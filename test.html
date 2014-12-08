@@ -1,0 +1,164 @@
+<!doctype html>
+<meta charset="utf-8">
+<style>
+  script[type="text/eqcss"], script[type="text/eqcss-read"] { display: inline-block; background: #def; white-space: pre; padding: 0 20px 20px; margin: 30px 0 }
+  .minwidthpixels { border: 1px solid #000; padding: 30px; background: #fff8f1; }
+  .minwidthpercents { border: 1px solid #000; padding: 30px; background: #fff8f1; }
+  .maxwidthpixels { border: 1px solid #000; padding: 30px; background: #fff8f1; }
+  .maxwidthpercents { border: 1px solid #000; padding: 30px; background: #fff8f1; }
+</style>
+
+<h1>EQCSS Test page</h1>
+
+<h3>min-width in pixels</h3>
+
+<div class="minwidthpixels" style="width: 50%">
+  class="minwidthpixels"
+  <br>
+  width: 50%;
+</div>
+
+<script type="text/eqcss">
+@element ".minwidthpixels" and (min-width: 500px){
+  .minwidthpixels { background: yellow; }
+}
+</script>
+
+<h3>min-width in %</h3>
+
+<div class="minwidthpercents" style="width: 500px">
+  class="minwidthpercents"
+  <br>
+  width: 500px;
+</div>
+
+<script type="text/eqcss">
+@element ".minwidthpercents" and (min-width: 50%){
+  .minwidthpercents { background: yellow; }
+}
+</script>
+
+<h3>max-width in px</h3>
+
+<div class="maxwidthpixels" style="width: 50%">
+  class="maxwidthpixels"
+  <br>
+  width: 50%;
+</div>
+
+<script type="text/eqcss">
+@element ".maxwidthpixels" and (max-width: 500px){
+  .maxwidthpixels { background: yellow; }
+}
+</script>
+
+<h3>max-width in %</h3>
+
+<div class="maxwidthpercents" style="width: 500px">
+  class="maxwidthpercents"
+  <br>
+  width: 500px;
+</div>
+
+<script type="text/eqcss">
+@element ".maxwidthpercents" and (max-width: 50%){
+  .maxwidthpercents { background: yellow; }
+}
+</script>
+
+<!--
+<h3>multiple conditions</h3>
+
+<div class="minwidthpixels" style="width: 50%">
+  class="minwidthpixels"
+  <br>
+  width: 50%;
+</div>
+
+<script type="text/eqcss">
+@element ".minwidthpixels" and (min-width: 400px){
+  .minwidthpixels { background: yellow; }
+}
+</script>
+
+<h3>multiple queries on the same target</h3>
+
+<div class="minwidthpixels" style="width: 50%">
+  class="minwidthpixels"
+  <br>
+  width: 50%;
+</div>
+
+<script type="text/eqcss">
+@element ".minwidthpixels" and (min-width: 400px){
+  .minwidthpixels { background: yellow; }
+}
+</script>
+
+<div id="widget">
+My CSS says that my width is 80%, my default background is #456 and my <a href=#>links</a> are white.<br>
+My JSS says that if my width exceeds 550px, I turn red <a href=#>and my links turn yellow</a>.<br>
+If I measure less than 550px, I return to normal.<br>
+Resize browser to change my size and see the magic happen!
+</div>
+
+<pre>
+JSS code:
+
+&lt;script type="text/jss">
+
+@element "#widget" and (min-width: 550px){
+  #widget {
+    background: red;
+  }
+  #widget a {
+    background: yellow;
+  }
+}
+
+&lt;/script>
+</pre>
+
+<style>
+
+#widget {
+  background: #456;
+  color: #fff;
+  width: 80%;
+  padding: 10px;
+}
+
+#widget a {
+  background: #fff;
+}
+
+</style>
+
+<script type="text/jss">
+
+@element "#widget" and (min-width: 550px){
+
+  #widget {
+    background: red;
+  }
+
+  #widget a {
+    background: yellow;
+  }
+
+}
+
+</script>
+
+<script>
+
+
+
+</script>
+
+<style id="css">
+
+</style>
+-->
+
+<script src="EQCSS.js"></script>

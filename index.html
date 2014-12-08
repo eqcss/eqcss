@@ -1,0 +1,41 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>EQCSS</title>
+<style>
+  body { width: 800px; margin: auto; font: 14px/24px Tahoma }
+  pre { display: inline; background: #def; }
+  li { padding: 3px 0; }
+</style>
+<body>
+<center>
+<h1>EQCSS.js</h1>
+<br>
+<a href="eqcss.js">Download</a>
+<br>
+<br>
+<a href="test.html">Demo / Test page</a>
+<br>
+<br>
+<h2>How to use it</h2>
+</center>
+<ul>
+  <li>Install EQCSS at the end of your &lt;body> with <pre>&lt;script src="EQCSS.js">&lt;/script></pre>.
+  <li>Write your EQCSS code in the HTML page with <pre>&lt;script type="text/eqcss"> ... &lt;/script></pre>.
+  <br>Or include it from an external file with <pre>&lt;script type="text/eqcss" src="code.eqcss">&lt;/script></pre>.
+  <li>The <pre>EQCSS.apply()</pre> function is called on page load and on resize. Call it manually when you update the DOM.
+  <li>One EQCSS script can contain multiple queries, and a query can contain multiple conditions.  
+  <li>Queries have the following form: <pre>@element {selector} and {condition} [ and {condition} ]* { {css} }</pre>
+  <br><pre>{css}</pre> can contain any valid CSS rules. Ex: "#id div { color: red }".
+  <br><pre>{selector}</pre> is a CSS selector targeting one or many elements. Ex: "#id" or ".class".
+  <br><pre>{condition}</pre> is composed of a measure and a value. Examples:
+    <ul>
+      <li><pre>min-width: 500px</pre>: condition is true if the element's width is 500px or more.
+      <li><pre>min-width: 50%</pre>: condition is true if the element's width is 50% or more of its parent's width.
+      <li><pre>max-width: 500px</pre>: condition is true if the element's width is 500px or less.
+      <li><pre>max-width: 50%</pre>: condition is true if the element's width is 50% or less of its parent's width.
+      <li><pre>min-characters: 50</pre>: condition is true if the element contains 50 or more characters.
+      <li><pre>max-characters: 50</pre>: condition is true if the element contains 50 or less characters.
+      <li><pre>min-children: 50</pre>: condition is true if the element has 50 or more direct children.
+      <li><pre>max-children: 50</pre>: condition is true if the element has 50 or less direct children.
+    </ul>
+</body>
