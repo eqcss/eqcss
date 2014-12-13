@@ -1,23 +1,25 @@
 <!doctype html>
 <meta charset="utf-8">
 <style>
+  * { box-sizing: border-box; }
+  body { font-family: tahoma }
   script[type="text/eqcss"], script[type="text/eqcss-read"] { display: inline-block; background: #def; white-space: pre; padding: 0 20px 20px; margin: 30px 0 }
-  .minwidthpixels { border: 1px solid #000; padding: 30px; background: #fff8f1; }
-  .minwidthpercents { border: 1px solid #000; padding: 30px; background: #fff8f1; }
-  .maxwidthpixels { border: 1px solid #000; padding: 30px; background: #fff8f1; }
-  .maxwidthpercents { border: 1px solid #000; padding: 30px; background: #fff8f1; }
+  div { overflow: auto; display: inline-block; border: 1px solid #000; padding: 30px; background: #fff8f1; }
+  section { display: inline-block; border: 1px dotted red; }
+  img { margin: 5px; }
 </style>
 
 <h1>EQCSS Test page</h1>
+<b>Use your mouse to resize the blocks</b>
+
+<hr>
 
 <h3>min-width in pixels</h3>
 
-<div class="minwidthpixels" style="width: 50%">
+<div class="minwidthpixels" style="resize: horizontal">
   class="minwidthpixels"
-  <br>
-  width: 50%;
 </div>
-
+<br>
 <script type="text/eqcss">
 @element ".minwidthpixels" and (min-width: 500px){
   .minwidthpixels { background: yellow; }
@@ -26,12 +28,10 @@
 
 <h3>min-width in %</h3>
 
-<div class="minwidthpercents" style="width: 500px">
+<div class="minwidthpercents" style="resize: horizontal">
   class="minwidthpercents"
-  <br>
-  width: 500px;
 </div>
-
+<br>
 <script type="text/eqcss">
 @element ".minwidthpercents" and (min-width: 50%){
   .minwidthpercents { background: yellow; }
@@ -40,12 +40,10 @@
 
 <h3>max-width in px</h3>
 
-<div class="maxwidthpixels" style="width: 50%">
+<div class="maxwidthpixels" style="resize: horizontal">
   class="maxwidthpixels"
-  <br>
-  width: 50%;
 </div>
-
+<br>
 <script type="text/eqcss">
 @element ".maxwidthpixels" and (max-width: 500px){
   .maxwidthpixels { background: yellow; }
@@ -54,111 +52,160 @@
 
 <h3>max-width in %</h3>
 
-<div class="maxwidthpercents" style="width: 500px">
+<div class="maxwidthpercents" style="resize: horizontal">
   class="maxwidthpercents"
-  <br>
-  width: 500px;
 </div>
-
+<br>
 <script type="text/eqcss">
 @element ".maxwidthpercents" and (max-width: 50%){
   .maxwidthpercents { background: yellow; }
 }
 </script>
 
-<!--
-<h3>multiple conditions</h3>
 
-<div class="minwidthpixels" style="width: 50%">
-  class="minwidthpixels"
-  <br>
-  width: 50%;
+<h3>min-height in pixels</h3>
+
+<div class="minheightpixels" style="resize: vertical">
+  class="minheightpixels"
 </div>
-
+<br>
 <script type="text/eqcss">
-@element ".minwidthpixels" and (min-width: 400px){
-  .minwidthpixels { background: yellow; }
+@element ".minheightpixels" and (min-height: 200px){
+  .minheightpixels { background: yellow; }
 }
 </script>
 
-<h3>multiple queries on the same target</h3>
+<h3>min-height in %</h3>
 
-<div class="minwidthpixels" style="width: 50%">
-  class="minwidthpixels"
-  <br>
-  width: 50%;
-</div>
-
+<section style="height: 300px;">
+  <div class="minheightpercents" style="resize: vertical">
+    class="minheightpercents"
+  </div>
+</section>
+<br>
 <script type="text/eqcss">
-@element ".minwidthpixels" and (min-width: 400px){
-  .minwidthpixels { background: yellow; }
+@element ".minheightpercents" and (min-height: 50%){
+  .minheightpercents { background: yellow; }
 }
 </script>
 
-<div id="widget">
-My CSS says that my width is 80%, my default background is #456 and my <a href=#>links</a> are white.<br>
-My JSS says that if my width exceeds 550px, I turn red <a href=#>and my links turn yellow</a>.<br>
-If I measure less than 550px, I return to normal.<br>
-Resize browser to change my size and see the magic happen!
+<h3>max-height in px</h3>
+
+<div class="maxheightpixels" style="resize: vertical">
+  class="maxheightpixels"
 </div>
-
-<pre>
-JSS code:
-
-&lt;script type="text/jss">
-
-@element "#widget" and (min-width: 550px){
-  #widget {
-    background: red;
-  }
-  #widget a {
-    background: yellow;
-  }
+<br>
+<script type="text/eqcss">
+@element ".maxheightpixels" and (max-height: 200px){
+  .maxheightpixels { background: yellow; }
 }
-
-&lt;/script>
-</pre>
-
-<style>
-
-#widget {
-  background: #456;
-  color: #fff;
-  width: 80%;
-  padding: 10px;
-}
-
-#widget a {
-  background: #fff;
-}
-
-</style>
-
-<script type="text/jss">
-
-@element "#widget" and (min-width: 550px){
-
-  #widget {
-    background: red;
-  }
-
-  #widget a {
-    background: yellow;
-  }
-
-}
-
 </script>
 
-<script>
+<h3>max-height in %</h3>
 
-
-
+<section style="height: 300px">
+  <div class="maxheightpercents" style="resize: vertical">
+    class="maxheightpercents"
+  </div>
+</section>
+<br>
+<script type="text/eqcss">
+@element ".maxheightpercents" and (max-height: 50%){
+  .maxheightpercents { background: yellow; }
+}
 </script>
 
-<style id="css">
 
-</style>
--->
+
+
+
+
+
+
+
+<h3>min-characters on blocks</h3>
+<b>(Use keyboard)</b>
+<br>
+<br>
+<br>
+
+<div class="mincharacters" contenteditable>
+  class="mincharacters"
+</div>
+<br>
+<script type="text/eqcss">
+@element ".mincharacters" and (min-characters: 30){
+  .mincharacters { background: yellow; }
+}
+</script>
+
+<h3>max-characters on blocks</h3>
+
+<div class="maxcharacters" contenteditable>
+  class="maxcharacters"
+</div>
+<br>
+<script type="text/eqcss">
+@element ".maxcharacters" and (max-characters: 30){
+  .maxcharacters { background: yellow; }
+}
+</script>
+
+
+
+
+
+
+<h3>min-children</h3>
+<br>
+
+<div class="minchildren">
+  class="minchildren"
+</div>
+<br>
+<button onclick="document.querySelector('.minchildren').innerHTML += '<img src=//www.placehold.it/30>'">Add children</button>
+<br>
+<br>
+<script type="text/eqcss">
+@element ".minchildren" and (min-children: 10){
+  .minchildren { background: yellow; }
+}
+</script>
+
+<h3>max-children</h3>
+
+<div class="maxchildren">
+  class="maxchildren"
+</div>
+<br>
+<button onclick="document.querySelector('.maxchildren').innerHTML += '<img src=//www.placehold.it/30>'">Add children</button>
+<br>
+<br>
+<script type="text/eqcss">
+@element ".maxchildren" and (max-children: 10){
+  .maxchildren { background: yellow; }
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script src="EQCSS.js"></script>
+<script>
+// Apply eqcss on clicks, mousemoves (resizes), keyup (keyboard)
+onmouseup = onmousemove = onkeyup = function(e){
+  EQCSS.apply();
+}
+</script>

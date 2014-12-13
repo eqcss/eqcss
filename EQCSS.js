@@ -165,11 +165,95 @@ EQCSS.apply = function(){
           }
         
         break;
+        
+        // Min-height 
+        case "min-height":
+        
+          // Min-height in px
+          if(EQCSS.conditions[i][0].value.indexOf("px") != -1){
+            element_width = parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("height"));
+            if(element_width >= parseInt(EQCSS.conditions[i][0].value)){
+              test = true;
+            }
+          }
+        
+          // Min-height in %
+          if(EQCSS.conditions[i][0].value.indexOf("%") != -1){
+            element_width = parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("height"));
+            parent_width = parseInt(window.getComputedStyle(elements[j].parentNode,null).getPropertyValue("height"));
+            if(parent_width / element_width <= 100 / parseInt(EQCSS.conditions[i][0].value)){
+              test = true;
+            }
+          }
+          
+        break;
+        
+        // Max-height
+        case "max-height":
+        
+          // Max-height in px
+          if(EQCSS.conditions[i][0].value.indexOf("px") != -1){
+            element_width = parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("height"));
+            if(element_width <= parseInt(EQCSS.conditions[i][0].value)){
+              test = true;
+            }
+          }
+        
+          // Max-height in %
+          if(EQCSS.conditions[i][0].value.indexOf("%") != -1){
+            element_width = parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("height"));
+            parent_width = parseInt(window.getComputedStyle(elements[j].parentNode,null).getPropertyValue("height"));
+            if(parent_width / element_width >= 100 / parseInt(EQCSS.conditions[i][0].value)){
+              test = true;
+            }
+          }
+        
+        break;
+        
+        // Min-characters 
+        case "min-characters":
+        
+          if(elements[j].textContent.length >= parseInt(EQCSS.conditions[i][0].value)){
+              test = true;
+          }
+          
+        break;
+        
+        // Max-characters
+        case "max-characters":
+        
+          if(elements[j].textContent.length <= parseInt(EQCSS.conditions[i][0].value)){
+            test = true;
+          }
+        
+        break;
+        
+        
+        // Min-children 
+        case "min-children":
+        
+          if(elements[j].childNodes.length >= parseInt(EQCSS.conditions[i][0].value)){
+              test = true;
+          }
+          
+        break;
+        
+        // Max-children
+        case "max-children":
+        
+          if(elements[j].childNodes.length <= parseInt(EQCSS.conditions[i][0].value)){
+            test = true;
+          }
+        
+        break;
+        
+        
+        
       }
 
       // Update CSS block:
       // If condition is met: copy the CSS code from the query to the CSS block
-      if(test){
+      if(test === true){
         css_block.innerHTML = EQCSS.styles[i];
       }
       
