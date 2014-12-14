@@ -188,24 +188,108 @@
 </script>
 
 
+<h3>Comments</h3>
+
+<div class="comments" style="resize: horizontal">
+  class="comments"
+</div>
+<br>
+<script type="text/eqcss">
+/* comment before */
+@element ".comments" and (max-width: 400px){
+  /* comment at the beginning */
+  .comments { background: yellow; }
+  /* comment at the end */
+}
+/* comment after */ 
+</script>
 
 
 
 
+<h3>Multiple conditions</h3>
 
-
-
-
-
-
-
-
-
+<div class="multiple-conditions" style="resize: both">
+  class="multiple-conditions"
+</div>
+<br>
+<script type="text/eqcss">
+@element ".multiple-conditions" and (min-width: 50%) and (min-height: 150px){
+  .multiple-conditions { background: yellow; }
+}
+</script>
 
 <script src="EQCSS.js"></script>
+
 <script>
-// Apply eqcss on clicks, mousemoves (resizes), keyup (keyboard)
-onmouseup = onmousemove = onkeyup = function(e){
-  EQCSS.apply();
-}
+
+// Apply eqcss on clicks, resizes, inputs
+
+var EQCSS_resizing = false;
+var EQCSS_timeout = true;
+
+window.addEventListener("mousedown", function(){
+  EQCSS_resizing = true;
+  if(EQCSS_timeout == true){
+    EQCSS.apply();
+  }
+  EQCSS_timeout = false;
+  setTimeout(function(){
+    EQCSS_timeout = true;
+  },250);
+});
+
+window.addEventListener("mouseup", function(){
+  EQCSS_resizing = false;
+  if(EQCSS_timeout == true){
+    EQCSS.apply();
+  }
+  EQCSS_timeout = false;
+  setTimeout(function(){
+    EQCSS_timeout = true;
+  },250);
+});
+
+window.addEventListener("mousemove", function(){
+  if(EQCSS_resizing === true){
+    if(EQCSS_timeout === true){
+      EQCSS.apply();
+    }
+    EQCSS_timeout = false;
+    setTimeout(function(){
+      EQCSS_timeout = true;
+    },250);
+  }
+});
+
+window.addEventListener("keydown", function(){
+  if(EQCSS_timeout == true){
+    EQCSS.apply();
+  }
+  EQCSS_timeout = false;
+  setTimeout(function(){
+    EQCSS_timeout = true;
+  },250);
+});
+
+window.addEventListener("keyup", function(){
+  l(1);
+  if(EQCSS_timeout == true){
+    EQCSS.apply();
+  }
+  EQCSS_timeout = false;
+  setTimeout(function(){
+    EQCSS_timeout = true;
+  },250);
+});
+
+window.addEventListener("input", function(){
+  if(EQCSS_timeout == true){
+    EQCSS.apply();
+  }
+  EQCSS_timeout = false;
+  setTimeout(function(){
+    EQCSS_timeout = true;
+  },250);
+});
 </script>
