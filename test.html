@@ -1,5 +1,6 @@
 <!doctype html>
 <meta charset="utf-8">
+<title>EQCSS test page</title>
 <style>
   * { box-sizing: border-box; }
   body { font-family: tahoma }
@@ -9,7 +10,7 @@
   img { margin: 5px; }
 </style>
 
-<h1>EQCSS Test page</h1>
+<h1>EQCSS Test / demo page</h1>
 <b>Use your mouse to resize the blocks</b>
 
 <hr>
@@ -219,7 +220,10 @@
 }
 </script>
 
+
+<!--[if lt IE 9]><script src="EQCSS-polyfills.js"></script><![endif]-->
 <script src="EQCSS.js"></script>
+
 
 <script>
 
@@ -292,4 +296,8 @@ window.addEventListener("input", function(){
     EQCSS_timeout = true;
   },250);
 });
+
+setInterval(function(){
+  EQCSS.apply();
+}, 1000);
 </script>

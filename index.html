@@ -14,7 +14,8 @@
 <body>
   <header>
     <h1>EQCSS.js</h1>
-    <a href="eqcss.js" title="Download EQCSS.js">Flip the Script</a>
+    <a href="EQCSS.js" title="Download EQCSS.js">Flip the Script</a>
+    <a href="EQCSS.js" title="Download EQCSS-polyfills.js">...and the polyfills (IE < 9)</a>
     <a href="test.html">Demo Page</a>
   </header>
   <h2>What is EQCSS</h2>
@@ -22,6 +23,7 @@
   <h2>How to use it</h2>
   <ul>
     <li>Install EQCSS at the end of your &lt;body> with <pre>&lt;script src="EQCSS.js">&lt;/script></pre>.
+    <li>(If you want to support IE8, place <pre>&lt;!--[if lt IE 9]>&lt;script src="EQCSS-polyfills.js">&lt;/script>&lt;![endif]--></pre> beforehand.)
     <li>Write your EQCSS code in the HTML page with <pre>&lt;script type="text/eqcss"> ... &lt;/script></pre>.
     <br>Or include it from an external file with <pre>&lt;script type="text/eqcss" src="code.eqcss">&lt;/script></pre>.
     <li>The <pre>EQCSS.apply()</pre> function is called on page load and on resize. Call it manually when you update the DOM.
