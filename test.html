@@ -221,6 +221,52 @@
 </script>
 
 
+
+
+<h3>Scoped queries ($this)</h3>
+
+<div class="scoped" style="resize: horizontal">
+  class="scoped"
+</div>
+<div class="scoped" style="resize: horizontal">
+  class="scoped"
+</div>
+<br>
+<script type="text/eqcss">
+@element ".scoped" and (min-width: 300px){
+
+  /* Only set a yellow background to the elements matching the query */
+  $this { background: yellow; }
+  
+}
+</script>
+
+<h3>Scoped queries + multiple conditions</h3>
+(+ more complex use of $this inside qhe query)
+<br>
+<br>
+<br>
+<div class="scoped-multiple" style="resize: horizontal">
+  <b>class="scoped-multiple"</b>
+</div>
+<div class="scoped-multiple" style="resize: horizontal">
+  <b>class="scoped-multiple"</b>
+</div>
+<br>
+<script type="text/eqcss">
+@element ".scoped-multiple" and (min-width: 400px) and (max-width: 600px){
+
+  /* Only set a yellow background (orange on hover) to the elements matching the query */
+  $this { background: yellow; }
+  $this:hover { background: orange; }
+  
+  /* Only set a red color to the b inside the elements matching the query */
+  body>$this>b { color: red }
+  
+}
+</script>
+
+
 <!--[if lt IE 9]><script src="EQCSS-polyfills.js"></script><![endif]-->
 <script src="EQCSS.js"></script>
 

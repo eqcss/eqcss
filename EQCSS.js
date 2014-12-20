@@ -89,7 +89,8 @@ EQCSS.apply = function(){
 
   var i, j, k;                      // Iterators
   var elements;                     // Elements targeted by each query
-  var css_block_id, css_block;      // CSS block corresponding to each targeter element
+  var element_guid, css_block;      // CSS block corresponding to each targeted element
+  var css_code;                     // CSS code to write in each CSS block (one per targeted element)
   var element_width, parent_width;  // Computed widths
   var test;                         // Query's condition test result
   
@@ -102,17 +103,23 @@ EQCSS.apply = function(){
     // Loop on all the elements
     for(j = 0; j < elements.length; j++){
     
-      // Get the corresponding CSS block (or create one if it doesn't exist)
-      css_block_id = "EQCSS_css_block_" + i + "_" + j;
-      css_block = document.querySelector("#" + css_block_id);
+      // Create a guid for this element
+      // Pattern: "EQCSS_{element-query-index}_{nth-element-matching-this-query}"
+      element_guid = "EQCSS_" + i + "_" + j;
+      
+      // Add this guid as an attribute to the element 
+      elements[j].setAttribute(element_guid, element_guid);
+
+      // Get the CSS block to this element (or create one in the <HEAD> if it doesn't exist)
+      css_block = document.querySelector("#" + element_guid);
       if(!css_block){
         css_block = document.createElement("STYLE");
-        css_block.id = css_block_id;
+        css_block.id = element_guid;
         document.querySelector("head").appendChild(css_block);
       }
-      css_block = document.querySelector("#" + css_block_id);
+      css_block = document.querySelector("#" + element_guid);
       
-      // Reset the query test's result (first, we assume that the selector is matched, then we verify it)
+      // Reset the query test's result (first, we assume that the selector is matched)
       test = true;
       
       // Loop on the conditions
@@ -261,19 +268,26 @@ EQCSS.apply = function(){
 
         }
       }
+      
 
       // Update CSS block:
-      // If all conditions are met: copy the CSS code from the query to the corresponding CSS block (or rewrite it in the HEAD on IE < 9)
+      // If all conditions are met: copy the CSS code from the query to the corresponding CSS block
       if(test === true){
+
+        // Get the CSS code to apply to the element
+        css_code = EQCSS.styles[i];
+        
+        // Replace "$this" with "[element_guid]"
+        css_code = css_code.replace(/\$this/g, "[" + element_guid + "]");
         
         // good browsers
         try {
-          css_block.innerHTML = EQCSS.styles[i];
+          css_block.innerHTML = css_code;
         }
         
         // IE8
         catch(e){
-          css_block.styleSheet.cssText = EQCSS.styles[i];
+          css_block.styleSheet.cssText = css_code;
         }
       }
       
