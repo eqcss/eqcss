@@ -29,7 +29,12 @@
     <li>The <pre>EQCSS.apply()</pre> function is called on page load and on resize. Call it manually when you update the DOM.
     <li>One EQCSS script can contain multiple queries, and a query can contain multiple conditions.
     <li>Queries have the following form: <pre>@element {selector} and {condition} [ and {condition} ]* { {css} }</pre>
-    <li><pre>{css}</pre> can contain any valid CSS rules. Ex: "#id div { color: red }".</li>
+    <li><pre>{css}</pre> can contain:
+      <ul>
+        <li>Any valid CSS rule. (Ex: <pre>#id div { color: red }</pre>).</li>
+        <li><pre>$this</pre> to scope the css in the targeted element(s) only (Ex: <pre>body $this:hover > b { color: red }</pre>)
+      </ul>
+    </li>
     <li><pre>{selector}</pre> is a CSS selector targeting one or many elements. Ex: "#id" or ".class".</li>
     <li><pre>{condition}</pre> is composed of a measure and a value. Examples:
       <ul>
