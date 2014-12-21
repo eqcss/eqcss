@@ -92,6 +92,8 @@ EQCSS.apply = function(){
   var element_guid, css_block;      // CSS block corresponding to each targeted element
   var css_code;                     // CSS code to write in each CSS block (one per targeted element)
   var element_width, parent_width;  // Computed widths
+  var element_height, parent_height;// Computed heights
+  var element_line_height;          // Computed line-height
   var test;                         // Query's condition test result
   
   // Loop on all element queries
@@ -206,8 +208,8 @@ EQCSS.apply = function(){
           
             // Max-height in px
             if(EQCSS.conditions[i][k].value.indexOf("px") != -1){
-              element_width = parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("height"));
-              if(!(element_width <= parseInt(EQCSS.conditions[i][k].value))){
+              element_height = parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("height"));
+              if(!(element_height <= parseInt(EQCSS.conditions[i][k].value))){
                 test = false;
                 break test_conditions;
               }
@@ -215,9 +217,9 @@ EQCSS.apply = function(){
           
             // Max-height in %
             if(EQCSS.conditions[i][k].value.indexOf("%") != -1){
-              element_width = parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("height"));
-              parent_width = parseInt(window.getComputedStyle(elements[j].parentNode,null).getPropertyValue("height"));
-              if(!(parent_width / element_width >= 100 / parseInt(EQCSS.conditions[i][k].value))){
+              element_height = parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("height"));
+              parent_height = parseInt(window.getComputedStyle(elements[j].parentNode,null).getPropertyValue("height"));
+              if(!(parent_height / element_height >= 100 / parseInt(EQCSS.conditions[i][k].value))){
                 test = false;
                 break test_conditions;
               }
@@ -228,19 +230,45 @@ EQCSS.apply = function(){
           // Min-characters 
           case "min-characters":
           
-            if(!(elements[j].innerHTML.length >= parseInt(EQCSS.conditions[i][k].value))){
-              test = false;
-              break test_conditions;
+            // form inputs
+            if(elements[j].value){
+              if(!(elements[j].value.length >= parseInt(EQCSS.conditions[i][k].value))){
+                test = false;
+                break test_conditions;
+              }
+            }
+            
+            // blocks
+            else{
+            
+              if(!(elements[j].textContent.length >= parseInt(EQCSS.conditions[i][k].value))){
+                test = false;
+                break test_conditions;
+              }
+            
             }
             
           break;
           
           // Max-characters
           case "max-characters":
-          
-            if(!(elements[j].textContent.length <= parseInt(EQCSS.conditions[i][k].value))){
-              test = false;
-              break test_conditions;
+            
+            // form inputs
+            if(elements[j].value){
+              if(!(elements[j].value.length <= parseInt(EQCSS.conditions[i][k].value))){
+                test = false;
+                break test_conditions;
+              }
+            }
+            
+            // blocks
+            else{
+            
+              if(!(elements[j].textContent.length <= parseInt(EQCSS.conditions[i][k].value))){
+                test = false;
+                break test_conditions;
+              }
+            
             }
           
           break;
@@ -260,6 +288,46 @@ EQCSS.apply = function(){
           case "max-children":
           
             if(!(elements[j].childNodes.length <= parseInt(EQCSS.conditions[i][k].value))){
+              test = false;
+              break test_conditions;
+            }
+          
+          break;
+          
+          
+          
+          // Min-lines 
+          case "min-lines":
+
+            element_height = 
+              parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("height"))
+              - parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("border-top-width"))
+              - parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("border-bottom-width"))
+              - parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("padding-top"))
+              - parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("padding-bottom"))
+            
+            element_line_height = parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("line-height"));
+              
+            if(!(element_height / element_line_height >= parseInt(EQCSS.conditions[i][k].value))){
+              test = false;
+              break test_conditions;
+            }
+            
+          break;
+          
+          // Max-lines
+          case "max-lines":
+          
+            element_height = 
+              parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("height"))
+              - parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("border-top-width"))
+              - parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("border-bottom-width"))
+              - parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("padding-top"))
+              - parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("padding-bottom"))
+
+            element_line_height = parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("line-height"));
+              
+            if(!(element_height / element_line_height + 1 <= parseInt(EQCSS.conditions[i][k].value))){
               test = false;
               break test_conditions;
             }
@@ -304,8 +372,47 @@ EQCSS.apply = function(){
   }
 }
 
+/*
+ * "DOM Ready" cross-browser polyfill / Diego Perini / MIT license
+ * Forked from: https://github.com/dperini/ContentLoaded/blob/master/src/contentloaded.js
+ */
+function domready(fn) {
+
+	var done = false, top = true,
+
+	doc = window.document,
+	root = doc.documentElement,
+	modern = !~navigator.userAgent.indexOf("MSIE 8"),
+
+	add = modern ? 'addEventListener' : 'attachEvent',
+	rem = modern ? 'removeEventListener' : 'detachEvent',
+	pre = modern ? '' : 'on',
+
+	init = function(e) {
+		if (e.type == 'readystatechange' && doc.readyState != 'complete') return;
+		(e.type == 'load' ? window : doc)[rem](pre + e.type, init, false);
+		if (!done && (done = true)) fn.call(window, e.type || e);
+	},
+
+	poll = function() {
+		try { root.doScroll('left'); } catch(e) { setTimeout(poll, 50); return; }
+		init('poll');
+	};
+
+	if (doc.readyState == 'complete') fn.call(window, 'lazy');
+	else {
+		if (!modern && root.doScroll) {
+			try { top = !window.frameElement; } catch(e) { }
+			if (top) poll();
+		}
+		doc[add](pre + 'DOMContentLoaded', init, false);
+		doc[add](pre + 'readystatechange', init, false);
+		window[add](pre + 'load', init, false);
+	}
+}
+
 // Call load and apply on page load
-window.addEventListener("load", function(){
+domready(function(){
   EQCSS.load();
   EQCSS.apply();
 });

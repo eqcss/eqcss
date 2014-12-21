@@ -20,7 +20,10 @@
 			var e = e || win.event;
 			e.preventDefault  = e.preventDefault  || function(){e.returnValue = false}
 			e.stopPropagation = e.stopPropagation || function(){e.cancelBubble = true}
-			fn.call(self, e);
+			try{
+        fn.call(self, e);
+      }
+      catch(e){}
 		});
 	}
 	function addListen(obj, i){

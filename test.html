@@ -2,12 +2,13 @@
 <meta charset="utf-8">
 <title>EQCSS test page</title>
 <style>
-  * { box-sizing: border-box; }
+  * { box-sizing: border-box; line-height: 30px; }
   body { font-family: tahoma }
   script[type="text/eqcss"], script[type="text/eqcss-read"] { display: inline-block; background: #def; white-space: pre; padding: 0 20px 20px; margin: 30px 0 }
   div { overflow: auto; display: inline-block; border: 1px solid #000; padding: 30px; background: #fff8f1; }
   section { display: inline-block; border: 1px dotted red; }
   img { margin: 5px; }
+  input,textarea { width: 400px }
 </style>
 
 <h1>EQCSS Test / demo page</h1>
@@ -116,14 +117,6 @@
 }
 </script>
 
-
-
-
-
-
-
-
-
 <h3>min-characters on blocks</h3>
 <b>(Use keyboard)</b>
 <br>
@@ -143,7 +136,7 @@
 <h3>max-characters on blocks</h3>
 
 <div class="maxcharacters" contenteditable>
-  class="maxcharacters"
+class="maxcharacters"
 </div>
 <br>
 <script type="text/eqcss">
@@ -153,7 +146,39 @@
 </script>
 
 
+<h3>min-characters on form inputs</h3>
 
+<input class="mincharacters-input" value='class="mincharacters-input"'>
+<br><br>
+<textarea class="mincharacters-textarea">
+class="mincharacters-textarea"
+</textarea>
+<br>
+<script type="text/eqcss">
+@element ".mincharacters-input" and (min-characters: 50){
+  .mincharacters-input { background: yellow; }
+}
+@element ".mincharacters-textarea" and (min-characters: 50){
+  .mincharacters-textarea { background: yellow; }
+}
+</script>
+
+<h3>max-characters on form inputs</h3>
+
+<input class="maxcharacters-input" value='class="maxcharacters-input"'>
+<br><br>
+<textarea class="maxcharacters-textarea">
+class="maxcharacters-textarea"
+</textarea>
+<br>
+<script type="text/eqcss">
+@element ".maxcharacters-input" and (max-characters: 50){
+  .maxcharacters-input { background: yellow; }
+}
+@element ".maxcharacters-textarea" and (max-characters: 50){
+  .maxcharacters-textarea { background: yellow; }
+}
+</script>
 
 
 
@@ -185,6 +210,32 @@
 <script type="text/eqcss">
 @element ".maxchildren" and (max-children: 10){
   .maxchildren { background: yellow; }
+}
+</script>
+
+
+<h3>min-lines</h3>
+<br>
+
+<div class="minlines" contenteditable>
+  class="minlines"
+</div>
+<br>
+<script type="text/eqcss">
+@element ".minlines" and (min-lines: 5){
+  .minlines { background: yellow; }
+}
+</script>
+
+<h3>max-lines</h3>
+
+<div class="maxlines" contenteditable>
+  class="maxlines"
+</div>
+<br>
+<script type="text/eqcss">
+@element ".maxlines" and (max-lines: 5){
+  .maxlines { background: yellow; }
 }
 </script>
 
@@ -323,7 +374,6 @@ window.addEventListener("keydown", function(){
 });
 
 window.addEventListener("keyup", function(){
-  l(1);
   if(EQCSS_timeout == true){
     EQCSS.apply();
   }
