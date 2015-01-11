@@ -1,32 +1,58 @@
 <!DOCTYPE html>
 <head>
   <meta charset="utf-8">
-  <title>EQCSS</title>
+  <title>Element Query CSS ∙ EQCSS</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta property="og:title" content="Element Query CSS ∙ EQCSS">
+  <meta property="og:url" content="http://elementqueries.com">
+  <meta property="og:description" content="Element Query CSS  EQCSS">
   <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, minimal-ui">
-  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic" type="text/css" rel="stylesheet">
   <style type="text/css">
-    body { width: 100%; max-width:  margin: 0 auto; font: 14px/24px 'Open Sans'; }
-    header a { display: inline-block; padding: 10px; border: 1px solid black; border-radius: 3px; color: black; text-decoration: none; }
-    pre { display: inline; background: #def; }
-    li { padding: 3px 0; }
+    html {opacity: 0; }
   </style>
 </head>
 <body>
+
   <header>
     <h1>EQCSS.js</h1>
-    <a href="EQCSS.js" title="Download EQCSS.js">Flip the Script</a>
-    <a href="EQCSS.js" title="Download EQCSS-polyfills.js">...and the polyfills (IE < 9)</a>
-    <a href="test.html">Demo Page</a>
+    <a href="EQCSS.js" title="Download EQCSS.js">Download EQCSS</a>
+    <a href="EQCSS.js" title="Download EQCSS-polyfills.js">Legacy Support (for IE 8)</a>
+    <a href="test.html">View Demo Page</a>
+    <a href="">View on Github</a>
   </header>
-  <h2>What is EQCSS</h2>
-  <p>EQCSS is a JavaScript plugin that extends CSS to include Element Queries, plus other features that regular CSS may not support for years. It it written in pure JavaScript, meaning it doesn't require jQuery or any other JS library to be installed on your site to work.</p>
-  <h2>How to use it</h2>
+
+  <h2>What Are Element Queries?</h2>
+  <p>Element Queries are a new way of writing CSS so the styles apply to individual elements on the page, instead of to the whole page as one document like in regular CSS. Element Queries can be based on more than just the width or height of the browser as well, you can change styles in a number of different situations, like how many lines of text or child elements an element contains.</p>
+  <p>With style scoping we can also choose whether the styles that are applied when the conditions are met applies to the object that meets the conditions or other objects on the page.</p>
+
+  <h2>What is EQCSS?</h2>
+
+  <p>EQCSS is a JavaScript plugin that extends CSS to include Element Queries, plus other features that regular CSS doesn't currently support. It is written in pure JavaScript, so it doesn't require jQuery or any other JavaScript library to be installed on your site to work.</p>
+
+  <h2>How do I use Element Queries?</h2>
+
+
+  <h3>Installing EQCSS.js</h3>
+  <p>In order to being using Element Queries on your project you will need to add a copy of EQCSS.js to every page where you need Element Queries to display.</p>
+
   <ul>
     <li>Install EQCSS at the end of your &lt;body> with <pre>&lt;script src="EQCSS.js">&lt;/script></pre>.
-    <li>(If you want to support IE8, place <pre>&lt;!--[if lt IE 9]>&lt;script src="EQCSS-polyfills.js">&lt;/script>&lt;![endif]--></pre> beforehand.)
+    <li>(If you want to support IE8, place <pre>&lt;!--[if lt IE 9]>&lt;script src="EQCSS-polyfills.js">&lt;/script>&lt;![endif]--></pre> beforehand)
+  </ul>
+
+  <h3>Adding Element Queries</h3>
+
+  <p>Now that you have EQCSS linked into your project you can begin adding Element Queries. You can include these directly in your HTML or store these in an external stylesheet.</p>
+
+  <ul>
     <li>Write your EQCSS code in the HTML page with <pre>&lt;script type="text/eqcss"> ... &lt;/script></pre>.
     <br>Or include it from an external file with <pre>&lt;script type="text/eqcss" src="code.eqcss">&lt;/script></pre>.
     <li>The <pre>EQCSS.apply()</pre> function is called on page load and on resize. Call it manually when you update the DOM.
+  </ul>
+
+  <h3>How to write Element Queries with EQCSS</h3>
     <li>One EQCSS script can contain multiple queries, and a query can contain multiple conditions.
     <li>Queries have the following form: <pre>@element {selector} and {condition} [ and {condition} ]* { {css} }</pre>
     <li><pre>{css}</pre> can contain:
@@ -55,5 +81,20 @@
       </ul>
     </li>
   </ul>
+
+  <footer>Created by <a href="https://twitter.com/innovati">@innovati</a> and <a href="https://twitter.com/maximeuziere">@maximeuziere</a> &middot; <a href="https://github.com/eqcss/eqcss">Hosted on Github</a></footer>
+
+  <script type="text/eqcss">
+    @element 'html' and (min-width: 0px) {
+      html { opacity: 1; }
+      body { width: 100%; max-width:  margin: 0 auto; font: 14px/24px 'Open Sans'; }
+      header a { display: inline-block; padding: 10px; border: 1px solid black; border-radius: 3px; color: black; text-decoration: none; }
+      pre { display: inline; background: #def; }
+      li { padding: 3px 0; }
+    }
+  </script>
+
+  <!--[if lt IE 9]><script src="EQCSS-polyfills.js"></script><![endif]-->
+  <script src="EQCSS.js"></script>
 </body>
 </html>
