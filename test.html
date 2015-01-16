@@ -240,40 +240,6 @@ class="maxcharacters-textarea"
 </script>
 
 
-<h3>Comments</h3>
-
-<div class="comments" style="resize: horizontal">
-  class="comments"
-</div>
-<br>
-<script type="text/eqcss">
-/* comment before */
-@element ".comments" and (max-width: 400px){
-  /* comment at the beginning */
-  .comments { background: yellow; }
-  /* comment at the end */
-}
-/* comment after */ 
-</script>
-
-
-
-
-<h3>Multiple conditions</h3>
-
-<div class="multiple-conditions" style="resize: both">
-  class="multiple-conditions"
-</div>
-<br>
-<script type="text/eqcss">
-@element ".multiple-conditions" and (min-width: 50%) and (min-height: 150px){
-  .multiple-conditions { background: yellow; }
-}
-</script>
-
-
-
-
 <h3>Scoped queries ($this)</h3>
 
 <div class="scoped" style="resize: horizontal">
@@ -288,15 +254,12 @@ class="maxcharacters-textarea"
 
   /* Only set a yellow background to the elements matching the query */
   $this { background: yellow; }
-  
+
 }
 </script>
 
 <h3>Scoped queries + multiple conditions</h3>
 (+ more complex use of $this inside the query)
-<br>
-<br>
-<br>
 <div class="scoped-multiple" style="resize: horizontal">
   <b>class="scoped-multiple"</b>
 </div>
@@ -310,13 +273,40 @@ class="maxcharacters-textarea"
   /* Only set a yellow background (orange on hover) to the elements matching the query */
   $this { background: yellow; }
   $this:hover { background: orange; }
-  
+
   /* Only set a red color to the b inside the elements matching the query */
   body>$this>b { color: red }
-  
+
 }
 </script>
 
+<h3>Multiple conditions</h3>
+
+<div class="multiple-conditions" style="resize: both">
+  class="multiple-conditions"
+</div>
+<br>
+<script type="text/eqcss">
+@element ".multiple-conditions" and (min-width: 50%) and (min-height: 150px){
+  .multiple-conditions { background: yellow; }
+}
+</script>
+
+<h3>Comments</h3>
+
+<div class="comments" style="resize: horizontal">
+  class="comments"
+</div>
+<br>
+<script type="text/eqcss">
+/* comment before */
+@element ".comments" and (max-width: 400px){
+  /* comment at the beginning */
+  .comments { background: yellow; }
+  /* comment at the end */
+}
+/* comment after */
+</script>
 
 <!--[if lt IE 9]><script src="EQCSS-polyfills.js"></script><![endif]-->
 <script src="EQCSS.js"></script>
