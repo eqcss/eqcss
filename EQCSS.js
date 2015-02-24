@@ -277,7 +277,7 @@ EQCSS.apply = function(){
           // Min-children 
           case "min-children":
           
-            if(!(elements[j].childNodes.length >= parseInt(EQCSS.conditions[i][k].value))){
+            if(!(elements[j].children.length >= parseInt(EQCSS.conditions[i][k].value))){
               test = false;
               break test_conditions;
             }
@@ -287,7 +287,7 @@ EQCSS.apply = function(){
           // Max-children
           case "max-children":
           
-            if(!(elements[j].childNodes.length <= parseInt(EQCSS.conditions[i][k].value))){
+            if(!(elements[j].children.length <= parseInt(EQCSS.conditions[i][k].value))){
               test = false;
               break test_conditions;
             }
