@@ -95,6 +95,8 @@ EQCSS.apply = function(){
   var element_height, parent_height;// Computed heights
   var element_line_height;          // Computed line-height
   var test;                         // Query's condition test result
+  var computed_style;               // Each targeted element's computed style
+  var parent_computed_style;        // Each targeted element's computed style
   
   // Loop on all element queries
   for(i = 0; i < EQCSS.queries.length; i++){
@@ -126,7 +128,18 @@ EQCSS.apply = function(){
       
       // Loop on the conditions
       test_conditions: for(k = 0; k < EQCSS.conditions[i].length; k++){
-      
+        
+        // Reuse element and parent's computed style instead of computing it everywhere 
+        computed_style = window.getComputedStyle(elements[j], null);
+        
+        if(elements[j] != document.documentElement){
+          parent_computed_style = window.getComputedStyle(elements[j].parentNode, null);
+        }
+        
+        else{
+          parent_computed_style = null;
+        }
+        
         // Check each condition for this query and this element
         // If at least one condition is false, the element selector is not matched
         switch(EQCSS.conditions[i][k].measure){
@@ -136,7 +149,7 @@ EQCSS.apply = function(){
           
             // Min-width in px
             if(EQCSS.conditions[i][k].value.indexOf("px") != -1){
-              element_width = parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("width"));
+              element_width = parseInt(computed_style.getPropertyValue("width"));
               if(!(element_width >= parseInt(EQCSS.conditions[i][k].value))){
                 test = false;
                 break test_conditions;
@@ -145,8 +158,8 @@ EQCSS.apply = function(){
           
             // Min-width in %
             if(EQCSS.conditions[i][k].value.indexOf("%") != -1){
-              element_width = parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("width"));
-              parent_width = parseInt(window.getComputedStyle(elements[j].parentNode,null).getPropertyValue("width"));
+              element_width = parseInt(computed_style.getPropertyValue("width"));
+              parent_width = parseInt(parent_computed_style.getPropertyValue("width"));
               if(!(parent_width / element_width <= 100 / parseInt(EQCSS.conditions[i][k].value))){
                 test = false;
                 break test_conditions;
@@ -160,7 +173,7 @@ EQCSS.apply = function(){
           
             // Max-width in px
             if(EQCSS.conditions[i][k].value.indexOf("px") != -1){
-              element_width = parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("width"));
+              element_width = parseInt(computed_style.getPropertyValue("width"));
               if(!(element_width <= parseInt(EQCSS.conditions[i][k].value))){
                 test = false;
                 break test_conditions;
@@ -169,8 +182,8 @@ EQCSS.apply = function(){
           
             // Max-width in %
             if(EQCSS.conditions[i][k].value.indexOf("%") != -1){
-              element_width = parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("width"));
-              parent_width = parseInt(window.getComputedStyle(elements[j].parentNode,null).getPropertyValue("width"));
+              element_width = parseInt(computed_style.getPropertyValue("width"));
+              parent_width = parseInt(parent_computed_style.getPropertyValue("width"));
               if(!(parent_width / element_width >= 100 / parseInt(EQCSS.conditions[i][k].value))){
                 test = false;
                 break test_conditions;
@@ -184,7 +197,7 @@ EQCSS.apply = function(){
           
             // Min-height in px
             if(EQCSS.conditions[i][k].value.indexOf("px") != -1){
-              element_width = parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("height"));
+              element_width = parseInt(computed_style.getPropertyValue("height"));
               if(!(element_width >= parseInt(EQCSS.conditions[i][k].value))){
                 test = false;
                 break test_conditions;
@@ -193,8 +206,8 @@ EQCSS.apply = function(){
           
             // Min-height in %
             if(EQCSS.conditions[i][k].value.indexOf("%") != -1){
-              element_width = parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("height"));
-              parent_width = parseInt(window.getComputedStyle(elements[j].parentNode,null).getPropertyValue("height"));
+              element_width = parseInt(computed_style.getPropertyValue("height"));
+              parent_width = parseInt(parent_computed_style.getPropertyValue("height"));
               if(!(parent_width / element_width <= 100 / parseInt(EQCSS.conditions[i][k].value))){
                 test = false;
                 break test_conditions;
@@ -208,7 +221,7 @@ EQCSS.apply = function(){
           
             // Max-height in px
             if(EQCSS.conditions[i][k].value.indexOf("px") != -1){
-              element_height = parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("height"));
+              element_height = parseInt(computed_style.getPropertyValue("height"));
               if(!(element_height <= parseInt(EQCSS.conditions[i][k].value))){
                 test = false;
                 break test_conditions;
@@ -217,8 +230,8 @@ EQCSS.apply = function(){
           
             // Max-height in %
             if(EQCSS.conditions[i][k].value.indexOf("%") != -1){
-              element_height = parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("height"));
-              parent_height = parseInt(window.getComputedStyle(elements[j].parentNode,null).getPropertyValue("height"));
+              element_height = parseInt(computed_style.getPropertyValue("height"));
+              parent_height = parseInt(parent_computed_style.getPropertyValue("height"));
               if(!(parent_height / element_height >= 100 / parseInt(EQCSS.conditions[i][k].value))){
                 test = false;
                 break test_conditions;
@@ -300,13 +313,13 @@ EQCSS.apply = function(){
           case "min-lines":
 
             element_height = 
-              parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("height"))
-              - parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("border-top-width"))
-              - parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("border-bottom-width"))
-              - parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("padding-top"))
-              - parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("padding-bottom"))
+              parseInt(computed_style.getPropertyValue("height"))
+              - parseInt(computed_style.getPropertyValue("border-top-width"))
+              - parseInt(computed_style.getPropertyValue("border-bottom-width"))
+              - parseInt(computed_style.getPropertyValue("padding-top"))
+              - parseInt(computed_style.getPropertyValue("padding-bottom"))
             
-            element_line_height = parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("line-height"));
+            element_line_height = parseInt(computed_style.getPropertyValue("line-height"));
               
             if(!(element_height / element_line_height >= parseInt(EQCSS.conditions[i][k].value))){
               test = false;
@@ -319,13 +332,13 @@ EQCSS.apply = function(){
           case "max-lines":
           
             element_height = 
-              parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("height"))
-              - parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("border-top-width"))
-              - parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("border-bottom-width"))
-              - parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("padding-top"))
-              - parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("padding-bottom"))
+              parseInt(computed_style.getPropertyValue("height"))
+              - parseInt(computed_style.getPropertyValue("border-top-width"))
+              - parseInt(computed_style.getPropertyValue("border-bottom-width"))
+              - parseInt(computed_style.getPropertyValue("padding-top"))
+              - parseInt(computed_style.getPropertyValue("padding-bottom"))
 
-            element_line_height = parseInt(window.getComputedStyle(elements[j],null).getPropertyValue("line-height"));
+            element_line_height = parseInt(computed_style.getPropertyValue("line-height"));
               
             if(!(element_height / element_line_height + 1 <= parseInt(EQCSS.conditions[i][k].value))){
               test = false;
