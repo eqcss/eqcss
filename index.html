@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="description" content="">
   <meta name="keywords" content="">
-  <meta property="og:title" content="Element Query CSS ∙ EQCSS">
+  <meta property="og:title" content="EQCSS • CSS with Element Queries">
   <meta property="og:url" content="http://elementqueries.com">
   <meta property="og:description" content="A new dimension in responsive web design. Get EQCSS.js and start writing object-oriented responsive CSS today">
   <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, minimal-ui">
@@ -35,7 +35,6 @@
   </style>
 </head>
 <body>
-
   <header>
     <div class="wrapper">
       <h1><em>EQ</em>CSS</h1>
@@ -48,14 +47,12 @@
       </nav>
     </div>
   </header>
-
   <section id="hero">
     <div class="wrapper">
       <h1 class="animated fadeInUp delay-one">@element queries</h1>
       <h2 class="animated fadeInUp delay-onefifty">A New Dimension in Responsive Web Design</h2>
     </div>
   </section>
-
   <section id="Element-Queries">
     <div class="wrapper">
       <h2>What Are Element Queries?</h2>
@@ -63,14 +60,12 @@
       <p>With style scoping we can also choose whether the styles that are applied when the conditions are met applies to the object that meets the conditions or other objects on the page.</p>
     </div>
   </section>
-
   <section id="Using-EQCSS">
     <div class="wrapper">
       <h2>How to use EQCSS</h2>
       <p>EQCSS is a JavaScript plugin that extends CSS to include Element Queries, plus other features that regular CSS doesn't currently support. It is written in pure JavaScript, so it doesn't require jQuery or any other JavaScript library to be installed on your site to work.</p>
     </div>
   </section>
-
   <section id="download">
     <div class="wrapper">
       <h2>Download EQCSS</h2>
@@ -78,7 +73,6 @@
       <a href="EQCSS-polyfills.js" title="Download EQCSS-polyfills.js" class="button">Legacy Support <em>(for IE 8)</em></a>
     </div>
   </section>
-
   <section id="installing-eqcss">
     <div class="wrapper">
       <h2>Installing EQCSS.js</h2>
@@ -103,7 +97,6 @@
         <p>The <code>EQCSS.apply()</code> function is called on page load and on resize. Call it manually when you update the DOM.</p>
     </div>
   </section>
-
   <section id="Design-With-Element-Queries">
     <div class="wrapper">
       <h2>Design With Element Queries</h2>
@@ -375,7 +368,6 @@
       </article>
     </div>
   </section>
-
   <section id="further-reading">
     <div class="wrapper">
       <h2>Further Reading</h2>
@@ -387,7 +379,6 @@
       </ul>
     </div>
   </section>
-
   <section id="similar-projects">
     <div class="wrapper">
       <h2>Similar Projects</h2>
@@ -399,21 +390,18 @@
       </ul>
     </div>
   </section>
-
   <section id="license">
     <div class="wrapper">
       <h2>Licence</h2>
       <p>EQCSS.js is copyright &copy; 2014 Tommy Hodgins &amp; Maxime Euzière, and provided under the MIT license. The full license text can be found on <a href="//github.com/eqcss/eqcss/blob/gh-pages/LICENSE.md">Github</a></p>
     </div>
   </section>
-
   <footer>
     <div class="wrapper">
       <small>Created by <a href="//twitter.com/innovati">@innovati</a> and <a href="//twitter.com/maximeuziere">@maximeuziere</a> &middot; <a href="//github.com/eqcss/eqcss">hosted on Github <i class="ion-social-github"></i></a></small>
       <span></span>
     </div>
   </footer>
-
   <script type="text/eqcss" style="display: none;">
     /* Global Styles */
     @element 'html' and (min-width: 0px) {
@@ -505,62 +493,49 @@
         margin-top: .5em;
       }
     }
-
-
     /* Header Styles */
     @element 'header' and (min-width: 0px) {
 
     }
-
     /* #hero Styles */
     @element '#hero' and (min-width: 0px) {
 
     }
-
     /* #What-are-Element-Queries Styles */
     @element '#What-are-Element-Queries' and (min-width: 0px) {
 
     }
-
     /* #How-to-use-EQCSS Styles */
     @element '#Using-EQCSS' and (min-width: 0px) {
 
     }
-
     /* #Design-With-Element-Queries Styles */
     @element '#Design-With-Element-Queries' and (min-width: 0px) {
-
       $this article {
         width: 100%;
       }
-
       $this article + article {
         margin-top: 1em;
         border-top: 1px solid #eee;
       }
-
-      article div {
+      $this article div {
         overflow: auto;
         display: inline-block;
         border: 1px solid #000;
         padding: 30px;
         background: #fff8f1;
       }
-
       $this pre {
         display: block;
         width: 100%;
       }
-
       $this section {
         display: inline-block;
         border: 1px dotted red;
       }
-
       $this img {
         margin: 5px;
       }
-
       $this input,
       $this textarea {
         width: 100%;
@@ -568,35 +543,28 @@
         padding: 10px 8px;
       }
     }
-
     /* #further-reading Styles */
     @element '#further-reading' and (min-width: 0px) {
 
     }
-
     /* #similar-projects Styles */
     @element '#similar-projects' and (min-width: 0px) {
 
     }
-
     /* #license styles */
     @element '#license' and (min-width: 0px) {
 
     }
-
     /* Footer Styles */
     @element 'footer' and (min-width: 0px) {
-
     }
   </script>
-
   <!--[if lt IE 9]><script src="EQCSS-polyfills.js"></script><![endif]-->
   <script src="EQCSS.js"></script>
   <script>
     // Apply eqcss on clicks, resizes, inputs
     var EQCSS_resizing = false;
     var EQCSS_timeout = true;
-
     window.addEventListener("mousedown", function() {
       EQCSS_resizing = true;
       if(EQCSS_timeout == true) {
@@ -607,7 +575,6 @@
         EQCSS_timeout = true;
       },250);
     });
-
     window.addEventListener("mouseup", function() {
       EQCSS_resizing = false;
       if(EQCSS_timeout == true) {
@@ -618,7 +585,6 @@
         EQCSS_timeout = true;
       },250);
     });
-
     window.addEventListener("mousemove", function() {
       if(EQCSS_resizing === true) {
         if(EQCSS_timeout === true) {
@@ -630,7 +596,6 @@
         },250);
       }
     });
-
     window.addEventListener("keydown", function() {
       if(EQCSS_timeout == true) {
         EQCSS.apply();
@@ -640,7 +605,6 @@
         EQCSS_timeout = true;
       },250);
     });
-
     window.addEventListener("keyup", function() {
       if(EQCSS_timeout == true) {
         EQCSS.apply();
@@ -650,7 +614,6 @@
         EQCSS_timeout = true;
       },250);
     });
-
     window.addEventListener("input", function() {
       if(EQCSS_timeout == true) {
         EQCSS.apply();
@@ -660,7 +623,6 @@
         EQCSS_timeout = true;
       },250);
     });
-
     /*setInterval(function() {
       EQCSS.apply();
     }, 1000);*/
