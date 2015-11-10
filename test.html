@@ -4,7 +4,7 @@
 <style>
   * { box-sizing: border-box; font-size: 14px; line-height: 1.2em; }
   body { font-family: tahoma; text-align: center; max-width: 850px; margin: 0 auto }
-  script[type="text/eqcss"], script[type="text/eqcss-read"], pre { display: inline-block; background: #def; white-space: pre; padding: 0px 20px 20px; margin: 10px 0; text-align: left; font-size: 11px; line-height: 13px; }
+  script[type="text/eqcss"], style, pre { display: inline-block; background: #def; white-space: pre; padding: 0px 20px 20px; margin: 10px 0; text-align: left; font-size: 11px; line-height: 13px; }
   pre { padding-top: 20px }
   div { overflow: auto; overflow-x: hidden; display: inline-block; border: 1px solid #000; padding: 30px; background: #fff8f1; max-width: 400px; max-height: 160px }
   img { margin: 3px; }
@@ -45,26 +45,31 @@ Please note that this is called automatically on load, on resize, on input, on k
 </section>
 
 <section>
-<h3>Write your own EQCSS code</h3>
-in the head or the body, as inline script
+<h3>Write your own EQCSS code as if you wrote regular CSS code</h3>
+in the head or the body, as inline style
 <br>
 <pre>
-&lt;cript type="text/eqcss">
+&lt;style>
   /* EQCSS code */
-&lt;/script>
+&lt;/style>
 </pre>
 <br>
-or embedded script
+or embedded style
 <br>
 <pre>
-&lt;script type="text/eqcss" src="code.eqcss">
-&lt;/script>
+&lt;link rel=stylesheet href="code.css">
 </pre>
+<br>
+You can also use
+<br>
+<b>&lt;script type="text/eqcss">&lt/script></b>
+<br>
+(embedded or external - for external, use a "src" attribute)
 </section>
 
 <section>
 <h3>Mix regular CSS and EQCSS code</h3>
-in your EQCSS scripts
+in your EQCSS style
 <br>
 <pre>
 body { ... }
@@ -82,7 +87,7 @@ body { ... }
   class="comments"
 </div>
 <br>
-<script type="text/eqcss">
+<style>
 /* comment before */
 @element ".comments" and (max-width: 400px){
   /* comment at the beginning */
@@ -90,7 +95,7 @@ body { ... }
   /* comment at the end */
 }
 /* comment after */
-</script>
+</style>
 </section>
 
 <hr>
@@ -118,11 +123,11 @@ body { ... }
   class="minwidthpercents"
 </div>
 <br>
-<script type="text/eqcss">
+<style>
 @element ".minwidthpercents" and (min-width: 80%){
   .minwidthpercents { background: yellow; }
 }
-</script>
+</style>
 </section>
 <section>
 <h3>max-width in px</h3>
@@ -131,11 +136,11 @@ body { ... }
   class="maxwidthpixels"
 </div>
 <br>
-<script type="text/eqcss">
+<style>
 @element ".maxwidthpixels" and (max-width: 250px){
   .maxwidthpixels { background: yellow; }
 }
-</script>
+</style>
 </section>
 <section>
 <h3>max-width in %</h3>
@@ -144,11 +149,11 @@ body { ... }
   class="maxwidthpercents"
 </div>
 <br>
-<script type="text/eqcss">
+<style>
 @element ".maxwidthpercents" and (max-width: 80%){
   .maxwidthpercents { background: yellow; }
 }
-</script>
+</style>
 </section>
 <section>
 <h3>min-height in pixels</h3>
@@ -157,11 +162,11 @@ body { ... }
   class="minheightpixels"
 </div>
 <br>
-<script type="text/eqcss">
+<style>
 @element ".minheightpixels" and (min-height: 120px){
   .minheightpixels { background: yellow; }
 }
-</script>
+</style>
 </section>
 <section>
 <h3>min-height in %</h3>
@@ -172,11 +177,11 @@ body { ... }
   </div>
 </section>
 <br>
-<script type="text/eqcss">
+<style>
 @element ".minheightpercents" and (min-height: 80%){
   .minheightpercents { background: yellow; }
 }
-</script>
+</style>
 </section>
 <section>
 <h3>max-height in px</h3>
@@ -185,11 +190,11 @@ body { ... }
   class="maxheightpixels"
 </div>
 <br>
-<script type="text/eqcss">
+<style>
 @element ".maxheightpixels" and (max-height: 120px){
   .maxheightpixels { background: yellow; }
 }
-</script>
+</style>
 </section>
 <section>
 <h3>max-height in %</h3>
@@ -200,11 +205,11 @@ body { ... }
   </div>
 </section>
 <br>
-<script type="text/eqcss">
+<style>
 @element ".maxheightpercents" and (max-height: 80%){
   .maxheightpercents { background: yellow; }
 }
-</script>
+</style>
 </section>
 <section>
 <h3>min-characters on blocks</h3>
@@ -217,11 +222,11 @@ body { ... }
   class="mincharacters"
 </div>
 <br>
-<script type="text/eqcss">
+<style>
 @element ".mincharacters" and (min-characters: 30){
   .mincharacters { background: yellow; }
 }
-</script>
+</style>
 </section>
 <section>
 <h3>max-characters on blocks</h3>
@@ -230,11 +235,11 @@ body { ... }
 class="maxcharacters"
 </div>
 <br>
-<script type="text/eqcss">
+<style>
 @element ".maxcharacters" and (max-characters: 30){
   .maxcharacters { background: yellow; }
 }
-</script>
+</style>
 </section>
 <section>
 <h3>min-characters on form inputs</h3>
@@ -245,14 +250,14 @@ class="maxcharacters"
 class="mincharacters-textarea"
 </textarea>
 <br>
-<script type="text/eqcss">
+<style>
 @element ".mincharacters-input" and (min-characters: 50){
   .mincharacters-input { background: yellow; }
 }
 @element ".mincharacters-textarea" and (min-characters: 50){
   .mincharacters-textarea { background: yellow; }
 }
-</script>
+</style>
 </section>
 <section>
 <h3>max-characters on form inputs</h3>
@@ -263,14 +268,14 @@ class="mincharacters-textarea"
 class="maxcharacters-textarea"
 </textarea>
 <br>
-<script type="text/eqcss">
+<style>
 @element ".maxcharacters-input" and (max-characters: 50){
   .maxcharacters-input { background: yellow; }
 }
 @element ".maxcharacters-textarea" and (max-characters: 50){
   .maxcharacters-textarea { background: yellow; }
 }
-</script>
+</style>
 </section>
 <section>
 <h3>min-children</h3>
@@ -282,11 +287,11 @@ class="maxcharacters-textarea"
 <button onclick="document.querySelector('.minchildren').innerHTML += '<img src=//www.placehold.it/20 style>'">Add children</button>
 <br>
 <br>
-<script type="text/eqcss">
+<style>
 @element ".minchildren" and (min-children: 10){
   .minchildren { background: yellow; }
 }
-</script>
+</style>
 </section>
 <section>
 <h3>max-children</h3>
@@ -297,11 +302,11 @@ class="maxcharacters-textarea"
 <button onclick="document.querySelector('.maxchildren').innerHTML += '<img src=//www.placehold.it/20>'">Add children</button>
 <br>
 <br>
-<script type="text/eqcss">
+<style>
 @element ".maxchildren" and (max-children: 10){
   .maxchildren { background: yellow; }
 }
-</script>
+</style>
 </section>
 <section>
 <h3>min-lines</h3>
@@ -311,11 +316,11 @@ class="maxcharacters-textarea"
   class="minlines"
 </div>
 <br>
-<script type="text/eqcss">
+<style>
 @element ".minlines" and (min-lines: 5){
   .minlines { background: yellow; }
 }
-</script>
+</style>
 </section>
 <section>
 <h3>max-lines</h3>
@@ -324,11 +329,11 @@ class="maxcharacters-textarea"
   class="maxlines"
 </div>
 <br>
-<script type="text/eqcss">
+<style>
 @element ".maxlines" and (max-lines: 5){
   .maxlines { background: yellow; }
 }
-</script>
+</style>
 </section>
 
 <hr>
@@ -344,14 +349,14 @@ class="maxcharacters-textarea"
   class="scoped"
 </div>
 <br>
-<script type="text/eqcss">
+<style>
 @element ".scoped" and (min-width: 300px){
 
   /* Only set background to the elements matching the query */
   $this { background: yellow; }
 
 }
-</script>
+</style>
 </section>
 <section>
 <h3>Multiple conditions</h3>
@@ -360,12 +365,12 @@ class="maxcharacters-textarea"
   class="multiple-conditions"
 </div>
 <br>
-<script type="text/eqcss">
+<style>
 @element ".multiple-conditions" and (min-width: 50%)
   and (min-height: 150px){
   .multiple-conditions { background: yellow; }
 }
-</script>
+</style>
 </section>
 <section>
 <h3>Scoped queries + multiple conditions</h3>
@@ -376,7 +381,7 @@ class="maxcharacters-textarea"
   <b>class="scoped-multiple"</b>
 </div>
 <br>
-<script type="text/eqcss">
+<style>
 @element ".scoped-multiple" and (min-width: 150px)
   and (max-width: 200px){
 
@@ -386,7 +391,7 @@ class="maxcharacters-textarea"
   body>$this>b { color: red }
 
 }
-</script>
+</style>
 </section>
 <hr>
 <h2>Parent selectors</h2>
@@ -396,9 +401,9 @@ class="maxcharacters-textarea"
 todo
 </div>
 <br>
-<script type="text/eqcss">
+<style>
 todo
-</script>
+</style>
 </section>
 
 

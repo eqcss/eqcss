@@ -5,7 +5,7 @@
 
 EQCSS = {
   code: "",                       // All the EQCSS code (concatenated)
-  scripts: [],                    // All the <script type="text/eqcss"> blocks (be they internal or external)
+  styles: [],                     // All the <style> blocks (embedded style) and <link rel=stylesheet> tags (external files)
   queries: [],                    // All the @element queries
   selectors: [],                  // All the queries' selectors
   conditions: [],                 // All the queries' conditions
@@ -22,25 +22,69 @@ EQCSS = {
 
 EQCSS.load = function(){
 
-  // Retrieve all scripts with type="text/eqcss"
-  var scripts = document.querySelectorAll("script[type='text/eqcss']");
+  // Retrieve all style blocks
+  var styles = document.querySelectorAll("style");
 
-  for(var i = 0; i < scripts.length; i++){
+  for(var i = 0; i < styles.length; i++){
 
-    // If the script embeds EQCSS code, add its content into the code
-    if(scripts[i].innerHTML != ""){
-      this.code += scripts[i].innerHTML;
-    }
+    // Test if the style is not read yet
+    if(!styles[i].getAttribute("eqcss-read")){
+      
+      // add their content to the EQCSS code
+      this.code += styles[i].innerHTML;
     
-    // If the script is external, retrieve it with synchronous AJAX and add its content to the code
-    if(scripts[i].src){
-      this.xhr.open("GET", scripts[i].src, false);                             
-      this.xhr.send(null);
-      this.code += this.xhr.responseText;                   
+      // Mark the style block as read
+      styles[i].setAttribute("eqcss-read", "true");
     }
+  }
+  
+  // Retrieve all link tags
+  styles = document.querySelectorAll("link");
+
+  for(i = 0; i < styles.length; i++){
     
-    // Mark the script as read
-    scripts[i].type = "text/eqcss-read";
+    // Test if the link is not read yet, and has rel=stylesheet
+    if(!styles[i].getAttribute("eqcss-read") && styles[i].getAttribute("rel") == "stylesheet"){
+        
+      // retrieve the file content with synchronous AJAX and add it to the EQCSS code
+      if(styles[i].href){
+        this.xhr.open("GET", styles[i].href, false);                             
+        this.xhr.send(null);
+        this.code += this.xhr.responseText;                   
+      }
+      
+      // Mark the link as read
+      styles[i].setAttribute("eqcss-read", "true");
+    }
+  }
+  
+  // Retrieve all script blocks
+  var styles = document.querySelectorAll("script");
+
+  for(var i = 0; i < styles.length; i++){
+
+    // Test if the script is not read yet and has type="text/eqcss"
+    if(!styles[i].getAttribute("eqcss-read") && styles[i].getAttribute("type") === "text/eqcss"){
+      
+      // Test if they contain external EQCSS code
+      if(styles[i].src){
+
+        // retrieve the file content with synchronous AJAX and add it to the EQCSS code
+        this.xhr.open("GET", styles[i].src, false);                             
+        this.xhr.send(null);
+        this.code += this.xhr.responseText;  
+      }
+      
+      // or embedded EQCSS code
+      else {
+        
+        // add it content to the EQCSS code
+        this.code += styles[i].innerHTML;
+      }
+    
+      // Mark the script block as read
+      styles[i].setAttribute("eqcss-read", "true");
+    }
   }
   
   // Cleanup
