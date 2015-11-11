@@ -165,7 +165,7 @@ EQCSS.apply = function(){
       element_guid_parent = "EQCSS_" + i + "_" + j + "_parent";
       
       // Add this guid as an attribute to the element's parent (except if element is the root element)
-      if(elements[j].parentNode){
+      if(elements[j] != document.documentElement){
         elements[j].parentNode.setAttribute(element_guid_parent, element_guid_parent);
       }
       
