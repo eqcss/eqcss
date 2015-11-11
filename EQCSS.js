@@ -164,9 +164,11 @@ EQCSS.apply = function(){
       // Pattern: "EQCSS_{element-query-index}_{nth-element-matching-this-query}_parent"
       element_guid_parent = "EQCSS_" + i + "_" + j + "_parent";
       
-      // Add this guid as an attribute to the element's parent
-      elements[j].parentNode.setAttribute(element_guid_parent, element_guid_parent);
-
+      // Add this guid as an attribute to the element's parent (except if element is the root element)
+      if(elements[j].parentNode){
+        elements[j].parentNode.setAttribute(element_guid_parent, element_guid_parent);
+      }
+      
       // Get the CSS block to this element (or create one in the <HEAD> if it doesn't exist)
       css_block = document.querySelector("#" + element_guid);
       if(!css_block){
