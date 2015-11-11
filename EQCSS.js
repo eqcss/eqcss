@@ -5,7 +5,7 @@
 
 EQCSS = {
   code: "",                       // All the EQCSS code (concatenated)
-  styles: [],                     // All the <style> blocks (embedded style) and <link rel=stylesheet> tags (external files)
+  styles: [],                     // All the <style> blocks (embedded style), <link rel=stylesheet> tags (external files), and <script type="text/eqcss"> blocks (embedded or external)
   queries: [],                    // All the @element queries
   selectors: [],                  // All the queries' selectors
   conditions: [],                 // All the queries' conditions
@@ -59,7 +59,7 @@ EQCSS.load = function(){
   }
   
   // Retrieve all script blocks
-  var styles = document.querySelectorAll("script");
+  styles = document.querySelectorAll("script");
 
   for(var i = 0; i < styles.length; i++){
 
@@ -133,14 +133,16 @@ EQCSS.apply = function(){
 
   var i, j, k;                      // Iterators
   var elements;                     // Elements targeted by each query
-  var element_guid, css_block;      // CSS block corresponding to each targeted element
+  var element_guid;                 // GUID for current element
+  var css_block;                    // CSS block corresponding to each targeted element
+  var element_guid_parent;          // GUID for current element's parent
   var css_code;                     // CSS code to write in each CSS block (one per targeted element)
   var element_width, parent_width;  // Computed widths
   var element_height, parent_height;// Computed heights
   var element_line_height;          // Computed line-height
   var test;                         // Query's condition test result
   var computed_style;               // Each targeted element's computed style
-  var parent_computed_style;        // Each targeted element's computed style
+  var parent_computed_style;        // Each targeted element parent's computed style
   
   // Loop on all element queries
   for(i = 0; i < EQCSS.queries.length; i++){
@@ -157,6 +159,13 @@ EQCSS.apply = function(){
       
       // Add this guid as an attribute to the element 
       elements[j].setAttribute(element_guid, element_guid);
+      
+      // Create a guid for the parent of this element
+      // Pattern: "EQCSS_{element-query-index}_{nth-element-matching-this-query}_parent"
+      element_guid_parent = "EQCSS_" + i + "_" + j + "_parent";
+      
+      // Add this guid as an attribute to the element's parent
+      elements[j].parentNode.setAttribute(element_guid_parent, element_guid_parent);
 
       // Get the CSS block to this element (or create one in the <HEAD> if it doesn't exist)
       css_block = document.querySelector("#" + element_guid);
@@ -405,6 +414,12 @@ EQCSS.apply = function(){
         // Replace "$this" with "[element_guid]"
         css_code = css_code.replace(/\$this/g, "[" + element_guid + "]");
         
+        // Replace "$parent" with "[element_guid_parent]"
+        css_code = css_code.replace(/\$parent/g, "[" + element_guid_parent + "]");
+        
+        // Replace "$root" with html
+        css_code = css_code.replace(/\$root/g, "html");
+        
         // good browsers
         try {
           css_block.innerHTML = css_code;
@@ -416,11 +431,15 @@ EQCSS.apply = function(){
         }
       }
       
-      // If condition is not met: empty the CSS block (or remove it on IE < 9)
+      // If condition is not met: empty the CSS block
       else {
+        
+        // Good browsers
         try{
           css_block.innerHTML = "";
         }
+        
+        // IE8
         catch(e){
           css_block.styleSheet.cssText = "";
         }
@@ -479,5 +498,5 @@ window.addEventListener("resize", function(){
   EQCSS.apply();
 });
 
-// Temp: shortcut for console.log
-function l(a){console.log(a)}
+// Debug: here's a shortcut for console.log
+// function l(a){console.log(a)}

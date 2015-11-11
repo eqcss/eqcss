@@ -377,6 +377,7 @@ class="maxcharacters-textarea"
 <div class="scoped-multiple" style="resize: horizontal; padding: 5px;">
   <b>class="scoped-multiple"</b>
 </div>
+<br>
 <div class="scoped-multiple" style="resize: horizontal; padding: 5px;">
   <b>class="scoped-multiple"</b>
 </div>
@@ -388,25 +389,64 @@ class="maxcharacters-textarea"
   $this { background: yellow; }
   $this:hover { background: orange; }
 
-  body>$this>b { color: red }
-
 }
 </style>
 </section>
 <hr>
 <h2>Parent selectors</h2>
-<section>
+<section class="parent_section">
 <h3>$parent</h3>
 <div class="parent" style="resize: horizontal; padding: 5px;">
-todo
+.parent
 </div>
 <br>
 <style>
-todo
+@element ".parent" and (min-width: 150px){
+    $parent { background: red }
+}
+</style>
+<br>
+You can also target any children of the parent:
+<br>
+<br>
+<div class="parent2" style="resize: horizontal; padding: 5px;">
+.parent2
+</div>
+<br>
+<style>
+@element ".parent2" and (min-width: 150px){
+    $parent .parent { background: red }
+    $parent style { background: yellow }
+}
 </style>
 </section>
 
-
+<section>
+<h3>$root</h3>
+<div class="root" style="resize: horizontal; padding: 5px;">
+.root
+</div>
+<br>
+<style>
+@element ".root" and (min-width: 150px){
+    $root { background: red }
+}
+</style>
+<br>
+You can also target any children of the root:
+<br>
+<br>
+<div class="root2" style="resize: horizontal; padding: 5px;">
+.root2
+</div>
+<br>
+<style>
+@element ".root2" and (min-width: 150px){
+    $root .parent_section .parent { background: red }
+    $root .parent_section style { background: yellow }
+}
+</style>
+</section>
 
 
 
