@@ -31,6 +31,14 @@
       font-weight: 400;
       font-family: 'Fira Sans', 'Source Sans Pro', 'Open Sans', Roboto, 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', 'Myriad Pro', 'Segoe UI', Myriad, Helvetica, 'Lucida Grande', 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, Arial, sans-serif;
       -webkit-text-size-adjust: 100%;
+      background: rgba(0,0,0,.05);
+      background: -moz-linear-gradient(top, rgba(0,0,0,0.15) 0%, rgba(0,0,0,.05) 100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.15)), color-stop(100%,rgba(0,0,0,.05)));
+      background: -webkit-linear-gradient(top, rgba(0,0,0,0.15) 0%,rgba(0,0,0,.05) 100%);
+      background: -o-linear-gradient(top, rgba(0,0,0,0.15) 0%,rgba(0,0,0,.05) 100%);
+      background: -ms-linear-gradient(top, rgba(0,0,0,0.15) 0%,rgba(0,0,0,.05) 100%);
+      background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%,rgba(0,0,0,.05) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 );
     }
     body {
       margin: 0 auto;
@@ -49,6 +57,7 @@
       font-size: 48pt;
       color: #333;
       margin: .5em 0 0 0;
+      text-shadow: white 0 -1px 0;
     }
     h2 {
       text-align: center;
@@ -59,15 +68,15 @@
     }
     h3 {
       font-weight: 700;
-      color: #777;
+      color: #555;
       font-size: 22pt;
-      margin: .75em 0 .5em 0;
+      margin: 1.5em 0 .5em 0;
     }
     h4 {
       font-weight: 600;
       color: #555;
       font-size: 18pt;
-      margin: .75em 0 .5em 0;
+      margin: 1.5em 0 .5em 0;
     }
     a {
       color: slateblue;
@@ -205,7 +214,7 @@
     }
     [data-button] {
       display: block;
-      max-width: 250px;
+      max-width: 215px;
       margin: 1.5em auto;
       color: white !important;
     }
@@ -256,13 +265,18 @@
     article div {
       overflow: auto;
       display: inline-block;
-      border: 1px solid #000;
+      border-radius: 3px;
       padding: 30px;
-      background: #fff8f1;
+      background: ivory;
+      border: 1px solid rgba(0,0,0,.05);
+      box-shadow: inset rgba(0,0,0,.075) 0 -3px 10px,
+                  inset rgba(255,255,255,.3) 0 1px 1px,
+                  rgba(0,0,0,.075) 0 1px .5px,
+                  rgba(0,0,0,.05) 1px 3px 5px;
     }
     section {
       display: inline-block;
-      border: 1px dotted red;
+      border: 1px dotted mediumslateblue;
     }
     img {
       margin: 5px;
@@ -301,7 +315,7 @@
     <p>You can also link to EQCSS hosted in external files with either <code>.css</code> or <code>.eqcss</code> extensions.</p>
     <h3 id=script>Using the EQCSS script type</h3>
     <p>While not necessary, if you choose to isolate your EQCSS from your CSS you can store it in external <code>.eqcss</code> files and link them using a <code>&lt;script></code> tag like this:</p>
-    <pre>&lt;script type=text/eqcss src=styles.eqcss>&lt;/script.</pre>
+    <pre>&lt;script type=text/eqcss src=styles.eqcss>&lt;/script></pre>
     <p>And you can include EQCSS scripts inline in your page like this as well:</p>
     <pre>&lt;script type=text/eqcss>
 
