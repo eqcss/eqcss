@@ -9,10 +9,9 @@
   <meta property=og:description content="Element queries are a new way of thinking about responsive web design in CSS where the responsive conditions apply to individual elements on the page instead of the width or height of the browser.">
   <meta name=viewport content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
   <title>EQCSS - CSS with Element Queries</title>
-  <link href="http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic" rel=stylesheet>
+  <link href="//fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic" rel=stylesheet>
   <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:300,400,500,600,700,900" rel=stylesheet>
-  <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel=stylesheet>
-  <link href="http://staticresource.com/data-buttons.css" rel=stylesheet>
+  <link href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel=stylesheet>
   <style>
     *,
     *:before,
@@ -78,6 +77,131 @@
     a:hover,
     a:focus {
       color: darkslateblue;
+    }
+    [data-button] {
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      display: inline-block;
+      width: auto;
+      margin: .5em auto;
+      padding: .6em .7em .7em .7em;
+      -webkit-appearance: none;
+      appearance: none;
+      outline: none;
+      cursor: pointer;
+      background: #ff8900;
+      background: -moz-linear-gradient(top, #ff8900 0%, #ff3d00 100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff8900), color-stop(100%,#ff3d00));
+      background: -webkit-linear-gradient(top, #ff8900 0%,#ff3d00 100%);
+      background: -o-linear-gradient(top, #ff8900 0%,#ff3d00 100%);
+      background: -ms-linear-gradient(top, #ff8900 0%,#ff3d00 100%);
+      background: linear-gradient(to bottom, #ff8900 0%,#ff3d00 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff8900', endColorstr='#ff3d00',GradientType=0 );
+      font-family: 'Source Sans Pro', 'Myriad Pro', 'Open Sans', Roboto, Myriad, 'Segoe UI', Helvetica, Arial, sans-serif;
+      font-weight: 600;
+      font-kerning: auto;
+      text-decoration: none;
+      text-align: center;
+      font-size: 14pt;
+      line-height: 1;
+      color: #fff;
+      text-shadow: #e20 1px 1px 0;
+      border: 1px solid #f60;
+      border-bottom-color: #e20;
+      box-shadow: inset #f20 0 -5px 15px, inset #fc6 0 1px 1px, rgba(0,0,0,.15) 0px 1px 1px;
+      border-radius: 3px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      -o-user-select: none;
+      user-select: none;
+    }
+    [data-button]:hover,
+    [data-button]:focus {
+      background: #fa3;
+      background: -moz-linear-gradient(top, #fa3 0%, #f30 100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fa3), color-stop(100%,#f30));
+      background: -webkit-linear-gradient(top, #fa3 0%,#f30 100%);
+      background: -o-linear-gradient(top, #fa3 0%,#f30 100%);
+      background: -ms-linear-gradient(top, #fa3 0%,#f30 100%);
+      background: linear-gradient(to bottom, #fa3 0%,#f30 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fa3', endColorstr='#f30',GradientType=0 );
+      box-shadow: inset #f40 0 -5px 15px, inset #ffd28a 0 1px 1px, rgba(0,0,0,.15) 0px 1px 1px, rgba(255,200,0,.5) 0 0 10px;
+    }
+    [data-button]:active {
+      background: #f50;
+      border: 1px solid #f00;
+      box-shadow: inset #f40 0 -5px 15px, inset #ffd28a 0 1px 1px;
+      border-bottom-color: #d10;
+    }
+    /* Blue Theme */
+    [data-button=blue] {
+      background: #00ccff;
+      background: -moz-linear-gradient(top, #00ccff 0%, #0080ff 100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#00ccff), color-stop(100%,#0080ff));
+      background: -webkit-linear-gradient(top, #00ccff 0%,#0080ff 100%);
+      background: -o-linear-gradient(top, #00ccff 0%,#0080ff 100%);
+      background: -mr-linear-gradient(top, #00ccff 0%,#0080ff 100%);
+      background: linear-gradient(to bottom, #00ccff 0%,#0080ff 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ccff', endColorstr='#0080ff',GradientType=0 );
+      text-shadow: #06e 1px 1px 0;
+      border: 1px solid #07f;
+      border-bottom-color: #02e;
+      box-shadow: inset #0065ff 0 -5px 15px, inset #99ffff 0 1px 1px, rgba(0,0,0,.15) 0px 1px 1px;
+    }
+    [data-button=blue]:hover,
+    [data-button=blue]:focus {
+      background: #7df;
+      background: -moz-linear-gradient(top, #7df 0%, #07f 100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#7df), color-stop(100%,#07f));
+      background: -webkit-linear-gradient(top, #7df 0%,#07f 100%);
+      background: -o-linear-gradient(top, #7df 0%,#07f 100%);
+      background: -mr-linear-gradient(top, #7df 0%,#07f 100%);
+      background: linear-gradient(to bottom, #7df 0%,#07f 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7df', endColorstr='#07f',GradientType=0 );
+      box-shadow: inset #08f 0 -5px 15px, inset #cef 0 1px 1px, rgba(0,0,0,.15) 0px 1px 1px, rgba(0,200,255,.5) 0 0 10px;
+    }
+    [data-button=blue]:active {
+      background: #05f;
+      border: 1px solid #00f;
+      box-shadow: inset #04f 0 -5px 15px, inset #8ad2ff 0 1px 1px;
+      border-bottom-color: #01d;
+    }
+    /* Green Theme */
+    [data-button=green] {
+      background: #6a1;
+      background: -moz-linear-gradient(top, #6a1 0%, #360 100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6a1), color-stop(100%,#360));
+      background: -webkit-linear-gradient(top, #6a1 0%,#360 100%);
+      background: -o-linear-gradient(top, #6a1 0%,#360 100%);
+      background: -ms-linear-gradient(top, #6a1 0%,#360 100%);
+      background: linear-gradient(to bottom, #6a1 0%,#360 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6a1', endColorstr='#360',GradientType=0 );
+      text-shadow: #062 1px 1px 0;
+      border: 1px solid #480;
+      border-bottom-color: #005822;
+      box-shadow: inset #072 0 -5px 15px, inset #8e8 0 1px 1px, rgba(0,0,0,.15) 0px 1px 1px;
+    }
+    [data-button=green]:hover,
+    [data-button=green]:focus {
+      background: #6d4;
+      background: -moz-linear-gradient(top, #6d4 0%, #360 100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6d4), color-stop(100%,#360));
+      background: -webkit-linear-gradient(top, #6d4 0%,#360 100%);
+      background: -o-linear-gradient(top, #6d4 0%,#360 100%);
+      background: -ms-linear-gradient(top, #6d4 0%,#360 100%);
+      background: linear-gradient(to bottom, #6d4 0%,#360 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7a3', endColorstr='#360',GradientType=0 );
+      box-shadow: inset #064 0 -5px 15px, inset #8e8 0 1px 1px, rgba(0, 255, 75, 0.5) 0 0 10px, rgba(0,0,0,.15) 0px 1px 1px;
+    }
+    [data-button=green]:active {
+      background: #360;
+      border: 1px solid #005822;
+      border-bottom-color: #052;
+      box-shadow: inset #040 0 -5px 15px, inset #8e8 0 1px 1px;
     }
     [data-button] {
       display: block;
