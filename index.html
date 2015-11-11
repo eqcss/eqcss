@@ -222,8 +222,10 @@
       display: inline-block;
       color: #333;
       background: #def;
-      padding: 0 .1em;
+      padding: 0 .15em;
+      margin: 0 .15em;
       border-radius: 3px;
+      box-shadow: rgba(0,0,0,.1) 0 1px 0;
       font-family: 'Source Code Pro', Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
     }
     script[type="text/eqcss"],
@@ -235,7 +237,7 @@
       white-space: pre;
       color: #215;
       padding: 1em;
-      margin: 30px 0;
+      margin: 1em 0 2em 0;
       width: 100%;
       font-size: 12pt;
       font-family: 'Source Code Pro', Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
@@ -244,6 +246,11 @@
       font-kerning: auto;
       background: #002b36;
       color: #839496;
+      border: 1px solid rgba(0,0,0,.05);
+      box-shadow: inset rgba(0,0,0,.075) 0 -3px 10px,
+                  inset rgba(255,255,255,.15) 0 1px 0,
+                  rgba(0,0,0,.3) 0 1px .5px,
+                  rgba(0,0,0,.15) 0 3px 5px;
     }
     li {
       color: #555;
@@ -267,6 +274,8 @@
       display: inline-block;
       border-radius: 3px;
       padding: 30px;
+      color: #555;
+      font-size: 12pt;
       background: ivory;
       border: 1px solid rgba(0,0,0,.05);
       box-shadow: inset rgba(0,0,0,.075) 0 -3px 10px,
@@ -284,7 +293,8 @@
     input,
     textarea {
       width: 100%;
-      margin-bottom: 10px;
+      font-size: 12pt;
+      margin-bottom: 1em;
       padding: 10px 8px;
     }
     footer {
