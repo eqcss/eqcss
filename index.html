@@ -43,7 +43,7 @@
     body {
       margin: 0 auto;
       max-width: 850px;
-      padding: 15px;
+      padding: 2em;
     }
     h1, h2, h3, h4, h5, h6 {
       font-weight: 300;
@@ -93,10 +93,11 @@
       text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      display: inline-block;
+      display: block;
       width: auto;
-      margin: .5em auto;
-      padding: .6em .7em .7em .7em;
+      max-width: 230px;
+      margin: 1em auto;
+      padding: .5em .6em .4em .6em;
       -webkit-appearance: none;
       appearance: none;
       outline: none;
@@ -109,13 +110,13 @@
       background: -ms-linear-gradient(top, #ff8900 0%,#ff3d00 100%);
       background: linear-gradient(to bottom, #ff8900 0%,#ff3d00 100%);
       filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff8900', endColorstr='#ff3d00',GradientType=0 );
-      font-family: 'Source Sans Pro', 'Myriad Pro', 'Open Sans', Roboto, Myriad, 'Segoe UI', Helvetica, Arial, sans-serif;
-      font-weight: 600;
+      font-family: 'Fira Sans', 'Source Sans Pro', 'Open Sans', Roboto, 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', 'Myriad Pro', 'Segoe UI', Myriad, Helvetica, 'Lucida Grande', 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, Arial, sans-serif;
+      font-weight: 500;
       font-kerning: auto;
       text-decoration: none;
       text-align: center;
       font-size: 14pt;
-      line-height: 1;
+      line-height: 1.4;
       color: #fff;
       text-shadow: #e20 1px 1px 0;
       border: 1px solid #f60;
@@ -131,6 +132,7 @@
     [data-button]:hover,
     [data-button]:focus {
       background: #fa3;
+      color: white;
       background: -moz-linear-gradient(top, #fa3 0%, #f30 100%);
       background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fa3), color-stop(100%,#f30));
       background: -webkit-linear-gradient(top, #fa3 0%,#f30 100%);
@@ -142,6 +144,7 @@
     }
     [data-button]:active {
       background: #f50;
+      color: white;
       border: 1px solid #f00;
       box-shadow: inset #f40 0 -5px 15px, inset #ffd28a 0 1px 1px;
       border-bottom-color: #d10;
@@ -212,12 +215,6 @@
       border-bottom-color: #052;
       box-shadow: inset #040 0 -5px 15px, inset #8e8 0 1px 1px;
     }
-    [data-button] {
-      display: block;
-      max-width: 215px;
-      margin: 1.5em auto;
-      color: white !important;
-    }
     code {
       display: inline-block;
       color: #333;
@@ -255,7 +252,7 @@
     li {
       color: #555;
       font-size: 12pt;
-      padding: 3px 0;
+      padding: .5em 0;
     }
     p {
       margin: 0;
@@ -333,7 +330,7 @@
 
 &lt;/script></pre>
     <h3 id=running>Running EQCSS</h3>
-    <p>By default the plugin execute once when the content loads, and also whenever it detects browser resize (similar to @media queries). The <code>EQCSS.apply()</code> function can be called manually on other events too, like keyup or clicks, or even when specific elements are interacted with.
+    <p>By default the plugin execute once when the content loads, and also whenever it detects browser resize (similar to <code>@media</code> queries). The <code>EQCSS.apply()</code> function can be called manually on other events too, like keyup or clicks, or even when specific elements are interacted with.
     <h3 id=desgning>Designing with Element Queries</h3>
     <p>Element Queries have the following format:</p>
     <pre>@element {selector} and {condition} [ and {condition} ]* { {css} }</pre>
@@ -453,11 +450,11 @@
       <h4>min-characters on form inputs</h4>
       <input class="mincharacters-input" value='class="mincharacters-input"'>
       <textarea class="mincharacters-textarea">class="mincharacters-textarea"</textarea>
-<script type="text/eqcss">@element ".mincharacters-input" and (min-characters: 50) {
+<script type="text/eqcss">@element ".mincharacters-input" and (min-characters: 30) {
   .mincharacters-input {
     background: gold;
   }
-}@element ".mincharacters-textarea" and (min-characters: 50) {
+}@element ".mincharacters-textarea" and (min-characters: 30) {
   .mincharacters-textarea {
     background: gold;
   }
@@ -468,11 +465,11 @@
       <h4>max-characters on form inputs</h4>
       <input class="maxcharacters-input" value='class="maxcharacters-input"'>
       <textarea class="maxcharacters-textarea">class="maxcharacters-textarea"</textarea>
-<script type="text/eqcss">@element ".maxcharacters-input" and (max-characters: 50) {
+<script type="text/eqcss">@element ".maxcharacters-input" and (max-characters: 30) {
   .maxcharacters-input {
     background: gold;
   }
-}@element ".maxcharacters-textarea" and (max-characters: 50) {
+}@element ".maxcharacters-textarea" and (max-characters: 30) {
   .maxcharacters-textarea {
     background: gold;
   }
@@ -483,7 +480,7 @@
       <h4>min-children</h4>
       <div class="minchildren">class="minchildren"<br></div>
       <button data-button=green onclick="document.querySelector('.minchildren').innerHTML += '<img src=//www.placehold.it/30>'">Add Child</button>
-<script type="text/eqcss">@element ".minchildren" and (min-children: 10) {
+<script type="text/eqcss">@element ".minchildren" and (min-children: 5) {
   .minchildren {
     background: gold;
   }
@@ -494,7 +491,7 @@
       <h4>max-children</h4>
       <div class="maxchildren">class="maxchildren"<br></div>
       <button data-button=green onclick="document.querySelector('.maxchildren').innerHTML += '<img src=//www.placehold.it/30>'">Add Child</button>
-<script type="text/eqcss">@element ".maxchildren" and (max-children: 10) {
+<script type="text/eqcss">@element ".maxchildren" and (max-children: 5) {
   .maxchildren {
     background: gold;
   }
