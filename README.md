@@ -61,7 +61,7 @@ Element Queries have the following format:
 
 ## Special Conditions
 
-### Weight Queries
+### Width Queries
 
 - min-width in `px`
 - min-width in `%`
