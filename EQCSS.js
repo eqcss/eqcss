@@ -1,16 +1,9 @@
 /*
  * EQCSS / Tommy Hodgins, Maxime Euzière / MIT licence
- * Global object
  */
 
 EQCSS = {
-  code: "",                       // All the EQCSS code (concatenated)
-  styles: [],                     // All the <style> blocks (embedded style), <link rel=stylesheet> tags (external files), and <script type="text/eqcss"> blocks (embedded or external)
-  queries: [],                    // All the @element queries
-  selectors: [],                  // All the queries' selectors
-  conditions: [],                 // All the queries' conditions
-  styles: [],                     // All the queries' CSS code
-  xhr: new XMLHttpRequest         // AJAX handler
+  data: []
 }
 
 /*
@@ -26,15 +19,52 @@ EQCSS.load = function(){
   var styles = document.querySelectorAll("style");
 
   for(var i = 0; i < styles.length; i++){
-
+    
     // Test if the style is not read yet
-    if(!styles[i].getAttribute("eqcss-read")){
-      
-      // add their content to the EQCSS code
-      this.code += styles[i].innerHTML;
+    if(styles[i].getAttribute("data-eqcss-read") === null){
     
       // Mark the style block as read
-      styles[i].setAttribute("eqcss-read", "true");
+      styles[i].setAttribute("data-eqcss-read", "true");
+      
+      // Process
+      EQCSS.parse(styles[i].innerHTML);
+      EQCSS.apply();
+    }
+  }
+  
+  // Retrieve all script blocks
+  styles = document.querySelectorAll("script");
+
+  for(var i = 0; i < styles.length; i++){
+    
+    // Test if the script is not read yet and has type="text/eqcss"
+    if(styles[i].getAttribute("data-eqcss-read") === null && styles[i].getAttribute("type") === "text/eqcss"){
+      
+      // Test if they contain external EQCSS code
+      if(styles[i].src){
+
+        // retrieve the file content with AJAX and process it
+        (function(){
+          var xhr = new XMLHttpRequest;
+          xhr.open("GET", styles[i].src, true);                             
+          xhr.send(null);
+          xhr.onload = function(){
+            EQCSS.parse(xhr.responseText);
+            EQCSS.apply();
+          }
+        })();
+      }
+      
+      // or embedded EQCSS code
+      else {
+        
+        // Process
+        EQCSS.parse(styles[i].innerHTML);
+        EQCSS.apply();
+      }
+    
+      // Mark the script block as read
+      styles[i].setAttribute("data-eqcss-read", "true");
     }
   }
   
@@ -44,83 +74,75 @@ EQCSS.load = function(){
   for(i = 0; i < styles.length; i++){
     
     // Test if the link is not read yet, and has rel=stylesheet
-    if(!styles[i].getAttribute("eqcss-read") && styles[i].getAttribute("rel") == "stylesheet"){
+    if(styles[i].getAttribute("data-eqcss-read") === null && styles[i].getAttribute("rel") == "stylesheet"){
         
-      // retrieve the file content with synchronous AJAX and add it to the EQCSS code
+      // retrieve the file content with AJAX and process it
       if(styles[i].href){
-        this.xhr.open("GET", styles[i].href, false);                             
-        this.xhr.send(null);
-        this.code += this.xhr.responseText;                   
+        (function(){
+          var xhr = new XMLHttpRequest;
+          xhr.open("GET", styles[i].href, true);                             
+          xhr.send(null);
+          xhr.onload = function(){
+            EQCSS.parse(xhr.responseText);
+            EQCSS.apply();
+          }
+        })();               
       }
       
       // Mark the link as read
-      styles[i].setAttribute("eqcss-read", "true");
+      styles[i].setAttribute("data-eqcss-read", "true");
     }
   }
-  
-  // Retrieve all script blocks
-  styles = document.querySelectorAll("script");
+}
 
-  for(var i = 0; i < styles.length; i++){
-
-    // Test if the script is not read yet and has type="text/eqcss"
-    if(!styles[i].getAttribute("eqcss-read") && styles[i].getAttribute("type") === "text/eqcss"){
-      
-      // Test if they contain external EQCSS code
-      if(styles[i].src){
-
-        // retrieve the file content with synchronous AJAX and add it to the EQCSS code
-        this.xhr.open("GET", styles[i].src, false);                             
-        this.xhr.send(null);
-        this.code += this.xhr.responseText;  
-      }
-      
-      // or embedded EQCSS code
-      else {
-        
-        // add it content to the EQCSS code
-        this.code += styles[i].innerHTML;
-      }
-    
-      // Mark the script block as read
-      styles[i].setAttribute("eqcss-read", "true");
-    }
-  }
+/*
+ * EQCSS.parse()
+ * Called by load for each script / style / link resource.
+ * Generates data for each Element Query found
+ */
+EQCSS.parse = function(code){
   
   // Cleanup
-  this.code = this.code.replace(/\s+/g," "); // reduce spaces
-  this.code = this.code.replace(/^ | $/g,""); // trim
-  this.code = this.code.replace(/\/\*[\w\W]*?\*\//g,""); // remove comments
-  this.code = this.code.replace(/ *@element/g,"\n@element"); // One element query per line
+  code = code.replace(/\s+/g," "); // reduce spaces
+  code = code.replace(/\/\*[\w\W]*?\*\//g,""); // remove comments
+  code = code.replace(/(@element.*?\{([^}]*?\{[^}]*?\}[^}]*?)*\}).*/gm, "$1"); // Keep the queries only (discard regular css written around them)
   
   // Parse
   
-  // Separate the queries
-  this.code.replace(/(@element.*(?!@element))/g, function(string, match){
-    EQCSS.queries.push(match);
+  // For each query
+  code.replace(/(@element.*(?!@element))/g, function(string, query){
+    
+    // Create a data entry
+    dataEntry = { };
+    
+    // Extract the selector
+    query.replace(/@element ?["']([^"']*)["']/g, function(string, selector){
+        dataEntry.selector = selector;
+    })
+
+    // Extract the conditions (measure, value, unit)
+    dataEntry.conditions = [];
+    query.replace(/and ?\( ?([^:]*) ?: ?([^)]*) ?\)/g, function(string, measure, value){
+        
+      // Separate value and unit if it's possible
+      var unit = null;
+      unit = value.replace(/^\d+(\D+)$/, "$1");
+      if(unit == value){
+        unit = null;
+      }
+      value = value.replace(/^(\d+)\D+$/, "$1");
+      dataEntry.conditions.push({measure: measure, value: value, unit: unit});
+    });
+
+    // Extract the styles
+    query.replace(/{(.*)}/g, function(string, style){
+       dataEntry.style = style;
+    });
+    
+    // Add it to data
+    EQCSS.data.push(dataEntry);
+    
   });
-  
-  // Extract the selectors
-  for(i = 0; i < this.queries.length; i++){
-    this.queries[i].replace(/@element ?["']([^"']*)["']/g, function(string, match){
-      EQCSS.selectors[i] = match;
-    })
-  }
-  
-  // Extract the conditions
-  for(i = 0; i < this.queries.length; i++){
-    this.conditions[i] = [];
-    this.queries[i].replace(/and ?\( ?([^:]*) ?: ?([^)]*) ?\)/g, function(string, match1, match2){
-      EQCSS.conditions[i].push({measure: match1, value: match2});
-    })
-  }
-  
-  // Extract the styles
-  for(i = 0; i < this.queries.length; i++){
-    this.queries[i].replace(/{(.*)}/g, function(string, match){
-      EQCSS.styles[i] = match;
-    })
-  }
 }
 
 /*
@@ -130,6 +152,8 @@ EQCSS.load = function(){
  */
 
 EQCSS.apply = function(){
+    
+  //l(EQCSS.data);
 
   var i, j, k;                      // Iterators
   var elements;                     // Elements targeted by each query
@@ -145,35 +169,36 @@ EQCSS.apply = function(){
   var parent_computed_style;        // Each targeted element parent's computed style
   
   // Loop on all element queries
-  for(i = 0; i < EQCSS.queries.length; i++){
+  for(i = 0; i < EQCSS.data.length; i++){
   
     // Find all the elements targeted by the query
-    elements = document.querySelectorAll(EQCSS.selectors[i]);
+    elements = document.querySelectorAll(EQCSS.data[i].selector);
     
     // Loop on all the elements
     for(j = 0; j < elements.length; j++){
     
       // Create a guid for this element
-      // Pattern: "EQCSS_{element-query-index}_{nth-element-matching-this-query}"
-      element_guid = "EQCSS_" + i + "_" + j;
+      // Pattern: "EQCSS_{element-query-index}_{matched-element-index}"
+      element_guid = "data-eqcss-" + i + "-" + j;
       
       // Add this guid as an attribute to the element 
-      elements[j].setAttribute(element_guid, element_guid);
+      elements[j].setAttribute(element_guid, "");
       
       // Create a guid for the parent of this element
-      // Pattern: "EQCSS_{element-query-index}_{nth-element-matching-this-query}_parent"
-      element_guid_parent = "EQCSS_" + i + "_" + j + "_parent";
+      // Pattern: "EQCSS_{element-query-index}_{matched-element-index}_parent"
+      element_guid_parent = "data-eqcss-" + i + "-" + j + "-parent";
       
       // Add this guid as an attribute to the element's parent (except if element is the root element)
       if(elements[j] != document.documentElement){
-        elements[j].parentNode.setAttribute(element_guid_parent, element_guid_parent);
+        elements[j].parentNode.setAttribute(element_guid_parent, "");
       }
       
-      // Get the CSS block to this element (or create one in the <HEAD> if it doesn't exist)
+      // Get the CSS block associated to this element (or create one in the <HEAD> if it doesn't exist)
       css_block = document.querySelector("#" + element_guid);
       if(!css_block){
         css_block = document.createElement("STYLE");
         css_block.id = element_guid;
+        css_block.setAttribute("data-eqcss-read", "true");
         document.querySelector("head").appendChild(css_block);
       }
       css_block = document.querySelector("#" + element_guid);
@@ -182,40 +207,59 @@ EQCSS.apply = function(){
       test = true;
       
       // Loop on the conditions
-      test_conditions: for(k = 0; k < EQCSS.conditions[i].length; k++){
+      test_conditions: for(k = 0; k < EQCSS.data[i].conditions.length; k++){
         
         // Reuse element and parent's computed style instead of computing it everywhere 
         computed_style = window.getComputedStyle(elements[j], null);
         
+        parent_computed_style = null;
         if(elements[j] != document.documentElement){
           parent_computed_style = window.getComputedStyle(elements[j].parentNode, null);
         }
         
-        else{
-          parent_computed_style = null;
+        // If the condition's unit is set and is not px or %, convert it into pixels
+        if(EQCSS.data[i].conditions[k].unit != ""
+        && EQCSS.data[i].conditions[k].unit != "px"
+        && EQCSS.data[i].conditions[k].unit != "%")
+        {
+          // Create a hidden DIV, sibling of the current element (or its child, if the element is <html>)
+          // Set the given measure and unit to the DIV's width
+          // Measure the DIV's width in px
+          // Remove the DIV
+          var div = document.createElement('DIV');
+          div.style.visibility = 'hidden';
+          div.style.width = EQCSS.data[i].conditions[k].value + EQCSS.data[i].conditions[k].width;
+          var position = elements[j];
+          if(elements[j] != document.documentElement){
+            position = elements[j].parentNode;
+          }
+          position.appendChild(div);
+          EQCSS.data[i].conditions[k].value = parseInt(window.getComputedStyle(div, null).getPropertyValue('width'));
+          EQCSS.data[i].conditions[k].unit = "px";
+          position.removeChild(div);
         }
         
         // Check each condition for this query and this element
         // If at least one condition is false, the element selector is not matched
-        switch(EQCSS.conditions[i][k].measure){
+        switch(EQCSS.data[i].conditions[k].measure){
         
           // Min-width 
           case "min-width":
           
             // Min-width in px
-            if(EQCSS.conditions[i][k].value.indexOf("px") != -1){
+            if(EQCSS.data[i].conditions[k].unit == "px"){
               element_width = parseInt(computed_style.getPropertyValue("width"));
-              if(!(element_width >= parseInt(EQCSS.conditions[i][k].value))){
+              if(!(element_width >= parseInt(EQCSS.data[i].conditions[k].value))){
                 test = false;
                 break test_conditions;
               }
             }
           
             // Min-width in %
-            if(EQCSS.conditions[i][k].value.indexOf("%") != -1){
+            if(EQCSS.data[i].conditions[k].unit == "%"){
               element_width = parseInt(computed_style.getPropertyValue("width"));
               parent_width = parseInt(parent_computed_style.getPropertyValue("width"));
-              if(!(parent_width / element_width <= 100 / parseInt(EQCSS.conditions[i][k].value))){
+              if(!(parent_width / element_width <= 100 / parseInt(EQCSS.data[i].conditions[k].value))){
                 test = false;
                 break test_conditions;
               }
@@ -227,19 +271,19 @@ EQCSS.apply = function(){
           case "max-width":
           
             // Max-width in px
-            if(EQCSS.conditions[i][k].value.indexOf("px") != -1){
+            if(EQCSS.data[i].conditions[k].unit == "px"){
               element_width = parseInt(computed_style.getPropertyValue("width"));
-              if(!(element_width <= parseInt(EQCSS.conditions[i][k].value))){
+              if(!(element_width <= parseInt(EQCSS.data[i].conditions[k].value))){
                 test = false;
                 break test_conditions;
               }
             }
           
             // Max-width in %
-            if(EQCSS.conditions[i][k].value.indexOf("%") != -1){
+            if(EQCSS.data[i].conditions[k].unit == "%"){
               element_width = parseInt(computed_style.getPropertyValue("width"));
               parent_width = parseInt(parent_computed_style.getPropertyValue("width"));
-              if(!(parent_width / element_width >= 100 / parseInt(EQCSS.conditions[i][k].value))){
+              if(!(parent_width / element_width >= 100 / parseInt(EQCSS.data[i].conditions[k].value))){
                 test = false;
                 break test_conditions;
               }
@@ -251,19 +295,19 @@ EQCSS.apply = function(){
           case "min-height":
           
             // Min-height in px
-            if(EQCSS.conditions[i][k].value.indexOf("px") != -1){
+            if(EQCSS.data[i].conditions[k].unit == "px"){
               element_width = parseInt(computed_style.getPropertyValue("height"));
-              if(!(element_width >= parseInt(EQCSS.conditions[i][k].value))){
+              if(!(element_width >= parseInt(EQCSS.data[i].conditions[k].value))){
                 test = false;
                 break test_conditions;
               }
             }
           
             // Min-height in %
-            if(EQCSS.conditions[i][k].value.indexOf("%") != -1){
+            if(EQCSS.data[i].conditions[k].unit == "%"){
               element_width = parseInt(computed_style.getPropertyValue("height"));
               parent_width = parseInt(parent_computed_style.getPropertyValue("height"));
-              if(!(parent_width / element_width <= 100 / parseInt(EQCSS.conditions[i][k].value))){
+              if(!(parent_width / element_width <= 100 / parseInt(EQCSS.data[i].conditions[k].value))){
                 test = false;
                 break test_conditions;
               }
@@ -275,19 +319,19 @@ EQCSS.apply = function(){
           case "max-height":
           
             // Max-height in px
-            if(EQCSS.conditions[i][k].value.indexOf("px") != -1){
+            if(EQCSS.data[i].conditions[k].unit == "px"){
               element_height = parseInt(computed_style.getPropertyValue("height"));
-              if(!(element_height <= parseInt(EQCSS.conditions[i][k].value))){
+              if(!(element_height <= parseInt(EQCSS.data[i].conditions[k].value))){
                 test = false;
                 break test_conditions;
               }
             }
           
             // Max-height in %
-            if(EQCSS.conditions[i][k].value.indexOf("%") != -1){
+            if(EQCSS.data[i].conditions[k].unit == "%"){
               element_height = parseInt(computed_style.getPropertyValue("height"));
               parent_height = parseInt(parent_computed_style.getPropertyValue("height"));
-              if(!(parent_height / element_height >= 100 / parseInt(EQCSS.conditions[i][k].value))){
+              if(!(parent_height / element_height >= 100 / parseInt(EQCSS.data[i].conditions[k].value))){
                 test = false;
                 break test_conditions;
               }
@@ -300,7 +344,7 @@ EQCSS.apply = function(){
           
             // form inputs
             if(elements[j].value){
-              if(!(elements[j].value.length >= parseInt(EQCSS.conditions[i][k].value))){
+              if(!(elements[j].value.length >= parseInt(EQCSS.data[i].conditions[k].value))){
                 test = false;
                 break test_conditions;
               }
@@ -309,7 +353,7 @@ EQCSS.apply = function(){
             // blocks
             else{
             
-              if(!(elements[j].textContent.length >= parseInt(EQCSS.conditions[i][k].value))){
+              if(!(elements[j].textContent.length >= parseInt(EQCSS.data[i].conditions[k].value))){
                 test = false;
                 break test_conditions;
               }
@@ -323,7 +367,7 @@ EQCSS.apply = function(){
             
             // form inputs
             if(elements[j].value){
-              if(!(elements[j].value.length <= parseInt(EQCSS.conditions[i][k].value))){
+              if(!(elements[j].value.length <= parseInt(EQCSS.data[i].conditions[k].value))){
                 test = false;
                 break test_conditions;
               }
@@ -332,7 +376,7 @@ EQCSS.apply = function(){
             // blocks
             else{
             
-              if(!(elements[j].textContent.length <= parseInt(EQCSS.conditions[i][k].value))){
+              if(!(elements[j].textContent.length <= parseInt(EQCSS.data[i].conditions[k].value))){
                 test = false;
                 break test_conditions;
               }
@@ -345,7 +389,7 @@ EQCSS.apply = function(){
           // Min-children 
           case "min-children":
           
-            if(!(elements[j].children.length >= parseInt(EQCSS.conditions[i][k].value))){
+            if(!(elements[j].children.length >= parseInt(EQCSS.data[i].conditions[k].value))){
               test = false;
               break test_conditions;
             }
@@ -355,7 +399,7 @@ EQCSS.apply = function(){
           // Max-children
           case "max-children":
           
-            if(!(elements[j].children.length <= parseInt(EQCSS.conditions[i][k].value))){
+            if(!(elements[j].children.length <= parseInt(EQCSS.data[i].conditions[k].value))){
               test = false;
               break test_conditions;
             }
@@ -376,7 +420,7 @@ EQCSS.apply = function(){
             
             element_line_height = parseInt(computed_style.getPropertyValue("line-height"));
               
-            if(!(element_height / element_line_height >= parseInt(EQCSS.conditions[i][k].value))){
+            if(!(element_height / element_line_height >= parseInt(EQCSS.data[i].conditions[k].value))){
               test = false;
               break test_conditions;
             }
@@ -395,7 +439,7 @@ EQCSS.apply = function(){
 
             element_line_height = parseInt(computed_style.getPropertyValue("line-height"));
               
-            if(!(element_height / element_line_height + 1 <= parseInt(EQCSS.conditions[i][k].value))){
+            if(!(element_height / element_line_height + 1 <= parseInt(EQCSS.data[i].conditions[k].value))){
               test = false;
               break test_conditions;
             }
@@ -411,7 +455,7 @@ EQCSS.apply = function(){
       if(test === true){
 
         // Get the CSS code to apply to the element
-        css_code = EQCSS.styles[i];
+        css_code = EQCSS.data[i].style;
         
         // Replace "$this" with "[element_guid]"
         css_code = css_code.replace(/\$this/g, "[" + element_guid + "]");
@@ -454,43 +498,43 @@ EQCSS.apply = function(){
  * "DOM Ready" cross-browser polyfill / Diego Perini / MIT license
  * Forked from: https://github.com/dperini/ContentLoaded/blob/master/src/contentloaded.js
  */
-function domready(fn) {
+EQCSS.domReady = function(fn) {
 
-	var done = false, top = true,
+  var done = false, top = true,
 
-	doc = window.document,
-	root = doc.documentElement,
-	modern = !~navigator.userAgent.indexOf("MSIE 8"),
+  doc = window.document,
+  root = doc.documentElement,
+  modern = !~navigator.userAgent.indexOf("MSIE 8"),
 
-	add = modern ? 'addEventListener' : 'attachEvent',
-	rem = modern ? 'removeEventListener' : 'detachEvent',
-	pre = modern ? '' : 'on',
+  add = modern ? 'addEventListener' : 'attachEvent',
+  rem = modern ? 'removeEventListener' : 'detachEvent',
+  pre = modern ? '' : 'on',
 
-	init = function(e) {
-		if (e.type == 'readystatechange' && doc.readyState != 'complete') return;
-		(e.type == 'load' ? window : doc)[rem](pre + e.type, init, false);
-		if (!done && (done = true)) fn.call(window, e.type || e);
-	},
+  init = function(e) {
+    if (e.type == 'readystatechange' && doc.readyState != 'complete') return;
+    (e.type == 'load' ? window : doc)[rem](pre + e.type, init, false);
+    if (!done && (done = true)) fn.call(window, e.type || e);
+  },
 
-	poll = function() {
-		try { root.doScroll('left'); } catch(e) { setTimeout(poll, 50); return; }
-		init('poll');
-	};
+  poll = function() {
+    try { root.doScroll('left'); } catch(e) { setTimeout(poll, 50); return; }
+    init('poll');
+  };
 
-	if (doc.readyState == 'complete') fn.call(window, 'lazy');
-	else {
-		if (!modern && root.doScroll) {
-			try { top = !window.frameElement; } catch(e) { }
-			if (top) poll();
-		}
-		doc[add](pre + 'DOMContentLoaded', init, false);
-		doc[add](pre + 'readystatechange', init, false);
-		window[add](pre + 'load', init, false);
-	}
+  if (doc.readyState == 'complete') fn.call(window, 'lazy');
+  else {
+    if (!modern && root.doScroll) {
+      try { top = !window.frameElement; } catch(e) { }
+      if (top) poll();
+    }
+    doc[add](pre + 'DOMContentLoaded', init, false);
+    doc[add](pre + 'readystatechange', init, false);
+    window[add](pre + 'load', init, false);
+  }
 }
 
 // Call load and apply on page load
-domready(function(){
+EQCSS.domReady(function(){
   EQCSS.load();
   EQCSS.apply();
 });
@@ -501,4 +545,4 @@ window.addEventListener("resize", function(){
 });
 
 // Debug: here's a shortcut for console.log
-// function l(a){console.log(a)}
+function l(a){console.log(a)}

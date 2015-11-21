@@ -26,7 +26,7 @@
 
 <section>
 <h3>Install and use EQCSS</h3>
-At the end of the body of your HTML page
+In your HTML page
 <br>
 <pre>
 &lt;!--[if lt IE 9]>
@@ -69,15 +69,21 @@ You can also use
 
 <section>
 <h3>Mix regular CSS and EQCSS code</h3>
-in your EQCSS style
 <br>
-<pre>
-body { ... }
-
-@element body { 
-  div { ... }
-}
-</pre>
+&lt;style>
+<br>
+<style>
+  @element ".example" and (mix-width: 100px){
+    .example { color: red }
+    .test { color: green }
+  }
+  
+  body {
+    .example { background: blue }
+  }
+</style>
+<br>
+&lt;/style>
 </section>
 
 <section>
@@ -89,7 +95,7 @@ body { ... }
 <br>
 <style>
 /* comment before */
-@element ".comments" and (max-width: 400px){
+@element ".comments" and (max-width: 300px){
   /* comment at the beginning */
   .comments { background: yellow; }
   /* comment at the end */
@@ -118,7 +124,9 @@ body { ... }
 </section>
 <section>
 <h3>min-width in %</h3>
-
+<b>Warning: percentage based on the parent's width</b>
+<br>
+<br>
 <div class="minwidthpercents" style="resize: horizontal">
   class="minwidthpercents"
 </div>
@@ -144,7 +152,9 @@ body { ... }
 </section>
 <section>
 <h3>max-width in %</h3>
-
+<b>Warning: percentage based on the parent's width</b>
+<br>
+<br>
 <div class="maxwidthpercents" style="resize: horizontal">
   class="maxwidthpercents"
 </div>
@@ -170,7 +180,9 @@ body { ... }
 </section>
 <section>
 <h3>min-height in %</h3>
-
+<b>Warning: percentage based on the parent's height</b>
+<br>
+<br>
 <section style="height: 150px;">
   <div class="minheightpercents" style="resize: vertical">
     class="minheightpercents"
@@ -198,7 +210,9 @@ body { ... }
 </section>
 <section>
 <h3>max-height in %</h3>
-
+<b>Warning: percentage based on the parent's height</b>
+<br>
+<br>
 <section style="height: 150px">
   <div class="maxheightpercents" style="resize: vertical">
     class="maxheightpercents"

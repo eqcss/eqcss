@@ -186,13 +186,11 @@
  */
 
 (function(doc){
-
-  // If the function already exists, no need to polyfill
-  if(doc.querySelectorAll)return;
+  if(doc.querySelectorAll) return;
   
   doc.querySelectorAll = function(a){
-    if("#"==a.charAt(0))return [doc.getElementById(a.substr(1))];
-    if("."==a.charAt(0))return doc.getElementsByClassName(a.substr(1));
+    if("#" == a.charAt(0)) return [doc.getElementById(a.substr(1))];
+    if("." == a.charAt(0)) return doc.getElementsByClassName(a.substr(1));
     return doc.getElementsByTagName(a);
   }
   
@@ -214,7 +212,6 @@
   && !Object.getOwnPropertyDescriptor(Element.prototype, "textContent").get){
     var innerText = Object.getOwnPropertyDescriptor(Element.prototype, "innerText");
     Object.defineProperty(Element.prototype, "textContent", {
-      // It won't work if you just drop in innerText.get and innerText.set or the whole descriptor.
       get : function() {
         return innerText.get.call(this)
       },
