@@ -103,9 +103,9 @@ EQCSS.load = function(){
 EQCSS.parse = function(code){
   
   // Cleanup
-  code = code.replace(/\s+/g," "); // reduce spaces
+  code = code.replace(/\s+/g," "); // reduce spaces and line breaks
   code = code.replace(/\/\*[\w\W]*?\*\//g,""); // remove comments
-  code = code.replace(/(@element.*?\{([^}]*?\{[^}]*?\}[^}]*?)*\}).*/gm, "$1"); // Keep the queries only (discard regular css written around them)
+  code = code.replace(/(@element.*?\{([^}]*?\{[^}]*?\}[^}]*?)*\}).*/g, "$1"); // Keep the queries only (discard regular css written around them)
   
   // Parse
   
