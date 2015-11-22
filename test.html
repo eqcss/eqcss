@@ -14,6 +14,7 @@
   h3 { font-size: 18px }
   input,textarea { width: 300px }
   section { border: 2px solid #def; border-right: 4px solid #def; border-bottom: 4px solid #def; border-radius: 10px; margin: 10px; padding: 10px; width: 400px; height: 380px; display: inline-block; vertical-align: top; }
+  aside { display: inline-block; padding-top: 5px; }
   section section { display: inline-block; border: 1px dotted red; border-radius: 0; height: auto; width: auto; }
 @media screen and (min-width: 1700px){
   body { max-width: 1700px; }
@@ -21,6 +22,7 @@
 </style>
 
 <h1>EQCSS features</h1>
+
 <hr>
 <h2>General</h2>
 
@@ -29,9 +31,9 @@
 In your HTML page
 <br>
 <pre>
-&lt;!--[if lt IE 9]>
+&lt;!--[if lt IE 9]&gt;
   &lt;script src="EQCSS-polyfills.js">&lt;/script>
-&lt;![endif]-->
+&lt;![endif]--&gt;
 &lt;script src="EQCSS.js">&lt;/script>
 </pre>
 <br>
@@ -461,7 +463,6 @@ You can also target any children of the root:
 }
 </style>
 </section>
-
 <hr>
 <h2>Units</h2>
 <section>
@@ -475,6 +476,10 @@ You can also target any children of the root:
   $this { background: red }
 }
 </style>
+<br>
+<br>
+<br>
+<aside style="border-top: 2px solid red; height: 0; width: 150pt">this is 150pt</aside>
 </section>
 
 <section>
@@ -484,10 +489,14 @@ You can also target any children of the root:
 </div>
 <br>
 <style>
-@element ".em" and (min-width: 15em){
+@element ".em" and (min-width: 10em){
   $this { background: red }
 }
 </style>
+<br>
+<br>
+<br>
+<aside style="border-top: 2px solid red; height: 0; width: 10em">this is 10em</aside>
 </section>
 
 <section>
@@ -501,6 +510,10 @@ You can also target any children of the root:
   $this { background: red }
 }
 </style>
+<br>
+<br>
+<br>
+<aside style="border-top: 2px solid red; height: 0; width: 15rem">this is 15rem</aside>
 </section>
 
 <section>
@@ -510,23 +523,31 @@ You can also target any children of the root:
 </div>
 <br>
 <style>
-@element ".vw" and (min-width: 5vw){
+@element ".vw" and (min-width: 15vw){
   $this { background: red }
 }
 </style>
+<br>
+<br>
+<br>
+<aside style="border-top: 2px solid red; height: 0; width: 15vw">this is 15vw</aside>
 </section>
 
 <section>
 <h3>vh</h3>
-<div class="vh" style="resize: horizontal; padding: 5px;">
+<div class="vh" style="resize: horizontal; padding: 10px;">
 .vh
 </div>
 <br>
 <style>
-@element ".vh" and (min-width: 5vh){
+@element ".vh" and (min-width: 10vh){
   $this { background: red }
 }
 </style>
+<br>
+<br>
+<br>
+<aside style="border-top: 2px solid red; height: 0; width: 10vh">this is 10vh</aside>
 </section>
 
 <section>
@@ -536,10 +557,14 @@ You can also target any children of the root:
 </div>
 <br>
 <style>
-@element ".vmin" and (min-width: 5vmin){
+@element ".vmin" and (min-width: 10vmin){
   $this { background: red }
 }
 </style>
+<br>
+<br>
+<br>
+<aside style="border-top: 2px solid red; height: 0; width: 10vmin">this is 10vmin</aside>
 </section>
 
 <section>
@@ -549,10 +574,14 @@ You can also target any children of the root:
 </div>
 <br>
 <style>
-@element ".vmax" and (min-width: 5vmax){
+@element ".vmax" and (min-width: 10vmax){
   $this { background: red }
 }
 </style>
+<br>
+<br>
+<br>
+<aside style="border-top: 2px solid red; height: 0; width: 10vmax">this is 10vmax</aside>
 </section>
 
 <section>
@@ -566,6 +595,10 @@ You can also target any children of the root:
   $this { background: red }
 }
 </style>
+<br>
+<br>
+<br>
+<aside style="border-top: 2px solid red; height: 0; width: 5cm">this is 5cm</aside>
 </section>
 
 <section>
@@ -575,10 +608,14 @@ You can also target any children of the root:
 </div>
 <br>
 <style>
-@element ".mm" and (min-width: 50mm){
+@element ".mm" and (min-width: 60mm){
   $this { background: red }
 }
 </style>
+<br>
+<br>
+<br>
+<aside style="border-top: 2px solid red; height: 0; width: 60mm">this is 60mm</aside>
 </section>
 
 <section>
@@ -588,10 +625,65 @@ You can also target any children of the root:
 </div>
 <br>
 <style>
-@element ".in" and (min-width: 5in){
+@element ".in" and (min-width: 2in){
   $this { background: red }
 }
 </style>
+<br>
+<br>
+<br>
+<aside style="border-top: 2px solid red; height: 0; width: 2in">this is 2in</aside>
+</section>
+
+<section>
+<h3>ex</h3>
+<div class="ex" style="resize: horizontal; padding: 5px;">
+.ex
+</div>
+<br>
+<style>
+@element ".ex" and (min-width: 5ex){
+  $this { background: red }
+}
+</style>
+<br>
+<br>
+<br>
+<aside style="border-top: 2px solid red; height: 0; width: 5ex">this is 5ex</aside>
+</section>
+
+<section>
+<h3>ch</h3>
+<div class="ch" style="resize: horizontal; padding: 5px;">
+.ch
+</div>
+<br>
+<style>
+@element ".ch" and (min-width: 5ch){
+  $this { background: red }
+}
+</style>
+<br>
+<br>
+<br>
+<aside style="border-top: 2px solid red; height: 0; width: 5ch">this is 5ch</aside>
+</section>
+
+<section>
+<h3>pc</h3>
+<div class="pc" style="resize: horizontal; padding: 5px;">
+.pc
+</div>
+<br>
+<style>
+@element ".pc" and (min-width: 5pc){
+  $this { background: red }
+}
+</style>
+<br>
+<br>
+<br>
+<aside style="border-top: 2px solid red; height: 0; width: 5pc">this is 5pc</aside>
 </section>
 
 
@@ -624,7 +716,7 @@ window.addEventListener("mousedown", function(){
   EQCSS_timeout = false;
   setTimeout(function(){
     EQCSS_timeout = true;
-  },250);
+  },100);
 });
 
 window.addEventListener("mouseup", function(){
@@ -635,7 +727,7 @@ window.addEventListener("mouseup", function(){
   EQCSS_timeout = false;
   setTimeout(function(){
     EQCSS_timeout = true;
-  },250);
+  },100);
 });
 
 window.addEventListener("mousemove", function(){
@@ -646,7 +738,7 @@ window.addEventListener("mousemove", function(){
     EQCSS_timeout = false;
     setTimeout(function(){
       EQCSS_timeout = true;
-    },250);
+    },100);
   }
 });
 
@@ -657,7 +749,7 @@ window.addEventListener("keydown", function(){
   EQCSS_timeout = false;
   setTimeout(function(){
     EQCSS_timeout = true;
-  },250);
+  },100);
 });
 
 window.addEventListener("keyup", function(){
@@ -667,7 +759,7 @@ window.addEventListener("keyup", function(){
   EQCSS_timeout = false;
   setTimeout(function(){
     EQCSS_timeout = true;
-  },250);
+  },100);
 });
 
 window.addEventListener("input", function(){
@@ -677,6 +769,6 @@ window.addEventListener("input", function(){
   EQCSS_timeout = false;
   setTimeout(function(){
     EQCSS_timeout = true;
-  },250);
+  },100);
 });
 </script>

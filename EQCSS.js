@@ -228,7 +228,8 @@ EQCSS.apply = function(){
           // Remove the DIV
           var div = document.createElement('DIV');
           div.style.visibility = 'hidden';
-          div.style.width = EQCSS.data[i].conditions[k].value + EQCSS.data[i].conditions[k].width;
+          div.style.border = '1px solid red';
+          div.style.width = EQCSS.data[i].conditions[k].value + EQCSS.data[i].conditions[k].unit;
           var position = elements[j];
           if(elements[j] != document.documentElement){
             position = elements[j].parentNode;
