@@ -197,6 +197,7 @@ You can also use
 }
 </style>
 </section>
+
 <section>
 <h3>max-height in px</h3>
 
@@ -210,6 +211,7 @@ You can also use
 }
 </style>
 </section>
+
 <section>
 <h3>max-height in %</h3>
 <b>Warning: percentage based on the parent's height</b>
@@ -227,6 +229,91 @@ You can also use
 }
 </style>
 </section>
+
+<section>
+<h3>min-scroll-x in px</h3>
+<br>
+<br>
+<div class="minscrollxpixels" style="width: 100px; overflow: auto;">
+  class="minscrollxpixels"
+</div>
+<br>
+<style>
+@element ".minscrollxpixels" and (min-scroll-x: 20px){
+  .minscrollxpixels { background: yellow; }
+}
+</style>
+</section>
+
+<section>
+<h3>min-scroll-y in px</h3>
+<br>
+<br>
+<div class="minscrollypixels" style="height: 100px; overflow: auto;">
+  class="minscrollypixels"
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  Hi!
+</div>
+<br>
+<style>
+@element ".minscrollypixels" and (min-scroll-y: 20px){
+  .minscrollypixels { background: yellow; }
+}
+</style>
+</section>
+
+<section>
+<h3>max-scroll-x in px</h3>
+<br>
+<br>
+<div class="maxscrollxpixels" style="width: 100px; overflow: auto;">
+  class="maxscrollxpixels"
+</div>
+<br>
+<style>
+@element ".maxscrollxpixels" and (max-scroll-x: 20px){
+  .maxscrollxpixels { background: yellow; }
+}
+</style>
+</section>
+
+<section>
+<h3>max-scroll-y in px</h3>
+<br>
+<br>
+<div class="maxscrollypixels" style="height: 100px; overflow: auto;">
+  class="maxscrollypixels"
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  Hi!
+</div>
+<br>
+<style>
+@element ".maxscrollypixels" and (max-scroll-y: 20px){
+  .maxscrollypixels { background: yellow; }
+}
+</style>
+</section>
+
+
+
 <section>
 <h3>min-characters on blocks</h3>
 <b>(Use keyboard)</b>

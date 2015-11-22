@@ -340,6 +340,66 @@ EQCSS.apply = function(){
           
           break;
           
+          // Min-scroll-x
+          case "min-scroll-x":
+          
+            element_scroll = elements[j].scrollLeft;
+
+            // Min-scroll-x in px
+            if(EQCSS.data[i].conditions[k].unit == "px"){
+              if(!(element_scroll >= parseInt(EQCSS.data[i].conditions[k].value))){
+                test = false;
+                break test_conditions;
+              }
+            }
+          
+          break;
+          
+          // Min-scroll-y
+          case "min-scroll-y":
+          
+            element_scroll = elements[j].scrollTop;
+
+            // Min-scroll-y in px
+            if(EQCSS.data[i].conditions[k].unit == "px"){
+              if(!(element_scroll >= parseInt(EQCSS.data[i].conditions[k].value))){
+                test = false;
+                break test_conditions;
+              }
+            }
+          
+          break;
+          
+          // Max-scroll-x
+          case "max-scroll-x":
+          
+            element_scroll = elements[j].scrollLeft;
+
+            // Min-scroll-x in px
+            if(EQCSS.data[i].conditions[k].unit == "px"){
+              if(!(element_scroll <= parseInt(EQCSS.data[i].conditions[k].value))){
+                test = false;
+                break test_conditions;
+              }
+            }
+          
+          break;
+          
+          // Max-scroll-y
+          case "max-scroll-y":
+          
+            element_scroll = elements[j].scrollTop;
+
+            // Min-scroll-y in px
+            if(EQCSS.data[i].conditions[k].unit == "px"){
+              if(!(element_scroll <= parseInt(EQCSS.data[i].conditions[k].value))){
+                test = false;
+                break test_conditions;
+              }
+            }
+          
+          break;
+          
           // Min-characters 
           case "min-characters":
           
