@@ -105,6 +105,7 @@ EQCSS.parse = function(code){
   // Cleanup
   code = code.replace(/\s+/g," "); // reduce spaces and line breaks
   code = code.replace(/\/\*[\w\W]*?\*\//g,""); // remove comments
+  code = code.replace(/@element/g,"\n@element"); // one element query per line
   code = code.replace(/(@element.*?\{([^}]*?\{[^}]*?\}[^}]*?)*\}).*/g, "$1"); // Keep the queries only (discard regular css written around them)
   
   // Parse
@@ -152,8 +153,6 @@ EQCSS.parse = function(code){
  */
 
 EQCSS.apply = function(){
-    
-  //l(EQCSS.data);
 
   var i, j, k;                      // Iterators
   var elements;                     // Elements targeted by each query
@@ -356,7 +355,13 @@ EQCSS.apply = function(){
             // Min-scroll-x in %
             else if(EQCSS.data[i].conditions[k].unit == "%"){
               var element_scroll_size = elements[j].scrollWidth;
-              var element_size = parseInt(computed_style.getPropertyValue("width"));
+              var element_size;
+              if(elements[j] == document.documentElement || elements[j] == document.body){
+                element_size = window.innerWidth;
+              }
+              else {
+                element_size = parseInt(computed_style.getPropertyValue("width"));
+              }
               
               if(!((element_scroll / (element_scroll_size - element_size)) * 100 >= parseInt(EQCSS.data[i].conditions[k].value))){
                 test = false;
@@ -381,8 +386,15 @@ EQCSS.apply = function(){
             
             // Min-scroll-y in %
             else if(EQCSS.data[i].conditions[k].unit == "%"){
+              
               var element_scroll_size = elements[j].scrollHeight;
-              var element_size = parseInt(computed_style.getPropertyValue("height"));
+              var element_size;
+              if(elements[j] == document.documentElement || elements[j] == document.body){
+                element_size = window.innerHeight;
+              }
+              else {
+                element_size = parseInt(computed_style.getPropertyValue("height"));
+              }
               
               if(!((element_scroll / (element_scroll_size - element_size)) * 100 >= parseInt(EQCSS.data[i].conditions[k].value))){
                 test = false;
@@ -407,8 +419,15 @@ EQCSS.apply = function(){
             
             // Max-scroll-x in %
             else if(EQCSS.data[i].conditions[k].unit == "%"){
+              
               var element_scroll_size = elements[j].scrollWidth;
-              var element_size = parseInt(computed_style.getPropertyValue("width"));
+              var element_size;
+              if(elements[j] == document.documentElement || elements[j] == document.body){
+                element_size = window.innerWidth;
+              }
+              else {
+                element_size = parseInt(computed_style.getPropertyValue("width"));
+              }
               
               if(!((element_scroll / (element_scroll_size - element_size)) * 100 <= parseInt(EQCSS.data[i].conditions[k].value))){
                 test = false;
@@ -433,8 +452,15 @@ EQCSS.apply = function(){
             
             // Max-scroll-y in %
             else if(EQCSS.data[i].conditions[k].unit == "%"){
+              
               var element_scroll_size = elements[j].scrollHeight;
-              var element_size = parseInt(computed_style.getPropertyValue("height"));
+              var element_size;
+              if(elements[j] == document.documentElement || elements[j] == document.body){
+                element_size = window.innerHeight;
+              }
+              else {
+                element_size = parseInt(computed_style.getPropertyValue("height"));
+              }
               
               if(!((element_scroll / (element_scroll_size - element_size)) * 100 <= parseInt(EQCSS.data[i].conditions[k].value))){
                 test = false;

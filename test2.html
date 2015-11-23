@@ -1,0 +1,218 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>EQCSS features</title>
+
+<style>
+@element "html" and (min-scroll-y: 50%){
+  html { background: yellow; }
+}
+
+@element "body" and (min-scroll-y: 50%){
+  body { background: green; }
+}
+</style>
+
+<h3>min-scroll-y in percents</h3>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+Hi
+
+<br>
+<br>
+<br>
+<br>
+<br>
+Hi
+
+<br>
+<br>
+<br>
+<br>
+<br>
+Hi
+
+<br>
+<br>
+<br>
+<br>
+<br>
+Hi
+
+<br>
+<br>
+<br>
+<br>
+<br>
+Hi
+
+<br>
+<br>
+<br>
+<br>
+<br>
+Hi
+
+<br>
+<br>
+<br>
+<br>
+<br>
+Hi
+
+<br>
+<br>
+<br>
+<br>
+<br>
+Hi
+
+<br>
+<br>
+<br>
+<br>
+<br>
+Hi
+
+<br>
+<br>
+<br>
+<br>
+<br>
+Hi
+
+<br>
+<br>
+<br>
+<br>
+<br>
+Hi
+
+<br>
+<br>
+<br>
+<br>
+<br>
+Hi
+
+<br>
+<br>
+<br>
+<br>
+<br>
+Hi
+
+<br>
+<br>
+<br>
+<br>
+<br>
+Hi
+
+<br>
+<br>
+<br>
+<br>
+<br>
+Hi
+
+
+
+
+
+
+
+
+
+
+
+<!--[if lt IE 9]><script src="EQCSS-polyfills.js"></script><![endif]-->
+<script src="EQCSS.js"></script>
+
+
+<script>
+
+// Apply eqcss on clicks, resizes, inputs
+
+var EQCSS_resizing = false;
+var EQCSS_timeout = true;
+
+
+window.addEventListener("scroll", function(){
+  EQCSS_resizing = true;
+  if(EQCSS_timeout == true){
+    EQCSS.apply();
+  }
+  EQCSS_timeout = false;
+  setTimeout(function(){
+    EQCSS_timeout = true;
+  },100);
+});
+
+window.addEventListener("mousedown", function(){
+  EQCSS_resizing = true;
+  if(EQCSS_timeout == true){
+    EQCSS.apply();
+  }
+  EQCSS_timeout = false;
+  setTimeout(function(){
+    EQCSS_timeout = true;
+  },100);
+});
+
+window.addEventListener("mouseup", function(){
+  EQCSS_resizing = false;
+  if(EQCSS_timeout == true){
+    EQCSS.apply();
+  }
+  EQCSS_timeout = false;
+  setTimeout(function(){
+    EQCSS_timeout = true;
+  },100);
+});
+
+window.addEventListener("mousemove", function(){
+  if(EQCSS_resizing === true){
+    if(EQCSS_timeout === true){
+      EQCSS.apply();
+    }
+    EQCSS_timeout = false;
+    setTimeout(function(){
+      EQCSS_timeout = true;
+    },100);
+  }
+});
+
+window.addEventListener("keydown", function(){
+  if(EQCSS_timeout == true){
+    EQCSS.apply();
+  }
+  EQCSS_timeout = false;
+  setTimeout(function(){
+    EQCSS_timeout = true;
+  },100);
+});
+
+window.addEventListener("keyup", function(){
+  if(EQCSS_timeout == true){
+    EQCSS.apply();
+  }
+  EQCSS_timeout = false;
+  setTimeout(function(){
+    EQCSS_timeout = true;
+  },100);
+});
+
+window.addEventListener("input", function(){
+  if(EQCSS_timeout == true){
+    EQCSS.apply();
+  }
+  EQCSS_timeout = false;
+  setTimeout(function(){
+    EQCSS_timeout = true;
+  },100);
+});
+</script>
