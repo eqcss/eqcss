@@ -343,11 +343,22 @@ EQCSS.apply = function(){
           // Min-scroll-x
           case "min-scroll-x":
           
-            element_scroll = elements[j].scrollLeft;
+            var element_scroll = elements[j].scrollLeft;
 
             // Min-scroll-x in px
             if(EQCSS.data[i].conditions[k].unit == "px"){
               if(!(element_scroll >= parseInt(EQCSS.data[i].conditions[k].value))){
+                test = false;
+                break test_conditions;
+              }
+            }
+            
+            // Min-scroll-x in %
+            else if(EQCSS.data[i].conditions[k].unit == "%"){
+              var element_scroll_size = elements[j].scrollWidth;
+              var element_size = parseInt(computed_style.getPropertyValue("width"));
+              
+              if(!((element_scroll / (element_scroll_size - element_size)) * 100 >= parseInt(EQCSS.data[i].conditions[k].value))){
                 test = false;
                 break test_conditions;
               }
@@ -367,6 +378,17 @@ EQCSS.apply = function(){
                 break test_conditions;
               }
             }
+            
+            // Min-scroll-y in %
+            else if(EQCSS.data[i].conditions[k].unit == "%"){
+              var element_scroll_size = elements[j].scrollHeight;
+              var element_size = parseInt(computed_style.getPropertyValue("height"));
+              
+              if(!((element_scroll / (element_scroll_size - element_size)) * 100 >= parseInt(EQCSS.data[i].conditions[k].value))){
+                test = false;
+                break test_conditions;
+              }
+            }
           
           break;
           
@@ -375,9 +397,20 @@ EQCSS.apply = function(){
           
             element_scroll = elements[j].scrollLeft;
 
-            // Min-scroll-x in px
+            // Max-scroll-x in px
             if(EQCSS.data[i].conditions[k].unit == "px"){
               if(!(element_scroll <= parseInt(EQCSS.data[i].conditions[k].value))){
+                test = false;
+                break test_conditions;
+              }
+            }
+            
+            // Max-scroll-x in %
+            else if(EQCSS.data[i].conditions[k].unit == "%"){
+              var element_scroll_size = elements[j].scrollWidth;
+              var element_size = parseInt(computed_style.getPropertyValue("width"));
+              
+              if(!((element_scroll / (element_scroll_size - element_size)) * 100 <= parseInt(EQCSS.data[i].conditions[k].value))){
                 test = false;
                 break test_conditions;
               }
@@ -390,9 +423,20 @@ EQCSS.apply = function(){
           
             element_scroll = elements[j].scrollTop;
 
-            // Min-scroll-y in px
+            // Max-scroll-y in px
             if(EQCSS.data[i].conditions[k].unit == "px"){
               if(!(element_scroll <= parseInt(EQCSS.data[i].conditions[k].value))){
+                test = false;
+                break test_conditions;
+              }
+            }
+            
+            // Max-scroll-y in %
+            else if(EQCSS.data[i].conditions[k].unit == "%"){
+              var element_scroll_size = elements[j].scrollHeight;
+              var element_size = parseInt(computed_style.getPropertyValue("height"));
+              
+              if(!((element_scroll / (element_scroll_size - element_size)) * 100 <= parseInt(EQCSS.data[i].conditions[k].value))){
                 test = false;
                 break test_conditions;
               }
