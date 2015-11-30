@@ -597,6 +597,12 @@ EQCSS.apply = function(){
         // Replace "$root" with html
         css_code = css_code.replace(/\$root/g, "html");
         
+        // Replace var(xyz) with xyz's current value in JS
+        css_code = css_code.replace(/var\(([^()]*(\([^)]*\)[^()]*)*[^()]*)\)/g, function(string, match){
+          return (eval(match) || "");
+        });
+        
+        
         // good browsers
         try {
           css_block.innerHTML = css_code;
@@ -672,6 +678,11 @@ EQCSS.domReady(function(){
 
 // Call apply on resize
 window.addEventListener("resize", function(){
+  EQCSS.apply();
+});
+
+// Call apply on scroll
+window.addEventListener("scroll", function(){
   EQCSS.apply();
 });
 

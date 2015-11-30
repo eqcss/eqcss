@@ -870,7 +870,26 @@ You can also target any children of the root:
 <aside style="border-top: 2px solid red; height: 0; width: 5pc">this is 5pc</aside>
 </section>
 
-
+<hr>
+<h2>Link with JavaScript</h2>
+<section>
+<h3>var([expression])</h3>
+<div class="var" style="max-height: 200px; resize: both; padding: 20px;">
+resize me
+</div>
+<br>
+<style>
+@element ".var"{
+  $this:after {
+    content: "last resize at: var( new Date() )";
+    display: block;
+    background: gold;
+    padding: 10px;
+    font-size: 10px;
+  }
+}
+</style>
+</section>
 
 
 
