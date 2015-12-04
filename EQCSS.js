@@ -216,11 +216,41 @@ EQCSS.apply = function(){
           parent_computed_style = window.getComputedStyle(elements[j].parentNode, null);
         }
         
+        // Do we have to reconvert the size in px at each call?
+        // This is true only for vw/vh/vmin/vmax
+        var recomputed = false;
+        
+        // If the condition's unit is vw, convert current value in vw, in px
+        if(EQCSS.data[i].conditions[k].unit === "vw"){
+          recomputed = true;
+          var value = parseInt(EQCSS.data[i].conditions[k].value);
+          EQCSS.data[i].conditions[k].recomputed_value = value * window.innerWidth / 100;
+        }
+        
+        // If the condition's unit is vh, convert current value in vh, in px
+        else if(EQCSS.data[i].conditions[k].unit === "vh"){
+          recomputed = true
+          var value = parseInt(EQCSS.data[i].conditions[k].value);
+          EQCSS.data[i].conditions[k].recomputed_value = value * window.innerHeight / 100;
+        }
+        
+        // If the condition's unit is vmin, convert current value in vmin, in px
+        else if(EQCSS.data[i].conditions[k].unit === "vmin"){
+          recomputed = true;
+          var value = parseInt(EQCSS.data[i].conditions[k].value);
+          EQCSS.data[i].conditions[k].recomputed_value = value * Math.min(window.innerWidth, window.innerHeight) / 100;
+        }
+        
+        // If the condition's unit is vmax, convert current value in vmax, in px
+        else if(EQCSS.data[i].conditions[k].unit === "vmax"){
+          recomputed = true;
+          var value = parseInt(EQCSS.data[i].conditions[k].value);
+          EQCSS.data[i].conditions[k].recomputed_value = value * Math.max(window.innerWidth, window.innerHeight) / 100;
+        }
+        
         // If the condition's unit is set and is not px or %, convert it into pixels
-        if(EQCSS.data[i].conditions[k].unit != ""
-        && EQCSS.data[i].conditions[k].unit != "px"
-        && EQCSS.data[i].conditions[k].unit != "%")
-        {
+        else if(EQCSS.data[i].conditions[k].unit != "" && EQCSS.data[i].conditions[k].unit != "px" && EQCSS.data[i].conditions[k].unit != "%"){
+          
           // Create a hidden DIV, sibling of the current element (or its child, if the element is <html>)
           // Set the given measure and unit to the DIV's width
           // Measure the DIV's width in px
@@ -239,6 +269,9 @@ EQCSS.apply = function(){
           position.removeChild(div);
         }
         
+        // Store the good value in final_value depending if the size is recomputed or not
+        var final_value = recomputed ? EQCSS.data[i].conditions[k].recomputed_value : parseInt(EQCSS.data[i].conditions[k].value);
+        
         // Check each condition for this query and this element
         // If at least one condition is false, the element selector is not matched
         switch(EQCSS.data[i].conditions[k].measure){
@@ -247,9 +280,9 @@ EQCSS.apply = function(){
           case "min-width":
           
             // Min-width in px
-            if(EQCSS.data[i].conditions[k].unit == "px"){
+            if(recomputed == true || EQCSS.data[i].conditions[k].unit == "px"){
               element_width = parseInt(computed_style.getPropertyValue("width"));
-              if(!(element_width >= parseInt(EQCSS.data[i].conditions[k].value))){
+              if(!(element_width >= final_value)){
                 test = false;
                 break test_conditions;
               }
@@ -259,7 +292,7 @@ EQCSS.apply = function(){
             if(EQCSS.data[i].conditions[k].unit == "%"){
               element_width = parseInt(computed_style.getPropertyValue("width"));
               parent_width = parseInt(parent_computed_style.getPropertyValue("width"));
-              if(!(parent_width / element_width <= 100 / parseInt(EQCSS.data[i].conditions[k].value))){
+              if(!(parent_width / element_width <= 100 / final_value)){
                 test = false;
                 break test_conditions;
               }
@@ -271,9 +304,9 @@ EQCSS.apply = function(){
           case "max-width":
           
             // Max-width in px
-            if(EQCSS.data[i].conditions[k].unit == "px"){
+            if(recomputed == true || EQCSS.data[i].conditions[k].unit == "px"){
               element_width = parseInt(computed_style.getPropertyValue("width"));
-              if(!(element_width <= parseInt(EQCSS.data[i].conditions[k].value))){
+              if(!(element_width <= final_value)){
                 test = false;
                 break test_conditions;
               }
@@ -283,7 +316,7 @@ EQCSS.apply = function(){
             if(EQCSS.data[i].conditions[k].unit == "%"){
               element_width = parseInt(computed_style.getPropertyValue("width"));
               parent_width = parseInt(parent_computed_style.getPropertyValue("width"));
-              if(!(parent_width / element_width >= 100 / parseInt(EQCSS.data[i].conditions[k].value))){
+              if(!(parent_width / element_width >= 100 / final_value)){
                 test = false;
                 break test_conditions;
               }
@@ -295,9 +328,9 @@ EQCSS.apply = function(){
           case "min-height":
           
             // Min-height in px
-            if(EQCSS.data[i].conditions[k].unit == "px"){
+            if(recomputed == true || EQCSS.data[i].conditions[k].unit == "px"){
               element_width = parseInt(computed_style.getPropertyValue("height"));
-              if(!(element_width >= parseInt(EQCSS.data[i].conditions[k].value))){
+              if(!(element_width >= final_value)){
                 test = false;
                 break test_conditions;
               }
@@ -307,7 +340,7 @@ EQCSS.apply = function(){
             if(EQCSS.data[i].conditions[k].unit == "%"){
               element_width = parseInt(computed_style.getPropertyValue("height"));
               parent_width = parseInt(parent_computed_style.getPropertyValue("height"));
-              if(!(parent_width / element_width <= 100 / parseInt(EQCSS.data[i].conditions[k].value))){
+              if(!(parent_width / element_width <= 100 / final_value)){
                 test = false;
                 break test_conditions;
               }
@@ -319,9 +352,9 @@ EQCSS.apply = function(){
           case "max-height":
           
             // Max-height in px
-            if(EQCSS.data[i].conditions[k].unit == "px"){
+            if(recomputed == true || EQCSS.data[i].conditions[k].unit == "px"){
               element_height = parseInt(computed_style.getPropertyValue("height"));
-              if(!(element_height <= parseInt(EQCSS.data[i].conditions[k].value))){
+              if(!(element_height <= final_value)){
                 test = false;
                 break test_conditions;
               }
@@ -331,7 +364,7 @@ EQCSS.apply = function(){
             if(EQCSS.data[i].conditions[k].unit == "%"){
               element_height = parseInt(computed_style.getPropertyValue("height"));
               parent_height = parseInt(parent_computed_style.getPropertyValue("height"));
-              if(!(parent_height / element_height >= 100 / parseInt(EQCSS.data[i].conditions[k].value))){
+              if(!(parent_height / element_height >= 100 / final_value)){
                 test = false;
                 break test_conditions;
               }
@@ -345,8 +378,8 @@ EQCSS.apply = function(){
             var element_scroll = elements[j].scrollLeft;
 
             // Min-scroll-x in px
-            if(EQCSS.data[i].conditions[k].unit == "px"){
-              if(!(element_scroll >= parseInt(EQCSS.data[i].conditions[k].value))){
+            if(recomputed == true || EQCSS.data[i].conditions[k].unit == "px"){
+              if(!(element_scroll >= final_value)){
                 test = false;
                 break test_conditions;
               }
@@ -363,7 +396,7 @@ EQCSS.apply = function(){
                 element_size = parseInt(computed_style.getPropertyValue("width"));
               }
               
-              if(!((element_scroll / (element_scroll_size - element_size)) * 100 >= parseInt(EQCSS.data[i].conditions[k].value))){
+              if(!((element_scroll / (element_scroll_size - element_size)) * 100 >= final_value)){
                 test = false;
                 break test_conditions;
               }
@@ -377,8 +410,8 @@ EQCSS.apply = function(){
             element_scroll = elements[j].scrollTop;
 
             // Min-scroll-y in px
-            if(EQCSS.data[i].conditions[k].unit == "px"){
-              if(!(element_scroll >= parseInt(EQCSS.data[i].conditions[k].value))){
+            if(recomputed == true || EQCSS.data[i].conditions[k].unit == "px"){
+              if(!(element_scroll >= final_value)){
                 test = false;
                 break test_conditions;
               }
@@ -396,7 +429,7 @@ EQCSS.apply = function(){
                 element_size = parseInt(computed_style.getPropertyValue("height"));
               }
               
-              if(!((element_scroll / (element_scroll_size - element_size)) * 100 >= parseInt(EQCSS.data[i].conditions[k].value))){
+              if(!((element_scroll / (element_scroll_size - element_size)) * 100 >= final_value)){
                 test = false;
                 break test_conditions;
               }
@@ -410,8 +443,8 @@ EQCSS.apply = function(){
             element_scroll = elements[j].scrollLeft;
 
             // Max-scroll-x in px
-            if(EQCSS.data[i].conditions[k].unit == "px"){
-              if(!(element_scroll <= parseInt(EQCSS.data[i].conditions[k].value))){
+            if(recomputed == true || EQCSS.data[i].conditions[k].unit == "px"){
+              if(!(element_scroll <= final_value)){
                 test = false;
                 break test_conditions;
               }
@@ -429,7 +462,7 @@ EQCSS.apply = function(){
                 element_size = parseInt(computed_style.getPropertyValue("width"));
               }
               
-              if(!((element_scroll / (element_scroll_size - element_size)) * 100 <= parseInt(EQCSS.data[i].conditions[k].value))){
+              if(!((element_scroll / (element_scroll_size - element_size)) * 100 <= final_value)){
                 test = false;
                 break test_conditions;
               }
@@ -443,8 +476,8 @@ EQCSS.apply = function(){
             element_scroll = elements[j].scrollTop;
 
             // Max-scroll-y in px
-            if(EQCSS.data[i].conditions[k].unit == "px"){
-              if(!(element_scroll <= parseInt(EQCSS.data[i].conditions[k].value))){
+            if(recomputed == true || EQCSS.data[i].conditions[k].unit == "px"){
+              if(!(element_scroll <= final_value)){
                 test = false;
                 break test_conditions;
               }
@@ -462,7 +495,7 @@ EQCSS.apply = function(){
                 element_size = parseInt(computed_style.getPropertyValue("height"));
               }
               
-              if(!((element_scroll / (element_scroll_size - element_size)) * 100 <= parseInt(EQCSS.data[i].conditions[k].value))){
+              if(!((element_scroll / (element_scroll_size - element_size)) * 100 <= final_value)){
                 test = false;
                 break test_conditions;
               }
@@ -475,7 +508,7 @@ EQCSS.apply = function(){
           
             // form inputs
             if(elements[j].value){
-              if(!(elements[j].value.length >= parseInt(EQCSS.data[i].conditions[k].value))){
+              if(!(elements[j].value.length >= final_value)){
                 test = false;
                 break test_conditions;
               }
@@ -484,7 +517,7 @@ EQCSS.apply = function(){
             // blocks
             else{
             
-              if(!(elements[j].textContent.length >= parseInt(EQCSS.data[i].conditions[k].value))){
+              if(!(elements[j].textContent.length >= final_value)){
                 test = false;
                 break test_conditions;
               }
@@ -498,7 +531,7 @@ EQCSS.apply = function(){
             
             // form inputs
             if(elements[j].value){
-              if(!(elements[j].value.length <= parseInt(EQCSS.data[i].conditions[k].value))){
+              if(!(elements[j].value.length <= final_value)){
                 test = false;
                 break test_conditions;
               }
@@ -507,7 +540,7 @@ EQCSS.apply = function(){
             // blocks
             else{
             
-              if(!(elements[j].textContent.length <= parseInt(EQCSS.data[i].conditions[k].value))){
+              if(!(elements[j].textContent.length <= final_value)){
                 test = false;
                 break test_conditions;
               }
@@ -520,7 +553,7 @@ EQCSS.apply = function(){
           // Min-children 
           case "min-children":
           
-            if(!(elements[j].children.length >= parseInt(EQCSS.data[i].conditions[k].value))){
+            if(!(elements[j].children.length >= final_value)){
               test = false;
               break test_conditions;
             }
@@ -530,7 +563,7 @@ EQCSS.apply = function(){
           // Max-children
           case "max-children":
           
-            if(!(elements[j].children.length <= parseInt(EQCSS.data[i].conditions[k].value))){
+            if(!(elements[j].children.length <= final_value)){
               test = false;
               break test_conditions;
             }
@@ -551,7 +584,7 @@ EQCSS.apply = function(){
             
             element_line_height = parseInt(computed_style.getPropertyValue("line-height"));
               
-            if(!(element_height / element_line_height >= parseInt(EQCSS.data[i].conditions[k].value))){
+            if(!(element_height / element_line_height >= final_value)){
               test = false;
               break test_conditions;
             }
@@ -570,7 +603,7 @@ EQCSS.apply = function(){
 
             element_line_height = parseInt(computed_style.getPropertyValue("line-height"));
               
-            if(!(element_height / element_line_height + 1 <= parseInt(EQCSS.data[i].conditions[k].value))){
+            if(!(element_height / element_line_height + 1 <= final_value)){
               test = false;
               break test_conditions;
             }
