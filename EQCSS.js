@@ -249,7 +249,7 @@ EQCSS.apply = function(){
         }
         
         // If the condition's unit is set and is not px or %, convert it into pixels
-        else if(EQCSS.data[i].conditions[k].unit != "" && EQCSS.data[i].conditions[k].unit != "px" && EQCSS.data[i].conditions[k].unit != "%"){
+        else if(EQCSS.data[i].conditions[k].unit != null && EQCSS.data[i].conditions[k].unit != "px" && EQCSS.data[i].conditions[k].unit != "%"){
           
           // Create a hidden DIV, sibling of the current element (or its child, if the element is <html>)
           // Set the given measure and unit to the DIV's width
