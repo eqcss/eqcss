@@ -1,4 +1,11 @@
 /*
+ * EQCSS / Tommy Hodgins, Maxime Euzière / MIT licence
+ * github.com/eqcss/eqcss
+ * elementqueries.com
+ * version 1.0.0
+ */
+
+/*
  * addEventListener polyfill 1.0 / Eirik Backer / MIT Licence
  * Forked from http://css-tricks.com/snippets/javascript/addeventlistner-polyfill/
  * Adds the native DOM2 function addEventListener on IE6 - 8.
@@ -38,10 +45,9 @@
     docHijack('getElementsByTagName');
     docHijack('getElementById');
     docHijack('createElement');
-    addListen(doc.all);  
+    addListen(doc.all);
   }
 })(window, document);
-
 
 /*
  * getComputedStyle and getPropertyValue polyfill / Jonathan Neal / License CC0
@@ -54,15 +60,13 @@
 
   // If the function already exists, no need to polyfill
   if(win.getComputedStyle)return;
-  
+
   function getComputedStylePixel(element, property, fontSize) {
-    var
-    
     // Internet Explorer sometimes struggles to read currentStyle until the element's document is accessed.
-    value = element.document && element.currentStyle[property].match(/([\d\.]+)(%|cm|em|in|mm|pc|pt|)/) || [0, 0, ''],
-    size = value[1],
-    suffix = value[2],
-    rootSize;
+    var value = element.document && element.currentStyle[property].match(/([\d\.]+)(%|cm|em|in|mm|pc|pt|)/) || [0, 0, ''],
+        size = value[1],
+        suffix = value[2],
+        rootSize;
 
     fontSize = !fontSize ? fontSize : /%|em/.test(suffix) && element.parentElement ? getComputedStylePixel(element.parentElement, 'fontSize', null) : 16;
     rootSize = property == 'fontSize' ? fontSize : /width/i.test(property) ? element.clientWidth : element.clientHeight;
@@ -78,12 +82,11 @@
   }
 
   function setShortStyleProperty(style, property) {
-    var
-    borderSuffix = property == 'border' ? 'Width' : '',
-    t = property + 'Top' + borderSuffix,
-    r = property + 'Right' + borderSuffix,
-    b = property + 'Bottom' + borderSuffix,
-    l = property + 'Left' + borderSuffix;
+    var borderSuffix = property == 'border' ? 'Width' : '',
+        t = property + 'Top' + borderSuffix,
+        r = property + 'Right' + borderSuffix,
+        b = property + 'Bottom' + borderSuffix,
+        l = property + 'Left' + borderSuffix;
 
     style[property] = (style[t] == style[r] && style[t] == style[b] && style[t] == style[l] ? [ style[t] ] :
                        style[t] == style[b] && style[l] == style[r] ? [ style[t], style[r] ] :
@@ -93,14 +96,13 @@
 
   // <CSSStyleDeclaration>
   function CSSStyleDeclaration(element) {
-    var
-    style = this,
-    currentStyle = element.currentStyle,
-    fontSize = getComputedStylePixel(element, 'fontSize'),
-    unCamelCase = function (match) {
-      return '-' + match.toLowerCase();
-    },
-    property;
+    var style = this,
+        currentStyle = element.currentStyle,
+        fontSize = getComputedStylePixel(element, 'fontSize'),
+        unCamelCase = function (match) {
+          return '-' + match.toLowerCase();
+        },
+        property;
 
     for (property in currentStyle) {
       Array.prototype.push.call(style, property == 'styleFloat' ? 'float' : property.replace(/[A-Z]/, unCamelCase));
@@ -114,7 +116,7 @@
       } else if (/margin.|padding.|border.+W/.test(property) && style[property] != 'auto') {
         style[property] = Math.round(getComputedStylePixel(element, property, fontSize)) + 'px';
       } else if (/^outline/.test(property)) {
-        
+
         // errors on checking outline
         try {
           style[property] = currentStyle[property];
@@ -138,34 +140,34 @@
 
   CSSStyleDeclaration.prototype = {
     constructor: CSSStyleDeclaration,
-    
+
     // <CSSStyleDeclaration>.getPropertyPriority
     getPropertyPriority: function () {
       throw new Error('NotSupportedError: DOM Exception 9');
     },
-    
+
     // <CSSStyleDeclaration>.getPropertyValue
     getPropertyValue: function (property) {
       return this[property.replace(/-\w/g, function (match) {
         return match[1].toUpperCase();
       })];
     },
-    
+
     // <CSSStyleDeclaration>.item
     item: function (index) {
       return this[index];
     },
-    
+
     // <CSSStyleDeclaration>.removeProperty
     removeProperty: function () {
       throw new Error('NoModificationAllowedError: DOM Exception 7');
     },
-    
+
     // <CSSStyleDeclaration>.setProperty
     setProperty: function () {
       throw new Error('NoModificationAllowedError: DOM Exception 7');
     },
-    
+
     // <CSSStyleDeclaration>.getPropertyCSSValue
     getPropertyCSSValue: function () {
       throw new Error('NotSupportedError: DOM Exception 9');
@@ -178,7 +180,6 @@
   };
 })(window);
 
-
 /*
  * document.querySelector and querySelectorAll polyfill / Maxime Euzière / public domain
  * Forked from: http://xem.github.io/Lazy/
@@ -187,13 +188,13 @@
 
 (function(doc){
   if(doc.querySelectorAll) return;
-  
+
   doc.querySelectorAll = function(a){
     if("#" == a.charAt(0)) return [doc.getElementById(a.substr(1))];
     if("." == a.charAt(0)) return doc.getElementsByClassName(a.substr(1));
     return doc.getElementsByTagName(a);
   }
-  
+
   doc.querySelector = function(a){
     return querySelectorAll(a)[0];
   }
