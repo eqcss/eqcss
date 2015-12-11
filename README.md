@@ -59,21 +59,17 @@ Element Queries have the following format:
 - `{condition}` is composed of a measure and a value.
 - `{css}` can contain: Any valid CSS rule. (Ex: `#id div { color: red }`)
 
-## Special Conditions
+## Responsive Conditions
 
 ### Width Queries
 
-- min-width in `px`
-- min-width in `%`
-- max-width in `px`
-- max-width in `%`
+- min-width
+- max-width
 
 ### Height Queries
 
-- min-height in `px`
-- min-height in `%`
-- max-height in `px`
-- max-height in `%`
+- min-height 
+- max-height
 
 ### Count Queries
 
@@ -84,10 +80,21 @@ Element Queries have the following format:
 - min-children
 - max-children
 
+### Scroll queries
+
+- min-scroll-y
+- max-scroll-y
+- min-scroll-x
+- max-scroll-x
+
 ## Special Selectors
 
 - `$this`
 - `$parent`
 - `$root`
+
+## CSS Functions
+
+- `var()`
 
 ### Demos @ the EQCSS Website: [http://elementqueries.com](http://elementqueries.com)

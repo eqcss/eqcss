@@ -339,7 +339,7 @@
       <li><code>{condition}</code> is composed of a measure and a value.
       <li><code>{css}</code> can contain: Any valid CSS rule. (Ex: <code>#id div { color: red }</code>)</li>
     </ul>
-    <h3 id=special-conditions>Special Conditions</h3>
+    <h3 id=responsive-conditions>Responsive Conditions</h3>
     <p>Use your mouse to resize the blocks</p>
     <article id=min-width-in-pixels>
       <h4>min-width in <code>px</code></h4>
@@ -618,6 +618,24 @@
   }
   $root {
     background: pink;
+  }
+}
+</script>
+    <h3 id=css-functions>CSS Functions</h3>
+    <article id=var>
+      <h4>var()</h4>
+      <div class="var">
+        <p><strong>Current Year:</strong></p>
+        <p><em>Viewport Size:</em></p>
+      </div>
+<script type="text/eqcss">@element "strong" {
+  $this:after {
+    content: ' var(new Date().getFullYear())';
+  }
+}
+@element "em" {
+  $this:after {
+    content: ' var(window.innerWidth+' x '+window.innerHeight)';
   }
 }
 </script>
