@@ -1,5 +1,6 @@
 {
   "name": "eqcss",
+  "filename": "EQCSS.js",
   "version": "1.0.0",
   "description": "EQCSS is a polyfill that introduces Element Queries, Scoped CSS, a Parent selector, and responsive JavaScript to all browsers IE8 and up",
   "homepage": "http://elementqueries.com",
@@ -18,6 +19,7 @@
     "adaptive",
     "css",
     "elq",
+    "rwd",
     "polyfill",
     "plugin",
     "IE8"
@@ -49,6 +51,18 @@
       "name": "Maxime Euzière",
       "email": "maxime.euziere@gmail.com",
       "url": "http://xem.github.io"
+    }
+  ],
+  "npmName": "eqcss",
+  "npmFileMap": [
+    {
+      "basePath": "/",
+      "files": [
+        "EQCSS.js",
+        "EQCSS.min.js",
+        "EQCSS-polyfills.js",
+        "EQCSS-polyfills.min.js"
+      ]
     }
   ]
 }

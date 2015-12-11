@@ -300,6 +300,12 @@
       text-align: center;
       padding: 3em .5em;
     }
+    [class*=-scroll-x] p {
+      width: 200%;
+    }
+    [class*=-scroll-y] {
+      height: 150px;
+    }
   </style>
 </head>
 <body>
@@ -520,6 +526,54 @@
 }
 </script>
     </article>
+    <article id=min-scroll-x>
+      <h4>min-scroll-x</h4>
+      <div class="min-scroll-x">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+<script type="text/eqcss">@element ".min-scroll-x" and (min-scroll-x: 50%) {
+  .min-scroll-x {
+    background: gold;
+  }
+}
+</script>
+    </article>
+    <article id=max-scroll-x>
+      <h4>max-scroll-x</h4>
+      <div class="max-scroll-x" contenteditable>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+<script type="text/eqcss">@element ".max-scroll-x" and (max-scroll-x: 50%) {
+  .max-scroll-x {
+    background: gold;
+}</script>
+    </article>
+    <article id=min-scroll-y>
+      <h4>min-scroll-y</h4>
+      <div class="min-scroll-y">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+<script type="text/eqcss">@element ".min-scroll-y" and (min-scroll-y: 50%) {
+  .min-scroll-y {
+    background: gold;
+  }
+}
+</script>
+    </article>
+    <article id=max-scroll-y>
+      <h4>max-scroll-y</h4>
+      <div class="max-scroll-y">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+<script type="text/eqcss">@element ".max-scroll-y" and (max-scroll-y: 50%) {
+  .max-scroll-y {
+    background: gold;
+  }
+}
+</script>
+    </article>
     <article id=scoped-styles>
       <h4>Scoped queries ($this)</h4>
       <div class="scoped" style="resize: horizontal">class="scoped"</div>
@@ -668,7 +722,7 @@
   <script src="EQCSS.js"></script>
   <script>
     // Apply eqcss on clicks, resizes, inputs
-    var EQCSS_resizing = false;
+    var EQCSS_resizing = true;
     var EQCSS_timeout = true;
     window.addEventListener("mousedown", function() {
       EQCSS_resizing = true;
