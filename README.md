@@ -20,10 +20,13 @@ Once you have downloaded a copy of EQCSS you will need to add it to every HTML p
 
     <script src=EQCSS.js></script>
 
-
 If you need to support IE8 there is an optional polyfill available that adds `@media` queries and `@element` queries to IE8. Add this file to your HTML before where you added EQCSS:
 
     <!--[if lt IE 9]><script src="EQCSS-polyfills.js"></script><![endif]-->
+
+Alternatively, you can also grab [EQCSS from NPM](https://www.npmjs.com/package/eqcss) with the following command:
+
+    npm install eqcss
 
 ## Writing Element Queries
 
