@@ -1,23 +1,96 @@
 <!doctype html>
 <meta charset=utf-8>
+<meta charset=utf-8>
+<meta name=description content="EQCSS is a polyfill that introduces Element Queries, Scoped CSS, a Parent selector, and more to all browsers IE8 and up">
+<meta name=keywords content="EQCSS, element queries, @element, container queries, eq, reponsive, rwd, elq, css, polyfill, plugin, SASS, Less, Grid Style Sheets">
+<meta property=og:title content="EQCSS - CSS with Element Queries">
+<meta property=og:url content="http://elementqueries.com">
+<meta property=og:description content="EQCSS is a polyfill that introduces Element Queries, Scoped CSS, a Parent selector, and more to all browsers IE8 and up">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>EQCSS features</title>
 <style>
-  * { box-sizing: border-box; font-size: 14px; line-height: 1.2em; }
-  body { font-family: tahoma; text-align: center; max-width: 850px; margin: 0 auto }
-  script[type="text/eqcss"], style, pre { display: inline-block; background: #def; white-space: pre; padding: 0px 20px 20px; margin: 10px 0; text-align: left; font-size: 11px; line-height: 13px; }
-  pre { padding-top: 20px }
-  div { overflow: auto; overflow-x: hidden; display: inline-block; border: 1px solid #000; padding: 30px; background: #fff8f1; max-width: 400px; max-height: 160px }
-  img { margin: 3px; }
-  hr { width: 33%; border: none; border-top: 2px solid #555; margin: 40px auto; }
-  h1 { font-size: 26px; }
-  h2 { font-size: 22px }
-  h3 { font-size: 18px }
-  input,textarea { width: 300px }
-  section { border: 2px solid #def; border-right: 4px solid #def; border-bottom: 4px solid #def; border-radius: 10px; margin: 10px; padding: 10px; width: 400px; height: 380px; display: inline-block; vertical-align: top; }
-  section section { display: inline-block; border: 1px dotted red; border-radius: 0; height: auto; width: auto; }
-@media screen and (min-width: 1700px){
-  body { max-width: 1700px; }
-}
+  * {
+    box-sizing: border-box;
+    font-size: 14px;
+    line-height: 1.2em;
+  }
+  body {
+    font-family: tahoma;
+    text-align: center;
+    max-width: 850px;
+    margin: 0 auto;
+  }
+  script[type="text/eqcss"],
+  style,
+  pre {
+    display: inline-block;
+    background: #def;
+    white-space: pre;
+    padding: 0px 20px 20px;
+    margin: 10px 0;
+    text-align: left;
+    font-size: 11px;
+    line-height: 13px;
+  }
+  pre {
+    padding-top: 20px;
+  }
+  div {
+    overflow: auto;
+    overflow-x: hidden;
+    display: inline-block;
+    border: 1px solid #000;
+    padding: 30px;
+    background: #fff8f1;
+    max-width: 400px;
+    max-height: 160px;
+  }
+  img {
+    margin: 3px;
+  }
+  hr {
+    width: 33%;
+    border: none;
+    border-top: 2px solid #555;
+    margin: 40px auto;
+  }
+  h1 {
+    font-size: 26px;
+  }
+  h2 {
+    font-size: 22px;
+  }
+  h3 {
+    font-size: 18px;
+  }
+  input,
+  textarea {
+    width: 300px;
+  }
+  section {
+    border: 2px solid #def;
+    border-right: 4px solid #def;
+    border-bottom: 4px solid #def;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    width: 400px;
+    height: 380px;
+    display: inline-block;
+    vertical-align: top;
+  }
+  section section {
+    display: inline-block;
+    border: 1px dotted red;
+    border-radius: 0;
+    height: auto;
+    width: auto;
+  }
+  @media screen and (min-width: 1700px){
+    body {
+      max-width: 1700px;
+    }
+  }
 </style>
 
 <h1>EQCSS features</h1>
@@ -449,21 +522,8 @@ You can also target any children of the root:
 </section>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 <!--[if lt IE 9]><script src="EQCSS-polyfills.js"></script><![endif]-->
 <script src="EQCSS.js"></script>
-
 
 <script>
 
