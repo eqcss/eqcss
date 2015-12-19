@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tweet-counter with Element Queries</title>
+  <meta name="description" content="Using the new var() feature in EQCSS you can now use a value from JavaScript in your CSS, whether it's a variable, value, or function - whatever the current value of that is at the time the element query applies will be the value that is used.">
+  <meta name="keywords" content="EQCSS, element queries, element query, container queries, responsive">
+  <link href=http://staticresource.com/basic.css rel=stylesheet>
+  <link href="//fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic" rel=stylesheet>
+  <link href=//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic rel=stylesheet>
+  <style>
+    @element 'textarea' {
+      body:after {
+        content: 'var(140-t.value.length)';
+      }
+    }
+    @element 'textarea' and (min-characters: 140) {
+      body:after {
+        color: #f00;
+        font-weight: bold;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Tweet Counter</h1>
+  <h2>Counting Characters with Element Queries</h2>
+  <textarea id=t></textarea>
+  <!--[if lt IE 9]><script src="http://elementqueries.com/EQCSS-polyfills.js"></script><![endif]-->
+  <script src="http://elementqueries.com/EQCSS.js"></script>
+  <script src="http://staticresource.com/eqcss-demo.js"></script>
+</body>
+</html>

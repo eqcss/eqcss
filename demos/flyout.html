@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flyout with Element Queries</title>
+  <meta name="description" content="Here's an element-query based set of styles that could totally replace a jQuery-powered plugin to make a scroll-based flyout. Why bother?Just write a few easy element queries and you're done.">
+  <meta name="keywords" content="EQCSS, element queries, element query, container queries, responsive, flyout, subscribe, signup, newsletter">
+  <link href=http://staticresource.com/basic.css rel=stylesheet>
+  <link href=//fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic rel=stylesheet>
+  <link href=//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic rel=stylesheet>
+  <style>
+    @element 'html,body' and (min-scroll-y: 150px) and (max-scroll-y: 90%) {
+      aside {
+        right: 0 !important;
+        pointer-events: all !important;
+        opacity: 1 !important;
+      }
+    }
+    aside {
+      pointer-events: none;
+      background: white;
+      width: 300px;
+      max-width: 100%;
+      position: fixed;
+      bottom: 0;
+      right: -350px;
+      opacity: 0;
+      transition: all .3s ease-in-out;
+      box-shadow: rgba(0,0,0,.15) 0 5px 15px;
+    }
+    aside h2 {
+      margin: 0;
+      padding: .5em;
+      color: white;
+      background: green;
+      font-size: 14pt;
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: -.02em;
+      text-shadow: darkgreen 1px 1px 0;
+    }
+    aside p {
+      color: #555;
+      padding: 0 .5em;
+    }
+    [type=text] {
+      -webkit-appearance: none;
+      appearance: none;
+      outline: none;
+      display: block;
+      margin: .5em !important;
+      width: calc(100% - 70px) !important;
+      float: left;
+      padding: .5em;
+      border-radius: 3px;
+      border: 1px solid #ccc;
+      color: #111;
+      background: #fff;
+      cursor: text;
+      font-size: 100%;
+      line-height: 1.4;
+      font-weight: normal;
+      text-decoration: none;
+      font-family: 'Source Sans Pro', 'Open Sans', Roboto, 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', 'Myriad Pro', 'Segoe UI', Myriad, Helvetica, Arial, 'Lucida Grande', sans-serif;
+      transition: all .1s ease-in-out;
+      box-shadow: inset #fafafa 0 -5px 15px, inset #fff 0 1px 1px, rgba(0,0,0,.15) 0px 1px 1px;
+    }
+    [type=text]:hover,
+    [type=text]:focus {
+      border-color: #fa0;
+      box-shadow: inset #fafafa 0 -5px 15px, inset #fff 0 1px 1px, rgba(0,0,0,.15) 0px 1px 1px, rgba(255,200,0,.5) 0 0 10px;
+    }
+    [data-button] {
+      width: auto !important;
+      display: block !important;
+      padding: .75em !important;
+      margin: .5em 0 0 0 !important;
+      line-height: 1.1;
+    }
+    .greek{
+      line-height:1.4;
+      pointer-events: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      -o-user-select: none;
+      user-select: none;
+      cursor: default;
+    }
+    .greek i{
+      color:transparent;
+      background:#999;
+    }
+  </style>
+</head>
+<body>
+  <h1>Flyout Subscribe</h1>
+  <h2>Using Element Queries with Min & Max Scroll</h2>
+  <aside>
+    <h2>Subscribe to our Newsletter</h2>
+    <p>Enter your email to have your inbox receive messages on a near-<em>hourly</em> basis!</p>
+    <input type=text name=email placeholder="Your Email" autofocus>
+    <input data-button=green type=submit value=Go>
+  </aside>
+  <p class=greek><i>Lorem</i> <i>ipsum</i> <i>dolor</i> <i>sit</i> <i>amet,</i> <i>consectetur</i> <i>adipiscing</i> <i>elit.</i> <i>In</i> <i>vitae</i> <i>laoreet</i> <i>ante.</i> <i>Nunc</i> <i>sed</i> <i>enim</i> <i>nec</i> <i>quam</i> <i>suscipit</i> <i>faucibus.</i> <i>Donec</i> <i>at</i> <i>elit</i> <i>est.</i> <i>Quisque</i> <i>posuere</i> <i>massa</i> <i>nisl,</i> <i>sit</i> <i>amet</i> <i>imperdiet</i> <i>libero</i> <i>pharetra</i> <i>ut.</i> <i>Proin</i> <i>eleifend,</i> <i>dui</i> <i>in</i> <i>consectetur</i> <i>hendrerit,</i> <i>nisi</i> <i>ligula</i> <i>fringilla</i> <i>justo,</i> <i>et</i> <i>dictum</i> <i>justo</i> <i>est</i> <i>sagittis</i> <i>turpis.</i> <i>Morbi</i> <i>in</i> <i>libero</i> <i>metus.</i> <i>Vivamus</i> <i>aliquam</i> <i>orci</i> <i>non</i> <i>purus</i> <i>scelerisque</i> <i>mollis.</i> <i>In</i> <i>nec</i> <i>condimentum</i> <i>diam.</i> <i>Fusce</i> <i>congue</i> <i>sapien</i> <i>sed</i> <i>dictum</i> <i>feugiat.</i> <i>Sed</i> <i>et</i> <i>tempor</i> <i>turpis.</i> <i>Quisque</i> <i>tellus</i> <i>massa,</i> <i>consectetur</i> <i>dictum</i> <i>nulla</i> <i>non,</i> <i>lobortis</i> <i>scelerisque</i> <i>eros.</i> <i>Aenean</i> <i>iaculis</i> <i>arcu</i> <i>sed</i> <i>lectus</i> <i>pellentesque</i> <i>tempus.</i> <i>Suspendisse</i> <i>gravida</i> <i>elementum</i> <i>commodo.</i> <i>Donec</i> <i>eu</i> <i>facilisis</i> <i>metus.</i> <i>Curabitur</i> <i>ipsum</i> <i>lectus,</i> <i>imperdiet</i> <i>pulvinar</i> <i>dui</i> <i>vel,</i> <i>fermentum</i> <i>dapibus</i> <i>nibh.</i> <i>Nulla</i> <i>pharetra</i> <i>fringilla</i> <i>dignissim.</i></p>
+  <p class=greek><i>Etiam</i> <i>sed</i> <i>pharetra</i> <i>nulla.</i> <i>Quisque</i> <i>sit</i> <i>amet</i> <i>velit</i> <i>nunc.</i> <i>Donec</i> <i>consequat</i> <i>sed</i> <i>nisi</i> <i>a</i> <i>accumsan.</i> <i>Duis</i> <i>vel</i> <i>porttitor</i> <i>nisi.</i> <i>Phasellus</i> <i>turpis</i> <i>lectus,</i> <i>fermentum</i> <i>sed</i> <i>justo</i> <i>sed,</i> <i>accumsan</i> <i>placerat</i> <i>massa.</i> <i>Integer</i> <i>lacinia</i> <i>laoreet</i> <i>eros,</i> <i>eget</i> <i>consequat</i> <i>ligula</i> <i>dapibus</i> <i>at.</i> <i>Nam</i> <i>pulvinar</i> <i>molestie</i> <i>egestas.</i> <i>Mauris</i> <i>ultricies</i> <i>egestas</i> <i>mauris,</i> <i>et</i> <i>tincidunt</i> <i>lacus</i> <i>luctus</i> <i>ut.</i> <i>Suspendisse</i> <i>quis</i> <i>nisi</i> <i>nec</i> <i>dui</i> <i>malesuada</i> <i>mollis.</i> <i>Nunc</i> <i>velit</i> <i>ex,</i> <i>ultricies</i> <i>vitae</i> <i>lectus</i> <i>eget,</i> <i>vulputate</i> <i>varius</i> <i>enim.</i> <i>Cras</i> <i>lectus</i> <i>diam,</i> <i>vulputate</i> <i>non</i> <i>nisi</i> <i>suscipit,</i> <i>dictum</i> <i>hendrerit</i> <i>nibh.</i> <i>Vivamus</i> <i>eget</i> <i>arcu</i> <i>iaculis</i> <i>diam</i> <i>commodo</i> <i>efficitur</i> <i>at</i> <i>sed</i> <i>arcu.</i></p>
+  <p class=greek><i>Proin</i> <i>sit</i> <i>amet</i> <i>vulputate</i> <i>odio,</i> <i>sed</i> <i>porttitor</i> <i>est.</i> <i>Pellentesque</i> <i>metus</i> <i>enim,</i> <i>mattis</i> <i>sed</i> <i>enim</i> <i>vitae,</i> <i>venenatis</i> <i>egestas</i> <i>metus.</i> <i>Aenean</i> <i>sit</i> <i>amet</i> <i>odio</i> <i>et</i> <i>nunc</i> <i>aliquam</i> <i>pulvinar.</i> <i>Proin</i> <i>sit</i> <i>amet</i> <i>massa</i> <i>at</i> <i>tortor</i> <i>pulvinar</i> <i>lacinia.</i> <i>Nam</i> <i>fringilla</i> <i>et</i> <i>tellus</i> <i>nec</i> <i>placerat.</i> <i>Pellentesque</i> <i>blandit</i> <i>turpis</i> <i>sit</i> <i>amet</i> <i>sollicitudin</i> <i>pretium.</i> <i>Morbi</i> <i>mauris</i> <i>justo,</i> <i>scelerisque</i> <i>non</i> <i>consequat</i> <i>in,</i> <i>faucibus</i> <i>ac</i> <i>tellus.</i> <i>Vivamus</i> <i>sagittis</i> <i>tempor</i> <i>diam,</i> <i>eget</i> <i>porttitor</i> <i>massa</i> <i>tempor</i> <i>vitae.</i> <i>Integer</i> <i>ante</i> <i>ipsum,</i> <i>imperdiet</i> <i>nec</i> <i>elit</i> <i>eget,</i> <i>pellentesque</i> <i>egestas</i> <i>neque.</i> <i>In</i> <i>imperdiet</i> <i>tortor</i> <i>vitae</i> <i>ex</i> <i>lobortis,</i> <i>non</i> <i>porta</i> <i>nisl</i> <i>interdum.</i> <i>Vivamus</i> <i>viverra</i> <i>tempor</i> <i>neque,</i> <i>ut</i> <i>venenatis</i> <i>nisl</i> <i>venenatis</i> <i>ac.</i> <i>Proin</i> <i>laoreet</i> <i>ullamcorper</i> <i>magna,</i> <i>eget</i> <i>luctus</i> <i>tellus</i> <i>tristique</i> <i>porttitor.</i> <i>Etiam</i> <i>non</i> <i>tempor</i> <i>erat.</i> <i>Cras</i> <i>sit</i> <i>amet</i> <i>lectus</i> <i>nec</i> <i>risus</i> <i>ultricies</i> <i>tincidunt</i> <i>quis</i> <i>et</i> <i>urna.</i> <i>Etiam</i> <i>ac</i> <i>libero</i> <i>ipsum.</i> <i>Aliquam</i> <i>id</i> <i>ligula</i> <i>sit</i> <i>amet</i> <i>nulla</i> <i>vulputate</i> <i>auctor.</i></p>
+  <p class=greek><i>Integer</i> <i>in</i> <i>elit</i> <i>hendrerit</i> <i>erat</i> <i>sagittis</i> <i>fringilla.</i> <i>Sed</i> <i>viverra</i> <i>tincidunt</i> <i>quam</i> <i>et</i> <i>faucibus.</i> <i>Sed</i> <i>id</i> <i>dui</i> <i>quis</i> <i>erat</i> <i>hendrerit</i> <i>rutrum.</i> <i>Quisque</i> <i>congue,</i> <i>diam</i> <i>et</i> <i>eleifend</i> <i>blandit,</i> <i>felis</i> <i>arcu</i> <i>semper</i> <i>turpis,</i> <i>in</i> <i>porttitor</i> <i>metus</i> <i>nisl</i> <i>ut</i> <i>dolor.</i> <i>Quisque</i> <i>eleifend</i> <i>condimentum</i> <i>nisl,</i> <i>sit</i> <i>amet</i> <i>dignissim</i> <i>felis</i> <i>luctus</i> <i>eget.</i> <i>Phasellus</i> <i>magna</i> <i>neque,</i> <i>pellentesque</i> <i>sed</i> <i>varius</i> <i>vel,</i> <i>efficitur</i> <i>a</i> <i>odio.</i> <i>Donec</i> <i>ac</i> <i>nunc</i> <i>bibendum,</i> <i>interdum</i> <i>ante</i> <i>auctor,</i> <i>hendrerit</i> <i>diam.</i> <i>Morbi</i> <i>aliquam</i> <i>nibh</i> <i>vitae</i> <i>tortor</i> <i>aliquam,</i> <i>et</i> <i>euismod</i> <i>mauris</i> <i>bibendum.</i> <i>Etiam</i> <i>at</i> <i>odio</i> <i>a</i> <i>ipsum</i> <i>venenatis</i> <i>facilisis</i> <i>vel</i> <i>ac</i> <i>sem.</i> <i>In</i> <i>hac</i> <i>habitasse</i> <i>platea</i> <i>dictumst.</i> <i>Morbi</i> <i>ullamcorper</i> <i>risus</i> <i>eu</i> <i>libero</i> <i>accumsan,</i> <i>sit</i> <i>amet</i> <i>lacinia</i> <i>tellus</i> <i>ultricies.</i> <i>Nulla</i> <i>et</i> <i>laoreet</i> <i>turpis.</i> <i>Praesent</i> <i>ut</i> <i>hendrerit</i> <i>felis,</i> <i>et</i> <i>pretium</i> <i>velit.</i> <i>Maecenas</i> <i>mauris</i> <i>sem,</i> <i>convallis</i> <i>nec</i> <i>auctor</i> <i>in,</i> <i>ornare</i> <i>nec</i> <i>tortor.</i> <i>Integer</i> <i>tempus,</i> <i>nisi</i> <i>quis</i> <i>imperdiet</i> <i>fermentum,</i> <i>lorem</i> <i>enim</i> <i>aliquam</i> <i>nisi,</i> <i>sit</i> <i>amet</i> <i>lobortis</i> <i>felis</i> <i>sapien</i> <i>eu</i> <i>diam.</i></p>
+  <p class=greek><i>Aliquam</i> <i>erat</i> <i>volutpat.</i> <i>Mauris</i> <i>euismod</i> <i>aliquet</i> <i>consequat.</i> <i>Aenean</i> <i>tristique</i> <i>blandit</i> <i>faucibus.</i> <i>Phasellus</i> <i>gravida</i> <i>condimentum</i> <i>viverra.</i> <i>Nunc</i> <i>quis</i> <i>auctor</i> <i>ipsum.</i> <i>Nulla</i> <i>diam</i> <i>eros,</i> <i>aliquam</i> <i>id</i> <i>aliquet</i> <i>vel,</i> <i>aliquam</i> <i>eu</i> <i>diam.</i> <i>In</i> <i>pretium</i> <i>augue</i> <i>est,</i> <i>ut</i> <i>varius</i> <i>augue</i> <i>elementum</i> <i>et.</i> <i>Etiam</i> <i>in</i> <i>ante</i> <i>fringilla,</i> <i>malesuada</i> <i>lacus</i> <i>nec,</i> <i>commodo</i> <i>odio.</i> <i>Suspendisse</i> <i>fringilla,</i> <i>felis</i> <i>non</i> <i>pulvinar</i> <i>congue,</i> <i>mi</i> <i>orci</i> <i>eleifend</i> <i>tortor,</i> <i>et</i> <i>iaculis</i> <i>velit</i> <i>lectus</i> <i>a</i> <i>arcu.</i> <i>Morbi</i> <i>tincidunt</i> <i>tincidunt</i> <i>augue</i> <i>vestibulum</i> <i>tincidunt.</i> <i>Sed</i> <i>id</i> <i>arcu</i> <i>felis.</i> <i>Phasellus</i> <i>suscipit</i> <i>facilisis</i> <i>nulla,</i> <i>laoreet</i> <i>gravida</i> <i>elit</i> <i>aliquam</i> <i>in.</i></p>
+  <p class=greek><i>Etiam</i> <i>sed</i> <i>pharetra</i> <i>nulla.</i> <i>Quisque</i> <i>sit</i> <i>amet</i> <i>velit</i> <i>nunc.</i> <i>Donec</i> <i>consequat</i> <i>sed</i> <i>nisi</i> <i>a</i> <i>accumsan.</i> <i>Duis</i> <i>vel</i> <i>porttitor</i> <i>nisi.</i> <i>Phasellus</i> <i>turpis</i> <i>lectus,</i> <i>fermentum</i> <i>sed</i> <i>justo</i> <i>sed,</i> <i>accumsan</i> <i>placerat</i> <i>massa.</i> <i>Integer</i> <i>lacinia</i> <i>laoreet</i> <i>eros,</i> <i>eget</i> <i>consequat</i> <i>ligula</i> <i>dapibus</i> <i>at.</i> <i>Nam</i> <i>pulvinar</i> <i>molestie</i> <i>egestas.</i> <i>Mauris</i> <i>ultricies</i> <i>egestas</i> <i>mauris,</i> <i>et</i> <i>tincidunt</i> <i>lacus</i> <i>luctus</i> <i>ut.</i> <i>Suspendisse</i> <i>quis</i> <i>nisi</i> <i>nec</i> <i>dui</i> <i>malesuada</i> <i>mollis.</i> <i>Nunc</i> <i>velit</i> <i>ex,</i> <i>ultricies</i> <i>vitae</i> <i>lectus</i> <i>eget,</i> <i>vulputate</i> <i>varius</i> <i>enim.</i> <i>Cras</i> <i>lectus</i> <i>diam,</i> <i>vulputate</i> <i>non</i> <i>nisi</i> <i>suscipit,</i> <i>dictum</i> <i>hendrerit</i> <i>nibh.</i> <i>Vivamus</i> <i>eget</i> <i>arcu</i> <i>iaculis</i> <i>diam</i> <i>commodo</i> <i>efficitur</i> <i>at</i> <i>sed</i> <i>arcu.</i></p>
+  <p class=greek><i>Lorem</i> <i>ipsum</i> <i>dolor</i> <i>sit</i> <i>amet,</i> <i>consectetur</i> <i>adipiscing</i> <i>elit.</i> <i>In</i> <i>vitae</i> <i>laoreet</i> <i>ante.</i> <i>Nunc</i> <i>sed</i> <i>enim</i> <i>nec</i> <i>quam</i> <i>suscipit</i> <i>faucibus.</i> <i>Donec</i> <i>at</i> <i>elit</i> <i>est.</i> <i>Quisque</i> <i>posuere</i> <i>massa</i> <i>nisl,</i> <i>sit</i> <i>amet</i> <i>imperdiet</i> <i>libero</i> <i>pharetra</i> <i>ut.</i> <i>Proin</i> <i>eleifend,</i> <i>dui</i> <i>in</i> <i>consectetur</i> <i>hendrerit,</i> <i>nisi</i> <i>ligula</i> <i>fringilla</i> <i>justo,</i> <i>et</i> <i>dictum</i> <i>justo</i> <i>est</i> <i>sagittis</i> <i>turpis.</i> <i>Morbi</i> <i>in</i> <i>libero</i> <i>metus.</i> <i>Vivamus</i> <i>aliquam</i> <i>orci</i> <i>non</i> <i>purus</i> <i>scelerisque</i> <i>mollis.</i> <i>In</i> <i>nec</i> <i>condimentum</i> <i>diam.</i> <i>Fusce</i> <i>congue</i> <i>sapien</i> <i>sed</i> <i>dictum</i> <i>feugiat.</i> <i>Sed</i> <i>et</i> <i>tempor</i> <i>turpis.</i> <i>Quisque</i> <i>tellus</i> <i>massa,</i> <i>consectetur</i> <i>dictum</i> <i>nulla</i> <i>non,</i> <i>lobortis</i> <i>scelerisque</i> <i>eros.</i> <i>Aenean</i> <i>iaculis</i> <i>arcu</i> <i>sed</i> <i>lectus</i> <i>pellentesque</i> <i>tempus.</i> <i>Suspendisse</i> <i>gravida</i> <i>elementum</i> <i>commodo.</i> <i>Donec</i> <i>eu</i> <i>facilisis</i> <i>metus.</i> <i>Curabitur</i> <i>ipsum</i> <i>lectus,</i> <i>imperdiet</i> <i>pulvinar</i> <i>dui</i> <i>vel,</i> <i>fermentum</i> <i>dapibus</i> <i>nibh.</i> <i>Nulla</i> <i>pharetra</i> <i>fringilla</i> <i>dignissim.</i></p>
+  <p class=greek><i>Aliquam</i> <i>erat</i> <i>volutpat.</i> <i>Mauris</i> <i>euismod</i> <i>aliquet</i> <i>consequat.</i> <i>Aenean</i> <i>tristique</i> <i>blandit</i> <i>faucibus.</i> <i>Phasellus</i> <i>gravida</i> <i>condimentum</i> <i>viverra.</i> <i>Nunc</i> <i>quis</i> <i>auctor</i> <i>ipsum.</i> <i>Nulla</i> <i>diam</i> <i>eros,</i> <i>aliquam</i> <i>id</i> <i>aliquet</i> <i>vel,</i> <i>aliquam</i> <i>eu</i> <i>diam.</i> <i>In</i> <i>pretium</i> <i>augue</i> <i>est,</i> <i>ut</i> <i>varius</i> <i>augue</i> <i>elementum</i> <i>et.</i> <i>Etiam</i> <i>in</i> <i>ante</i> <i>fringilla,</i> <i>malesuada</i> <i>lacus</i> <i>nec,</i> <i>commodo</i> <i>odio.</i> <i>Suspendisse</i> <i>fringilla,</i> <i>felis</i> <i>non</i> <i>pulvinar</i> <i>congue,</i> <i>mi</i> <i>orci</i> <i>eleifend</i> <i>tortor,</i> <i>et</i> <i>iaculis</i> <i>velit</i> <i>lectus</i> <i>a</i> <i>arcu.</i> <i>Morbi</i> <i>tincidunt</i> <i>tincidunt</i> <i>augue</i> <i>vestibulum</i> <i>tincidunt.</i> <i>Sed</i> <i>id</i> <i>arcu</i> <i>felis.</i> <i>Phasellus</i> <i>suscipit</i> <i>facilisis</i> <i>nulla,</i> <i>laoreet</i> <i>gravida</i> <i>elit</i> <i>aliquam</i> <i>in.</i></p>
+  <!--[if lt IE 9]><script src="http://elementqueries.com/EQCSS-polyfills.js"></script><![endif]-->
+  <script src="http://elementqueries.com/EQCSS.js"></script>
+</body>
+</html>

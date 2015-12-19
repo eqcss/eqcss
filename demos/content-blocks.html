@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Responsive Content with Element Queries</title>
+  <meta name="description" content="Using Element Queries to build responsive content blocks. Bootstrap-free, jQuery-free">
+  <meta name="keywords" content="EQCSS, element queries, element query, container queries, responsive, content blocks, responsive content, responsive grid">
+  <link href=http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800 rel=stylesheet>
+  <link href=http://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css rel=stylesheet>
+  <link href=http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css rel=stylesheet>
+  <link href=http://staticresource.com/data-buttons.css rel=stlesheet>
+  <style>
+    *,
+    *:before,
+    *:after {
+    }
+    html {
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      margin: 15px;
+    }
+    [data-block],
+    [data-block] *,
+    [data-block] *:before,
+    [data-block] *:after {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-kerning: auto;
+    }
+    [data-block],
+    [data-block] *:not(i) {
+      font-family: 'Open Sans', 'Source Sans Pro', Roboto, 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', 'Myriad Pro', 'Segoe UI', Myriad, Helvetica, 'Lucida Grande', 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, Arial, sans-serif;
+      line-height: 1.4;
+      font-size: 10pt;
+    }
+    [data-block] {
+      margin: 0;
+      padding: 15px 0 0 0 !important;
+      background: transparent !important;
+      border: none !important;
+    }
+    [data-block]:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+    [data-block] article {
+      display: none;
+      width: 100%;
+      float: left;
+      margin-top: 1em;
+    }
+    [data-block] article:first-of-type {
+      margin-top: 0;
+    }
+    [data-block] h3 {
+      margin: 0 0 .5em 0;
+      font-size: 180%;
+      font-weight: 700;
+      letter-spacing: -.03em;
+      color: #333;
+    }
+    [data-block] h4 {
+      margin: .25em 0;
+      line-height: 1.2;
+      font-size: 100%;
+      font-weight: 600;
+      letter-spacing: -.02em;
+      min-height: calc(2 * 1.2em);
+    }
+    [data-block] hr {
+      height: 0;
+      background: transparent;
+      border: none;
+      margin: 0;
+      clear: both;
+    }
+    [data-block] a:first-of-type {
+      position: relative;
+      overflow: hidden;
+      display: block;
+      width: auto;
+      border-radius: 3px;
+    }
+    [data-block] a:first-of-type:before {
+      content: '\f21f';
+      font-family: 'ionicons';
+      text-align: center;
+      font-size: 32pt;
+      line-height: 100%;
+      color: white;
+      text-shadow: rgba(0,0,0,.3) 0 5px 15px;
+      display: block;
+      width: 100%;
+      position: absolute;
+      top: calc(50% - 16pt);
+      left: 0;
+      pointer-events: none;
+      z-index: 95;
+      transition: opacity .2s ease-in-out;
+      opacity: 0;
+    }
+    [data-block] a:first-of-type:after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 90;
+      transition: opacity .2s ease-in-out;
+      opacity: 0;
+      border-radius: 3px;
+      background: rgba(0,0,0,.5);
+      box-shadow: inset rgba(0,0,0,.5) 0 0 50px;
+    }
+    [data-block] a:first-of-type:hover:before,
+    [data-block] a:first-of-type:hover:after {
+      opacity: 1;
+    }
+    [data-block=cover] a:first-of-type:before {
+      content: '\f21f'; /* ion-search */
+      font-size: 72pt;
+      top: calc(50% - 34pt);
+    }
+    [data-block=button] a:first-of-type:before {
+      content: '\f488'; /* ion-ios-play */
+      padding-left: 5pt;
+    }
+    [data-block=icon] a:first-of-type:before {
+      content: '\f133'; /* ion-eye */
+      font-size: 24pt;
+      top: calc(50% - 12pt);
+    }
+    [data-block] a img {
+      position: relative;
+      z-index: 50;
+      display: block;
+      width: auto;
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 0;
+    }
+    [data-button] {
+      margin: 0 0 .5em 0;
+      font-size: 120%;
+      font-weight: 700;
+    }
+    [data-button],
+    [data-button]:hover,
+    [data-button]:focus {
+      text-decoration: none !important;
+      color: white !important;
+    }
+    [data-reveal] {
+      display: none;
+      font-size: 12pt;
+      width: auto;
+      margin: 1em auto 0 auto;
+      padding: .5em;
+      -webkit-apperance: none;
+      appearance: none;
+      border: 1px solid #777;
+      color: #555;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 3px;
+      font-size: 10pt;
+      background: white;
+      text-align: center;
+      outline: none;
+      transition: all .1s ease-in-out;
+    }
+    [data-reveal]:hover {
+      color: #f60;
+      border-color: #f60;
+    }
+    [data-block].toggle article {
+      display: block;
+    }
+    [data-block] .locked {
+      position: relative;
+    }
+    [data-block] .locked a:first-of-type,
+    [data-block] .locked a:first-of-type:after {
+      border-top-right-radius: 20px;
+    }
+    [data-block] .locked:after {
+      content: '\f200';
+      font-family: 'Ionicons';
+      display: block;
+      width: 30px;
+      height: 30px;
+      font-size: 18px;
+      text-shadow: rgba(0,0,0,.15) 1px 1px 1px;
+      line-height: 1.35;
+      text-indent: -.03em;
+      text-align: center;
+      border-radius: 100%;
+      color: white;
+      background: #999;
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      z-index: 95;
+      border: 2px solid white;
+      pointer-events: none;
+    }
+    /* Cover Style */
+    [data-block=cover] article:nth-child(-n+1) {
+      display: block;
+    }
+    [data-block=cover] [data-button] {
+      width: 100%;
+    }
+    /* Button Style */
+    [data-block=button] article:nth-child(-n+2) {
+      display: block;
+    }
+    [data-block=button]:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+    [data-block=button] article {
+      position: relative;
+    }
+    [data-block=button] aside {
+      min-height: 75px;
+      padding-top: 5px;
+    }
+    [data-block=button] [data-button] {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+    }
+    [data-block=button] a:first-of-type {
+      width: auto;
+      float: left;
+      margin-right: 10px;
+    }
+    [data-block=button] .locked:after {
+      left: 47px;
+      text-indent: 0;
+    }
+    /* Icon Style */
+    [data-block=icon] article {
+      min-height: 65px;
+      margin-top: 0;
+    }
+    [data-block=icon] article:nth-child(-n+3) {
+      display: block;
+    }
+    [data-block=icon] aside {
+      padding-top: 5px;
+    }
+    [data-block=icon]:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+    [data-block=icon] a:first-of-type {
+      width: auto;
+      float: left;
+      margin-right: 10px;
+      position: relative;
+      text-decoration: none;
+    }
+    [data-block=icon] a:first-of-type i {
+      display: block;
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      font-size: 20pt;
+      line-height: 50px;
+      color: white;
+      text-shadow: rgba(0,0,0,.15) 1px 2px 2px;
+    }
+    [data-block=icon] .pdf i {
+      background: firebrick;
+    }
+    [data-block=icon] .doc i {
+      background: royalblue;
+    }
+    [data-block=icon] .xls i {
+      background: forestgreen;
+      line-height: 2;
+    }
+    [data-block=icon] .locked:after {
+      left: 27px;
+      width: 25px;
+      height: 25px;
+      font-size: 14px;
+      text-indent: -.015em;
+    }
+    /* Element Queries */
+    /* Cover Theme */
+    @element "[data-block=cover] div" and (min-children: 4) and (max-width: 249px) {
+      $this [data-reveal] {
+        display: block;
+      }
+    }
+    @element "[data-block=cover]" and (min-width: 250px) and (max-width: 449px) {
+      $this article {
+        width: calc(50% - 7.5px) !important;
+        margin-right: 15px;
+      }
+      $this article:nth-child(even) {
+        margin-right: 0;
+      }
+      $this article:nth-child(-n+2) {
+        display: block;
+        margin-top: 0;
+      }
+    }
+    @element "[data-block=cover] div" and (min-children: 5) and (max-width: 449px) {
+      $this [data-reveal] {
+        display: block;
+      }
+    }
+    @element "[data-block=cover]" and (min-width: 450px) {
+      $this article {
+        width: calc(33.33% - 10px) !important;
+        margin-right: 15px;
+      }
+      $this article:nth-child(even) {
+        margin-right: 15px;
+      }
+      $this article:nth-child(3n) {
+        margin-right: 0;
+      }
+      $this article:nth-child(-n+3) {
+        display: block;
+        margin-top: 0;
+      }
+    }
+    @element "[data-block=cover] div" and (min-children: 6) and (min-width: 450px) and (max-width: 649px) {
+      $this [data-reveal] {
+        display: block;
+      }
+    }
+    @element "[data-block=cover]" and (min-width: 650px) {
+      $this article {
+        width: calc(25% - 11.5px) !important;
+        margin-right: 15px;
+      }
+      $this article:nth-child(3n) {
+        margin-right: 15px;
+      }
+      $this article:nth-child(4n) {
+        margin-right: 0;
+      }
+      $this article:nth-child(-n+4) {
+        display: block;
+        margin-top: 0;
+      }
+    }
+    @element "[data-block=cover] div" and (min-children: 7) and (min-width: 650px) and (max-width: 849px) {
+      $this [data-reveal] {
+        display: block;
+      }
+    }
+    @element "[data-block=cover]" and (min-width: 850px) {
+      $this article {
+        width: calc(20% - 12px) !important;
+        margin-right: 15px;
+      }
+      $this article:nth-child(4n) {
+        margin-right: 15px;
+      }
+      $this article:nth-child(5n) {
+        margin-right: 0;
+      }
+      $this article:nth-child(-n+5) {
+        display: block;
+        margin-top: 0;
+      }
+    }
+    @element "[data-block=cover] div" and (min-children: 8) and (min-width: 850px) {
+      $this [data-reveal] {
+        display: block;
+      }
+    }
+    /* Button Theme */
+    @element "[data-block=button] div" and (min-children: 6) and (max-width: 449px) {
+      $this [data-reveal] {
+        display: block;
+      }
+    }
+    @element "[data-block=button]" and (min-width: 450px) {
+      $this article {
+        width: calc(50% - 7.5px) !important;
+        margin-right: 15px;
+      }
+      $this article:nth-child(even) {
+        margin-right: 0;
+      }
+      $this article:nth-child(-n+2) {
+        margin-top: 0;
+      }
+      $this article:nth-child(-n+6) {
+        display: block;
+      }
+    }
+    @element "[data-block=button] div" and (min-children: 9) and (min-width: 450px) and (max-width: 849px) {
+      $this [data-reveal] {
+        display: block;
+      }
+    }
+    @element "[data-block=button] div" and (min-children: 12) and (min-width: 850px) {
+      $this [data-reveal] {
+        display: block;
+      }
+    }
+    @element "[data-block=button] article" and (min-width: 350px) {
+      [data-block=button] article {
+        position: relative;
+        padding-right: 75px;
+      }
+      [data-block=button] .locked {
+        position: relative;
+        padding-right: 145px;
+      }
+      [data-block=button] article aside {
+        min-height: none;
+      }
+      [data-block=button] article [data-button] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: auto !important;
+        margin-top: 0 !important;
+      }
+    }
+    /* Icon Theme */
+    @element "[data-block=icon] div" and (min-children: 6) and (max-width: 449px) {
+      $this [data-reveal] {
+        display: block;
+      }
+    }
+    @element "[data-block=icon]" and (min-width: 450px) {
+      $this article {
+        width: calc(50% - 7.5px) !important;
+        margin-right: 15px;
+      }
+      $this article:nth-child(even) {
+        margin-right: 0;
+      }
+      $this article:nth-child(-n+2) {
+        margin-top: 0;
+      }
+      $this article:nth-child(-n+8) {
+        display: block;
+      }
+    }
+    @element "[data-block=icon] div" and (min-children: 11) and (min-width: 450px) and (max-width: 649px) {
+      $this [data-reveal] {
+        display: block;
+      }
+    }
+    @element "[data-block=icon]" and (min-width: 650px) {
+      $this article {
+        width: calc(33.33% - 10px) !important;
+        margin-right: 15px;
+      }
+      $this article:nth-child(even) {
+        margin-right: 15px;
+      }
+      $this article:nth-child(3n) {
+        margin-right: 0;
+      }
+      $this article:nth-child(-n+3) {
+        margin-top: 0;
+      }
+      $this article:nth-child(-n+9) {
+        display: block;
+      }
+    }
+    @element "[data-block=icon] div" and (min-children: 12) and (min-width: 650px) and (max-width: 849px) {
+      $this [data-reveal] {
+        display: block;
+      }
+    }
+    @element "[data-block=icon]" and (min-width: 850px) {
+      $this article {
+        width: calc(25% - 11.5px) !important;
+        margin-right: 15px;
+      }
+      $this article:nth-child(3n) {
+        margin-right: 15px;
+      }
+      $this article:nth-child(4n) {
+        margin-right: 0;
+      }
+      $this article:nth-child(-n+4) {
+        margin-top: 0;
+      }
+      $this article:nth-child(-n+16) {
+        display: block;
+      }
+    }
+    @element "[data-block=icon] div" and (min-children: 19) and (min-width: 850px) {
+      $this [data-reveal] {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Cover Theme -->
+  <section data-block="cover">
+    <h3>Cover Style</h3>
+    <div>
+      <article>
+        <a href="#">
+          <img src="http://placehold.it/250x325">
+        </a>
+        <h4><a href="#"></a>Intro 101 Guide</h4>
+        <a data-button href="#">Open</a>
+      </article>
+      <article>
+        <a href="#">
+          <img src="http://placehold.it/250x325">
+        </a>
+        <h4><a href="#"></a>Rehabbing for Monster Paydays</h4>
+        <a data-button href="#">Open</a>
+      </article>
+      <article>
+        <a href="#">
+          <img src="http://placehold.it/250x325">
+        </a>
+        <h4><a href="#"></a>Virtual Wholesaling 3.0</h4>
+        <a data-button href="#">Open</a>
+      </article>
+      <article class=locked>
+        <a href="#">
+          <img src="http://placehold.it/250x325">
+        </a>
+        <h4><a href="#"></a>Rehabbing for Monster Paydays</h4>
+        <a data-button=green href="#">Add to Cart - $7</a>
+      </article>
+      <article class=locked>
+        <a href="#">
+          <img src="http://placehold.it/250x325">
+        </a>
+        <h4><a href="#"></a>Virtual Wholesaling 3.0</h4>
+        <a data-button=green href="#">Add to Cart - $7</a>
+      </article>
+      <hr>
+      <input type=button data-reveal onclick="toggle(this)" value="Show More">
+    </div>
+  </section>
+
+  <!-- Button Theme -->
+  <section data-block="button">
+    <h3>Button Style</h3>
+    <div>
+      <article>
+        <a href="#">
+          <img src="http://placehold.it/75x75">
+        </a>
+        <aside>lorem ipsum dolor sit amet</aside>
+        <a data-button href="#">Open</a>
+      </article>
+      <article>
+        <a href="#">
+          <img src="http://placehold.it/75x75">
+        </a>
+        <aside>lorem ipsum dolor sit amet</aside>
+        <a data-button href="#">Open</a>
+      </article>
+      <article>
+        <a href="#">
+          <img src="http://placehold.it/75x75">
+        </a>
+        <aside>lorem ipsum dolor sit amet</aside>
+        <a data-button href="#">Open</a>
+      </article>
+      <article>
+        <a href="#">
+          <img src="http://placehold.it/75x75">
+        </a>
+        <aside>lorem ipsum dolor sit amet</aside>
+        <a data-button href="#">Open</a>
+      </article>
+      <article class="locked">
+        <a href="#">
+          <img src="http://placehold.it/75x75">
+        </a>
+        <aside>lorem ipsum dolor sit amet</aside>
+        <a data-button=green href="#">Add to Cart - $47</a>
+      </article>
+      <article class="locked">
+        <a href="#">
+          <img src="http://placehold.it/75x75">
+        </a>
+        <aside>lorem ipsum dolor sit amet</aside>
+        <a data-button=green href="#">Add to Cart - $47</a>
+      </article>
+      <article class="locked">
+        <a href="#">
+          <img src="http://placehold.it/75x75">
+        </a>
+        <aside>lorem ipsum dolor sit amet</aside>
+        <a data-button=green href="#">Add to Cart - $47</a>
+      </article>
+      <article class="locked">
+        <a href="#">
+          <img src="http://placehold.it/75x75">
+        </a>
+        <aside>lorem ipsum dolor sit amet</aside>
+        <a data-button=green href="#">Add to Cart - $47</a>
+      </article>
+      <article class="locked">
+        <a href="#">
+          <img src="http://placehold.it/75x75">
+        </a>
+        <aside>lorem ipsum dolor sit amet</aside>
+        <a data-button=green href="#">Add to Cart - $47</a>
+      </article>
+      <article class="locked">
+        <a href="#">
+          <img src="http://placehold.it/75x75">
+        </a>
+        <aside>lorem ipsum dolor sit amet</aside>
+        <a data-button=green href="#">Add to Cart - $47</a>
+      </article>
+      <hr>
+      <input type=button data-reveal onclick="toggle(this)" value="Show More">
+    </div>
+  </section>
+
+  <!-- Icon Theme -->
+  <section data-block="icon">
+    <h3>Icon Style</h3>
+    <div>
+      <article>
+        <a href="#" class="pdf"><i class="fa fa-file-pdf-o"></i></a>
+        <aside>Affidavit of Contract</aside>
+      </article>
+      <article>
+        <a href="#" class="pdf"><i class="fa fa-file-pdf-o"></i></a>
+        <aside>How I Made 25k Extra (By Pricing My Wholesale Too High)</aside>
+      </article>
+      <article>
+        <a href="#" class="pdf"><i class="fa fa-file-pdf-o"></i></a>
+        <aside>Agreement to Assign Contract for Sale &amp; Purchase</aside>
+      </article>
+      <article>
+        <a href="#" class="pdf"><i class="fa fa-file-pdf-o"></i></a>
+        <aside>Attorney Letter</aside>
+      </article>
+      <article>
+        <a href="#" class="doc"><i class="fa fa-file-text-o"></i></a>
+        <aside>Sample Buyer Letter</aside>
+      </article>
+      <article>
+        <a href="#" class="doc"><i class="fa fa-file-text-o"></i></a>
+        <aside>Effect Listing Templates</aside>
+      </article>
+      <article>
+        <a href="#" class="doc"><i class="fa fa-file-text-o"></i></a>
+        <aside>How I Turned 4 Houses into 4 Million Dollars</aside>
+      </article>
+      <article>
+        <a href="#" class="doc"><i class="fa fa-file-text-o"></i></a>
+        <aside>Email Templates To Get Started In Real Estate</aside>
+      </article>
+      <article>
+        <a href="#" class="xls"><i class="fa fa-table"></i></a>
+        <aside>Real Estate Investing Templates</aside>
+      </article>
+      <article>
+        <a href="#" class="xls"><i class="fa fa-table"></i></a>
+        <aside>Risk Assessment Template</aside>
+      </article>
+      <article>
+        <a href="#" class="xls"><i class="fa fa-table"></i></a>
+        <aside>Home Inspection Checllist</aside>
+      </article>
+      <article>
+        <a href="#" class="xls"><i class="fa fa-table"></i></a>
+        <aside>Business Client Directory Template</aside>
+      </article>
+      <article>
+        <a href="#" class="pdf"><i class="fa fa-file-pdf-o"></i></a>
+        <aside>How To Make The Most of Auctions</aside>
+      </article>
+      <article>
+        <a href="#" class="doc"><i class="fa fa-file-text-o"></i></a>
+        <aside>Newsletter Campaign Template</aside>
+      </article>
+      <article>
+        <a href="#" class="xls"><i class="fa fa-table"></i></a>
+        <aside>Sample Building Renovation Budget</aside>
+      </article>
+      <article>
+        <a href="#" class="doc"><i class="fa fa-file-text-o"></i></a>
+        <aside>Contractor Agreement</aside>
+      </article>
+      <hr>
+      <input type=button data-reveal onclick="toggle(this)" value="Show More">
+    </div>
+  </section>
+  <script>
+    function toggle(el){
+      var container = el.parentNode.parentNode,
+          status = container.className;
+      status!=='toggle'?container.className='toggle':container.className=''
+      el.value=='Show More'?el.value='Show Less':el.value='Show More'
+    }
+  </script>
+  <!--[if lt IE 9]><script src="http://elementqueries.com/EQCSS-polyfills.js"></script><![endif]-->
+  <script src="http://elementqueries.com/EQCSS.js"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blockquote Style with Element Queries</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="EQCSS, element queries, element query, container queries, responsive, blockquote, pullquote, quote, alternating">
+  <link href=http://staticresource.com/basic.css rel=stylesheet>
+  <link href=http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic rel=stylesheet>
+  <link href=http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic rel=stylesheet>
+  <link href=http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic rel=stylesheet>
+  <style>
+    blockquote {
+      margin: 0 auto;
+      padding: 1em;
+      border-left: 5px solid #999;
+    }
+    blockquote:not(:first-of-type) {
+      margin-top: .5em;
+    }
+    blockquote p {
+      color: #555;
+      font-size: 12pt;
+      line-height: 1.4;
+      font-family: 'PT Serif', Cambria, 'Hoefler Text', Utopia, 'Liberation Serif', 'Nimbus Roman No9 L Regular', Times, 'Times New Roman', serif;
+    }
+    blockquote footer {
+      margin-top: .5em;
+      padding: 0;
+      color: #777;
+      font-size: 12pt;
+      text-align: left;
+      font-style: italic;
+    }
+    blockquote footer:before {
+      content: '— ';
+    }
+    blockquote:nth-of-type(even) {
+      text-align: right;
+      border-left: none;
+      border-right: 5px solid #999;
+    }
+    blockquote:nth-of-type(even) footer {
+      text-align: right;
+    }
+    blockquote:nth-of-type(even) footer:before {
+      content: '';
+    }
+    blockquote:nth-of-type(even) footer:after {
+      content: ' —';
+    }
+    @element 'blockquote' and (min-width: 300px) {
+      blockquote {
+        padding: 1em 20% 1em 1em;
+      }
+      blockquote p {
+        font-size: 14pt;
+      }
+      blockquote:nth-of-type(even) {
+        padding: 1em 1em 1em 20%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Alternating <code>&lt;blockquote></code></h1>
+  <blockquote>
+    <p><q>The U.S. is fast approaching $19,000,000,000,000.00 in national debt. This is mathematically impossible to ever pay back &hellip; even if every American was taxed at 100%.</q></p>
+    <footer>Charles Goyette, The Dollar Meltdown</footer>
+  </blockquote>
+  <blockquote>
+    <p><q>79 million Baby Boomers are about to retire, pull their money out of the economy, and demand their $35 Trillion Dollars in Social Security &amp; Medicare. Think that through&hellip;</q></p>
+    <footer>Robert Kiyosaki</footer>
+  </blockquote>
+  <blockquote>
+    <p><q>23.4% of Americans are Currently Unemployed &hellip; not the 9.1% they&rsquo;d like you to believe.</q></p>
+    <footer>ShadowStats.com</footer>
+  </blockquote>
+  <blockquote>
+    <p><q>There are currently 5 job seekers for every 1 job opening in America, forcing wages down by 10%.</q></p>
+    <footer>The Wall Street Journal</footer>
+  </blockquote>
+  <blockquote>
+    <p><q>Adjusted for inflation, the average yearly earnings for an American male are lower than in 1978.</q></p>
+    <footer>The Wall Street Journal</footer>
+  </blockquote>
+  <blockquote>
+    <p><q>1 out of every 5 Americans is on government support of some sort</q></p>
+    <footer>The Wall Street Journal</footer>
+  </blockquote>
+  <blockquote>
+    <p><q>America will lose its position as the world&rsquo;s superpower in less than 10 years.</q></p>
+    <footer>Goldman Sachs</footer>
+  </blockquote>
+  <blockquote>
+    <p><q>We&rsquo;re actually in a depression right now.  They just don&rsquo;t want us to know that.</q></p>
+    <footer>Anonymous</footer>
+  </blockquote>
+  <blockquote>
+    <p><q>If we don&rsquo;t do something soon &hellip; our recovery is on the verge of faltering.</q></p>
+    <footer>Ben Bernanke, The Fed</footer>
+  </blockquote>
+  <blockquote>
+    <p>&ldquo;The stock bubble of 2001 and the housing bubble of 2007 were mere sideshows for what&rsquo;s coming.</p>
+    <p>The main act is just around the corner &hellip;&rdquo;</p>
+    <footer>Chris Martenson Ph.D., The Crash Course</footer>
+  </blockquote>
+  <script>
+
+  </script>
+  <!--[if lt IE 9]><script src="http://elementqueries.com/EQCSS-polyfills.js"></script><![endif]-->
+  <script src="http://elementqueries.com/EQCSS.js"></script>
+</body>
+</html>

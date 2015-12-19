@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Headline Demo with Element Queries</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="EQCSS, element queries, element query, container queries, responsive, headline, element-first, element-first design">
+  <link href=http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800 rel=stylesheet>
+  <style>
+    @element 'html' and (min-width: 0px) {
+      html {
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-kerning: auto;
+        font-size: 10pt;
+        line-height: 1.4;
+        font-family: 'Open Sans', 'Source Sans Pro', Roboto, 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', 'Myriad Pro', 'Segoe UI', Myriad, Helvetica, 'Lucida Grande', 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, Arial, sans-serif;
+        -webkit-text-size-adjust: 100%;
+      }
+      div {
+        display: inline-block;
+        border-right: 1px solid red;
+      }
+      h1 {
+        margin: 0;
+        font-size: 400%;
+      }
+    }
+    @element 'h1' and (min-characters: 7) {
+      $this { font-size: 341%; }
+    }
+    @element 'h1' and (min-characters: 8) {
+      $this { font-size: 298%; }
+    }
+    @element 'h1' and (min-characters: 9) {
+      $this { font-size: 265%; }
+    }
+    @element 'h1' and (min-characters: 10) {
+      $this { font-size: 237%; }
+    }
+    @element 'h1' and (min-characters: 11) {
+      $this { font-size: 215%; }
+    }
+    @element 'h1' and (min-characters: 12) {
+    $this { font-size: 198%; }
+    }
+    @element 'h1' and (min-characters: 13) {
+      $this { font-size: 183%; }
+    }
+    @element 'h1' and (min-characters: 14) {
+      $this { font-size: 169%; }
+    }
+    @element 'h1' and (min-characters: 15) {
+      $this { font-size: 158%; }
+    }
+    @element 'h1' and (min-characters: 16) {
+      $this { font-size: 148%; }
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>Mmmmmm</h1>
+    <h1>Mmmmmmm</h1>
+    <h1>Mmmmmmmm</h1>
+    <h1>Mmmmmmmmm</h1>
+    <h1>Mmmmmmmmmm</h1>
+    <h1>Mmmmmmmmmmm</h1>
+    <h1>Mmmmmmmmmmmm</h1>
+    <h1>Mmmmmmmmmmmmm</h1>
+    <h1>Mmmmmmmmmmmmmm</h1>
+    <h1>Mmmmmmmmmmmmmmm</h1>
+    <h1>Mmmmmmmmmmmmmmmm</h1>
+  </div>
+  <!--[if lt IE 9]><script src="http://elementqueries.com/EQCSS-polyfills.js"></script><![endif]-->
+  <script src="http://elementqueries.com/EQCSS.js"></script>
+</body>
+</html>

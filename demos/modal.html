@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Responsive Modal with Element Queries</title>
+  <meta name="description" content="The goal was to design a modal that could hold a video and be added (like a plugin) to many different sites. I used the 'style scoping' feature of EQCSS to ensure that the plugin's styles would be 'quarantined' from the rest of the CSS and applied directly to the element in a way that the on-site CSS wouldn't interfere with">
+  <meta name="keywords" content="EQCSS, element queries, element query, container queries, responsive, modal, responsive modal, modal">
+  <link href=http://staticresource.com/basic.css rel=stylesheet>
+  <link href=http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic rel=stylesheet>
+  <link href=http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic rel=stylesheet>
+  <link href=http://staticresource.com/data-buttons.css rel=stylesheet>
+  <style>
+    [data-button] {
+      display: block !important;
+      margin: 1em auto !important;
+    }
+    @element "#RFImodal" {
+      $this,
+      $this * {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-kerning: auto;
+        font-size: 12pt;
+        font-family: 'Source Sans Pro', 'Open Sans', Roboto, 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', 'Myriad Pro', 'Segoe UI', Myriad, Helvetica, 'Lucida Grande', 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, Arial, sans-serif;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+      }
+      $this {
+        opacity: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        overflow: auto;
+        overflow-y: scroll;
+        background: rgba(0,0,0,.7);
+        -webkit-transition: opacity .2s ease-in-out;
+        -moz-transition: opacity .2s ease-in-out;
+        transition: opacity .2s ease-in-out;
+        z-index: 9999;
+      }
+      $this article {
+        position: relative;
+        max-width: 750px;
+        margin: 0 auto;
+        padding-bottom: 15px;
+        background: white;
+        height: auto;
+        box-shadow: rgba(0,0,0,.15) 0 5px 15px;
+      }
+      $this article p {
+        font-size: 12pt;
+        font-weight: 500;
+        line-height: 1.2;
+        color: #555;
+        margin: 15px 0;
+        padding: 0 20px;
+      }
+      $this article p:last-of-type {
+        margin-bottom: 0;
+      }
+      $this article button:first-of-type {
+        position: absolute;
+        top: 0;
+        right: 0;
+        -webkit-appearance: none;
+        appearance: none;
+        display: inline-block;
+        padding: 5px 10px 10px 15px;
+        font-size: 24pt;
+        color: rgba(255,255,255,.7);
+        line-height: 1;
+        font-weight: normal;
+        transition: 0;
+        border: none;
+        outline: none;
+        background: transparent;
+        -webkit-transition: color .2s ease-in-out;
+        -moz-transition: color .2s ease-in-out;
+        transition: color .2s ease-in-out;
+        cursor: pointer;
+        z-index: 1000;
+      }
+      $this article button:first-of-type:hover,
+      $this article button:first-of-type:focus {
+        color: #c00;
+      }
+    }
+    @element "#RFImodal" and (min-width: 750px) {
+      $this article {
+        margin: 50px auto;
+        overflow: hidden;
+      }
+      $this article p {
+        font-size: 14pt;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Responsive Video Modal</h1>
+  <h2>Bootstrap &amp; jQuery <em><u>free</u></em></h2>
+  <input type=button data-button onclick=spawnModal() value="Spawn Modal">
+  <aside id=RFImodal style=opacity:0>
+    <article>
+      <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
+        <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
+          <iframe src="http://fast.wistia.net/embed/iframe/xad3os2q76?videoFoam=true" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen width="100%" height="100%" ></iframe>
+        </div>
+      </div>
+      <script src="http://fast.wistia.net/assets/external/E-v1.js" async></script>
+      <p>Expect a call from your very own Business Development Consultant within the next week. He/she will be calling from the 480 area code and will be ready to answer any questions you have about getting started in real estate.</p>
+      <p>If you&rsquo;re unavailable when you receive the call, simply let your Consultant know and we&rsquo;ll reschedule the call for a date &amp; time that&rsquo;s convenient for you!</p>
+      <button>&times;</button>
+    </article>
+  </aside>
+  <script>
+    // find the modal & close button
+    var modal = document.getElementById('RFImodal'),
+        close = modal.querySelectorAll('article button')[0],
+        modalStatus = false;
+    // how to add the modal to the page
+    function spawnModal(e){
+      var wistiaEmbed = document.querySelectorAll('.wistia_embed')[0];
+      modalStatus = true;
+      modal.style.pointerEvents = 'auto';
+      wistiaEmbed.style.display = 'block';
+      modal.style.opacity = '1';
+      wistiaEmbed.wistiaApi.play();
+    }
+    // teach the modal backdrop and close button to close the modal
+    modal.addEventListener('click',clickClose);
+    close.addEventListener('click',clickClose);
+    function clickClose(e){
+      if (e.target == modal || e.target == close){
+        killModal()
+      }
+    }
+    // teach the 'escape' key to close the modal
+    document.onkeyup = function(e) {
+      e = e || window.event;
+      var charCode = (typeof e.which == "number")?e.which:e.keyCode;
+      if (charCode == 27 && modalStatus == true) { killModal() }
+    }
+    // how to close the modal
+    function killModal(){
+      var wistiaEmbed = document.querySelectorAll('.wistia_embed')[0];
+      wistiaEmbed.wistiaApi.pause();
+      modalStatus = false;
+      modal.style.pointerEvents = 'none';
+      modal.style.opacity = '0';
+      wistiaEmbed.style.display = 'none';
+    }
+  </script>
+  <!--[if lt IE 9]><script src="http://elementqueries.com/EQCSS-polyfills.js"></script><![endif]-->
+  <script src="http://elementqueries.com/EQCSS.js"></script>
+</body>
+</html>

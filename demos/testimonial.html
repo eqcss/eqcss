@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Testimonial with Element Queries</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="EQCSS, element queries, element query, container queries, responsive, element-first, element-first design">
+  <link href=//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic rel=stylesheet>
+  <style>
+    body {
+      margin: 0;
+      padding: 15px;
+      background: radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
+      background-color: #282828;
+      background-size: 16px 16px;
+      background-attachment: fixed;
+    }
+    @element '.testimonials' and (min-width: 0px) {
+    .testimonials,
+    .testimonials * {
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-family: 'Source Sans Pro', 'Open Sans', Roboto, 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', 'Myriad Pro', 'Segoe UI', Myriad, Helvetica, Arial, 'Lucida Grande', sans-serif;
+      font-kerning: auto;
+    }
+    $this {
+      background-color: #ff3333;
+      background: url('http://staticresource.com/squeeze/img/red-bg.jpg') no-repeat center center;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      position: relative;
+      z-index: 1000 !important;
+      padding: .25em  1em .5em 1em;
+      font-size: 10pt;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      -o-user-select: none;
+      user-select: none;
+      cursor: default;
+      box-shadow: inset #fff 0 -1px 0;
+    }
+    $this:before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,1)));
+      background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
+      background: -o-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
+      background: -ms-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
+      background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00FFFFFF', endColorstr='#FFFFFFFF',GradientType=0 );
+      z-index: 50;
+    }
+    $this .wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    $this blockquote img {
+      border-radius: 100%;
+      height: auto;
+      max-width: 50px;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    $this blockquote {
+      padding: .5em 1em 1em 60px;
+      position: relative;
+      z-index: 100;
+      font-style: italic;
+      min-height: 50px;
+      margin: 2em auto;
+    }
+    $this blockquote q {
+      color: #111;
+      font-size: 100%;
+      line-height: 1.1;
+      display: block;
+    }
+    $this blockquote footer {
+      color: #333;
+      font-size: 90%;
+      float: left;
+      font-style: normal;
+    }
+    $this blockquote footer:before {
+      content: '— ';
+    }
+    $this .wrapper:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+  }
+  @element '.testimonials' and (min-width: 0px) and (max-width: 199px) {
+    $this blockquote {
+      padding: 0 .25em;
+      text-align: center;
+    }
+    $this blockquote img {
+      display: block;
+      position: relative;
+      max-width: 50px;
+      margin: 0 auto 10px auto;
+    }
+    $this blockquote footer {
+      float: none;
+      text-align: right;
+    }
+  }
+  @element '.testimonials' and (min-width: 200px) and (max-width: 499px) {
+    $this blockquote:nth-child(even) {
+      padding: .5em 60px 1em 1em;
+      text-align: right;
+    }
+    $this blockquote:nth-child(even) img {
+      left: auto;
+      right: 0;
+    }
+    $this blockquote:nth-child(even) footer {
+      float: right;
+    }
+    $this blockquote img {
+      max-width: 50px;
+    }
+  }
+  @element '.testimonials' and (min-width: 500px) and (max-width: 799px) {
+    $this {
+      font-size: 12pt;
+      padding: 2em;
+    }
+    $this blockquote {
+      margin: 1em auto;
+      padding: 1em 1em 0 2em;
+      padding-left: 85px;
+      width: 50%;
+      float: left;
+      min-height: none;
+    }
+    $this blockquote:nth-child(3n+3) {
+      margin-left: 25%;
+      margin-right: 25%;
+    }
+    $this img {
+      max-width: 75px !important;
+      top: auto;
+    }
+    $this blockquote footer {
+      padding-right: 1em;
+    }
+  }
+  @element '.testimonials' and (min-width: 800px) {
+    $this {
+      font-size: 14pt;
+      padding: 2em 2em 0 2em;
+    }
+    $this blockquote {
+      padding-left: 115px;
+      width: 33%;
+      float: left;
+    }
+    $this blockquote:nth-child(5n+4) {
+      margin-left: 16%;
+    }
+    $this blockquote:nth-child(5n+5) {
+      margin-right: 16%;
+    }
+    $this img {
+      max-width: 100px !important;
+    }
+  }
+  @element '.testimonials' and (min-width: 1200px) {
+    $this {
+      font-size: 16pt;
+      padding: 2em 1em 0 1em;
+    }
+  }
+  </style>
+</head>
+<body>
+  <section class=testimonials>
+    <div class=wrapper>
+      <blockquote>
+        <img src="http://staticresource.com/prestonIcon.jpg">
+        <q>77% of all millionaires made their money in real estate</q>
+        <footer>bloomberg</footer>
+      </blockquote>
+      <blockquote>
+        <img src="http://staticresource.com/prestonIcon.jpg">
+        <q>77% of all millionaires made their money in real estate</q>
+        <footer>bloomberg</footer>
+      </blockquote>
+      <blockquote>
+        <img src="http://staticresource.com/prestonIcon.jpg">
+        <q>77% of all millionaires made their money in real estate</q>
+        <footer>bloomberg</footer>
+      </blockquote>
+      <blockquote>
+        <img src="http://staticresource.com/prestonIcon.jpg">
+        <q>77% of all millionaires made their money in real estate</q>
+        <footer>bloomberg</footer>
+      </blockquote>
+      <blockquote>
+        <img src="http://staticresource.com/prestonIcon.jpg">
+        <q>77% of all millionaires made their money in real estate</q>
+        <footer>bloomberg</footer>
+      </blockquote>
+      <blockquote>
+        <img src="http://staticresource.com/prestonIcon.jpg">
+        <q>77% of all millionaires made their money in real estate</q>
+        <footer>bloomberg</footer>
+      </blockquote>
+      <blockquote>
+        <img src="http://staticresource.com/prestonIcon.jpg">
+        <q>77% of all millionaires made their money in real estate</q>
+        <footer>bloomberg</footer>
+      </blockquote>
+      <blockquote>
+        <img src="http://staticresource.com/prestonIcon.jpg">
+        <q>77% of all millionaires made their money in real estate</q>
+        <footer>bloomberg</footer>
+      </blockquote>
+    </div>
+  </section>
+  <!--[if lt IE 9]><script src="http://elementqueries.com/EQCSS-polyfills.js"></script><![endif]-->
+  <script src="http://elementqueries.com/EQCSS.js"></script>
+</body>
+</html>

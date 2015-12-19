@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Parent Selector with Element Queries</title>
+  <meta name="description" content="Adding extra padding to the right side of the $parent element based on the number of icons present inside it!">
+  <meta name="keywords" content="EQCSS, element queries, element query, container queries, responsive, parent selector, parent CSS, css parent, $parent">
+  <link href=http://staticresource.com/basic.css rel=stylesheet>
+  <link href=http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic rel=stylesheet>
+  <link href=http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic rel=stylesheet>
+  <link href=http://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css rel=stylesheet>
+  <style>
+    div {
+      margin: 0;
+      padding: 1em;
+      position: relative;
+      background: white;
+    }
+    div + div {
+      margin-top: 10px;
+    }
+    aside {
+      position: absolute;
+      right: .5em;
+      top: calc(50% - 15pt);
+      height: 30pt;
+    }
+    i {
+      display: inline-block;
+      margin: 0;
+      width: 30pt;
+      height: 30pt;
+      line-height: 30pt;
+      text-align: center;
+      font-size: 24pt;
+    }
+    @element 'aside' and (min-children: 1) {
+      $parent { padding-right: calc(30pt + .5em) }
+    }
+    @element 'aside' and (min-children: 2) {
+      $parent { padding-right: calc(60pt + 1em) }
+    }
+    @element 'aside' and (min-children: 3) {
+      $parent { padding-right: calc(90pt + 1.5em) }
+    }
+    @element 'aside' and (min-children: 4) {
+      $parent { padding-right: calc(120pt + 2em) }
+    }
+  </style>
+</head>
+<body>
+  <h1><code>$parent</code> Selector</h1>
+  <h2>Use $parent with EQCSS today in IE8+</h2>
+  <div>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat hic quia nostrum assumenda quis, ea nesciunt laboriosam laborum ipsa nam aspernatur voluptatum veritatis molestias reprehenderit corporis qui dolore sunt dolores.</p>
+    <aside>
+      <i class=ion-medkit></i>
+    </aside>
+  </div>
+  <div>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat hic quia nostrum assumenda quis, ea nesciunt laboriosam laborum ipsa nam aspernatur voluptatum veritatis molestias reprehenderit corporis qui dolore sunt dolores.</p>
+    <aside>
+      <i class=ion-map></i>
+      <i class=ion-android-chat></i>
+      <i class=ion-medkit></i>
+    </aside>
+  </div>
+  <div>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat hic quia nostrum assumenda quis, ea nesciunt laboriosam laborum ipsa nam aspernatur voluptatum veritatis molestias reprehenderit corporis qui dolore sunt dolores.</p>
+    <aside>
+      <i class=ion-android-chat></i>
+      <i class=ion-medkit></i>
+    </aside>
+  </div>
+  <script>
+
+  </script>
+  <!--[if lt IE 9]><script src="http://elementqueries.com/EQCSS-polyfills.js"></script><![endif]-->
+  <script src="http://elementqueries.com/EQCSS.js"></script>
+</body>
+</html>

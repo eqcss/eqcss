@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calendar with Element Queries</title>
+  <meta name="description" content="Bootstrap-free calendar widget written using HTML and EQCSS, CSS with element queries. Because of the element queries this calendar widget will adapt responsively to fit into whatever container in your template you display it inside. This can fill an entire page, or shrink down to just the size of a thumbnail in a sidebar.">
+  <meta name="keywords" content="EQCSS, element queries, element query, container queries, responsive, widget, calendar, element-first, element-first design">
+  <link href=https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css rel=stylesheet>
+  <style>
+    /* Base Calendar Styles */
+    @element '.eqCal' and (min-width: 0px) {
+      $this {
+        position: relative;
+        padding: 0;
+        font-size: 12pt;
+        opacity: 1;
+      }
+      $this * {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-kerning: auto;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+        line-height: 1.2;
+      }
+      $this .title {
+        text-align: center;
+        color: #333;
+        font-family: 'Source Sans Pro', 'Open Sans', Roboto, 'Helvetica Neue', 'Myriad Pro', Myriad, 'Segoe UI', Arial, sans-serif;
+        position: relative;
+        z-index: 100;
+        margin: 0 0 12pt 0;
+        transition: font-size: .1s ease-in-out;
+      }
+      $this .title .month {
+        font-weight: 400;
+      }
+      $this .title .year {
+        font-weight: 300;
+        opacity: .5;
+      }
+      $this nav {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        padding: 0 .5em;
+        z-index: 200;
+        transition: opacity .2s ease-in-out;
+      }
+      $this nav a {
+        display: inline-block;
+        color: #999;
+        padding: .1em .1em;
+        transition: color .1s ease-in-out;
+      }
+      $this nav a.eqCal-prev {
+        float: left;
+      }
+      $this nav a.eqCal-next {
+        float: right;
+      }
+      $this nav a:hover,
+      $this nav a :focus {
+        color: #555;
+      }
+      $this .dates:after {
+         content: '';
+         display: block;
+         clear: both;
+      }
+      $this article,
+      $this article * {
+        font-family: 'Source Sans Pro', 'Open Sans', Roboto, 'Helvetica Neue', 'Myriad Pro', Myriad, 'Segoe UI', Arial, sans-serif;
+      }
+      $this article {
+        display: block;
+        float: left;
+        width: 14.28571428571429%;
+        padding-top: 14.28571428571429%;
+        position: relative;
+        z-index: 250;
+      }
+      $this input[type="radio"] {
+        display: none;
+      }
+      $this .reset,
+      $this .reset:hover {
+        display: block;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: transparent !important;
+        z-index: 200;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent !important;
+      }
+      $this input:checked + .reset,
+      $this input:checked + .reset:hover {
+        cursor: default;
+        display: block;
+        z-index: 20;
+      }
+      $this ol {
+        display: block;
+        padding: 0;
+        margin: 0 auto;
+        list-style: none;
+        font-family: 'Source Sans Pro', 'Open Sans', Roboto, 'Helvetica Neue', 'Myriad Pro', Myriad, 'Segoe UI', Arial, sans-serif;
+        pointer-events: none;
+        cursor: default;
+        position: relative;
+        z-index: 200;
+      }
+      $this ol li {
+        display: inline-block;
+        float: left;
+        width: 14.28571428571429%;
+        padding: 0;
+        color: #999;
+        padding: .5em 0;
+        text-align: center;
+        font-size: 10pt;
+        z-index: 0;
+        border-bottom: 1px solid #eee;
+        margin-bottom: .5em;
+      }
+      $this ol li .short {
+        display: none;
+      }
+      $this ol li .full {
+        display: none;
+      }
+    }
+    /* Popover Functionality */
+    @element '.eqCal' and (min-width: 0px) and (max-width: 849px) {
+      $this label:hover {
+        background: #fc0;
+      }
+      $this input:checked + label {
+        background: #fc0;
+      }
+      $this input:checked + label + .date {
+        color: #fff;
+      }
+      $this label {
+        cursor: pointer;
+        -webkit-tap-highlight-color: #f60 !important;
+      }
+      $this label:empty {
+        cursor: default;
+        background: transparent;
+        pointer-events: none;
+        -webkit-tap-highlight-color: transparent !important;
+      }
+      $this input:checked + label:empty:before {
+        display: none;
+      }
+      $this input:checked + label:before {
+        content: '';
+        display: block;
+        border: 12px solid transparent;
+        border-top-color: #ccc;
+        position: absolute;
+        left: 50%;
+        margin-left: -12px;
+        top: -12.5px;
+        z-index: 1000;
+      }
+      $this input:checked + label:after {
+        content: '';
+        display: block;
+        border: 11px solid transparent;
+        border-top-color: #f0f0f0;
+        position: absolute;
+        left: 50%;
+        margin-left: -11px;
+        top: -13px;
+        z-index: 1500;
+      }
+      $this label > div {
+        height: 100%;
+      }
+      $this input:checked + label > div {
+        content: '';
+        display: inline-block;
+        width: 200px;
+        background: #f0f0f0;
+        height: 150px;
+        top: -162px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        position: absolute;
+        left: 50%;
+        margin-left: -100px;
+        z-index: 1000;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        -ms-overflow-style: none;
+        -webkit-overflow-scrolling: touch;
+        box-shadow: rgba(0,0,0,.1) 0 1px 5px;
+        cursor: default;
+        z-index: 500;
+      }
+      $this article:nth-child(7n+1) input:checked + label > div {
+        margin-left: -50px;
+      }
+      $this article:nth-child(7n+2) input:checked + label > div {
+        margin-left: -75px;
+      }
+      $this article:nth-child(7n+6) input:checked + label > div {
+        margin-left: -125px;
+      }
+      $this article:nth-child(7n+7) input:checked + label > div {
+        margin-left: -150px;
+      }
+      $this input:checked + label > div::-webkit-scrollbar {
+        display: none;
+      }
+      $this input:checked + label .event {
+        display: block;
+        height: auto;
+        width: auto;
+        float: none;
+        position: relative;
+        margin: 2% 2% 0 2%;
+        padding: 3%;
+        text-align: left;
+        z-index: 750;
+      }
+      $this input:checked + label .event:last-child {
+        margin-bottom: 2%;
+      }
+      $this input:checked + label .event + .event {
+        margin-top: 2%;
+      }
+      $this input:checked + label .event h4 {
+        font-size: 100%;
+        margin: 0;
+        display: block;
+        color: #333;
+        padding: 0 2%;
+      }
+      $this input:checked + label .event aside:empty {
+        display: none;
+      }
+      $this input:checked + label .event aside {
+        display: block;
+        padding: 2% 2% 0 2%;
+        font-size: 90%;
+        color: #444;
+      }
+    }
+    /* Dot Grid */
+    @element '.eqCal' and (min-width: 0px) and (max-width: 199px) {
+      $this .title,
+      $this nav a {
+        font-size: 100%;
+      }
+      $this nav {
+        opacity: 0;
+      }
+      $this label {
+        content: '';
+        display: block;
+        width: 25%;
+        padding-top: 25%;
+        height: 0;
+        background: #999;
+        position: absolute;
+        top: 50%;
+        margin-top: -12.5%;
+        left: 50%;
+        margin-left: -12.5%;
+        border-radius: 100%;
+        cursor: pointer;
+      }
+      $this .date,
+      $this .event {
+        display: none;
+      }
+      $this input:checked + label > div,
+      $this input:checked + label:before {
+        display: none;
+      }
+    }
+    /* Small Numbers */
+    @element '.eqCal' and (min-width: 200px) and (max-width: 849px) {
+      $this .title {
+        font-size: 125%;
+      }
+      $this nav a {
+        font-size: 125%;
+      }
+      $this nav {
+        opacity: 1;
+      }
+      $this article {
+        width: 13.14%;
+        padding-top: 12%;
+        margin-right: 1.33%;
+      }
+      $this article:nth-child(7n+0) {
+        margin-right: 0;
+      }
+      $this article:nth-child(n+8) {
+        margin-top: 1.33%;
+      }
+      $this label {
+        position: absolute;
+        top: 10%;
+        left: 10%;
+        width: 80%;
+        height: 80%;
+        background: #f70;
+        border-radius: 50%;
+      }
+      $this .event h4,
+      $this .event aside {
+        display: none;
+      }
+      $this .date {
+        display: block;
+        width: 100%;
+        text-align: center;
+        position: absolute;
+        font-size: 100%;
+        font-weight: 600;
+        top: 50%;
+        margin-top: -7.5pt;
+        color: #fff;
+        z-index: 1000;
+        pointer-events: none;
+      }
+      $this label:empty + .date {
+        color: #999;
+      }
+      $this .date.today,
+      $this label:empty + .date.today {
+        color: #000 !important;
+      }
+      $this label {
+        text-align: right;
+      }
+    }
+    @element '.eqCal' and (min-width: 300px) and (max-width: 399px) {
+      $this .title,
+      $this nav a {
+        font-size: 150%;
+      }
+      $this nav a {
+        font-size: 150%;
+        padding: .1em .15em;
+      }
+    }
+    @element '.eqCal' and (min-width: 400px) and (max-width: 499px) {
+      $this .title,
+      $this nav a {
+        font-size: 200%;
+      }
+      $this label {
+        top: 15%;
+        left: 15%;
+        width: 70%;
+        height: 70%;
+      }
+      $this nav a {
+        font-size: 200%;
+        padding: .1em .15em;
+      }
+    }
+    @element '.eqCal' and (min-width: 500px) and (max-width: 699px) {
+      $this .title,
+      $this nav a {
+        font-size: 300%;
+      }
+      $this .date {
+        font-size: 18pt;
+        margin-top: -10pt;
+      }
+      $this ol li .short {
+        display: inline;
+      }
+    }
+    @element '.eqCal' and (min-width: 700px) and (max-width: 849px) {
+      $this .title,
+      $this nav a {
+        font-size: 350%;
+      }
+      $this .date {
+        font-size: 24pt;
+        margin-top: -14pt;
+      }
+      $this ol li {
+       font-size: 12pt;
+      }
+      $this ol li .short,
+      $this ol li .full {
+        display: inline;
+      }
+    }
+    /* Big Calendar */
+    @element '.eqCal' and (min-width: 850px) {
+      $this .title {
+        font-size: 450%;
+        margin: 0 0 -14pt 0;
+        color: #333;
+        overflow: hidden;
+        text-align: left;
+        letter-spacing: -.03em;
+      }
+      $this nav {
+        width: 100%;
+        text-align: right;
+      }
+      $this nav a {
+        font-size: 350%;
+        float: none !important;
+      }
+      $this .title .month {
+        font-weight: 400;
+      }
+      $this .title .year {
+        font-weight: 300;
+        opacity: .4;
+      }
+      $this ol {
+        margin: 0;
+        border-bottom: none;
+        overflow: hidden;
+      }
+      $this ol li {
+        border: 1px solid #ccc;
+        border-right: none;
+        margin-bottom: 0;
+        font-size: 12pt;
+        padding: .25em 0;
+        background: rgba(255,255,255,.8);
+        border-bottom: none;
+      }
+      $this ol li .short,
+      $this ol li .full {
+        display: inline;
+      }
+      $this ol li + li {
+        border-right-width: 1px;
+      }
+      $this ol li:last-child {
+        border-right: 1px solid #ccc;
+      }
+      $this article {
+        border: 1px solid #ccc;
+        border-right-width: 0;
+        background: rgba(255,255,255,.8);
+      }
+      $this article:nth-child(7n+0) {
+        border-right-width: 1px;
+      }
+      $this article:nth-child(n+8) {
+        border-top: none;
+      }
+      $this .date:empty {
+        display: none;
+        pointer-events: none;
+      }
+      $this .date {
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 150%;
+        font-weight: 400;
+        display: inline-block;
+        padding: 2% 5%;
+        margin: 0;
+        color: #999;
+        letter-spacing: -.03em;
+        cursor: none;
+      }
+      $this .date.today {
+        color: #000 !important;
+      }
+      $this label > div {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        padding: 20% 0 3% 0;
+        z-index: 1500;
+      }
+      $this label > div::-webkit-scrollbar {
+        display: none;
+      }
+      $this .event {
+        display: block;
+        position: relative;
+        border-radius: 3px;
+        margin: 3% 3% 5% 3%;
+        padding: 3%;
+        border: 1px solid #ccc;
+        border-left-width: 5px;
+        background: #fafafa;
+        box-shadow: rgba(0,0,0,.05) 0 2px 2px;
+      }
+      $this .event:last-child {
+        margin-bottom: 3%;
+      }
+      $this .event h4 {
+        margin: 0;
+        display: block;
+        color: #555;
+        padding: 2%;
+      }
+      $this .event aside:empty {
+        display: none;
+      }
+      $this .event aside {
+        padding: 0 2% 2%  2%;
+        font-size: 90%;
+        color: #555;
+      }
+      $this .event.dark {
+        background: #f90;
+        border-color: #e40;
+      }
+      $this .event.dark h4 {
+        color: #e20;
+      }
+      $this .event.dark aside {
+        color: #e20;
+      }
+      $this .event.light {
+        background: #0cf;
+        border-color: #09c;
+      }
+      $this .event.light h4 {
+        color: #06a;
+      }
+      $this .event.light aside {
+        color: #06a;
+      }
+      $this input:checked + label:before {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="eqCal">
+    <h2 class="title">
+      <span class="month">September</span>
+      <span class="year">2015</span>
+    </h2>
+    <nav>
+      <a href="#" class="eqCal-prev"><i class="ion-android-arrow-back"></i></a>
+      <a href="#" class="eqCal-next"><i class="ion-android-arrow-forward"></i></a>
+    </nav>
+    <ol>
+      <li>S<span class="short">un<span class="full">day</span></span></li>
+      <li>M<span class="short">on<span class="full">day</span></span></li>
+      <li>T<span class="short">ues<span class="full">day</span></span></li>
+      <li>W<span class="short">ed<span class="full">nesday</span></span></li>
+      <li>T<span class="short">hur<span class="full">sday</span></span></li>
+      <li>F<span class="short">ri<span class="full">day</span></span></li>
+      <li>S<span class="short">at<span class="full">urday</span></span></li>
+    </ol>
+    <div class="dates">
+      <!-- Week 1 -->
+      <article>
+        <input type="radio" name="eqCal" id="day_0">
+        <label for="day_0"></label>
+        <h3 class="date"></h3>
+      </article>
+      <article>
+        <input type="radio" name="eqCal" id="day_1">
+        <label for="day_1">
+          <div>
+            <span class="event">
+              <h4>Event Title</h4>
+              <aside>Some info here<br>With a few more lines</aside>
+            </span>
+          </div>
+        </label>
+        <h3 class="date">1</h3>
+      </article>
+      <article>
+        <input type="radio" name="eqCal" id="day_2">
+        <label for="day_2"></label>
+        <h3 class="date">2</h3>
+      </article>
+      <article>
+        <input type="radio" name="eqCal" id="day_3">
+        <label for="day_3">
+          <div>
+            <span class="event light">
+              <h4>Event Title</h4>
+              <aside><strong>Other:</strong> information<br><strong>More:</strong> information</aside>
+            </span>
+          </div>
+        </label>
+        <h3 class="date">3</h3>
+      </article>
+      <article>
+        <input type="radio" name="eqCal" id="day_4">
+        <label for="day_4"></label>
+        <h3 class="date">4</h3>
+      </article>
+      <article>
+        <input type="radio" name="eqCal" id="day_5">
+        <label for="day_5">
+          <div>
+            <span class="event light">
+              <h4>Event Title</h4>
+              <aside><strong>Name of Event here!</strong><br>Info about event</aside>
+            </span>
+            <span class="event dark">
+              <h4>Event Title</h4>
+              <aside>More info here that will surely cause this text to overflow inside of the square</aside>
+            </span>
+          </div>
+        </label>
+        <h3 class="date">5</h3>
+      </article>
+      <article>
+        <input type="radio" name="eqCal" id="day_6">
+        <label for="day_6"></label>
+        <h3 class="date">6</h3>
+      </article>
+      <!-- Week 2 -->
+      <article>
+        <input type="radio" name="eqCal" id="day_7">
+        <label for="day_7"></label>
+        <h3 class="date">7</h3>
+      </article>
+      <article>
+        <input type="radio" name="eqCal" id="day_8">
+        <label for="day_8"></label>
+        <h3 class="date">8</h3>
+      </article>
+      <article>
+        <input type="radio" name="eqCal" id="day_9">
+        <label for="day_9"></label>
+        <h3 class="date">9</h3>
+      </article>
+      <article>
+        <input type="radio" name="eqCal" id="day_10">
+        <label for="day_10"></label>
+        <h3 class="date">10</h3>
+      </article>
+      <article>
+        <input type="radio" name="eqCal" id="day_11">
+        <label for="day_11">
+          <div>
+            <span class="event dark">
+              <h4>Event Title</h4>
+              <aside><strong>Location:</strong> 123 Place Road<br><strong>Time:</strong> 5pm</aside>
+            </span>
+          </div>
+        </label>
+        <h3 class="date">11</h3>
+      </article>
+      <article>
+        <input type="radio" name="eqCal" id="day_12">
+        <label for="day_12"></label>
+        <h3 class="date">12</h3>
+      </article>
+      <article>
+        <input type="radio" name="eqCal" id="day_13">
+        <label for="day_13"></label>
+        <h3 class="date">13</h3>
+      </article>
+      <!-- Week 3 -->
+      <article>
+        <input type="radio" name="eqCal" id="day_14">
+        <label for="day_14"></label>
+        <h3 class="date">14</h3>
+      </article>
+      <article>
+        <input type="radio" name="eqCal" id="day_15">
+        <label for="day_15">
+          <div>
+            <span class="event">
+              <h4>Event Title</h4>
+              <aside>This is a bit of information about this event</aside>
+            </span>
+          </div>
+        </label>
+        <h3 class="date">15</h3>
+      </article>
+      <article>
+        <input type="radio" name="eqCal" id="day_16">
+        <label for="day_16"></label>
+        <h3 class="date">16</h3>
+      </article>
+      <article>
+        <input type="radio" name="eqCal" id="day_17">
+        <label for="day_17">
+          <div>
+            <span class="event light">
+              <h4>Event Title</h4>
+              <aside><strong>Speaker:</strong> Joe Somebody<br><strong>Room:</strong> 214</aside>
+            </span>
+          </div>
+        </label>
+        <h3 class="date">17</h3>
+      </article>
+      <article>
+        <input type="radio" name="eqCal" id="day_18">
+        <label for="day_18"></label>
+        <h3 class="date">18</h3>
+      </article>
+      <article>
+        <input type="radio" name="eqCal" id="day_19">
+        <label for="day_19"></label>
+        <h3 class="date">19</h3>
+      </article>
+      <article>
+        <input type="radio" name="eqCal" id="day_20">
+        <label for="day_20"></label>
+        <h3 class="date">20</h3>
+      </article>
+      <!-- Week 4 -->
+      <article>
+        <input type="radio" name="eqCal" id="day_21">
+        <label for="day_21"></label>
+        <h3 class="date">21</h3>
+      </article>
+      <article>
+        <input type="radio" name="eqCal" id="day_22">
+        <label for="day_22">
+          <div>
+            <span class="event">
+              <h4>Event Title</h4>
+              <aside>7:30 sharp</aside>
+            </span>
+          </div>
+        </label>
+        <h3 class="date today">22</h3>
+      </article>
+      <article>
+        <input type="radio" name="eqCal" id="day_23">
+        <label for="day_23"></label>
+        <h3 class="date">23</h3>
+      </article>
+      <article>
+        <input type="radio" name="eqCal" id="day_24">
+        <label for="day_24">
+          <div>
+            <span class="event light">
+              <h4>Session 1</h4>
+              <aside></aside>
+            </span>
+            <span class="event light">
+              <h4>Session 2</h4>
+              <aside></aside>
+            </span>
+            <span class="event light">
+              <h4>Session 3</h4>
+              <aside></aside>
+            </span>
+          </div>
+        </label>
+        <h3 class="date">24</h3>
+      </article>
+      <article>
+        <input type="radio" name="eqCal" id="day_25">
+        <label for="day_25"></label>
+        <h3 class="date">25</h3>
+      </article>
+      <article>
+        <input type="radio" name="eqCal" id="day_26">
+        <label for="day_26">
+          <div>
+            <span class="event light">
+              <h4>Event Title</h4>
+              <aside></aside>
+            </span>
+            <span class="event dark">
+              <h4>Event Title</h4>
+              <aside></aside>
+            </span>
+          </div>
+        </label>
+        <h3 class="date">26</h3>
+      </article>
+      <article>
+        <input type="radio" name="eqCal" id="day_27">
+        <label for="day_27"></label>
+        <h3 class="date">27</h3>
+      </article>
+      <!-- Week 5 -->
+      <article>
+        <input type="radio" name="eqCal" id="day_28">
+        <label for="day_28"></label>
+        <h3 class="date">28</h3>
+      </article>
+      <article>
+        <input type="radio" name="eqCal" id="day_29">
+        <label for="day_29">
+          <div>
+            <span class="event">
+              <h4>Event Title</h4>
+              <aside>Event Description</aside>
+            </span>
+          </div>
+        </label>
+        <h3 class="date">29</h3>
+      </article>
+      <article>
+        <input type="radio" name="eqCal" id="day_30">
+        <label for="day_30"></label>
+        <h3 class="date">30</h3>
+      </article>
+      <article>
+        <input type="radio" name="eqCal" id="day_31">
+        <label for="day_31">
+          <div>
+            <span class="event light">
+              <h4>Event Title</h4>
+              <aside></aside>
+            </span>
+          </div>
+        </label>
+        <h3 class="date">31</h3>
+      </article>
+      <article>
+        <input type="radio" name="eqCal" id="day_32">
+        <label for="day_32"></label>
+        <h3 class="date"></h3>
+      </article>
+      <article>
+        <input type="radio" name="eqCal" id="day_33">
+        <label for="day_33"></label>
+        <h3 class="date"></h3>
+      </article>
+      <article>
+        <input type="radio" name="eqCal" id="day_34">
+        <label for="day_34"></label>
+        <h3 class="date"></h3>
+      </article>
+    </div>
+    <input type="radio" name="eqCal" id="reset">
+    <label class="reset" for="reset">
+  </section>
+  <!--[if lt IE 9]><script src="http://elementqueries.com/EQCSS-polyfills.js"></script><![endif]-->
+  <script src="http://elementqueries.com/EQCSS.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Responsive Scaling with Element Queries</title>
+  <meta name="description" content="Using the new var() feature in EQCSS you can now use a value from JavaScript in your CSS, whether it's a variable, value, or function - whatever the current value of that is at the time the element query applies will be the value that is used.">
+  <meta name="keywords" content="EQCSS, element queries, element query, container queries, responsive, responsive video, video scaling, repsonsive scaling">
+  <link href=http://staticresource.com/basic.css rel=stylesheet>
+  <link href=http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic rel=stylesheet>
+  <style>
+    @element 'iframe' {
+      $this {
+        margin: 0 auto;
+        width: 100%;
+        height: var(
+          var iframe = document.querySelector("$this"),
+              ratio = iframe.width/iframe.height;
+          iframe.scrollWidth/ratio+'px'
+        );
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Video Scaling with Element Queries</h1>
+  <h2>Calculating height based on <code>scrollWidth</code></h2>
+  <iframe width="420" height="315" src="https://www.youtube.com/embed/eGl6OlSczdU" frameborder="0" allowfullscreen></iframe>
+  <iframe id=video width="560" height="315" src="https://www.youtube.com/embed/LS-ErOKpO4E" frameborder="0" allowfullscreen></iframe>
+  <!--[if lt IE 9]><script src="http://elementqueries.com/EQCSS-polyfills.js"></script><![endif]-->
+  <script src="http://elementqueries.com/EQCSS.js"></script>
+</body>
+</html>

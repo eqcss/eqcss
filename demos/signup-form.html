@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Signup Form with Element Queries</title>
+  <meta name="description" content="This signup form uses EQCSS to add element queries. Because of this it can be dropped into any container on any page and it will always look its best no mater how much space it's given.">
+  <meta name="keywords" content="EQCSS, element queries, element query, container queries, responsive, signup, cta, signup form, responsive form">
+  <link href=http://staticresource.com/basic.css rel=stylesheet>
+  <link href=http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic rel=stylesheet>
+  <link href=http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic rel=stylesheet>
+  <link href=http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css rel=stylesheet>
+  <style>
+    @element '.cta_form' {
+      $this {
+        font-size: 10pt;
+      }
+      $this [type=text],
+      $this [type=email],
+      $this [type=password],
+      $this [type=tel],
+      $this [type=submit] {
+        -webkit-appearance: none;
+        appearance: none;
+        outline: none;
+        display: block;
+        width: 100%;
+        padding: .75em;
+        border-radius: 3px;
+        border: 1px solid #ccc;
+        color: #111;
+        background: #fff;
+        cursor: text;
+        font-size: 100%;
+        line-height: 1.4;
+        font-weight: normal;
+        text-decoration: none;
+        font-family: 'Source Sans Pro', 'Open Sans', Roboto, 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', 'Myriad Pro', 'Segoe UI', Myriad, Helvetica, Arial, 'Lucida Grande', sans-serif;
+        transition: all .1s ease-in-out;
+        box-shadow: inset #fafafa 0 -5px 15px, inset #fff 0 1px 1px, rgba(0,0,0,.15) 0px 1px 1px;
+      }
+      $this [type=submit] {
+        cursor: pointer;
+        padding: .5em .4em .4em .4em;
+        outline: none;
+        border: 1px solid #f60;
+        border-bottom-color: #e20;
+        color: white;
+        text-align: center;
+        line-height: 1.2;
+        font-weight: 500;
+        font-style: italic;
+        font-size: 150% !important;
+        text-shadow: #e20 1px 1px 0;
+        box-shadow: inset #f20 0 -5px 15px, inset #fc0 0 1px 1px, rgba(0,0,0,.15) 0px 1px 1px;
+        font-family: 'Fira Sans', 'Source Sans Pro', 'Open Sans', Roboto, 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', 'Myriad Pro', 'Segoe UI', Myriad, Helvetica, 'Lucida Grande', 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, Arial, sans-serif;
+        background: #ff8900;
+
+        background: -moz-linear-gradient(top, #ff8900 0%, #ff3d00 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff8900), color-stop(100%,#ff3d00));
+        background: -webkit-linear-gradient(top, #ff8900 0%,#ff3d00 100%);
+        background: -o-linear-gradient(top, #ff8900 0%,#ff3d00 100%);
+        background: -ms-linear-gradient(top, #ff8900 0%,#ff3d00 100%);
+        background: linear-gradient(to bottom, #ff8900 0%,#ff3d00 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff8900', endColorstr='#ff3d00',GradientType=0 );
+      }
+      $this [type=text]:hover,
+      $this [type=text]:focus,
+      $this [type=email]:hover,
+      $this [type=email]:focus,
+      $this [type=password]:hover,
+      $this [type=password]:focus,
+      $this [type=tel]:hover,
+      $this [type=tel]:focus {
+        border-color: #fa0;
+        box-shadow: inset #fafafa 0 -5px 15px, inset #fff 0 1px 1px, rgba(0,0,0,.15) 0px 1px 1px, rgba(255,200,0,.5) 0 0 10px;
+      }
+      $this [type=submit]:hover,
+      $this [type=submit]:focus {
+        background: #fa3;
+        background: -moz-linear-gradient(top, #fa3 0%, #f30 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fa3), color-stop(100%,#f30));
+        background: -webkit-linear-gradient(top, #fa3 0%,#f30 100%);
+        background: -o-linear-gradient(top, #fa3 0%,#f30 100%);
+        background: -ms-linear-gradient(top, #fa3 0%,#f30 100%);
+        background: linear-gradient(to bottom, #fa3 0%,#f30 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fa3', endColorstr='#f30',GradientType=0 );
+        box-shadow: inset #f40 0 -5px 15px, inset #ffd28a 0 1px 1px, rgba(0,0,0,.15) 0px 1px 1px, rgba(255,200,0,.5) 0 0 10px;
+      }
+      $this [type=submit]:active {
+        border: 1px solid #f00;
+        border-bottom-color: #d10;
+        background: #f50;
+        background: -moz-linear-gradient(top, #f50 0%, #f50 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f50), color-stop(100%,#f50));
+        background: -webkit-linear-gradient(top, #f50 0%,#f50 100%);
+        background: -o-linear-gradient(top, #f50 0%,#f50 100%);
+        background: -ms-linear-gradient(top, #f50 0%,#f50 100%);
+        background: linear-gradient(to bottom, #f50 0%,#f50 100%);
+        box-shadow: inset #f40 0 -5px 15px, inset #ffd28a 0 1px 1px;
+      }
+      $this * + input {
+        margin-top: 1em;
+      }
+      $this [type=checkbox] {
+        display: none;
+      }
+      $this label {
+        cursor: pointer;
+        position: relative;
+        display: block;
+        padding: .6em .5em .5em .75em;
+        font-size: 100%;
+        font-weight: 400;
+        border-radius: 3px;
+        border: 1px solid #ccc;
+        box-shadow: inset #fafafa 0 -5px 15px, inset #fff 0 1px 1px, rgba(0,0,0,.15) 0px 1px 1px;
+        background: #fff;
+        transition: all .1s ease-in-out;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+      }
+      $this label:hover,
+      $this label:focus {
+        border-color: #fa0;
+        box-shadow: inset #fafafa 0 -5px 15px, inset #fff 0 1px 1px, rgba(0,0,0,.15) 0px 1px 1px, rgba(255,200,0,.5) 0 0 10px;
+      }
+      $this label:before {
+        content: '\f372';
+        position: relative;
+        top: .1em;
+        margin-right: .25em;
+        line-height: 1;
+        font-size: 125%;
+        font-family: 'ionicons';
+        color: #777;
+      }
+      $this input:checked + label:before {
+        content: '\f373';
+        color: #333;
+      }
+      $this input:checked + label {
+        background: #afa;
+        border-color: #7c0;
+        box-shadow: inset #fff 0 1px 1px, rgba(0,0,0,.15) 0px 1px 1px, rgba(0,255,0,.5) 0 0 10px;
+      }
+      $this aside label {
+        margin-bottom: 1em;
+      }
+      $this label:after {
+        content: '';
+        display: block;
+        clear: both;
+      }
+      $this label span {
+        display: inline-block;
+        color: #777;
+        padding: .25em 0;
+      }
+      $this input:checked + label span {
+        color: #333;
+      }
+      $this input:checked + label img {
+        opacity: 1;
+      }
+      $this p {
+        margin: 1em 0;
+        text-align: center;
+      }
+    }
+    @element '.cta_form' and (min-width: 200px) {
+      $this {
+        font-size: 12pt;
+      }
+    }
+    @element '.cta_form label' and (max-width: 349px) {
+      $this img {
+        display: block;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 150px;
+        opacity: .8;
+        float: none;
+      }
+    }
+    @element '.cta_form label' and (min-width: 350px) {
+      $this img {
+        display: inline !important;
+        width: 100px !important;
+        margin: 0 !important;
+        float: right !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Signup Form</h1>
+  <h2>Inputs &amp; Checkboxes with Element Queries</h2>
+  <section class=cta_form>
+    <form>
+      <input type=text name=firstName autocorrect=off placeholder="Enter Your First Name&hellip;" autofocus>
+      <input type=email name=email autocapitalize=off autocorrect=off placeholder="Type Your Email Address&hellip;">
+      <aside>
+        <p>Which opportunities are you interested in hearing more about by email?</p>
+          <input type=checkbox id=partner1 name=partner1 value=optIn checked>
+          <label for=partner1>
+            <span>Wholesaling for Quick Cash</span>
+            <img src=http://placehold.it/300x100/ccc/555&text=Logo%201>
+          </label>
+          <input type=checkbox id=partner2 name=partner2 value=optIn>
+          <label for=partner2>
+            <span>Rehabbing for Huge Paydays</span>
+            <img src=http://placehold.it/300x100/ccc/555&text=Logo%202>
+          </label>
+          <input type=checkbox id=partner3 name=partner3 value=optIn>
+          <label for=partner3>
+            <span>Wholesaling for Quick Cash</span>
+            <img src=http://placehold.it/300x100/ccc/555&text=Logo%203>
+          </label>
+      </aside>
+      <input type=submit id=submit class=cta-button value="Free Instant Access!">
+    </form>
+  </section>
+  <script>
+
+  </script>
+  <!--[if lt IE 9]><script src="http://elementqueries.com/EQCSS-polyfills.js"></script><![endif]-->
+  <script src="http://elementqueries.com/EQCSS.js"></script>
+</body>
+</html>

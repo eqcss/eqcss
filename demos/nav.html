@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Navigation Menu with Element Queries</title>
+  <meta name="description" content="Bootstrap-free lightweight mobile-friendly nav menu with dropdowns you can use for adding navigation to a page. Built with HTML and EQCSS, which is CSS with Element Queries. This navigation will adapt responsively to whatever page layout you add it to. For more info: http://elementqueries.com">
+  <meta name="keywords" content="EQCSS, element queries, element query, container queries, responsive, mobile menu, mobile friendly, nav">
+  <style>
+    /* Global Menu Styles */
+    @element '.eqNav' and (min-width: 0px) {
+      html {
+        opacity: 1;
+      }
+      body {
+        margin: 0;
+      }
+      $this * {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-family: 'Source Sans Pro', 'Open Sans', Roboto, 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', 'Myriad Pro', 'Segoe UI', Myriad, Helvetica, Arial, 'Lucida Grande', sans-serif;
+        font-kerning: auto;
+        outline: none;
+      }
+      $this {
+        background: #333;
+      }
+      $this .brand {
+        display: block;
+        color: #fff;
+        font-weight: 600;
+        text-decoration: none;
+        padding: .5em;
+        font-size: 140%;
+        position: relative;
+      }
+      $this input {
+        display: none;
+      }
+      $this label {
+        display: block;
+        position: relative;
+      }
+      $this label span,
+      $this label > div a {
+        display: block;
+        padding: 1em;
+        color: #fff;
+        font-size: 100%;
+        font-weight: 400;
+        text-decoration: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+        cursor: pointer;
+        z-index: 3000;
+        position: relative;
+        transition: color .1s ease-in-out;
+      }
+      $this label span:hover,
+      $this label span:focus,
+      $this a:hover,
+      $this a:focus {
+        color: #f0c;
+      }
+      $this label > div a {
+        padding: 1em 1em 0 1em;
+      }
+      $this label > div a:last-child {
+        padding-bottom: 1em;
+      }
+      $this input + label > div {
+        display: none;
+        background: #333;
+        position: relative;
+        width: 100%;
+        right: 0;
+        z-index: 3000;
+        transition: all .5s ease-in-out;
+      }
+      $this input:checked + label {
+        background: #333;
+      }
+      $this input:checked + label span {
+        color: #cf0;
+        z-index: 100;
+      }
+      $this input:checked + label > div {
+        display: block;
+        z-index: 3000;
+      }
+      $this input:checked ~ label[for="reset"] {
+        opacity: 1;
+        pointer-events: all;
+        background: transparent;
+      }
+      $this label[for="reset"] {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        z-index: 2000;
+        opacity: 0;
+        background: transparent;
+        transition: all .2s ease-in-out;
+        pointer-events: none;
+      }
+      $this input#reset:checked + label {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+    /* Mobile Menu View */
+    @element '.eqNav' and (min-width: 0px) and (max-width: 499px) {
+      $this {
+        text-align: center;
+      }
+      $this label[for="menu"] {
+        display: inline-block;
+        width: auto;
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+      $this label[for="menu"] span {
+        display: inline-block;
+        font-size: 200%;
+        padding: .2em .5em;
+        text-align: center;
+        z-index: 3000;
+      }
+      $this input#menu:checked + label span {
+        color: #cf0;
+      }
+      $this input[type="radio"] + label {
+        display: none;
+      }
+      $this input#menu:checked ~ input[type="radio"] + label,
+      $this input#menu:checked ~ input[type="radio"]:checked ~ label[for="reset"] {
+        display: block;
+      }
+      $this input#menu:checked ~ input[type="radio"] + label[for="reset"] {
+        display: none;
+      }
+    }
+    /* Desktop Menu View */
+    @element '.eqNav' and (min-width: 500px) {
+      $this {
+        text-align: right;
+        max-height: auto !important;
+        overflow: visible;
+      }
+      $this .brand {
+        display: inline-block;
+        float: left;
+      }
+      $this label[for="menu"] {
+        display: none;
+      }
+      $this input + label > div {
+        display: none;
+        background: #333;
+        position: absolute;
+        width: auto;
+        min-width: 200px;
+        max-width: 500px;
+        word-break: normal;
+        right: 0;
+        text-align: left;
+        z-index: 3000;
+        transition: all .5s ease-in-out;
+      }
+      $this:before {
+        display: none;
+      }
+      $this label {
+        display: inline-block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="eqNav">
+    <a href="#" class="brand">responsive nav</a>
+    <input type="checkbox" id="menu">
+    <label for="menu"><span>≡</span></label>
+    <!-- Menu Loop -->
+    <input type="radio" name="eqNav" id="one" value="one">
+    <label for="one">
+      <span>One</span>
+      <div>
+        <a href="#">link a</a>
+        <a href="#">link b</a>
+        <a href="#">link c</a>
+      </div>
+    </label>
+    <input type="radio" name="eqNav" id="two" value="two">
+    <label for="two">
+      <span>Two</span>
+      <div>
+        <a href="#">link d</a>
+        <a href="#">link f</a>
+        <a href="#">link g</a>
+      </div>
+    </label>
+    <input type="radio" name="eqNav" id="three" value="three">
+    <label for="three">
+      <span>Three</span>
+      <div>
+        <a href="#">link h</a>
+        <a href="#">link i</a>
+        <a href="#">link j</a>
+      </div>
+    </label>
+    <!-- /Menu Loop -->
+    <input type="radio" name="eqNav" id="reset">
+    <label for="reset"></label>
+  </nav>
+  <!--[if lt IE 9]><script src="http://elementqueries.com/EQCSS-polyfills.js"></script><![endif]-->
+  <script src="http://elementqueries.com/EQCSS.js"></script>
+</body>
+</html>

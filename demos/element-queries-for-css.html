@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8>
+  <meta name=viewport content="width=device-width, initial-scale=1">
+  <title>Element Queries for CSS - Tom Hodgins</title>
+  <meta name="description" content="EQCSS is a polyfill that introduces Element Queries, Scoped CSS, a Parent selector, and responsive JavaScript to all browsers IE8 and up, check out http://elementqueries.com">
+  <meta name="keywords" content="EQCSS, element queries, element query, container queries, responsive, adaptive">
+  <link href=http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic rel=stylesheet>
+  <link href=http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic rel=stylesheet>
+  <link href=http://staticresource.com/basic.css rel=stylesheet>
+  <link href=http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic rel=stylesheet>
+  <link href=http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic rel=stylesheet>
+</head>
+<body>
+  <h1>Element Queries for CSS</h1>
+  <h2>Written by <a href=https://twitter.com/innovati>Tom Hodgins</a></h2>
+  <p>Element Queries are a new way of writing CSS styles so the rules apply to individual elements on the page, instead of to the whole page as one document like in regular CSS.</p>
+  <p>Element Queries can be based on more than just the width or height of the browser as well, you can change styles in a number of different conditions, like how many lines of text or child elements an element contains.</p>
+  <p>Perhaps the most exciting feature of element queries is that since the styles are applied to the element(s) that match the query, we finally have scoped CSS styles. We can apply styles specifically to one element and the elements inside of it and move that content from design to design without worrying that the design of our element will be affected.</p>
+  <p>In addition to this, enabling queries on elements allows you to do reach elements that CSS can&#39;t normally reach on its own.</p>
+  <pre><code>@element &quot;input[type=checkbox]:checked&quot; {
+    body {
+      background: red;
+    }
+  }
+  </code></pre>
+  <p>This code would change the <code>&lt;body&gt;</code> when a checkbox is checked, something that CSS normally wouldn&#39;t be able to reach. What do you think this code would do?</p>
+  <pre><code>@element &quot;#sidebar:empty&quot; {
+    #sidebar {
+      display: none;
+    }
+    #content {
+      width: 100%;
+    }
+  }
+  </code></pre>
+  <p>It doesn&#39;t matter where <code>#content</code> is located in the template, if the <code>#sidebar</code> happens to be empty it will be hidden and the <code>#content</code> area will expand to fill the container.</p>
+  <h2>How to use EQCSS</h2>
+  <p>EQCSS is a JavaScript plugin that extends CSS to include Element Queries, plus other features that regular CSS doesn&#39;t currently support. It is written in pure JavaScript, so it doesn&#39;t require jQuery or any other JavaScript library to be installed on your site to work.</p>
+  <blockquote>
+  <p>Here on Codepen you can fork my ‘Batteries-Included’ EQCSS template that has EQCSS.js and event listeners for most keyboard and mouse events built-in and ready to play around with.<br>
+  <strong>Save this as a template:</strong> <a href="http://codepen.io/tomhodgins/pen/gagyrz">EQCSS Batteries Included Template</a></p>
+  </blockquote>
+  <h2>Download EQCSS</h2>
+  <ul>
+    <li><a href="https://github.com/eqcss/eqcss">EQCSS on Github</a></li>
+    <li><a href="https://www.npmjs.com/package/eqcss">EQCSS on NPM</a></li>
+  </ul>
+  <h2>Installing EQCSS.js</h2>
+  <p>In order to being using Element Queries on your project you will need to add a copy of <code>EQCSS.js</code> to every page where you need Element Queries to display. Install EQCSS at the end of your <code>&lt;body&gt;</code></p>
+  <pre><code>&lt;script src=&quot;EQCSS.js&quot;&gt;&lt;/script&gt;
+  </code></pre>
+  <p>If you want to support IE8, place <code>EQCSS-polyfills.js</code> before <code>EQCSS.js</code></p>
+  <pre><code>&lt;!--[if lt IE 9]&gt;&lt;script src=&quot;EQCSS-polyfills.js&quot;&gt;&lt;/script&gt;&lt;![endif]--&gt;
+  &lt;script src=&quot;EQCSS.js&quot;&gt;&lt;/script&gt;
+  </code></pre>
+  <h2>How to write EQCSS</h2>
+  <p>Now that you have EQCSS linked into your project you can begin adding Element Queries. You can include these directly in your HTML or store these in an external stylesheet.</p>
+  <p><strong>Updated Nov 2015:</strong> You can write EQCSS styles a couple of different ways, right in your CSS either inside a <code>&lt;style&gt;</code> tag or an external CSS stylesheet with the <code>&lt;link&gt;</code> tag, or you can write your EQCSS code in the HTML page in a <code>&lt;script&gt;</code> tag that has the type <code>type=&quot;text/eqcss&quot;</code>.</p>
+  <pre><code>&lt;script type=&quot;text/eqcss&quot;&gt;
+    /* EQCSS goes here */
+
+  &lt;/script&gt;
+  </code></pre>
+  <p>or include it from an external file:</p>
+  <pre><code>&lt;script type=&quot;text/eqcss&quot; src=&quot;code.eqcss&quot;&gt;&lt;/script&gt;
+  </code></pre>
+  <p>So far in tests it seems that storing EQCSS inside CSS leads to more a responsive page after load, while storing EQCSS inside <code>&lt;script type=text/eqcss&gt;</code> loads faster initially but feels a bit slower once loaded. More research required.</p>
+  <p>The <code>EQCSS.apply()</code> function is called on page load and on resize. Call it manually when you update the DOM. You can also include code like this to apply EQCSS after different events: <a href="http://staticresource.com/eqcss-demo.js">http://staticresource.com/eqcss-demo.js</a></p>
+  <p>Even though we use <code>&lt;script type=&quot;text/eqcss&quot;&gt;</code> for our filetype, EQCSS remains compatible with CSS syntax, and so you should be able to set CSS syntax highlighting for EQCSS files. Here&#39;s an example of a <em>massive</em> all-EQCSS modular template with CSS syntax highlighting applied: <a href="http://staticresource.com/inspect/?http://staticresource.com/squeeze/styles.eqcss">View source: styles.eqcss</a></p>
+  <h2>Design With Element Queries</h2>
+  <p>Element Queries have the following format:</p>
+  <pre><code>@element {selector} and {condition} [ and {condition} ]* { {css} }
+  </code></pre>
+  <ul>
+    <li>-<code>{css}</code> can contain: Any valid CSS rule. (Ex: <code>#id div { color: red }</code>)</li>
+    <li>-<code>{selector}</code> is a CSS selector targeting one or many elements. Ex: <code>#id</code> or <code>.class</code></li>
+    <li>-<code>{condition}</code> is composed of a measure and a value.</li>
+  </ul>
+  <h3>Supported Element Queries</h3>
+
+  <h4>min-width</h4>
+  <p>[[[pen slug-hash=&#39;yNWprq&#39; height=&#39;300&#39; ]]]</p>
+  <p>[[[pen slug-hash=&#39;bdyLNa&#39; height=&#39;300&#39; ]]]</p>
+
+  <h4>max-width</h4>
+  <p>[[[pen slug-hash=&#39;OVYQVj&#39; height=&#39;300&#39; ]]]</p>
+  <p>[[[pen slug-hash=&#39;yNWvNR&#39; height=&#39;300&#39; ]]]</p>
+
+  <h4>min-height</h4>
+  <p>[[[pen slug-hash=&#39;bdyLVL&#39; height=&#39;300&#39; ]]]</p>
+  <p>[[[pen slug-hash=&#39;mJYXVW&#39; height=&#39;300&#39; ]]]</p>
+
+  <h4>max-height</h4>
+  <p>[[[pen slug-hash=&#39;OVYQMx&#39; height=&#39;300&#39; ]]]</p>
+  <p>[[[pen slug-hash=&#39;jPoZWp&#39; height=&#39;300&#39; ]]]</p>
+
+  <h4>min-scroll-y</h4>
+  <p>[[[pen slug-hash=&#39;RWOExQ&#39; height=&#39;300&#39; ]]]</p>
+
+  <h4>max-scroll-y</h4>
+  <p>[[[pen slug-hash=&#39;bVJOLO&#39; height=&#39;300&#39; ]]]</p>
+
+  <h4>min-characters on block elements</h4>
+  <p>[[[pen slug-hash=&#39;ZGNrQw&#39; height=&#39;300&#39; ]]]</p>
+
+  <h4>min-characters on form inputs</h4>
+  <p>[[[pen slug-hash=&#39;EVNzGr&#39; height=&#39;300&#39; ]]]</p>
+
+  <h4>max-charactes on block elements</h4>
+  <p>[[[pen slug-hash=&#39;qdGxZd&#39; height=&#39;300&#39; ]]]</p>
+
+  <h4>max-caracters on form inputs</h4>
+  <p>[[[pen slug-hash=&#39;NGbVJa&#39; height=&#39;300&#39; ]]]</p>
+
+  <h4>multiple conditions</h4>
+  <p>[[[pen slug-hash=&#39;bVBPgv&#39; height=&#39;300&#39; ]]]</p>
+
+  <h4>scoped styles</h4>
+  <p>[[[pen slug-hash=&#39;dYOBbo&#39; height=&#39;300&#39; ]]]</p>
+
+  <h4>scoped styles + multiple conditions</h4>
+  <p>[[[pen slug-hash=&#39;yYVdBq&#39; height=&#39;300&#39; ]]]</p>
+
+  <h4>comments</h4>
+  <p>[[[pen slug-hash=&#39;meOZdO&#39; height=&#39;300&#39; ]]]</p>
+
+  <h4><code>$parent</code> Selector</h4>
+  <p>[[[pen slug-hash=&#39;mVVYBg&#39; height=&#39;300&#39; ]]]</p>
+
+  <h4>Using values from JavaScript inside CSS</h4>
+  <p>[[[pen slug-hash=&#39;MKWOWW&#39; height=&#39;300&#39; ]]]</p>
+
+  <h2>Demos using Element Queries</h2>
+  <h4>Headlines with element queries</h4>
+  <p>[[[pen slug-hash=&#39;JdzLex&#39; height=&#39;300&#39; ]]]</p>
+
+  <h4>Testimonials Block with element queries</h4>
+  <p>[[[pen slug-hash=&#39;vOqaVa&#39; height=&#39;300&#39; ]]]</p>
+
+  <h4>Mobile Navigation with element queries</h4>
+  <p>[[[pen slug-hash=&#39;vOEGWp&#39; height=&#39;300&#39; ]]]</p>
+
+  <h4>Calendar UI with element queries</h4>
+  <p>[[[pen slug-hash=&#39;mJrZxP&#39; height=&#39;300&#39; ]]]</p>
+
+  <h4>Pricing Chart with element queries</h4>
+  <p>[[[pen slug-hash=&#39;xGEojN&#39; height=&#39;300&#39; ]]]</p>
+
+  <h4>Responsive <code>&lt;table&gt;</code> with element queries</h4>
+  <p>[[[pen slug-hash=&#39;xwGdGd&#39; height=&#39;300&#39; ]]]</p>
+
+  <h4>Wrapper-free video resizing</h4>
+  <p>[[[pen slug-hash=&#39;eJmQoz&#39; height=&#39;300&#39; ]]]</p>
+
+  <h4>Scroll-based flyout</h4>
+  <p>[[[pen slug-hash=&#39;QyNEpq&#39; height=&#39;300&#39; ]]]</p>
+
+  <h4>Zastrow-style Element Query Demo</h4>
+  <p>[[[pen slug-hash=&#39;eJJqoz&#39; height=&#39;300&#39; ]]]</p>
+
+  <h4>Min-character based tweet counter</h4>
+  <p>[[[pen slug-hash=&#39;yeLwWa&#39; height=&#39;300&#39; ]]]</p>
+
+  <h4>Responsive &#39;media library&#39; grid</h4>
+  <p>[[[pen slug-hash=&#39;Lpmmzy&#39; height=&#39;300&#39; ]]]</p>
+
+  <h4>Scroll-triggered Modal</h4>
+  <p>[[[pen slug-hash=&#39;KVzePP&#39; height=&#39;300&#39; ]]]</p>
+  <!--[if lt IE 9]><script src=http://elementqueries.com/EQCSS-polyfills.js></script><![endif]-->
+  <script src=http://elementqueries.com/EQCSS.js></script>
+</body>
+</html>

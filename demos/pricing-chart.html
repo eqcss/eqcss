@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pricing Chart with Element Queries</title>
+  <meta name="description" content="Bootstrap-free pricing chart built using HTML and EQCSS, which is CSS with Element Queries. This means the pricing chart will adapt responsively to the page we place it on - ensuring that this chart will always look its best.">
+  <meta name="keywords" content="EQCSS, element queries, element query, container queries, responsive, rpcigin chart, signup, chart">
+  <style>
+    @element ".pricingChart" and (min-width: 0px) {
+      html {
+        -webkit-text-size-adjust:100%;
+      }
+      $this * {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-kerning: auto;
+        outline: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+      }
+      $this {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        font-size: 10pt;
+        font-weight: 400;
+        font-family: "Source Sans Pro", "Open Sans", Roboto, "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Myriad Pro", "Segoe UI", Myriad, Helvetica, Arial, "Lucida Grande", sans-serif;
+        padding: 1em;
+        opacity: 1 !important;
+        transition: opacity: .1s ease-in-out;
+      }
+      $this:after {
+        content: '';
+        display: block;
+        clear: both;
+      }
+      $this article {
+        width: 100%;
+        display: block;
+        padding: 0;
+        margin: 0;
+        background: #fff;
+        font-size: 100%;
+        border: 1px solid #eee;
+        border-radius: 3px;
+        border: 1px solid #ccc;
+        box-shadow: rgba(0,0,0,.1) 0 2px 5px;
+        background-clip: padding-box;
+        box-sizing: border-box !important;
+        position: relative;
+      }
+      $this article:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        width: 100px;
+        height: 100px;
+        background-size: 100%;
+        z-index: 20;
+        pointer-events: none;
+      }
+      $this article#pro:after {
+        background-image: url('http://staticresource.com/silver-guarantee-seal.png');
+      }
+      $this article#elite:after {
+        background-image: url('http://staticresource.com/gold-guarantee-seal.png');
+      }
+      $this article.selected {
+        border-color: #f60;
+        box-shadow: #f60 1px 0 0,
+                    #f60 0 1px 0,
+                    #f60 -1px 0 0,
+                    #f60 0 -1px 0,
+                    rgba(0,0,0,.1) 0 2px 5px;
+      }
+      $this article:nth-child(n+2) {
+        margin-top: 15px;
+      }
+      $this label {
+        display: block;
+        width: 100%;
+      }
+      $this label:focus,
+      $this label:hover {
+        cursor: pointer;
+      }
+      $this label.header {
+        padding: .5em .5em .25em .5em;
+        position: relative;
+      }
+      $this label.header:after {
+        content: "\f3d3";
+        font-family: "ionicons";
+        display: inline-block;
+        width:auto;
+        font-size: 24pt;
+        color: #eee;
+        margin-left: 10px;
+      }
+      $this label.header:hover,
+      $this label.header:focus {
+        background: #fe9;
+      }
+      $this label.header:hover:after,
+      $this label.header:focus:after {
+        color: #f60;
+      }
+      $this label.footer {
+        padding: .75em 0;
+        text-align: center;
+        font-size: 105%;
+        font-weight: 600;
+        color: #fff;
+        background: #888;
+        border-bottom-right-radius: 2px;
+        border-bottom-left-radius: 2px;
+      }
+      $this label.footer:focus,
+      $this label.footer:hover {
+        background: #f90 !important;
+        box-shadow: inset #f60 0 0 50px;
+        text-shadow: #f40 1px 1px 2px;
+      }
+      $this article.selected label.footer {
+        background: #f60;
+      }
+      $this h2,
+      $this h3,
+      $this h4 {
+        margin: 0;
+        padding: 0;
+        position: relative;
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: .03em;
+        z-index: 100;
+      }
+      $this h2 {
+        font-size: 120%;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: .05em;
+        color: #333;
+        margin-top: .75em;
+      }
+      $this h3 {
+        font-size: 100%;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #9ab;
+        margin: .5em 0 1em 0;
+        display: inline-block;
+      }
+      $this small {
+        display: block;
+        width: 100%;
+        text-align: center;
+        color: #c00;
+        font-size: 8pt;
+        font-weight: 400;
+        position: absolute;
+        bottom: 0px;
+        left: 0;
+      }
+      $this h3 sup {
+        position: relative;
+        font-size: 150%;
+        font-weight: 700;
+        top: -.5em;
+        margin-right: .25em;
+      }
+      $this h3 em {
+        font-size: 325%;
+        font-weight: 300;
+        color: #173d50;
+        margin-right: .03em;
+        letter-spacing: -.03em;
+        font-style: normal;
+      }
+      $this article.selected h3 {
+        color: #e86;
+      }
+      $this article.selected h3 em {
+        color: #f60;
+      }
+      $this h4 {
+        font-size: 115%;
+        background: #e5dfd1;
+        color: rgba(0,0,0,0.5);
+        font-weight: 500;
+        padding: .75em;
+        text-transform: uppercase;
+      }
+      $this #community h4:last-of-type,
+      $this #pro h4:last-of-type {
+        display: none;
+      }
+      $this article a {
+        display: block;
+        padding: 1em;
+        z-index: 300;
+        position: relative;
+        line-height: 1;
+        color: #333;
+        background: #fff;
+        text-decoration: none !important;
+      }
+      $this article a.new {
+        font-weight: 600;
+      }
+      $this article a[data-included]:focus,
+      $this article a[data-included]:hover {
+        cursor: pointer;
+        z-index: 500;
+        color: #000;
+        background: #eee;
+      }
+      $this article a[data-included]:after {
+        position: relative;
+        top: 0;
+        left: 0;
+        display: block;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        width: 100%;
+        max-height: 0;
+        font-weight: 400;
+        line-height: 1.4;
+        pointer-events: none;
+        overflow: hidden;
+        transition: max-height .5s ease-in-out;
+      }
+      /* Learn Captions */
+      $this article a[data-included="investingLesson-1"]:after {
+        content: "Get access to one cutting-edge “what's working now” lesson each morning, taught by our expert faculty … which has over 300 years and $1.5 Billion of combined real estate investing experience!";
+      }
+      $this article a[data-included="investingLesson-unlimited"]:after {
+        content: "Get access to unlimited cutting-edge “what's working now” lessons, taught by our expert faculty … which has over 300 years and $1.5 Billion of combined real estate investing experience!";
+      }
+      $this article a[data-included="allAccess"]:after {
+        content: "Browse 300+ past daily lessons, each jam-packed with pricess tips & tricks for success in real estate in today's market.";
+      }
+      $this article a[data-included="investingEcourse"]:after {
+        content: "This 25-module video course will walk you step-by-step through the process of closing your first real estate deal for profit!";
+      }
+      $this article a[data-included="swipeTools"]:after {
+        content: "Hundreds of marketing pieces, checklists, spreadsheets, offer formulas, negotiation scripts, and other tools that you can download and begin using yourself!";
+      }
+      $this article a[data-included="mogulLive"]:after {
+        content: "These bi-weekly live calls, hosted by our expert faculty, are your opportunity to learn (LIVE!) exactly what we're doing that week to make money in real estate. Ask questions & get answers in real-time.";
+      }
+      /* Interact Captions */
+      $this article a[data-included="mogulPoints"]:after {
+        content: "Gain exposure in the Mogul community by accumulating Mogul Points and climbing to the top of the national rankings!";
+      }
+      $this article a[data-included="mogulProfile"]:after {
+        content: "This customizable webpage is where you'll put the spotlight on yourself and exactly what you're looking for!";
+      }
+      $this article a[data-included="browseAnswers"]:after {
+        content: "Search & sort through 1,000+ solutions to common investing questions asked — and answered! — by our community over the past year.";
+      }
+      $this article a[data-included="askQuestions"]:after {
+        content: "Have a question on ANYTHING real estate? Ask the community and get an instant answer, on-demand … even late at night.";
+      }
+      /* Do Deals Captions */
+      $this article a[data-included="mogulListings"]:after {
+        content: "Search our exclusive database of 1.3 million wholesale, REO, FSBO, and other properties available RIGHT NOW in nearly every local market in the U.S.";
+      }
+      $this article a[data-included="dealCollaborator"]:after {
+        content: "Need a buyer, partner, or tenant for any property? Post it for instant exposure to over 50,000 investors nationwide.";
+      }
+      $this article a[data-included="moneyOnDemand"]:after {
+        content: "Need private or hard money for a deal you're working on? Post your request for instant syndication to over 1,000 private & hard money lenders, and make THEM fight to give you the best terms.";
+      }
+      $this article a[data-included="cashflowDeals"]:after {
+        content: "Take advantage of these exclusive turnkey deals — over 10 of them each month — for $250–$800/month each in completely passive, hands-free income!";
+      }
+      /* Cashflow Add-ons Captions */
+      $this article a[data-included="mogulPublishing"]:after {
+        content: "As you learn & invest, share your experiences! You'll earn $50–$500 cash for each approved lesson you teach.";
+      }
+      $this article a[data-included="promoteForCash"]:after {
+        content: "The Mogul Elite plan includes a VIP partnership license. Share Mogul with others and we'll share their membership fee — 50/50 — with YOU. Use this for extra income stream to pay bills and inject into your real estate business!";
+      }
+      $this article a:focus:after,
+      $this article a:hover:after {
+        padding: .5em .5em 0 .5em;
+        max-height: 500px;
+      }
+      $this article a[data-included]:before {
+        content: "\f122";
+        font-family: "ionicons";
+        color: #0c0;
+      }
+      $this article a[data-excluded]:before {
+        content: "\f12a";
+        font-family: "ionicons";
+        color: #c00;
+      }
+      $this article a:before,
+      $this article a:before:hover
+      $this article a:before:focus {
+        font-weight: normal !important;
+        margin-right: 5px;
+        left: 0;
+      }
+      $this article a[data-excluded] {
+        display: none;
+        color: #666;
+        cursor: no-drop;
+      }
+      $this a + a {
+        border-top: 1px solid #eee;
+      }
+    }
+
+    /* Multi-column layout */
+    @element ".pricingChart" and (min-width: 600px) {
+      $this {
+        font-size: 12pt;
+      }
+      $this article {
+        width: calc(33.3333% - 10px);
+        float: left;
+        text-align: center;
+        margin-right: 7.5px;
+      }
+      $this article:after {
+        width: 60px;
+        height: 60px;
+      }
+      $this article:nth-child(n+2) {
+        margin-left: 7.5px;
+        margin-top: 0;
+      }
+      $this article:last-child {
+        margin-right: 0;
+      }
+      $this label.header:after {
+        display: none;
+      }
+      $this label.header:hover,
+      $this label.header:focus {
+        background: inherit;
+      }
+      $this #community h4:last-of-type,
+      $this #pro h4:last-of-type {
+        display: block;
+      }
+      $this article a,
+      $this article a[data-excluded] {
+        display: block;
+        font-size: 80%;
+      }
+      $this article a:nth-child(even) {
+        background-color: #faf6f6 !important;
+      }
+      $this article a[data-included]:nth-child(even):focus,
+      $this article a[data-included]:nth-child(even):hover {
+        background-color: #faf6f6;
+        background-repeat: no-repeat;
+        background-image: linear-gradient(-45deg, #faf6f6 25%, transparent 25%, transparent 75%, #faf6f6 75%, #faf6f6),
+                          linear-gradient(45deg, #faf6f6 25%, #555 25%, #555 75%, #faf6f6 75%, #faf6f6);
+        background-size: 20px 20px;
+        background-position: center calc(100% + 10px);
+      }
+      $this article a[data-included]:focus,
+      $this article a[data-included]:hover {
+        background-color: white;
+        background-repeat: no-repeat;
+        background-image: linear-gradient(-45deg, white 25%, transparent 25%, transparent 75%, white 75%, white),
+                          linear-gradient(45deg, white 25%, #555 25%, #555 75%, white 75%, white);
+        background-size: 20px 20px;
+        background-position: center calc(100% + 10px);
+      }
+      $this article a:before,
+      $this article a:before {
+        z-index: 450;
+        pointer-events: none;
+      }
+      $this article a[data-excluded]:before {
+        display: none;
+      }
+      $this article a[data-excluded] {
+        text-indent: -9999px;
+        cursor: default;
+      }
+      $this article a[data-included]:after {
+        position: absolute;
+        max-height: auto;
+        overflow: hidden;
+        opacity: 0;
+      }
+      $this article a[data-included]:focus:after,
+      $this article a[data-included]:hover:after {
+        left: 10%;
+        top: 100%;
+        color: #fff;
+        background: #555;
+        border-radius: 5px;
+        box-shadow: #333 0 1px 1px;
+        width: 80%;
+        line-height: 1.2;
+        opacity: 1;
+        z-index: 500;
+        padding: .75em;
+        font-size: 12pt;
+        text-shadow: rgba(0,0,0,.3) 1px 1px 1px;
+      }
+      $this article a + a {
+        border: none;
+      }
+    }
+    @element ".pricingChart" and (min-width: 800px) {
+      $this { font-size: 14pt; }
+      $this label.footer { font-size: 115%; }
+      $this article:after {
+        width: 75px;
+        height: 75px;
+      }
+    }
+    @element ".pricingChart" and (min-width: 1000px) {
+      $this article:after {
+        width: 90px;
+        height: 90px;
+      }
+    }
+    @element ".pricingChart" and (min-width: 1200px) {
+      $this { font-size: 16pt; }
+      $this label.footer { font-size: 125%; }
+      $this article:after {
+        width: 100px;
+        height: 100px;
+      }
+    }
+
+    /* Additional Queries */
+    @element ".pricingChart" and (min-width: 600px) and (min-children: 1) {
+      $this article { width: 100%; }
+    }
+    @element ".pricingChart" and (min-width: 600px) and (min-children: 2) {
+      $this article { width: calc(50% - 7.5px); }
+    }
+    @element ".pricingChart" and (min-width: 600px) and (min-children: 3) {
+      $this article { width: calc(33.3333% - 10px); }
+    }
+    @element ".pricingChart" and (min-width: 600px) and (min-children: 4) {
+      $this article { width: calc(25% - 11.25px); }
+    }
+    @element ".pricingChart article a" and (min-lines: 2) {
+      @media (min-width: 600px) { $this { font-size: 73% !important; padding: 1.15em 0 !important; } }
+    }
+    @element ".pricingChart article a" and (min-lines: 2) {
+      @media (min-width: 600px) { $this { font-size: 70% !important; padding: 1.25em 0 !important; } }
+    }
+    @element ".pricingChart article a" and (min-lines: 2) {
+      @media (min-width: 600px) { $this { font-size: 65% !important; padding: 1.4em 0 !important; } }
+    }
+    @element ".pricingChart article a" and (min-lines: 2) {
+      @media (min-width: 600px) {$this { font-size: 60% !important; padding: 1.5em 0 !important; } }
+    }
+    @element ".pricingChart article a" and (min-lines: 2) {
+      @media (min-width: 600px) { $this { font-size: 55% !important; padding: 1.65em 0 !important; } }
+    }
+    @element ".pricingChart h2" and (min-lines: 2) {
+      @media (min-width: 600px) { $this { font-size: 100% !important; padding: .2em 0 !important; } }
+    }
+    @element ".pricingChart h2" and (min-lines: 2) {
+      @media (min-width: 600px) { $this { font-size: 95% !important; padding: .45em 0 !important; } }
+    }
+    @element ".pricingChart h2" and (min-lines: 2) {
+      @media (min-width: 600px) {
+        $this { padding: 0 !important; }
+        $this + h3 { margin-top: 0 !important; }
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="pricingChart" style="opacity:0">
+    <article id="community">
+      <label class="header" for="modal">
+        <h2>Community Member</h2>
+        <h3><sup>$</sup><em>0</em>/mo</h3>
+      </label>
+      <h4><i class="fa fa-bolt"></i> Learn</h4>
+      <a href="#" data-included="investingLesson-1">Daily Investing Lesson</a>
+      <a href="#" data-excluded>All-Access Lesson Pass</a>
+      <a href="#" data-excluded>Real Estate Investing 101 e-Course</a>
+      <a href="#" data-excluded>&ldquo;Swipe &amp; Deploy&rdquo; Tools</a>
+      <a href="#" data-excluded>Mogul LIVE! Training Calls</a>
+      <h4><i class="ion-ios-person"></i> Interact</h4>
+      <a href="#" data-included="mogulPoints"><em>15,000</em> Instant Mogul Points</a>
+      <a href="#" data-included="mogulProfile">Mogul Profile Page</a>
+      <a href="#" data-excluded>Browse Answers</a>
+      <a href="#" data-excluded>Ask Questions</a>
+      <h4><i class="ion-ios-pricetag"></i> Do Deals</h4>
+      <a href="#" data-included="mogulListings">Mogul Listings</a>
+      <a href="#" data-excluded>Deal Collaborator</a>
+      <a href="#" data-excluded>Money On-Demand!</a>
+      <a href="#" data-excluded>Premium $250&ndash;$800/mo Cashflow Deals</a>
+      <h4><i class="ion-ios-pricetag"></i> Cashflow Add-Ons</h4>
+      <a href="#" data-excluded>Mogul Publishing Program</a>
+      <a href="#" data-excluded>Promote-for-Cash Program</a>
+      <label class="footer" for="modal">Create Free Account &raquo;</label>
+    </article>
+    <article id="pro">
+      <label class="header" for="modal">
+        <h2>Mogul Pro</h2>
+        <h3><sup>$</sup><em>97</em>/mo</h3>
+      </label>
+      <h4><i class="fa fa-bolt"></i> Learn</h4>
+      <a href="#" data-included="investingLesson-unlimited">Daily Investing Lesson</a>
+      <a href="#" data-included="allAccess" class="new">All-Access Lesson Pass</a>
+      <a href="#" data-included="investingEcourse" class="new">Real Estate Investing 101 e-Course</a>
+      <a href="#" data-excluded>&ldquo;Swipe &amp; Deploy&rdquo; Tools</a>
+      <a href="#" data-excluded>Mogul LIVE! Training Calls</a>
+      <h4><i class="ion-ios-person"></i> Interact</h4>
+      <a href="#" data-included="mogulPoints"><em>15,000</em> Instant Mogul Points</a>
+      <a href="#" data-included="mogulProfile" class="new">Mogul Profile Page</a>
+      <a href="#" data-included="browseAnswers" class="new">Browse Answers</a>
+      <a href="#" data-excluded>Ask Questions</a>
+      <h4><i class="ion-ios-pricetag"></i> Do Deals</h4>
+      <a href="#" data-included="mogulListings">Mogul Listings</a>
+      <a href="#" data-included="dealCollaborator" class="new">Deal Collaborator</a>
+      <a href="#" data-excluded>Money On-Demand!</a>
+      <a href="#" data-excluded>Premium $250&ndash;$800/mo Cashflow Deals</a>
+      <h4><i class="ion-ios-pricetag"></i> Cashflow Add-Ons</h4>
+      <a href="#" data-excluded>Mogul Publishing Program</a>
+      <a href="#" data-excluded>Promote-for-Cash Program</a>
+      <label class="footer" for="modal">Create Pro Account &raquo;</label>
+    </article>
+    <article id="elite" class="selected">
+      <label class="header" for="modal">
+        <h2>Mogul Elite</h2>
+        <h3><sup>$</sup><em>197</em>/mo</h3>
+      </label>
+      <h4><i class="fa fa-bolt"></i> Learn</h4>
+      <a href="#" data-included="investingLesson-unlimited">Daily Investing Lesson</a>
+      <a href="#" data-included="allAccess">All-Access Lesson Pass</a>
+      <a href="#" data-included="investingEcourse">Real Estate Investing 101 e-Course</a>
+      <a href="#" data-included="swipeTools" class="new">&ldquo;Swipe &amp; Deploy&rdquo; Tools</a>
+      <a href="#" data-included="mogulLive" class="new">Mogul LIVE! Training Calls</a>
+      <h4><i class="ion-ios-person"></i> Interact</h4>
+      <a href="#" data-included="mogulPoints"><em>15,000</em> Instant Mogul Points</a>
+      <a href="#" data-included="mogulProfile">Mogul Profile Page</a>
+      <a href="#" data-included="browseAnswers">Browse Answers</a>
+      <a href="#" data-included="askQuestions" class="new">Ask Questions</a>
+      <h4><i class="ion-ios-pricetag"></i> Do Deals</h4>
+      <a href="#" data-included="mogulListings">Mogul Listings</a>
+      <a href="#" data-included="dealCollaborator">Deal Collaborator</a>
+      <a href="#" data-included="moneyOnDemand" class="new">Money On-Demand!</a>
+      <a href="#" data-included="cashflowDeals" class="new">Premium $250&ndash;$800/mo Cashflow Deals</a>
+      <h4><i class="ion-ios-pricetag"></i> Cashflow Add-Ons</h4>
+      <a href="#" data-included="mogulPublishing" class="new">Mogul Publishing Program</a>
+      <a href="#" data-included="promoteForCash" class="new">Promote-for-Cash Program</a>
+      <label class="footer" for="modal">Create Elite Account &raquo;</label>
+    </article>
+  </section>
+  <script>
+    var feature = document.querySelectorAll('.pricingChart a');
+    for (var i=0; i<feature.length; i++){
+      feature[i].onclick = function(e) {
+        e.preventDefault();
+        this.blur();
+      }
+    }
+  </script>
+  <!--[if lt IE 9]><script src="http://elementqueries.com/EQCSS-polyfills.js"></script><![endif]-->
+  <script src="http://elementqueries.com/EQCSS.js"></script>
+</body>
+</html>

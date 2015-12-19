@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Element Query demo with Element Queries</title>
+  <meta name="description" content="Zastrow-style Element Query Demo with EQCSS. This demo uses EQCSS, a vanilla JavaScript plugin that adds element queries, style scoping, JavaScript-powered variables, a parent selector, and more to CSS. The plugin works in all browsers IE8 and up.">
+  <meta name="keywords" content="EQCSS, element queries, element query, container queries, responsive">
+  <link href=//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic rel=stylesheet>
+  <link href=//fonts.googleapis.com/css?family=Tauri|Playfair+Display:400,400italic|Playfair+Display+SC&subset=latin,latin-ext rel=stylesheet>
+  <style>
+    *,
+    *:before,
+    *:after {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-kerning: auto;
+    }
+    html {
+      font-size: 10pt;
+      line-height: 1.4;
+      font-weight: 400;
+      font-family: 'Open Sans', 'Source Sans Pro', Roboto, 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', 'Myriad Pro', 'Segoe UI', Myriad, Helvetica, 'Lucida Grande', 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, Arial, sans-serif;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      margin: 0;
+    }
+    header {
+      padding: 1em;
+      background: -webkit-linear-gradient(270deg, #cc0000, #660000);
+      background: linear-gradient(180deg, #cc0000, #660000);
+    }
+    header h1 {
+      margin: 0;
+      font-family: "Playfair Display SC", serif;
+      font-weight: 900;
+      font-style: italic;
+      color: white;
+      text-shadow: 0 2px 2px black;
+    }
+    article {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 1em;
+    }
+    article:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+    footer p {
+      font-family: "Source Sans Pro", sans-serif;
+      font-size: 10pt;
+      color: #555;
+    }
+    [data-best-picture] h1 {
+      font-family: "Playfair Display SC", serif;
+      font-size: 1.125em;
+      font-weight: 400;
+      font-style: smallcaps;
+      text-align: center;
+      background: -webkit-linear-gradient(270deg, #333, #111);
+      background: linear-gradient(180deg, #333, #111);
+      color: white;
+      padding: 1rem;
+    }
+    aside[data-best-picture] h1 {
+      background: linear-gradient(180deg, #333, #111);
+      color: white;
+    }
+    [data-best-picture] ol {
+      list-stlye: none;
+      padding: 0;
+      margin: 1em;
+    }
+    [data-best-picture] li {
+      display: block;
+    }
+    [data-best-picture] li + li {
+      border-top: 1px solid #ddd;
+      padding-top: 0.5em;
+      margin-top: 0.5em;
+    }
+    [data-best-picture] a {
+      text-decoration: none;
+      display: block;
+      position: relative;
+    }
+    [data-best-picture] a:after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+    [data-best-picture] img {
+      float: left;
+      width: 20%;
+      -webkit-transition: -webkit-transform 150ms ease-in-out;
+      transition: -webkit-transform 150ms ease-in-out;
+      transition: transform 150ms ease-in-out;
+      transition: transform 150ms ease-in-out, -webkit-transform 150ms ease-in-out;
+    }
+    [data-best-picture] a:hover [data-best-picture] img {
+      -webkit-transform: scale(0.9);
+              transform: scale(0.9);
+    }
+    [data-best-picture] div {
+      float: left;
+      width: 80%;
+      padding-left: 0.5em;
+      box-sizing: border-box;
+    }
+    [data-best-picture] h2 {
+      color: #333;
+      margin: 0;
+      font-family: "Playfair Display", serif;
+      font-weight: 400;
+      font-size: 1em;
+    }
+    [data-best-picture] .winner h2 {
+      font-weight: 700;
+      font-style: italic;
+      color: #C69F24;
+    }
+    [data-best-picture] p {
+      margin: 0;
+      color: #666;
+      font-family: "Tauri", sans-serif;
+      font-size: 0.75em;
+      font-weight: 400;
+    }
+    [data-best-picture] .winner p {
+      color: #888;
+    }
+    [data-best-picture] p:before {
+      content: 'Directed by: ';
+      font-weight: 400;
+      color: #999;
+      display: none;
+    }
+    aside {
+      display: none;
+    }
+    @element '[data-best-picture] p' and (min-width: 220px) {
+      $this:before {
+        display: inline;
+      }
+    }
+    @element '[data-best-picture] .winner div' and (min-width: 220px) {
+      $this:before {
+        content: 'Best Picture Winner';
+      }
+    }
+    @element '[data-best-picture]' and (min-width: 400px) {
+      $this h1 {
+        background: none;
+        color: #333;
+        font-size: 1.25em;
+      }
+      $this li {
+        display: inline-block;
+        width: 50%;
+      }
+      $this li + li {
+        border-top: none;
+        padding-top: auto;
+        margin-top: auto;
+        margin-left: -4px;
+      }
+      $this a {
+        overflow: hidden;
+        margin: 0.5em;
+        border: 1px solid #333;
+        box-shadow: 0 0.125em 0.25em rgba(0, 0, 0, 0.5);
+      }
+      $this a:after {
+        display: block;
+        content: '';
+        padding-top: 147.5095785%;
+      }
+      $this img {
+        float: none;
+        width: 100%;
+        position: absolute;
+        display: block;
+      }
+      $this a:hover img {
+        -webkit-transform: scale(1.1);
+                transform: scale(1.1);
+      }
+      $this div {
+        float: none;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        padding: 1.5em 1em;
+        background: -webkit-linear-gradient(270deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.9));
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.9));
+      }
+      $this .winner div {
+        background: -webkit-linear-gradient(270deg, rgba(193, 165, 32, 0.9), rgba(137, 100, 14, 0.9));
+        background: linear-gradient(180deg, rgba(193, 165, 32, 0.9), rgba(137, 100, 14, 0.9));
+        padding: 0.5em 1em 1.5em;
+      }
+      $this .winner div:before {
+        content: '2015 Winner';
+        color: white;
+        font-family: "Tauri", sans-serif;
+        font-size: 0.675em;
+        text-shadow: 0px -1px rgba(0, 0, 0, 0.3);
+        text-transform: uppercase;
+        display: block;
+        text-align: center;
+        letter-spacing: 0.25em;
+        margin: 0 -1em 0.5em;
+      }
+      $this h2 {
+        font-size: 1.125em;
+        color: white;
+        text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+      }
+      $this .winner h2 {
+        font-weight: 700;
+        color: white;
+        text-shadow: 0 -1px #89640E;
+      }
+      $this p {
+        color: white;
+        text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+      }
+      $this p:before {
+        color: #aaa;
+      }
+      $this .winner p {
+        color: #312A05;
+        text-shadow: 0 1px rgba(214, 188, 46, 0.4);
+      }
+      [data-best-picture] .winner p:before {
+        color: #413806;
+      }
+    }
+    @element '[data-best-picture]' and (min-width: 600px) {
+      $this h1 {
+        font-size: 1.75em;
+      }
+      $this ol {
+        margin: 1em;
+      }
+      $this li {
+        width: 33.333%;
+      }
+    }
+    @element '[data-best-picture]' and (min-width: 900px) {
+      $this h1 {
+        font-size: 2.5em;
+      }
+      $this li {
+        width: 25%;
+      }
+    }
+    @element 'article' and (min-width: 900px) {
+      $this section,
+      $this aside {
+        float: left;
+      }
+      $this section {
+        width: 75%;
+      }
+      $this aside {
+        display: block;
+        width: 25%
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Super Awesome Movies</h1>
+</header>
+  <article>
+    <section data-best-picture>
+      <h1>2015 Best Picture Nominees</h1>
+      <ol>
+        <li>
+          <a href=#>
+            <img src=http://trailers.apple.com/trailers/wb/americansniper/images/poster-large.jpg>
+            <div>
+              <h2>American Sniper</h2>
+              <p>Clint Eastwood</p>
+            </div>
+          </a>
+        </li>
+        <li class=winner>
+          <a href=#>
+            <img src=http://trailers.apple.com/trailers/fox_searchlight/birdman/images/poster-large.jpg>
+            <div>
+              <h2>Birdman</h2>
+              <p>Alejandro G. Iñarritu</p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href=#>
+            <img src=http://trailers.apple.com/trailers/ifcfilms/boyhood/images/poster-large.jpg>
+            <div>
+              <h2>Boyhood</h2>
+              <p>Richard Linklater</p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href=#>
+            <img src=http://trailers.apple.com/trailers/fox_searchlight/thegrandbudapesthotel/images/poster-large.jpg>
+            <div>
+              <h2>The Grand Budapest Hotel</h2>
+              <p>Wes Anderson</p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href=#>
+            <img src=http://trailers.apple.com/trailers/weinstein/theimitationgame/images/poster-large.jpg>
+            <div>
+              <h2>The Imitation Game</h2>
+              <p>Morten Tyldum</p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href=#>
+            <img src=http://trailers.apple.com/trailers/paramount/selma/images/poster-large.jpg>
+            <div>
+              <h2>Selma</h2>
+              <p>Ava DuVernay</p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href=#>
+            <img src=http://trailers.apple.com/trailers/focus_features/thetheoryofeverything/images/poster-large.jpg>
+            <div>
+              <h2>The Theory of Everything</h2>
+              <p>James Marsh</p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href=#>
+            <img src=http://trailers.apple.com/trailers/sony/whiplash/images/poster-large.jpg>
+            <div>
+              <h2>Whiplash</h2>
+              <p>Damien Chazelle</p>
+            </div>
+          </a>
+        </li>
+      </ol>
+    </section>
+    <aside data-best-picture>
+      <h1>2015 Best Picture Nominees</h1>
+      <ol>
+        <li>
+          <a href=#>
+            <img src=http://trailers.apple.com/trailers/wb/americansniper/images/poster-large.jpg>
+            <div>
+              <h2>American Sniper</h2>
+              <p>Clint Eastwood</p>
+            </div>
+          </a>
+        </li>
+        <li class=winner>
+          <a href=#>
+            <img src=http://trailers.apple.com/trailers/fox_searchlight/birdman/images/poster-large.jpg>
+            <div>
+              <h2>Birdman</h2>
+              <p>Alejandro G. Iñarritu</p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href=#>
+            <img src=http://trailers.apple.com/trailers/ifcfilms/boyhood/images/poster-large.jpg>
+            <div>
+              <h2>Boyhood</h2>
+              <p>Richard Linklater</p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href=#>
+            <img src=http://trailers.apple.com/trailers/fox_searchlight/thegrandbudapesthotel/images/poster-large.jpg>
+            <div>
+              <h2>The Grand Budapest Hotel</h2>
+              <p>Wes Anderson</p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href=#>
+            <img src=http://trailers.apple.com/trailers/weinstein/theimitationgame/images/poster-large.jpg>
+            <div>
+              <h2>The Imitation Game</h2>
+              <p>Morten Tyldum</p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href=#>
+            <img src=http://trailers.apple.com/trailers/paramount/selma/images/poster-large.jpg>
+            <div>
+              <h2>Selma</h2>
+              <p>Ava DuVernay</p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href=#>
+            <img src=http://trailers.apple.com/trailers/focus_features/thetheoryofeverything/images/poster-large.jpg>
+            <div>
+              <h2>The Theory of Everything</h2>
+              <p>James Marsh</p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href=#>
+            <img src=http://trailers.apple.com/trailers/sony/whiplash/images/poster-large.jpg>
+            <div>
+              <h2>Whiplash</h2>
+              <p>Damien Chazelle</p>
+            </div>
+          </a>
+        </li>
+      </ol>
+    </aside>
+    <footer>
+      <p>Movie images and information via <a href=http://trailers.apple.com>Apple Trailers</a></p>
+    </footer>
+  </article>
+  <!--[if lt IE 9]><script src="http://elementqueries.com/EQCSS-polyfills.js"></script><![endif]-->
+  <script src="http://elementqueries.com/EQCSS.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Variables with Element Queries</title>
+  <meta name="description" content="Using the new var() feature in EQCSS you can now use a value from JavaScript in your CSS, whether it's a variable, value, or function - whatever the current value of that is at the time the element query applies will be the value that is used.">
+  <meta name="keywords" content="EQCSS, element queries, element query, container queries, responsive, variables, CSS variables, JS variables">
+  <link href=http://staticresource.com/basic.css rel=stylesheet>
+  <link href=http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic rel=stylesheet>
+  <link href=http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic rel=stylesheet>
+  <style>
+    div, aside, span, article {
+      display: block;
+      font-size: 18pt;
+      text-align: center;
+    }
+    @element 'div' {
+      $this:before {
+        content: 'var(coolDude)';
+      }
+      $this:after {
+        content: ' is a cool dude';
+      }
+    }
+    @element 'aside' {
+      $this:before {
+        content: 'The time is: ';
+      }
+      $this:after {
+        content: 'var(new Date())';
+      }
+    }
+    @element 'span' {
+      $this:before {
+        content: 'Your viewport is: var(window.innerWidth)';
+      }
+      $this:after {
+        content: ' by var(window.innerHeight)';
+      }
+    }
+    @element 'article' {
+      $this:before {
+        content: 'Five plus ten is: ';
+      }
+      $this:after {
+        content: 'var(addTen(5))';
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>JS Variables in CSS</h1>
+  <h2>Using values from JS in your Element Queries</h2>
+  <div></div>
+  <aside></aside>
+  <span></span>
+  <article></article>
+  <script>
+    var coolDude = 'Maxime'
+
+    function addTen(number){
+      return parseInt(number) + 10
+    }
+  </script>
+  <!--[if lt IE 9]><script src="http://elementqueries.com/EQCSS-polyfills.js"></script><![endif]-->
+  <script src="http://elementqueries.com/EQCSS.js"></script>
+  <script src="http://staticresource.com/eqcss-demo.js"></script>
+</body>
+</html>

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Media Player with Element Queries</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="EQCSS, element queries, element query, container queries, responsive, media player, player ui, media controls, responsive audio player">
+  <link href=http://staticresource.com/basic.css rel=stylesheet>
+  <link href=http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic rel=stylesheet>
+  <link href=http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic rel=stylesheet>
+  <link href=http://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css rel=stylesheet>
+  <link href=http://staticresource.com/data-buttons.css rel=stylesheet>
+  <style>
+    [data-media],
+    [data-media] *,
+    [data-media] *:before,
+    [data-media] *:after {
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-kerning: auto;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      -o-user-select: none;
+      user-select: none;
+    }
+    [data-media],
+    [data-media] * {
+      font-size: 10pt;
+      line-height: 1;
+      font-family: "Source Sans Pro", "Open Sans", Roboto, "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Myriad Pro", "Segoe UI", Myriad, Helvetica, "Lucida Grande", "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, Arial, sans-serif;
+    }
+    [data-media] {
+      border: 1px solid #ccc;
+      padding: 15px;
+      max-width: 450px;
+      margin: 1em auto;
+      text-align: center;
+      background: white;
+      border-radius: 3px;
+    }
+    [data-media]:after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+    [data-media] [type=range] {
+      width: 100%;
+    }
+    [data-media] audio {
+      display: none;
+    }
+    [data-media] [data-current],
+    [data-media] [data-total] {
+      pointer-events: none;
+      color: #555;
+      font-size: 10pt;
+      font-weight: 400 !important;
+      opacity: 0;
+      transition: opacity .2s ease-in-out;
+      cursor: default;
+    }
+    [data-media] [data-current] {
+      float: left;
+    }
+    [data-media] [data-total] {
+      float: right;
+    }
+    [data-media] [data-button] {
+      font-size: 12pt;
+      margin-left: 5px;
+      margin-top: 0;
+      margin-bottom: 0;
+      color: white !important;
+      text-decoration: none !important;
+    }
+    [data-media] [data-play] {
+      min-width: 70px;
+    }
+    [data-media] [data-button][data-play] i {
+      font-size: 32pt;
+      position: relative;
+      top: 2px;
+      vertical-align: middle;
+    }
+    [data-media] [data-button] i {
+      font-size: 12pt;
+      position: relative;
+      top: 2px;
+    }
+    /* Range Styles */
+    [data-media] input[type=range] {
+      -webkit-appearance: none;
+      margin: 1em 0 1.5em 0;
+      outline: none;
+    }
+    [data-media] input[type=range]::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 10px;
+      cursor: pointer;
+      animate: 0.2s;
+      background: #ccc;
+      border-radius: 5px;
+      box-shadow: inset rgba(0,0,0,.1) 0 1px 5px;
+      border: 1px solid rgba(0,0,0,.15);
+      transition: background .1s ease-in-out;
+    }
+    [data-media] input[type=range]::-webkit-slider-thumb {
+      height: 30px;
+      width: 30px;
+      border-radius: 100%;
+      background: #f60;
+      cursor: pointer;
+      -webkit-appearance: none;
+      margin-top: -12px;
+      background: #ff8900;
+      background: -moz-linear-gradient(top, #ff8900 0%, #ff3d00 100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff8900), color-stop(100%,#ff3d00));
+      background: -webkit-linear-gradient(top, #ff8900 0%,#ff3d00 100%);
+      background: -o-linear-gradient(top, #ff8900 0%,#ff3d00 100%);
+      background: -ms-linear-gradient(top, #ff8900 0%,#ff3d00 100%);
+      background: linear-gradient(to bottom, #ff8900 0%,#ff3d00 100%);
+      border: 1px solid #f60;
+      border-bottom-color: #e20;
+      box-shadow: inset #f20 0 -5px 15px, inset #fc6 0 1px 1px, rgba(0,0,0,.15) 0px 1px 1px;
+    }
+    [data-media] input[type=range]:hover::-webkit-slider-thumb {
+      background: #fa3;
+      background: -moz-linear-gradient(top, #fa3 0%, #f30 100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fa3), color-stop(100%,#f30));
+      background: -webkit-linear-gradient(top, #fa3 0%,#f30 100%);
+      background: -o-linear-gradient(top, #fa3 0%,#f30 100%);
+      background: -ms-linear-gradient(top, #fa3 0%,#f30 100%);
+      background: linear-gradient(to bottom, #fa3 0%,#f30 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#fa3", endColorstr="#f30",GradientType=0 );
+      box-shadow: inset #f40 0 -5px 15px, inset #ffd28a 0 1px 1px, rgba(0,0,0,.15) 0px 1px 1px, rgba(255,200,0,.5) 0 0 10px;
+    }
+    [data-media] input[type=range]:focus::-webkit-slider-thumb {
+      background: #f50;
+      border: 1px solid #f00;
+      box-shadow: inset #f40 0 -5px 15px, inset #ffd28a 0 1px 1px;
+      border-bottom-color: #d10;
+    }
+    [data-media] input[type=range]::-moz-range-track {
+      width: 100%;
+      height: 10px;
+      cursor: pointer;
+      animate: 0.2s;
+      background: #ccc;
+      border-radius: 5px;
+      box-shadow: inset rgba(0,0,0,.1) 0 1px 5px;
+      border: 1px solid rgba(0,0,0,.15);
+      transition: background .1s ease-in-out;
+    }
+    [data-media] input[type=range]::-moz-range-thumb {
+      height: 30px;
+      width: 30px;
+      border-radius: 100%;
+      background: #f60;
+      cursor: pointer;
+      -webkit-appearance: none;
+      margin-top: -12px;
+      background: #ff8900;
+      background: -moz-linear-gradient(top, #ff8900 0%, #ff3d00 100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff8900), color-stop(100%,#ff3d00));
+      background: -webkit-linear-gradient(top, #ff8900 0%,#ff3d00 100%);
+      background: -o-linear-gradient(top, #ff8900 0%,#ff3d00 100%);
+      background: -ms-linear-gradient(top, #ff8900 0%,#ff3d00 100%);
+      background: linear-gradient(to bottom, #ff8900 0%,#ff3d00 100%);
+      border: 1px solid #f60;
+      border-bottom-color: #e20;
+      box-shadow: inset #f20 0 -5px 15px, inset #fc6 0 1px 1px, rgba(0,0,0,.15) 0px 1px 1px;
+    }
+    [data-media] input[type=range]:hover::-moz-range-thumb {
+      background: #fa3;
+      background: -moz-linear-gradient(top, #fa3 0%, #f30 100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fa3), color-stop(100%,#f30));
+      background: -webkit-linear-gradient(top, #fa3 0%,#f30 100%);
+      background: -o-linear-gradient(top, #fa3 0%,#f30 100%);
+      background: -ms-linear-gradient(top, #fa3 0%,#f30 100%);
+      background: linear-gradient(to bottom, #fa3 0%,#f30 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#fa3", endColorstr="#f30",GradientType=0 );
+      box-shadow: inset #f40 0 -5px 15px, inset #ffd28a 0 1px 1px, rgba(0,0,0,.15) 0px 1px 1px, rgba(255,200,0,.5) 0 0 10px;
+    }
+    [data-media] input[type=range]:focus::-moz-range-thumb {
+      background: #f50;
+      border: 1px solid #f00;
+      box-shadow: inset #f40 0 -5px 15px, inset #ffd28a 0 1px 1px;
+      border-bottom-color: #d10;
+    }
+    [data-media] input[type=range]::-ms-track {
+      box-sizing: border-box;
+      width: 100%;
+      height: 30px;
+      cursor: pointer;
+      animate: 0.2s;
+      border-radius: 5px;
+      transition: background .1s ease-in-out;
+    }
+    [data-media] input[type=range]::-ms-fill-upper {
+      background: #ccc;
+      border-radius: 5px;
+      height: 10px;
+      box-shadow: inset rgba(0,0,0,.1) 0 1px 5px;
+      border: 1px solid rgba(0,0,0,.15);
+    }
+    [data-media] input[type=range]::-ms-fill-lower {
+      background: #ccc;
+      height: 10px;
+      border-radius: 5px;
+      box-shadow: inset rgba(0,0,0,.1) 0 1px 5px;
+      border: 1px solid rgba(0,0,0,.15);
+    }
+    [data-media] input[type=range]::-ms-thumb {
+      height: 30px;
+      width: 30px;
+      border-radius: 100%;
+      background: #f60;
+      cursor: pointer;
+      margin-top: 0;
+      background: #ff8900;
+      background: -moz-linear-gradient(top, #ff8900 0%, #ff3d00 100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff8900), color-stop(100%,#ff3d00));
+      background: -webkit-linear-gradient(top, #ff8900 0%,#ff3d00 100%);
+      background: -o-linear-gradient(top, #ff8900 0%,#ff3d00 100%);
+      background: -ms-linear-gradient(top, #ff8900 0%,#ff3d00 100%);
+      background: linear-gradient(to bottom, #ff8900 0%,#ff3d00 100%);
+      border: 1px solid #f60;
+      border-bottom-color: #e20;
+      box-shadow: inset #f20 0 -5px 15px, inset #fc6 0 1px 1px, rgba(0,0,0,.15) 0px 1px 1px;
+    }
+    [data-media] input[type=range]:hover::-ms-thumb {
+      background: #fa3;
+      background: -moz-linear-gradient(top, #fa3 0%, #f30 100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fa3), color-stop(100%,#f30));
+      background: -webkit-linear-gradient(top, #fa3 0%,#f30 100%);
+      background: -o-linear-gradient(top, #fa3 0%,#f30 100%);
+      background: -ms-linear-gradient(top, #fa3 0%,#f30 100%);
+      background: linear-gradient(to bottom, #fa3 0%,#f30 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#fa3", endColorstr="#f30",GradientType=0 );
+      box-shadow: inset #f40 0 -5px 15px, inset #ffd28a 0 1px 1px, rgba(0,0,0,.15) 0px 1px 1px, rgba(255,200,0,.5) 0 0 10px;
+    }
+    [data-media] input[type=range]:focus::-ms-thumb {
+      background: #f50;
+      border: 1px solid #f00;
+      box-shadow: inset #f40 0 -5px 15px, inset #ffd28a 0 1px 1px;
+      border-bottom-color: #d10;
+    }
+    /* Element Queries */
+    @element "[data-media]" and (max-width: 229px) {
+      $this [data-button] {
+        width: 100%;
+        margin: 10px 0 0 0 !important;
+      }
+      $this [data-button][data-play] {
+        margin-top: 5px !important;
+        margin-left: 0 !important;
+      }
+    }
+    @element "[data-media]" and (min-width: 230px) and (max-width: 415px) {
+      $this [data-button] {
+        width: calc(50% - 5px);
+        margin: 10px 0 0 0 !important;
+        float: left;
+      }
+      $this [data-button]:nth-child(odd) {
+        margin-left: 10px !important;
+      }
+      $this [data-button][data-play] {
+        width: 100%;
+        margin: 5px 0 0 0 !important;
+      }
+    }
+
+  </style>
+</head>
+<body>
+<h1>REM Audio Player</h1>
+<aside data-media>
+  <audio src="http://staticresource.com/test.m4a" preload=auto></audio>
+  <span data-current>00:00</span>
+  <span data-total>00:00</span>
+  <input type=range min=0 max=1000 step=1 value=0 oninput=remPlayer.updateTime(this.parentNode.getAttribute("data-media"),this.value)>
+  <a href=# data-play data-button=green type=button onclick=remPlayer.unPause(this.parentNode.getAttribute("data-media"))><i class="ion-ios-play"></i></a>
+  <a href=# data-button=green type=button onclick=remPlayer.seek(this.parentNode.getAttribute("data-media"),"back",15)><i class="ion-ios-rewind"></i> 15</a>
+  <a href=# data-button=green type=button onclick=remPlayer.seek(this.parentNode.getAttribute("data-media"),"forward",15)>15 <i class="ion-ios-fastforward"></i></a>
+  <a href=# data-button=green type=button onclick=remPlayer.rewind(this.parentNode.getAttribute("data-media"))><i class="ion-ios-skipbackward"></i> Rewind</a>
+  <a href=# data-turbo data-button=green type=button onclick=remPlayer.turbo(this.parentNode.getAttribute("data-media"))>Turbo</a>
+</aside>
+
+<aside data-media>
+  <audio src="http://staticresource.com/test.m4a" preload=auto></audio>
+  <span data-current>00:00</span>
+  <span data-total>00:00</span>
+  <input type=range min=0 max=1000 step=1 value=0 oninput=remPlayer.updateTime(this.parentNode.getAttribute("data-media"),this.value)>
+  <a href=# data-play data-button=green type=button onclick=remPlayer.unPause(this.parentNode.getAttribute("data-media"))><i class="ion-ios-play"></i></a>
+  <a href=# data-button=green type=button onclick=remPlayer.seek(this.parentNode.getAttribute("data-media"),"back",15)><i class="ion-ios-rewind"></i> 15</a>
+  <a href=# data-button=green type=button onclick=remPlayer.seek(this.parentNode.getAttribute("data-media"),"forward",15)>15 <i class="ion-ios-fastforward"></i></a>
+  <a href=# data-button=green type=button onclick=remPlayer.rewind(this.parentNode.getAttribute("data-media"))><i class="ion-ios-skipbackward"></i> Rewind</a>
+  <a href=# data-turbo data-button=green type=button onclick=remPlayer.turbo(this.parentNode.getAttribute("data-media"))>Turbo</a>
+</aside>
+
+  <script>
+    //Media Player
+    ready()
+    function ready(){
+      if (document.readystate && document.readystate != 'loading'){
+        initializePlayers()
+      } else {
+        document.addEventListener('DOMContentLoaded',initializePlayers)
+      }
+    }
+    function initializePlayers(){
+      var button = '';
+      var player = document.querySelectorAll('[data-media]')
+      for (i=0;i<player.length;i++){
+        // Count the media players
+        player[i].setAttribute('data-media',i)
+        // Set our default playback states
+        player[i].setAttribute('playing','false')
+        player[i].setAttribute('turboMode','false')
+
+        // Add blur on mouseup
+        var range = player[i].querySelectorAll("[type=range]")[0]
+        range.addEventListener('mouseup',remPlayer.blurRange)
+
+        // Run function when clip ends
+        var audio = player[i].getElementsByTagName('audio')[0]
+
+        // Prevent clicking the UI buttons from scrolling the page
+        button = player[i].querySelectorAll('a')
+        for (j=0;j<button.length;j++){
+          button[j].addEventListener('click',function(e){
+            e.preventDefault()
+          })
+        }
+        // Start download and calculate total time
+        remPlayer.unPause(i)
+        remPlayer.unPause(i)
+        audio.addEventListener('canplay',remPlayer.updateTotal(i))
+        audio.addEventListener('ended',function(i){
+          var player = this.parentNode,
+              audio = this,
+              range = this.nextSibling,
+              play = this.parentNode.querySelectorAll('[data-play]')[0]
+          player.setAttribute('data-playing','false')
+          audio.pause()
+          audio.currentTime = range.value = 0
+          play.innerHTML = "<i class=\"ion-ios-play\"></i>"
+          play.setAttribute("data-button","green")
+          remPlayer.trackProgress(player.getAttribute('data-media'))
+        })
+      }
+    }
+    var remPlayer = {
+          blurRange: function(){
+            this.blur()
+          },
+          unPause: function(player){
+            var player = document.querySelectorAll('[data-media="'+player+'"]')[0],
+                audio = player.getElementsByTagName('audio')[0],
+                total = player.querySelectorAll('[data-total]')[0],
+                play = player.querySelectorAll('[data-play]')[0]
+            if (player.getAttribute('data-playing') !== 'true'){
+              player.setAttribute('data-playing','true')
+              audio.play()
+              remPlayer.trackProgress(player.getAttribute('data-media'))
+              play.innerHTML = '<i class="ion-ios-pause"></i>'
+              play.setAttribute('data-button','')
+            } else {
+              player.setAttribute('data-playing','false')
+              audio.pause()
+              play.innerHTML = "<i class=\"ion-ios-play\"></i>"
+              play.setAttribute("data-button","green")
+            }
+          },
+          seek: function(player,dir,num){
+            var player = document.querySelectorAll('[data-media="'+player+'"]')[0],
+                audio = player.getElementsByTagName('audio')[0],
+                range = player.querySelectorAll('[type=range]')[0]
+            if (dir == "forward"){
+              var time = audio.currentTime+num<audio.seekable.end(0)?audio.currentTime+num:audio.seekable.end(0)
+              audio.currentTime = time
+            } else {
+              var time = audio.currentTime-num>0?audio.currentTime-num:0
+              audio.currentTime = time
+            }
+            range.value = (audio.currentTime/audio.seekable.end(0))*1000
+            remPlayer.trackProgress(player.getAttribute('data-media'))
+          },
+          trackProgress: function(player){
+            var player = document.querySelectorAll('[data-media="'+player+'"]')[0],
+                audio = player.getElementsByTagName('audio')[0],
+                range = player.querySelectorAll('[type=range]')[0],
+                current = player.querySelectorAll('[data-current]')[0],
+                total = player.querySelectorAll('[data-total]')[0],
+                percent = audio.currentTime?(audio.currentTime/audio.seekable.end(0))*1000:0,
+                seconds = Math.floor(audio.currentTime),
+                minutes = Math.floor(seconds/60)<10?"0"+Math.floor(seconds/60):Math.floor(seconds/60)
+            seconds = (seconds-(minutes*60))<10?"0"+(seconds-(minutes*60)):(seconds-(minutes*60))
+            var totalTime = Math.floor(audio.currentTime)>60?minutes+":"+seconds:"00:"+seconds
+            range.value = percent
+            current.innerHTML = totalTime
+            if(total.innerHTML == '00:00'){
+              remPlayer.updateTotal(player.getAttribute('data-media'))
+            }
+            if (player.getAttribute('data-playing') == 'true') {
+              setTimeout(function(){remPlayer.trackProgress(player.getAttribute('data-media'))},100)
+            }
+            current.style.opacity = total.style.opacity = 1
+          },
+          updateTime: function(player,time){
+            var player = document.querySelectorAll('[data-media="'+player+'"]')[0],
+                audio = player.getElementsByTagName('audio')[0],
+                location = (time/1000)*audio.seekable.end(0)
+            audio.currentTime = location
+            remPlayer.trackProgress(player.getAttribute('data-media'))
+          },
+          updateTotal: function(player){
+            var player = document.querySelectorAll('[data-media="'+player+'"]')[0],
+                audio = player.getElementsByTagName('audio')[0],
+                total = player.querySelectorAll('[data-total]')[0],
+                seconds = audio.seekable.length!==0?Math.floor(audio.seekable.end(0)):'00',
+                minutes = Math.floor(seconds/60)<10?"0"+Math.floor(seconds/60):Math.floor(seconds/60)
+                totalTime = seconds>60?minutes+":"+(seconds-(minutes*60)):"00:"+seconds
+            total.innerHTML = totalTime
+          },
+          rewind: function(player){
+            var player = document.querySelectorAll('[data-media="'+player+'"]')[0],
+                audio = player.getElementsByTagName('audio')[0],
+                range = player.querySelectorAll('[type=range]')[0]
+            audio.currentTime = range.value = 0
+            remPlayer.trackProgress(player.getAttribute('data-media'))
+          },
+          turbo: function(player){
+            var player = document.querySelectorAll('[data-media="'+player+'"]')[0]
+                audio = player.getElementsByTagName('audio')[0],
+                button =player.querySelectorAll('[data-turbo]')[0]
+            if (player.getAttribute('data-turbo') !== 'true'){
+              player.setAttribute('data-turbo','true')
+              audio.playbackRate = 1.25
+              button.setAttribute("data-button","orange")
+            } else {
+              player.setAttribute('data-turbo','false')
+              audio.playbackRate = 1
+              button.setAttribute("data-button","green")
+            }
+          }
+        }
+  </script>
+  <!--[if lt IE 9]><script src="http://elementqueries.com/EQCSS-polyfills.js"></script><![endif]-->
+  <script src="http://elementqueries.com/EQCSS.js"></script>
+</body>
+</html>
