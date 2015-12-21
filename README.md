@@ -126,7 +126,7 @@ Element Queries have the following format:
 
 ## Documentation & Tutorials
 
-- [CSS For Element Queries](http://elementqueries.com/notes/elementqueries.com/notes/element-queries-for-css.html)
+- [CSS For Element Queries](http://elementqueries.com/notes/element-queries-for-css.html)
 - [EQCSS v1.0.0 Technical Documentation](http://elementqueries.com/notes/technical-documentation.html)
 
 ### More Demos @ the EQCSS Website: [http://elementqueries.com](http://elementqueries.com)
