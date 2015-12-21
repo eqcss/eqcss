@@ -90,17 +90,17 @@ Element Queries have the following format:
 - min-scroll-x
 - max-scroll-x
 
-## Special Selectors
+### Special Selectors
 
 - `$this`
 - `$parent`
 - `$root`
 
-## CSS Functions
+### CSS Functions
 
 - `var()`
 
-### Element Query Demos
+## Element Query Demos
 
 - [Blockquote Style](http://elementqueries.com/demos/blockquote-style.html)
 - [Calendar](http://elementqueries.com/demos/calendar.html)
@@ -126,7 +126,7 @@ Element Queries have the following format:
 
 ## Documentation & Tutorials
 
-- [CSS For Element Queries](http://elementqueries.com/notes/element-queries-for-css.html)
+- [Element Queries For CSS](http://elementqueries.com/notes/element-queries-for-css.html)
 - [EQCSS v1.0.0 Technical Documentation](http://elementqueries.com/notes/technical-documentation.html)
 
 ### More Demos @ the EQCSS Website: [http://elementqueries.com](http://elementqueries.com)
