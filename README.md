@@ -100,4 +100,33 @@ Element Queries have the following format:
 
 - `var()`
 
-### Demos @ the EQCSS Website: [http://elementqueries.com](http://elementqueries.com)
+### Element Query Demos
+
+- [Blockquote Style](http://elementqueries.com/demos/blockquote-style.html)
+- [Calendar](http://elementqueries.com/demos/calendar.html)
+- [Content Demo](http://elementqueries.com/demos/content-blocks.html)
+- [Counting Children Demo](http://elementqueries.com/demos/counting-children.html)
+- [Date Demo](http://elementqueries.com/demos/date.html)
+- [Zastrow-style Element Query Demo Demo](http://elementqueries.com/demos/element-query-demo.html)
+- [Flyout Demo](http://elementqueries.com/demos/flyout.html)
+- [Headline Demo](http://elementqueries.com/demos/headline.html)
+- [Media Player Demo](http://elementqueries.com/demos/media-player.html)
+- [Message Style Demo](http://elementqueries.com/demos/message-style.html)
+- [Modal Demo](http://elementqueries.com/demos/modal.html)
+- [Nav Demo](http://elementqueries.com/demos/nav.html)
+- [Parent Selector Demo](http://elementqueries.com/demos/parent.html)
+- [Pricing Chart Demo](http://elementqueries.com/demos/pricing-chart.html)
+- [Responsive Tables Demo](http://elementqueries.com/demos/responsive-table.html)
+- [Scroll-triggered Blocker Demo](http://elementqueries.com/demos/blocker.html)
+- [Signup Form Demo](http://elementqueries.com/demos/signup-form.html)
+- [Testimonials Block Demo](http://elementqueries.com/demos/testimonial.html)
+- [Tweet-Counter Demo](http://elementqueries.com/demos/tweet-counter.html)
+- [JS Variables Demo](http://elementqueries.com/demos/variables.html)
+- [Responsive Scaling Demo](http://elementqueries.com/demos/video-scaling.html)
+
+## Documentation & Tutorials
+
+- [CSS For Element Queries](http://elementqueries.com/notes/elementqueries.com/notes/element-queries-for-css.html)
+- [EQCSS v1.0.0 Technical Documentation](http://elementqueries.com/notes/technical-documentation.html)
+
+### More Demos @ the EQCSS Website: [http://elementqueries.com](http://elementqueries.com)
