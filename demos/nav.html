@@ -8,7 +8,7 @@
   <meta name="keywords" content="EQCSS, element queries, element query, container queries, responsive, mobile menu, mobile friendly, nav">
   <style>
     /* Global Menu Styles */
-    @element '.eqNav' and (min-width: 0px) {
+    @element '.eqNav' {
       html {
         opacity: 1;
       }
@@ -118,7 +118,7 @@
       }
     }
     /* Mobile Menu View */
-    @element '.eqNav' and (min-width: 0px) and (max-width: 499px) {
+    @element '.eqNav' and (max-width: 499px) {
       $this {
         text-align: center;
       }

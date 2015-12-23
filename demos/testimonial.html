@@ -16,7 +16,7 @@
       background-size: 16px 16px;
       background-attachment: fixed;
     }
-    @element '.testimonials' and (min-width: 0px) {
+    @element '.testimonials' {
     .testimonials,
     .testimonials * {
       box-sizing: border-box;
@@ -104,7 +104,7 @@
       clear: both;
     }
   }
-  @element '.testimonials' and (min-width: 0px) and (max-width: 199px) {
+  @element '.testimonials' (max-width: 199px) {
     $this blockquote {
       padding: 0 .25em;
       text-align: center;

@@ -9,7 +9,7 @@
   <link href=https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css rel=stylesheet>
   <style>
     /* Base Calendar Styles */
-    @element '.eqCal' and (min-width: 0px) {
+    @element '.eqCal' {
       $this {
         position: relative;
         padding: 0;
@@ -141,7 +141,7 @@
       }
     }
     /* Popover Functionality */
-    @element '.eqCal' and (min-width: 0px) and (max-width: 849px) {
+    @element '.eqCal' and (max-width: 849px) {
       $this label:hover {
         background: #fc0;
       }
@@ -260,7 +260,7 @@
       }
     }
     /* Dot Grid */
-    @element '.eqCal' and (min-width: 0px) and (max-width: 199px) {
+    @element '.eqCal' and (max-width: 199px) {
       $this .title,
       $this nav a {
         font-size: 100%;
