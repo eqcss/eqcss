@@ -90,7 +90,7 @@ Element Queries have the following format:
 - min-scroll-x
 - max-scroll-x
 
-### Special Selectors
+### Meta Selectors
 
 - `$this`
 - `$parent`
@@ -128,5 +128,7 @@ Element Queries have the following format:
 
 - [Element Queries For CSS](http://elementqueries.com/notes/element-queries-for-css.html)
 - [EQCSS v1.0.0 Technical Documentation](http://elementqueries.com/notes/technical-documentation.html)
+- [A Parent Selector for CSS](http://elementqueries.com/notes/a-parent-selector-for-css.html)
+- [It's Time to Think 'Element-First'](http://elementqueries.com/notes/its-time-to-think-element-first.html)
 
 ### More Demos @ the EQCSS Website: [http://elementqueries.com](http://elementqueries.com)

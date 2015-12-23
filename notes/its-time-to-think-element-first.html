@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8>
+  <meta name=viewport content="width=device-width, initial-scale=1">
+  <title>It's Time to Think 'Element-First' - Tommy Hodgins</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="parent selector, css parent, EQCSS, element queries, element query, container queries, responsive, adaptive">
+  <link href=http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic rel=stylesheet>
+  <link href=http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic rel=stylesheet>
+  <link href=http://staticresource.com/basic.css rel=stylesheet>
+  <link href=http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic rel=stylesheet>
+  <link href=http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic rel=stylesheet>
+  <style>
+    h1 span {
+      display: block;
+    }
+    pre {
+      white-space: pre;
+    }
+    p {
+      font-size: 140%;
+    }
+    h2 {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h2>Forget <em>desktop-first</em> and <em>mobile-first</em></h2>
+  <h1>It&rsquo;s Time to Think<span><q>Element-First</q></span></h1>
+  <h2>Written by <a href=https://twitter.com/innovati>Tommy Hodgins</a></h2>
+  <p>Much e-ink has been spilled in the debate between <q>mobile-first</q> and <q>desktop-first</q> approaches in responsive design. Thankfully in 2016 that battle is behind us, but before I get into the new way, let&rsquo;s briefly explain what the old battle was about.</p>
+  <h3>Desktop-First</h3>
+  <p>Even though the term didn&rsquo;t become popular until five years ago, you could say that <em>desktop-first</em> thinking was the original approach to web design. Even though mobile devices were increasingly able to access some form of internet leading up the 2010, if you were serious about providing a good experience to these mobile users on their small screens, low bandwidth connections, and limited CSS support it often meant that you would maintain both a desktop and a mobile website, or at least a desktop and a mobile interface that accessed the same data. This is the way things were before 2010.</p>
+  <h3>Mobile-first</h3>
+  <p>After the increasing popularity of smartphones, as well as enhanced support for web standards on mobile devices it became possible not just to build one website that both desktop and mobile users could access - but you could also tailor how that single interface displayed depending on how much room (screen size) the browser was able to take up. What <em>mobile-first</em> means is that when building your layout, you designed the layout for phones and tablets first, offering overrides from screens with larger widths. There&rsquo;s no functional benefit to arranging your styles this way, but it really helped clarify priorities for designers by forcing them to deal with the biggest constraints in the layout first.</p>
+  <p>So now that all devices are being accounted for - why change our approach? Because no matter how you look at it, both desktop-first and mobile-first mindsets still prioritize the layout over the individual design elements that that layout is comprised of. With element-first thinking we deal with the modules inside the layout first, and then put self-responsive modules into a very simple layout. We never have to worry what happens if the layout is displayed 600px wide, or 3000px, because we know that each module within that layout will always adapt to display itself according to the responsive styles it has been given, and also how the user and web page interact after the page loads.</p>
+  <p>Element-first layouts aren&rsquo;t static, they are born when the page loads and live and adapt as the user and application interact</p>
+  <h3>Element-first</h4>
+  <p>Element-first design is the spirit of the Atomic design principle, but looks very different in practice than how most people implement Atomic using their mobile-first mindset. Instead of writing styles on advance for every conceivable situation a widget my find itself in, we are able to allow individual parts of the layout to adapt responsively when those elements require it.</p>
+  <p>It makes more sense to say: “These are the styles for the menu when the menu has 300px wide, and these are the styles when the menu is more than 300px wide” than it does to say “These styles are in case the menu shows up in a layout outside a wrapper where it has less than 300px space, here&rsquo;s how the menu shows up in a layout inside a wrapper with less than 300px space, here&rsquo;s how the menu shows up in a layout without a wrapper but with a sidebar with less than 300px, etc…” and then also defining all those different layout variations at every breakpoint you want to support as well.</p>
+  <p>You can see why people have turned toward conventions like BEM to try to help them manage the complexity, but we&rsquo;ve clearly gotten to a breaking point where our layouts are breaking under the weight of all of the classes and attributes we&rsquo;re adding to them. We feel the need to use pre-processors which can&rsquo;t help us after the page loads to try to output enough CSS <q>just in case</q> we need it, then we have to deal with tons of CSS and minify and compress that down so it&rsquo;s small again.</p>
+  <p>Why not just take an element-first approach?</p>
+  <h3>Illustration</h3>
+  <p>Let&rsquo;s say you have some HTML like this:</p>
+<pre>&lt;form>
+  &lt;input placeholder=Search>
+  &lt;input type=button value=Search>
+&lt;/form></pre>
+  <p>Now let&rsquo;s say the responsive behaviour you want could be explained like this in english:<p>
+  <p><q>Search box and button are side-by-side until they get too narrow, then both the input and the button should be stacked on top of each other and full-width.</q></p>
+  <h4>Desktop-first CSS</h4>
+  <p>In a desktop-first mindset you would write your CSS like this:</p>
+<pre>input {
+  width: 100%;
+}
+@media (max-width: 600px) {
+  input {
+    width: 50%;
+    float: left;
+  }
+}</pre>
+  <h4>Mobile-first CSS</h4>
+  <p>In a mobile-first mindset, you&rsquo;re targeting the mobile view (stacked) first and adding support for the side-by-side view only if the screen has enough room:</p>
+<pre>input {
+  width: 1000%;
+}
+@media (min-width: 600px) {
+  input {
+    width: 50%;
+    float: left;
+  }
+}</pre>
+  <h4>Element-first CSS</h4>
+  <p>With the first two examples, your <code>@media</code> breakpoint was set to <code>600px</code> not because that&rsquo;s how wide the inputs will be when they switch. The chances are that search form is probably inside at least one other parent element with margins and padding and so when the browser is <code>600px</code> width, those inputs might be somewhere around <code>550px</code> or <code>525px</code> wide in reality. So in a <em>desktop-first</em> and <em>mobile-first</em> mindset you&rsquo;re always setting your breakpoints based on the layout and how the elements show up in it. With <em>element-first</em> you would just say: <em><q>I don&rsquo;t care how wide the browser may be, I know when my inputs get to be <code>525-550px</code> wide that&rsquo;s the sweet spot where I want them to stack.</q></em> Instead of using a <code>@media</code> query to swap that CSS by the browser&rsquo;s dimensions, with <em>element-first</em> design you could attach your responsive conditions to the <code>&lt;form></code> element and say something like:</p>
+<pre>input {
+  width: 100%;
+}
+@element 'form' and (min-width: 525px) {
+  input {
+    width: 50%;
+    float: left;
+  }
+}</pre>
+  <p>The code is very very close to the other methods, but now you can toss this search form in a sidebar, you can make it full-width, you can use it in any template and no matter how wide the browser is, when the form itself doesn&rsquo;t have enough room to display the inputs side-by-side it will adapt. Even if the browser is <code>1000px</code> wide at the time that the form is squished below <code>525px</code> where you&rsquo;ve put it in your layout.</p>
+  <h4>Element-First Design Examples</h4>
+  <p data-height="300" data-theme-id="0" data-slug-hash="jWMNpE" data-default-tab="result" data-user="tomhodgins" class="codepen">See the Pen <a href="http://codepen.io/tomhodgins/pen/jWMNpE/">Atomic design with Element Queries</a> by Tommy Hodgins (<a href="http://codepen.io/tomhodgins">@tomhodgins</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+  <p data-height="300" data-theme-id="0" data-slug-hash="BjzbvQ" data-default-tab="result" data-user="tomhodgins" class="codepen">See the Pen <a href="http://codepen.io/tomhodgins/pen/BjzbvQ/">Modals with Element Queries</a> by Tommy Hodgins (<a href="http://codepen.io/tomhodgins">@tomhodgins</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+  <footer>
+    Created by <a href=//twitter.com/innovati>@innovati</a> and <a href=//twitter.com/MaximeEuziere>@maximeeuziere</a> &middot; <a href=//github.com/eqcss/eqcss>hosted on Github <i class=ion-social-github></i></a>
+  </footer>
+  <!--[if lt IE 9]><script src=http://elementqueries.com/EQCSS-polyfills.js></script><![endif]-->
+  <script src=http://elementqueries.com/EQCSS.js></script>
+  <script async src="http://assets.codepen.io/assets/embed/ei.js"></script>
+</body>
+</html>
