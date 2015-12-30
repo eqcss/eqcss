@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8>
+  <meta name=viewport content="width=device-width, initial-scale=1">
+  <title>Previous Element Meta-Selector</title>
+  <link href=http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic rel=stylesheet>
+  <link href=http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic rel=stylesheet>
+  <link href=http://staticresource.com/basic.css rel=stylesheet>
+  <link href=http://staticresource.com/data-buttons.css rel=stylesheet>
+  <style>
+    @element '[type=button]' {
+      $prev {
+        background: gold;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Selecting Previous Element</h1>
+  <h2>Using the <code>$prev</code> meta-selector in EQCSS</h2>
+  <input type=text placeholder="Text input">
+  <input type=email placeholder="Email input">
+  <input type=password placeholder="Password input">
+  <input type=button data-button value="Button input">
+  <!--[if lt IE 9]><script src=EQCSS-polyfills.js></script><![endif]-->
+  <script src=EQCSS.js></script>
+</body>
+</html>
