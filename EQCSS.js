@@ -673,10 +673,8 @@ EQCSS.apply = function(){
         // Replace "$root" with html
         css_code = css_code.replace(/\$root/g, "html");
 
-        // Replace eval("xyz") with xyz's current value in JS
-        css_code = css_code.replace(/var\(([^()]*(\([^)]*\)[^()]*)*[^()]*)\)/g, function(string, match){
-          return (eval(match) || "");
-        });
+
+
 
         // good browsers
         try {

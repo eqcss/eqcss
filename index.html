@@ -640,7 +640,7 @@
     </article>
     <h3 id=meta-selectors>Meta Selectors</h3>
     <article id=this-selector>
-      <h4>$this</h4>
+      <h4><code>$this</code> selector</h4>
       <div class="this-selector">
         class="this-selector"
         <input placeholder=input>
@@ -654,7 +654,7 @@
 </script>
     </article>
     <article id=parent-selector>
-      <h4>$parent</h4>
+      <h4><code>$parent</code> selector</h4>
       <div class="parent-selector">
         class="parent-selector"
         <input placeholder=input>
@@ -670,7 +670,7 @@
 }
 </script>
     <article id=root-selector>
-      <h4>$root</h4>
+      <h4><code>$root</code> selector</h4>
       <div class="root-selector">
         class="root-selector"
         <input placeholder=input>
@@ -685,6 +685,35 @@
   }
 }
 </script>
+    </article>
+    <article id=prev-selector>
+      <h4><code>$prev</code> selector</h4>
+      <div class="prev-selector">
+        class="prev-selector"
+        <input type=text placeholder=input>
+        <input type=email placeholder=email>
+      </div>
+<script type="text/eqcss">@element ".prev-selector [type=email]" {
+  $prev {
+    border-color: red;
+  }
+}
+</script>
+    </article>
+    <article id=next-selector>
+      <h4><code>$next</code> selector</h4>
+      <div class="next-selector">
+        class="next-selector"
+        <input type=text placeholder=input>
+        <input type=email placeholder=email>
+      </div>
+<script type="text/eqcss">@element ".next-selector [type=text]" {
+  $next {
+    border-color: red;
+  }
+}
+</script>
+    </article>
     <h3 id=css-functions>CSS Functions</h3>
     <article id=var>
       <h4>eval("")</h4>
@@ -717,7 +746,9 @@
       <li><a href=demos/message-style.html>Chat Message Style</a></li>
       <li><a href=demos/modal.html>Modal Demo</a></li>
       <li><a href=demos/nav.html>Nav Demo</a></li>
+      <li><a href=demos/next.html>Next Element CSS Selector Demo</a></li>
       <li><a href=demos/parent.html>Parent Selector Demo</a></li>
+      <li><a href=demos/prev.html>Previous Element CSS Selector Demo</a></li>
       <li><a href=demos/pricing-chart.html>Pricing Chart Demo</a></li>
       <li><a href=demos/responsive-table.html>Responsive Tables Demo</a></li>
       <li><a href=demos/blocker.html>Scroll-triggered Blocker Demo</a></li>
