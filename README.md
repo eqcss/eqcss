@@ -98,7 +98,7 @@ Element Queries have the following format:
 
 ### CSS Functions
 
-- `var()`
+- `eval("")`
 
 ## Element Query Demos
 

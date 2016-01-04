@@ -4,32 +4,48 @@
   <meta charset=utf-8>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Counting Children with Element Queries</title>
-  <meta name="description" content="Using the new var() feature in EQCSS you can now use a value from JavaScript in your CSS, whether it's a variable, value, or function - whatever the current value of that is at the time the element query applies will be the value that is used.">
+  <meta name="description" content="Using the new eval("") feature in EQCSS you can now use a value from JavaScript in your CSS, whether it's a variable, value, or function - whatever the current value of that is at the time the element query applies will be the value that is used.">
   <meta name="keywords" content="EQCSS, element queries, element query, container queries, responsive">
   <link href=http://staticresource.com/data-buttons.css rel=stylesheet>
   <link href=http://staticresource.com/basic.css rel=stylesheet>
   <link href=http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic rel=stylesheet>
   <link href=http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic rel=stylesheet>
   <style>
-    @element 'button' {
-      $this:after {
-        content: '\ var(document.querySelectorAll("#cart li").length) Items'
-      }
+    @element '[type=submit]' {
+      eval("className=document.querySelector('ul').children.length>=5?'':'disabled'")
+      eval("value='Checkout with '+document.querySelector('ul').children.length+' Items'")
+    }
+    .disabled {
+      transition: all .1s ease-in-out;
+      opacity: .3;
+      pointer-events: none;
+      cursor: default;
+    }
+    [data-button] {
+      width: auto !important;
     }
   </style>
 </head>
 <body>
   <h1>Counting Children</h1>
-  <h2>Powering CSS with JS</h2>
-  <input type=button data-button=blue onclick="cart.innerHTML+='<li>item</li>'" value="Add Item to Cart">
-  <button data-button=green>Purchase</button>
-  <ul id=cart>
-    <li>item</li>
-    <li>item</li>
-    <li>item</li>
-  </ul>
+  <h2>Using <code>eval("")</code> in CSS to Count Elements</h2>
+  <p><input data-button=green type=button onclick=addItem() value="+ Add Item"> <input data-button=red type=button onclick=removeItem() value="- Remove Item"></p>
+  <ul></ul>
+  <p><input data-button=blue type=submit class=disabled value=Checkout></p>
+  <small>A minimum order quantity of five (5) items is required to check out.</small>
   <!--[if lt IE 9]><script src="http://elementqueries.com/EQCSS-polyfills.js"></script><![endif]-->
   <script src="http://elementqueries.com/EQCSS.js"></script>
   <script src="http://staticresource.com/eqcss-demo.js"></script>
+  <script>
+    document.addEventListener('click',function(){EQCSS.apply()})
+    function addItem(){
+      var list = document.querySelector('ul')
+      list.innerHTML += '<li>item</li>'
+    }
+    function removeItem(){
+      var list = document.querySelector('ul')
+      list.removeChild(list.lastChild)
+    }
+  </script>
 </body>
 </html>

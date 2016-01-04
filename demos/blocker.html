@@ -66,17 +66,17 @@
       }
     }
     @element 'html,body' and (min-scroll-y: 50%) {
-      var(
-        var modal = document.querySelector("[data-blocker]");
+      eval("
+        var modal = document.querySelector('[data-blocker]');
         modal.style.opacity = 1;
         modal.style.pointerEvents = 'all';
-      )
+      ")
     }
   </style>
 </head>
 <body>
   <h1>Scroll-triggered Blocker</h1>
-  <h2>Using <code>min-scroll-y</code> and <code>var()</code></h2>
+  <h2>Using <code>min-scroll-y</code> and <code>eval("")</code></h2>
   <h3>The blocker will fire once you've scrolled 50% of the page and not go away. <em>(Sorry!)</em></h3>
   <aside data-blocker>
     <article>

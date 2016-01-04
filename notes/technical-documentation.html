@@ -168,7 +168,7 @@
     <li>To make scoped styles, eqcss allows to use the keyword <code>$this</code> into the query. The trick here is to replace “<code>$this</code>” with “<code>[data-eqcss_X_Y]</code>” before copying the css code into the <code>style</code> block. This produced a CSS selector that matches only the element having the current GUID, i.e. the current element, that we want to call “<code>$this</code>”.</li>
     <li>“<code>$parent</code>” is quite similar: EQCSS replaces it with “<code>[data-eqcss-X-Y-parent]</code>” in the CSS code before applying it.</li>
     <li>“<code>$root</code>” is replaced by “<code>html</code>”</li>
-    <li>And when EQCSS meets something like “<code>var(abcd)</code>” or “<code>var(oneFunction())</code>”, it evaluates the expression inside (in JavaScript) the parenthesis and replaces it with the value returned. Ex: if <code>abcd = 40</code>, “<code>width: var(abcd)px</code>” becomes “<code>width: 40px</code>”.</li>
+    <li>And when EQCSS meets something like “<code>eval("abcd")</code>” or “<code>eval("oneFunction()")</code>”, it evaluates the expression inside (in JavaScript) the parenthesis and replaces it with the value returned. Ex: if <code>abcd = 40</code>, “<code>width: eval("abcd")px</code>” becomes “<code>width: 40px</code>”.</li>
   </ul>
   <h3>Polyfills</h3>
   <p>Many polyfills were included into EQCSS to allow a good compatibility between browsers:</p>

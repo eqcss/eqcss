@@ -2,7 +2,7 @@
  * EQCSS / Tommy Hodgins, Maxime Euzière / MIT licence
  * github.com/eqcss/eqcss
  * elementqueries.com
- * version 1.0.0
+ * version 1.1.0
  */
 
 EQCSS = {
@@ -633,7 +633,7 @@ EQCSS.apply = function(){
         // Replace "$root" with html
         css_code = css_code.replace(/\$root/g, "html");
 
-        // Replace var(xyz) with xyz's current value in JS
+        // Replace eval("xyz") with xyz's current value in JS
         css_code = css_code.replace(/var\(([^()]*(\([^)]*\)[^()]*)*[^()]*)\)/g, function(string, match){
           return (eval(match) || "");
         });

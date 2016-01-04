@@ -687,19 +687,19 @@
 </script>
     <h3 id=css-functions>CSS Functions</h3>
     <article id=var>
-      <h4>var()</h4>
-      <div class="var">
+      <h4>eval("")</h4>
+      <div class="eval">
         <p><strong>Current Year:</strong></p>
         <p><em>Viewport Size:</em></p>
       </div>
 <script type="text/eqcss">@element "strong" {
   $this:after {
-    content: ' var(new Date().getFullYear())';
+    content: ' eval("new Date().getFullYear()")';
   }
 }
 @element "em" {
   $this:after {
-    content: ' var(window.innerWidth+' x '+window.innerHeight)';
+    content: ' eval("window.innerWidth+' x '+window.innerHeight")';
   }
 }
 </script>
