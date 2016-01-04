@@ -75,7 +75,7 @@
     margin: 10px;
     padding: 10px;
     width: 400px;
-    height: 380px;
+    min-height: 380px;
     display: inline-block;
     vertical-align: top;
   }
@@ -117,7 +117,7 @@ EQCSS.apply();
 Please note that this is called automatically on load, on resize, on input, on keydown/keyup, on mousedown/mouseup and when the DOM changes.
 </section>
 
-<section>
+<!--section>
 <h3>Write your own EQCSS code as if you wrote regular CSS code</h3>
 in the head or the body, as inline style
 <br>
@@ -519,6 +519,106 @@ You can also target any children of the root:
     $root .parent_section style { background: yellow }
 }
 </style>
+</section-->
+
+
+
+<section>
+<h3>eval</h3>
+classic
+<br>
+<br>
+<div class="eval" style="resize: horizontal; padding: 5px;">
+.eval
+</div>
+<br>
+<style>
+@element ".eval" and (min-width: 150px){
+    $this:after { content: "eval('Math.random()')" }
+}
+</style>
+<br>
+Infinite nested parenthesis
+<br>
+<br>
+<div class="eval2" style="resize: horizontal; padding: 5px;">
+.eval2
+</div>
+<br>
+<style>
+@element ".eval2" and (min-width: 150px){
+    $this:after {
+      content: 
+      "eval('Math.min(Math.random(),Math.random())')"
+    }
+}
+</style>
+<br>
+<br>
+JS error
+<br>
+<br>
+<div class="eval3" style="resize: horizontal; padding: 5px;">
+.eval3
+</div>
+<br>
+<style>
+@element ".eval3" and (min-width: 150px){
+    $this:after { content: "eval('Math.random()<0.5?"ok":undef()')" }
+}
+</style>
+<br>
+<br>
+Scoping
+<br>
+(you can use "$it" or nothing to access the current element) 
+<br>
+<br>
+<div class="eval4" style="resize: horizontal; padding: 5px;">
+.eval4
+</div>
+<br>
+<style>
+@element ".eval4" and (min-width: 150px){
+    $this:after {
+        display: block;
+        content: "eval('"The className of this div is:" + className')"
+    }
+}
+</style>
+</section>
+
+
+
+<section class="parent_section">
+<h3>$prev, $next</h3>
+<br>
+<br>
+<div>prev</div>
+<div class="prev" style="resize: horizontal; padding: 5px;">
+.prev
+</div>
+<br>
+<style>
+@element ".prev" and (min-width: 150px){
+    $prev { background: red }
+}
+</style>
+<br>
+
+<br>
+<br>
+<div class="next" style="resize: horizontal; padding: 5px;">
+.next
+</div>
+<div>next</div>
+<br>
+<style>
+@element ".next" and (min-width: 150px){
+    $next { background: red }
+}
+</style>
+<br>
 </section>
 
 

@@ -195,6 +195,24 @@ EQCSS.apply = function(){
         elements[j].parentNode.setAttribute(element_guid_parent, "");
       }
 
+      // Create a guid for the prev sibling of this element
+      // Pattern: "EQCSS_{element-query-index}_{matched-element-index}_prev"
+      element_guid_prev = "data-eqcss-" + i + "-" + j + "-prev";
+
+      // Add this guid as an attribute to the element's prev sibling
+      if(elements[j].previousElementSibling){
+        elements[j].previousElementSibling.setAttribute(element_guid_prev, "");
+      }
+
+      // Create a guid for the next sibling of this element
+      // Pattern: "EQCSS_{element-query-index}_{matched-element-index}_next"
+      element_guid_next = "data-eqcss-" + i + "-" + j + "-next";
+
+      // Add this guid as an attribute to the element's next sibling
+      if(elements[j].nextElementSibling){
+        elements[j].nextElementSibling.setAttribute(element_guid_next, "");
+      }
+
       // Get the CSS block associated to this element (or create one in the <HEAD> if it doesn't exist)
       css_block = document.querySelector("#" + element_guid);
       if(!css_block){
@@ -624,11 +642,33 @@ EQCSS.apply = function(){
         // Get the CSS code to apply to the element
         css_code = EQCSS.data[i].style;
 
+        // Replace eval(xyz) with the result of try{with(element){eval(xyz)}} in JS
+        css_code = css_code.replace(
+          /eval\( *((".*?")|('.*?')) *\)/g,
+          function(string,match){
+            var $it = elements[j];
+            var ret = "";
+            try{
+              with($it){ret = eval(match.slice(1,-1))}
+            }
+            catch(e){
+              ret = "";
+            };
+            return ret;
+          }
+        );
+
         // Replace "$this" with "[element_guid]"
         css_code = css_code.replace(/\$this/g, "[" + element_guid + "]");
 
         // Replace "$parent" with "[element_guid_parent]"
         css_code = css_code.replace(/\$parent/g, "[" + element_guid_parent + "]");
+
+        // Replace "$prev" with "[element_guid_prev]"
+        css_code = css_code.replace(/\$prev/g, "[" + element_guid_prev + "]");
+
+        // Replace "$next" with "[element_guid_next]"
+        css_code = css_code.replace(/\$next/g, "[" + element_guid_next + "]");
 
         // Replace "$root" with html
         css_code = css_code.replace(/\$root/g, "html");
@@ -637,7 +677,6 @@ EQCSS.apply = function(){
         css_code = css_code.replace(/var\(([^()]*(\([^)]*\)[^()]*)*[^()]*)\)/g, function(string, match){
           return (eval(match) || "");
         });
-
 
         // good browsers
         try {
