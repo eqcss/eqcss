@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-theme=dark>
 <head>
   <meta charset=utf-8>
   <meta name=viewport content="width=device-width, initial-scale=1">
@@ -18,9 +18,6 @@
     }
     pre {
       white-space: pre;
-    }
-    p {
-      font-size: 140%;
     }
   </style>
 </head>
@@ -61,7 +58,7 @@
   <h3>EQCSS.load()</h3>
   <p>EQCSS code can be written alongside regular CSS code. Its syntax <code>@element (...) { ... }</code> is custom enough to stay ignored by browsers when they parse CSS. Although, it’s clean enough to be colored by syntax highlighters. Ex: <a href="http://codepen.io/tomhodgins/pen/yYVdBq">codepen.io/tomhodgins/pen/yYVdBq</a></p>
   <p>That’s why we allow to write EQCSS code directly in <code>style</code> blocks (for embedded style) and <code>link rel=stylesheet href=...</code> links (for external CSS files).</p>
-  <p>If you want to keep your EQCSS code separated from regular CSS, you can also include it in a <code>script type=“text/eqcss”</code> block (for embedded style) or <code>script type=“text/eqcss” src=...</code> includes (for external files)</p>
+  <p>If you want to keep your EQCSS code separated from regular CSS, you can also include it in a <code>script type="text/eqcss"</code> block (for embedded style) or <code>script type="text/eqcss" src=...</code> includes (for external files)</p>
   <p><code>EQCSS.load()</code> fetches all these elements into the page, and gather their content into a string: <code>EQCSS.code</code></p>
   <p>Embedded styles are read via innerHTML, external files are read via a synchronous AJAX request.</p>
   <p><code>EQCSS.code</code> is then cleaned by a bunch of RegExps that remove all the comments, trim extra spaces and put each query on a separate line.</p>
