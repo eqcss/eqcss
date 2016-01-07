@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-theme=code>
 <head>
   <meta charset=utf-8>
   <meta name=viewport content="width=device-width, initial-scale=1">
@@ -8,9 +8,8 @@
   <meta name="keywords" content="parent selector, css parent, EQCSS, element queries, element query, container queries, responsive, adaptive">
   <link href=http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic rel=stylesheet>
   <link href=http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic rel=stylesheet>
+  <link href=http://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,500,600,700,900 rel=stylesheet>
   <link href=http://staticresource.com/basic.css rel=stylesheet>
-  <link href=http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic rel=stylesheet>
-  <link href=http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic rel=stylesheet>
   <style>
     h1 span {
       display: block;
@@ -20,6 +19,11 @@
     }
     h2 {
       text-align: center;
+    }
+    @media (min-width: 1000px) {
+      p {
+        font-size: 140%;
+      }
     }
   </style>
 </head>
@@ -36,7 +40,7 @@
   <p>Element-first layouts aren&rsquo;t static, they are born when the page loads and live and adapt as the user and application interact</p>
   <h3>Element-first</h4>
   <p>Element-first design is the spirit of the Atomic design principle, but looks very different in practice than how most people implement Atomic using their mobile-first mindset. Instead of writing styles on advance for every conceivable situation a widget my find itself in, we are able to allow individual parts of the layout to adapt responsively when those elements require it.</p>
-  <p>It makes more sense to say: “These are the styles for the menu when the menu has 300px wide, and these are the styles when the menu is more than 300px wide” than it does to say “These styles are in case the menu shows up in a layout outside a wrapper where it has less than 300px space, here&rsquo;s how the menu shows up in a layout inside a wrapper with less than 300px space, here&rsquo;s how the menu shows up in a layout without a wrapper but with a sidebar with less than 300px, etc…” and then also defining all those different layout variations at every breakpoint you want to support as well.</p>
+  <p>It makes more sense to say: <em><q>These are the styles for the menu when the menu has 300px wide, and these are the styles when the menu is more than 300px wide</q></em> than it does to say <em><q>These styles are in case the menu shows up in a layout outside a wrapper where it has less than 300px space, here&rsquo;s how the menu shows up in a layout inside a wrapper with less than 300px space, here&rsquo;s how the menu shows up in a layout without a wrapper but with a sidebar with less than 300px, etc…</q></em> and then also defining all those different layout variations at every breakpoint you want to support as well.</p>
   <p>You can see why people have turned toward conventions like BEM to try to help them manage the complexity, but we&rsquo;ve clearly gotten to a breaking point where our layouts are breaking under the weight of all of the classes and attributes we&rsquo;re adding to them. We feel the need to use pre-processors which can&rsquo;t help us after the page loads to try to output enough CSS <q>just in case</q> we need it, then we have to deal with tons of CSS and minify and compress that down so it&rsquo;s small again.</p>
   <p>Why not just take an element-first approach?</p>
   <h3>Illustration</h3>
@@ -46,7 +50,7 @@
   &lt;input type=button value=Search>
 &lt;/form></pre>
   <p>Now let&rsquo;s say the responsive behaviour you want could be explained like this in english:<p>
-  <p><q>Search box and button are side-by-side until they get too narrow, then both the input and the button should be stacked on top of each other and full-width.</q></p>
+  <p><Em><q>Search box and button are side-by-side until they get too narrow, then both the input and the button should be stacked on top of each other and full-width.</q></em></p>
   <h4>Desktop-first CSS</h4>
   <p>In a desktop-first mindset you would write your CSS like this:</p>
 <pre>input {

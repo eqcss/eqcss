@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-theme=code>
 <head>
   <meta charset=utf-8>
   <meta name=viewport content="width=device-width, initial-scale=1">
@@ -8,12 +8,19 @@
   <meta name="keywords" content="EQCSS, element queries, element query, container queries, responsive, adaptive">
   <link href=http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic rel=stylesheet>
   <link href=http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic rel=stylesheet>
+  <link href=http://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,500,600,700,900 rel=stylesheet>
   <link href=http://staticresource.com/basic.css rel=stylesheet>
-  <link href=http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic rel=stylesheet>
-  <link href=http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic rel=stylesheet>
   <style>
     pre {
       white-space: pre;
+    }
+    blockquote p {
+      font-size: 180%;
+    }
+    @media (min-width: 1000px) {
+      p {
+        font-size: 140%;
+      }
     }
   </style>
 </head>
@@ -42,7 +49,7 @@
   <h2>How to use EQCSS</h2>
   <p>EQCSS is a JavaScript plugin that extends CSS to include Element Queries, plus other features that regular CSS doesn&#39;t currently support. It is written in pure JavaScript, so it doesn&#39;t require jQuery or any other JavaScript library to be installed on your site to work.</p>
   <blockquote>
-  <p>Here on Codepen you can fork my ‘Batteries-Included’ EQCSS template that has EQCSS.js and event listeners for most keyboard and mouse events built-in and ready to play around with.<br>
+  <p>On Codepen you can fork my ‘Batteries-Included’ EQCSS template that has <code>EQCSS.js</code> and event listeners for most keyboard and mouse events built-in and ready to play around with.<br>
   <strong>Save this as a template:</strong> <a href="http://codepen.io/tomhodgins/pen/gagyrz">EQCSS Batteries Included Template</a></p>
   </blockquote>
   <h2>Download EQCSS</h2>
