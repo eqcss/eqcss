@@ -15,8 +15,13 @@
       display: block;
       margin: .25em 0 0 0;
     }
-    pre {
+    pre, pre code {
+      color: inherit !important;
       white-space: pre;
+      background: midnightblue !important;
+    }
+    pre code {
+      box-shadow: none !important;
     }
     @media (min-width: 1000px) {
       p {
@@ -41,7 +46,7 @@
   <p>When we started this project, the requirements for EQCSS were:</p>
   <ul>
     <li>extend CSS with revolutionary selectors and meta-selectors</li>
-    <li>define a great syntax for “Element Queries” allowing to style elements based on their size, their content or their state (most of the syntax proposals we could find online didn’t suit us)</li>
+    <li>define a great syntax for <q>Element Queries</q> allowing to style elements based on their size, their content or their state (most of the syntax proposals we could find online didn’t suit us)</li>
     <li>standalone (no jQuery)</li>
     <li>light</li>
     <li>fast</li>
@@ -53,12 +58,12 @@
   <p>We have a global object EQCSS containing 2 functions:</p>
   <ul>
     <li><code>EQCSS.load()</code>, called automatically when the DOM is ready. Its role is to find all the EQCSS code present in the page, gather it and parse it in order to extract all the useful parts. It can also be called manually if new EQCSS sources are added to the page after page load.</li>
-    <li><code>EQCSS.apply()</code>, called automatically when the DOM is ready (after EQCSS.load), but also when the user interacts with the page. Its role is to test all the Element Queries parsed by <code>EQCSS.load()</code> and apply their respective styles into the page if it is applicable. It’s called after “resize” events by default, but developers can also decide to call it after events like click, text input, scroll (like at the <a href="https://github.com/eqcss/eqcss/blob/gh-pages/test.html">end of the test page</a>), or manually as soon as the display needs to be updated.</li>
+    <li><code>EQCSS.apply()</code>, called automatically when the DOM is ready (after EQCSS.load), but also when the user interacts with the page. Its role is to test all the Element Queries parsed by <code>EQCSS.load()</code> and apply their respective styles into the page if it is applicable. It’s called after <q>resize</q> events by default, but developers can also decide to call it after events like click, text input, scroll (like at the <a href="https://github.com/eqcss/eqcss/blob/gh-pages/test.html">end of the test page</a>), or manually as soon as the display needs to be updated.</li>
   </ul>
   <p>Ex: apply EQCSS after keydown events:</p>
-<pre>window.addEventListener(“keydown”, function(){
+<pre><code class=javascript>window.addEventListener("keydown", function(){
   EQCSS.apply();
-});</pre>
+});</code></pre>
   <h3>EQCSS.load()</h3>
   <p>EQCSS code can be written alongside regular CSS code. Its syntax <code>@element (...) { ... }</code> is custom enough to stay ignored by browsers when they parse CSS. Although, it’s clean enough to be colored by syntax highlighters. Ex: <a href="http://codepen.io/tomhodgins/pen/yYVdBq">codepen.io/tomhodgins/pen/yYVdBq</a></p>
   <p>That’s why we allow to write EQCSS code directly in <code>style</code> blocks (for embedded style) and <code>link rel=stylesheet href=...</code> links (for external CSS files).</p>
@@ -67,7 +72,7 @@
   <p>Embedded styles are read via innerHTML, external files are read via a synchronous AJAX request.</p>
   <p><code>EQCSS.code</code> is then cleaned by a bunch of RegExps that remove all the comments, trim extra spaces and put each query on a separate line.</p>
   <p>Before (HTML):</p>
-<pre>&lt;style&gt;
+<pre><code class=html>&lt;style&gt;
 /* Hi */
 @element &quot;.class1&quot; and (max-width: 40%){
   /* HERE IT IS */
@@ -79,13 +84,13 @@
 @element &quot;.class2&quot; and (min-width: 250px) and (max-width: 300px){
   .class2 { background: yellow; }
 }
-&lt;/script&gt;</pre>
+&lt;/script&gt;</code></pre>
   <p>After (JS):</p>
-<pre>EQCSS.code =
+<pre><code class=css>EQCSS.code =
 &quot;@element &quot;.class1&quot; and (max-width: 40%){ .class1 { background: yellow; }  }
-@element &quot;.class2&quot; and (min-width: 250px) and (max-width: 300px){ .class2 { background: yellow; } }&quot;</pre>
+@element &quot;.class2&quot; and (min-width: 250px) and (max-width: 300px){ .class2 { background: yellow; } }&quot;</code></pre>
   <p>Then, another bunch of RegExps parse these lines and separate the selectors, conditions and styles into an object called EQCSS.data:</p>
-<pre>EQCSS.data = [
+<pre><code class=javascript>EQCSS.data = [
   {
     selector: &quot;.class1&quot;,
     conditions: [
@@ -113,39 +118,39 @@
     ],
     style: &quot;.class2 { background: yellow; }&quot;;
   }
-]</pre>
+]</code></pre>
   <h3>EQCSS.apply()</h3>
-  <p>We now have a collection of EQCSS selectors, conditions and styles to apply. The first thing we can do with it is to query the page’s DOM to retrieve all the elements corresponding to the selectors, and mark them with a “GUID”: a custom and unique attribute: <code>data-eqcss-X-Y</code>.</p>
+  <p>We now have a collection of EQCSS selectors, conditions and styles to apply. The first thing we can do with it is to query the page’s DOM to retrieve all the elements corresponding to the selectors, and mark them with a <q>GUID</q>: a custom and unique attribute: <code>data-eqcss-X-Y</code>.</p>
   <p>X represents the current Element Query, and Y the current element matching this query.</p>
-  <p>The parent of each matched element is also marked with a custom attribute, or “parent GUID”, in the form of <code>data-eqcss-X-Y-parent</code>. Here’s an example:</p>
+  <p>The parent of each matched element is also marked with a custom attribute, or <q>parent GUID</q>, in the form of <code>data-eqcss-X-Y-parent</code>. Here’s an example:</p>
   <p>Before:</p>
-<pre>&lt;div&gt;
+<pre><code class=html>&lt;div&gt;
   &lt;div class=&quot;class1&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div&gt;
   &lt;div class=&quot;class1&quot;&gt;&lt;/div&gt;
   &lt;div class=&quot;class1 class2&quot;&gt;&lt;/div&gt;
   &lt;div class=&quot;class2&quot;&gt;&lt;/div&gt;
-&lt;/div&gt;</pre>
+&lt;/div&gt;</code></pre>
   <p>After:</p>
-<pre>&lt;div data-eqcss-0-0-parent&gt;
+<pre><code class=html>&lt;div data-eqcss-0-0-parent&gt;
   &lt;div &lt;div class=&quot;class1&quot; data-eqcss-0-0&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div data-eqcss-0-1-parent data-eqcss-0-2-parent data-eqcss-1-0-parent data-eqcss-1-1-parent&gt;
   &lt;div class=&quot;class1&quot; data-eqcss-0-1&gt;&lt;/div&gt;
   &lt;div class=&quot;class1 class2&quot; data-eqcss-0-2 data-eqcss-1-0&gt;&lt;/div&gt;
   &lt;div class=&quot;class2&quot; data-eqcss-1-1&gt;&lt;/div&gt;
-&lt;/div&gt;</pre>
+&lt;/div&gt;</code></pre>
   <p>(<strong>NB:</strong> as you can see, an element can belong to multiple Element Queries (and thus, carry multiple GUIDs), and if multiple elements share a common parent, the parent will have multiple parent GUIDs.)</p>
   <p>Then, a <code>style</code> block is created in the page’s HEAD for each GUID (and the GUID becomes the id of the <code>style</code> block).</p>
   <p>Ex:</p>
-<pre>&lt;head&gt;
+<pre><code class=html>&lt;head&gt;
   &lt;style id=&quot;eqcss-0-0&quot;&gt;&lt;/style&gt;
   &lt;style id=&quot;eqcss-0-1&quot;&gt;&lt;/style&gt;
   &lt;style id=&quot;eqcss-0-2&quot;&gt;&lt;/style&gt;
   &lt;style id=&quot;eqcss-1-0&quot;&gt;&lt;/style&gt;
   &lt;style id=&quot;eqcss-1-1&quot;&gt;&lt;/style&gt;
-&lt;/head&gt;</pre>
+&lt;/head&gt;</code></pre>
   <p>(<strong>NB:</strong> These style blocks are created once, at the first call of <code>EQCSS.apply()</code>. During the next calls, they are just reused if they already exist)</p>
   <p>Then, for each query, and for each element matching the query, we have to test if all the query’s conditions are met.</p>
   <p>We save the element’s <code>computedStyle</code> as well as it’s parent’s <code>computedStyle</code>, because they will be required to test the conditions.</p>
@@ -155,21 +160,21 @@
   <p>Finally, some conditions (like min/max-children or min/max-characters) require no units and no <code>computedStyle</code> at all. They just depend on the element’s content.</p>
   <p>Anyway, if all the conditions of a query are met by an element, then EQCSS will fetch the <code>style</code> block associated to this element (in the page’s <code>head</code>) and fill it with the query’s css.</p>
   <p>Ex: if the element <code>[data-eqcss-1-0]</code> matches the query 1, then the head will contain this:</p>
-<pre>&lt;head&gt;
+<pre><code class=html>&lt;head&gt;
   &lt;style id=&quot;eqcss-0-0&quot;&gt;&lt;/style&gt;
   &lt;style id=&quot;eqcss-0-1&quot;&gt;&lt;/style&gt;
   &lt;style id=&quot;eqcss-0-2&quot;&gt;&lt;/style&gt;
   &lt;style id=&quot;eqcss-1-0&quot;&gt;.class2 { background: yellow; }&lt;/style&gt;
   &lt;style id=&quot;eqcss-1-1&quot;&gt;&lt;/style&gt;
-&lt;/head&gt;</pre>
+&lt;/head&gt;</code></pre>
   <p>And the browser will instantly apply this style on all the page.</p>
   <p>At the contrary, if all the conditions are NOT met, the <code>style</code> block is emptied and the corresponding style disappears into the page.</p>
   <p>Special keywords are handled like this:</p>
   <ul>
-    <li>To make scoped styles, eqcss allows to use the keyword <code>$this</code> into the query. The trick here is to replace “<code>$this</code>” with “<code>[data-eqcss_X_Y]</code>” before copying the css code into the <code>style</code> block. This produced a CSS selector that matches only the element having the current GUID, i.e. the current element, that we want to call “<code>$this</code>”.</li>
-    <li>“<code>$parent</code>” is quite similar: EQCSS replaces it with “<code>[data-eqcss-X-Y-parent]</code>” in the CSS code before applying it.</li>
-    <li>“<code>$root</code>” is replaced by “<code>html</code>”</li>
-    <li>And when EQCSS meets something like “<code>eval("abcd")</code>” or “<code>eval("oneFunction()")</code>”, it evaluates the expression inside (in JavaScript) the parenthesis and replaces it with the value returned. Ex: if <code>abcd = 40</code>, “<code>width: eval("abcd")px</code>” becomes “<code>width: 40px</code>”.</li>
+    <li>To make scoped styles, eqcss allows to use the keyword <code>$this</code> into the query. The trick here is to replace <q><code>$this</code></q> with <q><code>[data-eqcss_X_Y]</code></q> before copying the css code into the <code>style</code> block. This produced a CSS selector that matches only the element having the current GUID, i.e. the current element, that we want to call <q><code>$this</code></q>.</li>
+    <li><q><code>$parent</code></q> is quite similar: EQCSS replaces it with <q><code>[data-eqcss-X-Y-parent]</code></q> in the CSS code before applying it.</li>
+    <li><q><code>$root</code></q> is replaced by <q><code>html</code></q></li>
+    <li>And when EQCSS meets something like <q><code>eval("abcd")</code></q> or <q><code>eval("oneFunction()")</code></q>, it evaluates the expression inside (in JavaScript) the parenthesis and replaces it with the value returned. Ex: if <code>abcd = 40</code>, <q><code>width: eval("abcd")px</code></q> becomes <q><code>width: 40px</code></q>.</li>
   </ul>
   <h3>Polyfills</h3>
   <p>Many polyfills were included into EQCSS to allow a good compatibility between browsers:</p>
@@ -188,5 +193,8 @@
   </footer>
   <!--[if lt IE 9]><script src=http://elementqueries.com/EQCSS-polyfills.js></script><![endif]-->
   <script src=http://elementqueries.com/EQCSS.js></script>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/tomorrow-night-blue.min.css" rel=stylesheet>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad()</script>
 </body>
 </html>

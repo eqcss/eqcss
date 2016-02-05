@@ -14,6 +14,9 @@
     pre {
       white-space: pre;
     }
+    pre code {
+      box-shadow: none !important;
+    }
     h3 {
       text-align: center;
     }
@@ -33,26 +36,26 @@
   <h3>Ladies and Gentlemen may I present: the <code>$parent</code> selector.</h3>
   <p>It works with our element query plugin EQCSS, to learn more about how to get started with element queries check out <a href=http://elementqueries.com>elementqueries.com</a></p>
   <p>When you write an element query you create a responsive context into which those styles apply. A simple element query might look like this:</p>
-<pre>@element '.widget' {
+<pre><code class=css>@element '.widget' {
   .widget {
     background: red'
   }
-}</pre>
+}</code></pre>
   <p>Now the styles inside can apply to any element, including other <code>.widget</code> elements on the page, so we use style scoping to apply our styles to the element(s) which match our query with the <code>$this</code> keyword. In the example below every <code>.widget</code> that matches the condition will get the styles applied to <code>$this</code>, but the styles applied to <code>.widget</code> will apply to all <code>.widget</code> elements on the page at any time a <code>.widget</code> element meets the responsive condition.</p>
-<pre>@element '.widget' {
+<pre><code class=css>@element '.widget' {
     $this {
     background: green;
   }
   .widget {
     background: red;
   }
-}</pre>
+}</code></pre>
   <p>This is style scoping. To target the parent of an element using the <code>$parent</code> selector, first create a responsive context. Now anywhere you use the <code>$parent</code> selector inside this query it will target the element containing <code>$this</code>, the element that matches the query</p>
-<pre>@element '.widget {
+<pre><code class=css>@element '.widget {
   $parent {
     background: red;
   }
-}</pre>
+}</code></pre>
   <p>Now the next time you encounter a situation where you wish you could target the parent of something, <strong><em>you can!</em></strong></p>
   <h4>Parent Selector Demos</h4>
   <p data-height="300" data-theme-id="0" data-slug-hash="mVVYBg" data-default-tab="result" data-user="tomhodgins" class="codepen">See the Pen <a href="http://codepen.io/tomhodgins/pen/mVVYBg/">Parent Selector Demo</a> by Tommy Hodgins (<a href="http://codepen.io/tomhodgins">@tomhodgins</a>) on <a href="http://codepen.io">CodePen</a>.</p>
@@ -63,5 +66,8 @@
   <!--[if lt IE 9]><script src=http://elementqueries.com/EQCSS-polyfills.js></script><![endif]-->
   <script src=http://elementqueries.com/EQCSS.js></script>
   <script async src="http://assets.codepen.io/assets/embed/ei.js"></script>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/solarized_dark.min.css" rel=stylesheet>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad()</script>
 </body>
 </html>

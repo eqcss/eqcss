@@ -17,6 +17,9 @@
     pre {
       white-space: pre;
     }
+    pre code {
+      box-shadow: none !important;
+    }
     h2 {
       text-align: center;
     }
@@ -45,15 +48,15 @@
   <p>Why not just take an element-first approach?</p>
   <h3>Illustration</h3>
   <p>Let&rsquo;s say you have some HTML like this:</p>
-<pre>&lt;form>
+<pre><code class=html>&lt;form>
   &lt;input placeholder=Search>
   &lt;input type=button value=Search>
-&lt;/form></pre>
+&lt;/form></code></pre>
   <p>Now let&rsquo;s say the responsive behaviour you want could be explained like this in english:<p>
   <p><Em><q>Search box and button are side-by-side until they get too narrow, then both the input and the button should be stacked on top of each other and full-width.</q></em></p>
   <h4>Desktop-first CSS</h4>
   <p>In a desktop-first mindset you would write your CSS like this:</p>
-<pre>input {
+<pre><code class=css>input {
   width: 100%;
 }
 @media (max-width: 600px) {
@@ -61,10 +64,10 @@
     width: 50%;
     float: left;
   }
-}</pre>
+}</code></pre>
   <h4>Mobile-first CSS</h4>
   <p>In a mobile-first mindset, you&rsquo;re targeting the mobile view (stacked) first and adding support for the side-by-side view only if the screen has enough room:</p>
-<pre>input {
+<pre><code class=css>input {
   width: 1000%;
 }
 @media (min-width: 600px) {
@@ -72,10 +75,10 @@
     width: 50%;
     float: left;
   }
-}</pre>
+}</code></pre>
   <h4>Element-first CSS</h4>
   <p>With the first two examples, your <code>@media</code> breakpoint was set to <code>600px</code> not because that&rsquo;s how wide the inputs will be when they switch. The chances are that search form is probably inside at least one other parent element with margins and padding and so when the browser is <code>600px</code> width, those inputs might be somewhere around <code>550px</code> or <code>525px</code> wide in reality. So in a <em>desktop-first</em> and <em>mobile-first</em> mindset you&rsquo;re always setting your breakpoints based on the layout and how the elements show up in it. With <em>element-first</em> you would just say: <em><q>I don&rsquo;t care how wide the browser may be, I know when my inputs get to be <code>525-550px</code> wide that&rsquo;s the sweet spot where I want them to stack.</q></em> Instead of using a <code>@media</code> query to swap that CSS by the browser&rsquo;s dimensions, with <em>element-first</em> design you could attach your responsive conditions to the <code>&lt;form></code> element and say something like:</p>
-<pre>input {
+<pre><code class=css>input {
   width: 100%;
 }
 @element 'form' and (min-width: 525px) {
@@ -83,7 +86,7 @@
     width: 50%;
     float: left;
   }
-}</pre>
+}</code></pre>
   <p>The code is very very close to the other methods, but now you can toss this search form in a sidebar, you can make it full-width, you can use it in any template and no matter how wide the browser is, when the form itself doesn&rsquo;t have enough room to display the inputs side-by-side it will adapt. Even if the browser is <code>1000px</code> wide at the time that the form is squished below <code>525px</code> where you&rsquo;ve put it in your layout.</p>
   <h4>Element-First Design Examples</h4>
   <p data-height="300" data-theme-id="0" data-slug-hash="jWMNpE" data-default-tab="result" data-user="tomhodgins" class="codepen">See the Pen <a href="http://codepen.io/tomhodgins/pen/jWMNpE/">Atomic design with Element Queries</a> by Tommy Hodgins (<a href="http://codepen.io/tomhodgins">@tomhodgins</a>) on <a href="http://codepen.io">CodePen</a>.</p>
@@ -94,5 +97,8 @@
   <!--[if lt IE 9]><script src=http://elementqueries.com/EQCSS-polyfills.js></script><![endif]-->
   <script src=http://elementqueries.com/EQCSS.js></script>
   <script async src="http://assets.codepen.io/assets/embed/ei.js"></script>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/solarized_dark.min.css" rel=stylesheet>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad()</script>
 </body>
 </html>
