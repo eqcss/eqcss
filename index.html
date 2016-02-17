@@ -10,9 +10,10 @@
   <meta name=google-site-verification content=zqvNXM9AZmB51r-f-4NNlvL_RRS-K0oWVpPo0yd3E_0>
   <meta name=viewport content="width=device-width, initial-scale=1">
   <title>EQCSS - Element Queries for CSS</title>
-  <link href=//fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic rel=stylesheet>
-  <link href=//fonts.googleapis.com/css?family=Source+Code+Pro:300,400,500,600,700,900 rel=stylesheet>
-  <link href=//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css rel=stylesheet>
+  <link href=http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic rel=stylesheet>
+  <link href=http://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,500,600,700,900 rel=stylesheet>
+  <link href=http://staticresource.com/data-buttons.css rel=stylesheet>
+  <link href=http://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css rel=stylesheet>
   <style>
     *,
     *:before,
@@ -86,134 +87,6 @@
     a:hover,
     a:focus {
       color: darkslateblue;
-    }
-    [data-button] {
-      box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      text-rendering: optimizeLegibility;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      display: block;
-      width: auto;
-      max-width: 230px;
-      margin: 1em auto;
-      padding: .5em .6em .4em .6em;
-      -webkit-appearance: none;
-      appearance: none;
-      outline: none;
-      cursor: pointer;
-      background: #ff8900;
-      background: -moz-linear-gradient(top, #ff8900 0%, #ff3d00 100%);
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff8900), color-stop(100%,#ff3d00));
-      background: -webkit-linear-gradient(top, #ff8900 0%,#ff3d00 100%);
-      background: -o-linear-gradient(top, #ff8900 0%,#ff3d00 100%);
-      background: -ms-linear-gradient(top, #ff8900 0%,#ff3d00 100%);
-      background: linear-gradient(to bottom, #ff8900 0%,#ff3d00 100%);
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff8900', endColorstr='#ff3d00',GradientType=0 );
-      font-family: 'Fira Sans', 'Source Sans Pro', 'Open Sans', Roboto, 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', 'Myriad Pro', 'Segoe UI', Myriad, Helvetica, 'Lucida Grande', 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, Arial, sans-serif;
-      font-weight: 500;
-      font-kerning: auto;
-      text-decoration: none;
-      text-align: center;
-      font-size: 14pt;
-      line-height: 1.4;
-      color: #fff;
-      text-shadow: #e20 1px 1px 0;
-      border: 1px solid #f60;
-      border-bottom-color: #e20;
-      box-shadow: inset #f20 0 -5px 15px, inset #fc6 0 1px 1px, rgba(0,0,0,.15) 0px 1px 1px;
-      border-radius: 3px;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      -o-user-select: none;
-      user-select: none;
-    }
-    [data-button]:hover,
-    [data-button]:focus {
-      background: #fa3;
-      color: white;
-      background: -moz-linear-gradient(top, #fa3 0%, #f30 100%);
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fa3), color-stop(100%,#f30));
-      background: -webkit-linear-gradient(top, #fa3 0%,#f30 100%);
-      background: -o-linear-gradient(top, #fa3 0%,#f30 100%);
-      background: -ms-linear-gradient(top, #fa3 0%,#f30 100%);
-      background: linear-gradient(to bottom, #fa3 0%,#f30 100%);
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fa3', endColorstr='#f30',GradientType=0 );
-      box-shadow: inset #f40 0 -5px 15px, inset #ffd28a 0 1px 1px, rgba(0,0,0,.15) 0px 1px 1px, rgba(255,200,0,.5) 0 0 10px;
-    }
-    [data-button]:active {
-      background: #f50;
-      color: white;
-      border: 1px solid #f00;
-      box-shadow: inset #f40 0 -5px 15px, inset #ffd28a 0 1px 1px;
-      border-bottom-color: #d10;
-    }
-    /* Blue Theme */
-    [data-button=blue] {
-      background: #00ccff;
-      background: -moz-linear-gradient(top, #00ccff 0%, #0080ff 100%);
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#00ccff), color-stop(100%,#0080ff));
-      background: -webkit-linear-gradient(top, #00ccff 0%,#0080ff 100%);
-      background: -o-linear-gradient(top, #00ccff 0%,#0080ff 100%);
-      background: -ms-linear-gradient(top, #00ccff 0%,#0080ff 100%);
-      background: linear-gradient(to bottom, #00ccff 0%,#0080ff 100%);
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ccff', endColorstr='#0080ff',GradientType=0 );
-      text-shadow: #06e 1px 1px 0;
-      border: 1px solid #07f;
-      border-bottom-color: #02e;
-      box-shadow: inset #0065ff 0 -5px 15px, inset #99ffff 0 1px 1px, rgba(0,0,0,.15) 0px 1px 1px;
-    }
-    [data-button=blue]:hover,
-    [data-button=blue]:focus {
-      background: #7df;
-      background: -moz-linear-gradient(top, #7df 0%, #07f 100%);
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#7df), color-stop(100%,#07f));
-      background: -webkit-linear-gradient(top, #7df 0%,#07f 100%);
-      background: -o-linear-gradient(top, #7df 0%,#07f 100%);
-      background: -ms-linear-gradient(top, #7df 0%,#07f 100%);
-      background: linear-gradient(to bottom, #7df 0%,#07f 100%);
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7df', endColorstr='#07f',GradientType=0 );
-      box-shadow: inset #08f 0 -5px 15px, inset #cef 0 1px 1px, rgba(0,0,0,.15) 0px 1px 1px, rgba(0,200,255,.5) 0 0 10px;
-    }
-    [data-button=blue]:active {
-      background: #05f;
-      border: 1px solid #00f;
-      box-shadow: inset #04f 0 -5px 15px, inset #8ad2ff 0 1px 1px;
-      border-bottom-color: #01d;
-    }
-    /* Green Theme */
-    [data-button=green] {
-      background: #6a1;
-      background: -moz-linear-gradient(top, #6a1 0%, #360 100%);
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6a1), color-stop(100%,#360));
-      background: -webkit-linear-gradient(top, #6a1 0%,#360 100%);
-      background: -o-linear-gradient(top, #6a1 0%,#360 100%);
-      background: -ms-linear-gradient(top, #6a1 0%,#360 100%);
-      background: linear-gradient(to bottom, #6a1 0%,#360 100%);
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6a1', endColorstr='#360',GradientType=0 );
-      text-shadow: #062 1px 1px 0;
-      border: 1px solid #480;
-      border-bottom-color: #005822;
-      box-shadow: inset #072 0 -5px 15px, inset #8e8 0 1px 1px, rgba(0,0,0,.15) 0px 1px 1px;
-    }
-    [data-button=green]:hover,
-    [data-button=green]:focus {
-      background: #6d4;
-      background: -moz-linear-gradient(top, #6d4 0%, #360 100%);
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6d4), color-stop(100%,#360));
-      background: -webkit-linear-gradient(top, #6d4 0%,#360 100%);
-      background: -o-linear-gradient(top, #6d4 0%,#360 100%);
-      background: -ms-linear-gradient(top, #6d4 0%,#360 100%);
-      background: linear-gradient(to bottom, #6d4 0%,#360 100%);
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7a3', endColorstr='#360',GradientType=0 );
-      box-shadow: inset #064 0 -5px 15px, inset #8e8 0 1px 1px, rgba(0, 255, 75, 0.5) 0 0 10px, rgba(0,0,0,.15) 0px 1px 1px;
-    }
-    [data-button=green]:active {
-      background: #360;
-      border: 1px solid #005822;
-      border-bottom-color: #052;
-      box-shadow: inset #040 0 -5px 15px, inset #8e8 0 1px 1px;
     }
     code {
       display: inline-block;
@@ -325,30 +198,30 @@
     <h3 id=howto>How to use EQCSS</h3>
     <p>EQCSS is a JavaScript plugin that lets you write element queries inside CSS today. With performance in mind, this plugin is written in pure JavaScript, so it doesn't require jQuery or any other libraries on your page in order to function - add EQCSS.js to you HTML and you&rsquo;re ready to get started!</p>
     <p class=center>
-      <a href=//github.com/eqcss/eqcss data-button=blue>View EQCSS on Github</a>
-      <a href=//www.npmjs.com/package/eqcss data-button=blue>View EQCSS on NPM</a>
+      <a href=http://github.com/eqcss/eqcss data-button=blue>View EQCSS on Github</a>
+      <a href=http://www.npmjs.com/package/eqcss data-button=red>View EQCSS on NPM</a>
     </p>
     <p>Once you have downloaded a copy of EQCSS you will need to add it to every HTML page where you will be using element queries. It&rsquo;s best to add a <code>&lt;script></code> after your content, before the end of your <code>&lt;body></code> tag.</p>
-    <pre>&lt;script src=EQCSS.js>&lt;/script></pre>
+    <pre><code class=html>&lt;script src=EQCSS.js>&lt;/script></code></pre>
     <p>If you need to support IE8 there is an optional polyfill available that adds <code>@media</code> queries and <code>@element</code> queries to IE8. Add this file to your HTML before where you added EQCSS:</p>
-    <pre>&lt;!--[if lt IE 9]>&lt;script src="EQCSS-polyfills.js">&lt;/script>&lt;![endif]--></pre>
+    <pre><code class=html>&lt;!--[if lt IE 9]>&lt;script src="EQCSS-polyfills.js">&lt;/script>&lt;![endif]--></code></pre>
     <h3 id=writing>Writing Element Queries</h3>
     <p>Now that you have EQCSS added to your HTML you&rsquo;re ready to write element queries. There are two ways you can add EQCSS to your site: the easiest way is by writing them inside your CSS either in a <code>&lt;style></code> or <code>&lt;link></code> in your HTML, or by isolating your EQCSS styles in a custom script type.</p>
     <p>You can also link to EQCSS hosted in external files with either <code>.css</code> or <code>.eqcss</code> extensions.</p>
     <h3 id=script>Using the EQCSS script type</h3>
     <p>While not necessary, if you choose to isolate your EQCSS from your CSS you can store it in external <code>.eqcss</code> files and link them using a <code>&lt;script></code> tag like this:</p>
-    <pre>&lt;script type=text/eqcss src=styles.eqcss>&lt;/script></pre>
+    <pre><code class=html>&lt;script type="text/eqcss" src=styles.eqcss>&lt;/script></code></pre>
     <p>And you can include EQCSS scripts inline in your page like this as well:</p>
-    <pre>&lt;script type=text/eqcss>
+    <pre><code class=html>&lt;script type="text/eqcss">
 
   /* EQCSS goes here */
 
-&lt;/script></pre>
+&lt;/script></code></pre>
     <h3 id=running>Running EQCSS</h3>
     <p>By default the plugin execute once when the content loads, and also whenever it detects browser resize (similar to <code>@media</code> queries). The <code>EQCSS.apply()</code> function can be called manually on other events too, like keyup or clicks, or even when specific elements are interacted with.
     <h3 id=desgning>Designing with Element Queries</h3>
     <p>Element Queries have the following format:</p>
-    <pre>@element {selector} and {condition} [ and {condition} ]* { {css} }</pre>
+    <pre><code class=css>@element {selector} and {condition} [ and {condition} ]* { {css} }</code></pre>
     <ul>
       <li><code>{selector}</code> is a CSS selector targeting one or many elements. Ex: <code>"#id"</code> or <code>".class"</code></li>
       <li><code>{condition}</code> is composed of a measure and a value.
@@ -496,7 +369,7 @@
     <article id=min-children>
       <h4>min-children</h4>
       <div class="minchildren">class="minchildren"<br></div>
-      <button data-button=green onclick="document.querySelector('.minchildren').innerHTML += '<img src=//www.placehold.it/30>'">Add Child</button>
+      <button data-button=green onclick="document.querySelector('.minchildren').innerHTML += '<img src=//staticresource.com/prestonIcon.jpg style=width:50px>'">Add Child</button>
 <script type="text/eqcss">@element ".minchildren" and (min-children: 5) {
   .minchildren {
     background: gold;
@@ -507,7 +380,7 @@
     <article id=max-children>
       <h4>max-children</h4>
       <div class="maxchildren">class="maxchildren"<br></div>
-      <button data-button=green onclick="document.querySelector('.maxchildren').innerHTML += '<img src=//www.placehold.it/30>'">Add Child</button>
+      <button data-button=green onclick="document.querySelector('.maxchildren').innerHTML += '<img src=//staticresource.com/prestonIcon.jpg style=width:50px>'">Add Child</button>
 <script type="text/eqcss">@element ".maxchildren" and (max-children: 5) {
   .maxchildren {
     background: gold;
@@ -855,5 +728,8 @@
       },250);
     });
   </script>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/solarized_dark.min.css" rel=stylesheet>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad()</script>
 </body>
 </html>
