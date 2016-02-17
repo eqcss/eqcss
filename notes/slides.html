@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8>
+  <meta name=viewport content="width=device-width, initial-scale=1">
+  <title>EQCSS Slideshow</title>
+  <meta name=description content="EQCSS is a polyfill that introduces Element Queries, Scoped Styles, CSS Meta-Selectors like $parent and $prev, and more, to all browsers IE8 and up">
+  <meta name=keywords content="EQCSS, element queries, element query, container queries, CSS extension, parent selector, meta selector, scoped CSS, scoped styles, CSS variables, reponsive web design, rwd, elq, polyfill, plugin, SASS, Less, Grid Style Sheets, flexbox, IE8">
+  <meta property=og:title content="EQCSS - Element Query CSS | Element Queries | Scoped Styles | Meta-Selectors | CSS Extension">
+  <meta property=og:url content=http://elementqueries.com>
+  <meta property=og:description content="EQCSS is a polyfill that introduces Element Queries, Scoped Styles, CSS Meta-Selectors like $parent and $prev, and more, to all browsers IE8 and up">
+  <link href=http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic rel=stylesheet>
+  <link href=http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic rel=stylesheet>
+  <link href=http://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,500,600,700,900 rel=stylesheet>
+  <link href=http://staticresource.com/basic.css rel=stylesheet>
+  <link href=http://staticresource.com/data-buttons.css rel=stylesheet>
+  <style>
+    html,body {
+      margin: 0;
+      padding: 0;
+      max-width: none;
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+    }
+    [data-slideshow] {
+      margin: 0;
+      padding: 0;
+      position: relative;
+    }
+    [data-slide] {
+      position: absolute;
+      left: 100vmax;
+      z-index: 50;
+      padding-bottom: 5em;
+      transition: left .5s ease-in-out;
+      overflow-y: scroll;
+    }
+    [data-slide]:first-of-type {
+      left: 0;
+    }
+    [data-slideshow] nav {
+      margin: 0;
+      padding: 0;
+      position: fixed;
+      bottom: 1em;
+      right: .75em;
+      z-index: 100;
+    }
+    [data-slideshow] nav input {
+      font-size: 18pt !important;
+      margin: 0 .25em !important;
+      width: auto !important;
+      min-width: 2.25em;
+      background: rgba(0,0,0,.5) !important;
+      color: white !important;
+      border-color: currentColor !important;
+      text-shadow: rgba(0,0,0,.7) 1px 1px 0 !important;
+      box-shadow: inset rgba(0,0,0,.15) 1px 1px 0;
+      transition: color .1s ease-in-out;
+    }
+    [data-slideshow] nav input:focus,
+    [data-slideshow] nav input:hover {
+      color: white !important;
+      background: rgba(0,0,0,.7) !important;
+    }
+    [data-slideshow] nav input:active {
+      color: #0cf !important;
+      background: rgba(0,0,0,.7) !important;
+    }
+    [data-slide] h1 {
+      max-width: 80%;
+      margin: 1.5em auto .5em auto !important;
+      font-size: 100pt;
+    }
+    [data-slide] h1 + h2 {
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 34pt;
+    }
+    [data-slide] h2 {
+      color: #eee8d5;
+      font-size: 48pt;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+    [data-slide] h3 {
+      max-width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 34pt;
+      margin-bottom: .75em;
+      text-align: center;
+    }
+    [data-slide] h4 {
+      font-size: 8vmin;
+      text-align: center;
+    }
+    [data-slide] > p {
+      max-width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 20pt;
+      line-height: 1.5;
+    }
+    [data-slide] ul,
+    [data-slide] ol {
+      display: block;
+      max-width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 20pt;
+      line-height: 1.5;
+    }
+    [data-slide] li {
+      font-size: 20pt;
+      line-height: 1.5;
+    }
+    @media (orientation: portrait) {
+      [data-slideshow],
+      [data-slide] {
+        width: 100vmin;
+        height: 100vmax;
+      }
+    }
+    @media (orientation: landscape) {
+      [data-slideshow],
+      [data-slide] {
+        width: 100vmax;
+        height: 100vmin;
+      }
+    }
+    blockquote {
+      text-align: left;
+      max-width: 80%;
+      margin: 2em auto 0 auto;
+      background: rgba(255,255,255,.1);
+    }
+    blockquote h2 {
+      font-size: 34pt;
+      margin: 0 0 .25em 0;
+      text-align: left !important;
+    }
+    blockquote:not(.pullquote) p {
+      font-size: 24pt;
+      font-weight: 400;
+    }
+    blockquote:not(.pullquote) li {
+      font-size: 12pt;
+    }
+    blockquote ul,
+    blockquote li {
+      color: inherit;
+    }
+    abbr {
+      font-weight: 700;
+    }
+    h2 + h2 {
+      color: rgb(119, 119, 119);
+      margin-top: -1em;
+      margin-bottom: 1.5em;
+      font-size: 200%;
+      line-height: 1.4;
+      font-weight: 300;
+      text-align: center;
+    }
+    h2, h3, h4 {
+      margin-top: 1em;
+      margin-bottom: .25em;
+    }
+    h2 q {
+      font-weight: 500;
+    }
+    pre,
+    pre>code {
+      font-size: 18pt;
+      font-weight: 400 !important;
+      box-shadow: none !important;
+      font-family: 'Source Code Pro', Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
+    }
+    pre {
+      margin-bottom: 1em;
+      max-width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    li a {
+      font-size: 16pt !important;
+    }
+    @element 'iframe' {
+      $this {
+        margin: 2em auto 1em auto;
+        width: 100%;
+        height: eval("scrollWidth/(width/height)")px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section data-slideshow>
+    <article data-slide data-theme=dark>
+      <h1>EQCSS</h1>
+      <h2>Element Queries, Scoped Styles, CSS Meta-Selectors &amp; more!</h2>
+    </article>
+    <article data-slide data-theme=dark>
+      <h1 style=margin-top:.5em!important;>How to Write Element Queries</h1>
+      <blockquote>
+        <h2>What are Element Queries?</h2>
+        <p>Element Queries are styles that apply to an element based on its own properties on the page, instead of the width or height of the browser.</p>
+      </blockquote>
+    </article>
+    <article data-slide data-theme=code>
+      <h2>Downloading <code>EQCSS.js</code></h2>
+      <p>If you want to clone the EQCSS repository from github you can:</p>
+      <pre><code class=bash>git clone https://github.com/eqcss/eqcss/archive/gh-pages.zip</code></pre>
+      <p>Or alternatively if you use NPM, you can add EQCSS to your project with the following command:</p>
+      <pre><code>npm install eqcss</code></pre>
+    </article>
+    <article data-slide data-theme=code>
+      <h2>Adding <code>EQCSS.js</code> to your HTML</h2>
+      <p>Once you have downloaded EQCSS, you can add it to your HTML with a <code>&lt;script></code> tag like this:</p>
+      <pre><code class=html>&lt;script src=EQCSS.js>&lt;/script></code></pre>
+      <p>This file (<code>EQCSS.js</code>) includes support for all current browsers IE9 and up. To add IE8 support, we required the use of a lot of other polyfills. Keep in mind that IE8 doesn't even support CSS <code>@media</code> queries without a polyfill, so it's pretty amazing that the EQCSS plugin manages to bring  these advanced features to IE8 as well! To add IE8 support to a site using EQCSS, add the following line before your link to the main plugin:</p>
+      <pre><code>&lt;!--[if lt IE 9]>&lt;script src=EQCSS-polyfills.js>&lt;/script>&lt;![endif]--></code></pre>
+    </article>
+    <article data-slide data-theme=code>
+      <h2>Running EQCSS</h2>
+      <p>By default, the EQCSS plugin will compute any styles it finds once the page loads and also whenever it detects the browser resize, similar to <code>@media</code> queries. The <code>EQCSS.apply()</code> function can also be called manually on other events, like <code>keyup</code> or <code>click</code>, or triggered by JavaScript functions. For example, JavaScript could trigger <code>EQCSS.apply()</code> to recalculate styles after content within UI elements on the page has been updated, even if nothing else about the page has changed.</p>
+    </article>
+    <article data-slide data-theme=code>
+      <h2>Writing Element Query CSS</h2>
+      <p>The <code>EQCSS.js</code> plugin can read styles in three ways. You can include EQCSS inside any <code>&lt;style></code> tags in an HTML page where <code>EQCSS.js</code> has been loaded. You are also able to write EQCSS inside external <code>.css</code> files linked into a page that includes <code>EQCSS.js</code>. And the last way you're able to write EQCSS styles is inside a custom <code>&lt;script type="text/eqcss"></code> tag or hosted in an externally <code>.eqcss</code> stylesheet, linked using a <code>&lt;script></code> tag as the document source.</p>
+      <p>The easiest way to write EQCSS is right in your CSS, just be sure to add a comment at the top of the file reminding other developers that EQCSS is required for that file.</p>
+    </article>
+    <article data-slide data-theme=code>
+      <h1>The Anatomy of an Element Query</h1>
+    </article>
+    <article data-slide data-theme=code>
+      <h2>Scoped Styles</h2>
+      <p>The EQCSS syntax for writing element queries is very similar to the formatting for CSS <code>@media</code> queries, but instead of <code>@media</code> we start the query with <code>@element</code>. The only other piece of information we need to supply EQCSS is at least one element these styles should apply to. Here's how I would open a scope for an element named <code>&lt;div class="widget"></code> in my HTML:</p>
+      <pre><code class=css>@element '.widget' {
+
+}</code></pre>
+      <p>The element selector between the quotes can be any valid CSS selector. With this query we have created a new scope on the <code>.widget</code> element. We haven't included a responsive condition yet, so these styles will apply to our element at all times.</p>
+      <p>Using style scoping on an element allows you to use the <code>$parent</code> meta-selector for example, because JavaScript can now easily find the <code>parentNode</code> of the elements you have scoped. CSS includes a direct descendant selector, <code>></code>, that allows you to select only elements that are the children of a specified element. But CSS offers no way to travel the other way, to select the element containing something, its parent.</p>
+      <p>Now that we have opened a scope for the <code>.widget</code> element, this is how we could write a style targeting its parent element:</p>
+      <pre><code class=css>@element '.widget' {
+  $parent {
+    /* These styles apply to the parent of .widget */
+  }
+}</code></pre>
+      <p>Other special <q>meta-selectors</q> available inside any <code>@element</code> query are <code>$prev</code> and <code>$next</code> selectors, which represent to previous and next sibling elements. CSS can reach the element after a specified element with <code>+ *</code>, as in <code>.widget + *</code>, but as with <code>$parent</code> CSS has no way of moving backward through the document to find the element before a specified element.</p>
+      <pre><code class=css>@element '.widget' {
+  $prev {
+    /* These styles apply to the element before .widget */
+  }
+  $next {
+    /* These styles apply to the element after .widget */
+  }
+}</code></pre>
+    </article>
+    <article data-slide data-theme=code>
+      <h2>Responsive Scoped Styles</h2>
+      <p>CSS <code>@media</code> queries work in two dimensions, width and height, but the EQCSS syntax supports many more responsive conditions than regular CSS. Instead of just working with the width or height of the browser, you can also write style that apply to elements based on other things as well, like how many child elements an element has, or how many characters of text are inside that element at the moment.</p>
+      <pre><code class=css>@element '.widget' and (min-width: 500px) {
+  /* CSS rules here */
+}</code></pre>
+      <p>Here's the formatting for <code>@element</code> queries with responsive conditions added to the scope.</p>
+      <pre><code class=css>@element {selector} and {condition} [ and {condition} ]* { {css} }</code></pre>
+      <p>Or to put that another way, to make a query that turns the body red when the widget element is 500px wide would look something like this:</p>
+      <pre><code class=css>@element '.widget' and (min-width: 500px) {
+  body {
+    background: red;
+  }
+}</code></pre>
+    </article>
+    <article data-slide data-theme=code>
+      <h2>Responsive Conditions</h2>
+      <p>The full list of responsive conditions supported in the EQCSS syntax are the following:</p>
+      <h3 style=text-align:left>Width-based Conditions</h3>
+      <ul>
+        <li><code>min-width</code>
+        <li><code>max-width</code>
+      </ul>
+      <h3 style=text-align:left>Height-based Conditions</h3>
+      <ul>
+        <li><code>min-height</code>
+        <li><code>max-height</code>
+      </ul>
+      <h3 style=text-align:left>Count-based Conditions</h3>
+      <ul>
+        <li><code>min-characters</code>
+        <li><code>max-characters</code>
+        <li><code>min-lines</code>
+        <li><code>max-lines</code>
+        <li><code>min-children</code>
+        <li><code>max-children</code>
+      </ul>
+      <h3 style=text-align:left>Scroll-based Conditions</h3>
+      <ul>
+        <li><code>min-scroll-y</code>
+        <li><code>max-scroll-y</code>
+        <li><code>min-scroll-x</code>
+        <li><code>max-scroll-x</code>
+      </ul>
+    </article>
+    <article data-slide data-theme=code>
+      <h2>Multiple Responsive Conditions</h2>
+      <p>You can combine <em>any number</em> of these conditions in your element queries for truly multi-dimensional responsive styles. This gives you much more control over <em>how</em> your designs show up. For example, if you only wanted to shrink the font size of a header that had more than 15 characters when it's less than 600px wide, you could combine <code>min-characters: 16</code> and <code>max-width: 600px</code> like this:</p>
+      <pre><code class=css>h1 {
+  font-size: 24pt;
+}
+@element 'h1' and (min-characters: 16) and (max-width: 600px) {
+  $this {
+    font-size: 20pt;
+  }
+}</code></pre>
+    </article>
+    <article data-slide data-theme=code>
+      <h2>Meta-Selectors</h2>
+      <p>One of the problems you might run into once you start writing scoped CSS with responsive conditions is that if you have multiple instances of the same selector on a page, any CSS inside an element query referencing that selector will apply those styles to <em>all</em> elements that match that selector when the first element to match that selector meets the responsive conditions. This means that for our <code>.widget</code> example, if we have one widget in the sidebar, and another full-width in the footer, if we write our element query like this:</p>
+      <pre><code class=css>@element '.widget' and (min-width: 500px) {
+  .widget h2 {
+    font-size: 14pt;
+  }
+}</code></pre>
+      <p>What will happen is when <em>either</em> <code>.widget</code> on the page reaches <code>500px</code>, the new style will apply to <em>both</em> <code>.widget</code> elements, which is probably not what we want to happen in most cases. This is where style scoping comes in!</p>
+      <p>The two parts of the responsive query are the selector and the condition, so if we want to target only those elements on the page that match <em>both</em> the selector <em>and</em> the condition at any given time, we can use the meta-selector <code>$this</code> inside our element query. With this in mind, here's how we could rewrite our last example so the style would only apply to the <code>.widget</code> which meets the <code>min-width: 500px</code> condition:</p>
+      <pre><code class=css>@element '.widget' and (min-width: 500px) {
+  $this h2 {
+    font-size: 14pt;
+  }
+}</code></pre>
+      <p>There are a number of additional meta-selectors in the EQCSS syntax that aren't included in regular CSS. The full list is:</p>
+      <ul>
+        <li><code>$this</code>
+        <li><code>$parent</code>
+        <li><code>$prev</code>
+        <li><code>$next</code>
+        <li><code>$it</code> (inside <code>eval('')</code>)
+        <li><code>$root</code>
+      </ul>
+      <p>These selectors will only work inside styles scoped to an element using an <code>@element</code> query.</p>
+    </article>
+    <article data-slide data-theme=code>
+      <h2>Opening the Portal Between JavaScript and CSS</h2>
+      <p>The last and final feature of EQCSS is the most wild of all: <code>eval('')</code>. Through this doorway lies all the power of JavaScript, accessible from CSS. Though JavaScript can apply styles to elements, it currently has a hard time reaching pseudo-elements like <code>:before</code> and <code>:after</code>. But what if CSS could reach JavaScript from the other side, instead of JavaScript settling styles, what if styles could use JavaScript?</p>
+      <p>Currently it's common to use HTML as an intermediary to allow JavaScript and CSS to communicate with each other. You end up either toggling classes on your HTML to apply different CSS styles, or else adding CSS to HTML in ways that can interfere with your responsive styles. It's difficult to build <code>@media</code> queries to style elements that also have inline styles effectively.</p>
+      <p>This is where <code>eval('')</code> comes in. You can access or evaluate any JavaScript, whether just to refer to the value of a JavaScript variable, to execute a one-liner like <code>new Date().getFullYear()</code>, or to run a Javascript function on the page and use the value it returns inside your CSS.</p>
+      <pre><code class=css>@element 'footer' {
+  $this:after {
+    content: "© eval('new Date().getFullYear()')";
+  }
+}</code></pre>
+    </article>
+    <article data-slide data-theme=code>
+      <h2>Using <code>$it</code> inside <code>eval('')</code></h2>
+      <p>To more easily share the scope of the element query where <code>eval('')</code> appears, you can use the meta-selector <code>$it</code>. This replaces the need for something like <code>document.querySelector("$this")</code> inside <code>eval('')</code> to find the context of the scoped element. For example, let's say we have a <code>&lt;div></code> with the word <q>hello</q> inside. The following code would output <q>hello hello</q>:</p>
+      <pre><code class=html>&lt;div>hello&lt/div>
+&lt;style>
+  @element 'div' {
+    div:before {
+      content: 'eval("$it.innerHTML") ';
+    }
+  }
+&lt;/style></code></pre>
+      <p>You can also drop the <code>$it</code>, and unless you're specifying anything else <code>$it</code> will be implied. The following code performs the exact same task:</p>
+      <pre><code class=css>@element 'div' {
+  div:before {
+    content: 'eval("innerHTML") ';
+  }
+}</code></pre>
+    </article>
+    <article data-slide data-theme=code>
+      <h2>Where <code>eval('')</code> Works</h2>
+      <p>Where <code>eval('')</code> can be useful is in situations when CSS isn't aware of measurements or events that happen on the page after it's loaded. For example, elements like <code>iframe</code> elements used for embedding Youtube videos come with a specified width and height. While you can set the width to auto, there's no easy way to maintain the correct aspect ratio of width to height as the width changes to fill the width of the container it has been placed inside.</p>
+      <p>A common workaround to this problem is to place any content that needs to maintain an aspect ratio as it sizes into a wrapper which contains extra padding, based on the aspect ratio of the content. This works well, but requires you to know all of the aspect ratios you need to support in advance, as well as requires extra markup to be added around each video to inform CSS which aspect ratio to use.</p>
+      <p>The smarter approach to responsive aspect ratios might involve placing each of those <code>iframe</code> elements into a container without padding applied, and to let JavaScript measure each iframe and calculate each aspect ratio at the time the page loads. Then, JavaScript can apply the correct ratio of padding to each container element to maintain the aspect ratio of the iframe inside.</p>
+      <p>&hellip;But what if CSS could access those measurements directly? Not only could we consolidate our CSS and JS from two separate locations in our codebase into one, but we can also support any aspect ratio we might encounter in the future using one piece of code, without any additional labour, or surrounding containers in our HTML. Here's how simple a wrapper-free responsive video resizing solution could be when using EQCSS syntax:</p>
+      <pre><code class=css>@element 'iframe' {
+  $this {
+    margin: 0 auto;
+    width: 100%;
+    height: eval("scrollWidth/(width/height)")px;
+  }
+}</code></pre>
+      <p>It has the succinctness and legibility of CSS, plus the power of JavaScript. No extra wrappers required, no extra classes, and no extra CSS. In fact, we can make this even more flexible by using more advanced CSS selectors! If you want to add responsive resizing to youtube videos <em>only</em>, you could target only those <code>iframe</code> elements whose URLs contain "youtube" with a selector like <code>iframe[src*="youtube"]</code>.
+      <p>Be careful with <code>eval('')</code> though, there's a reason why CSS expressions were considered dangerous in the past. If you aren't careful with how many elements you apply them to, or how frequently you recalculate your styles, JavaScript can end up recalculating styles hundreds of times per second. Thankfully, unlike CSS expressions, EQCSS allows you to control this by allowing you to invoke <code>EQCSS.apply()</code> only when you need to. Future releases of the EQCSS plugin will improve performance by giving developers more control over this process, allowing you to specify which elements need to be recalculated, and which elements are okay to ignore during a recalculation.</p>
+    </article>
+    <article data-slide data-theme=code>
+      <h2>The Danger Zone!</h2>
+      <p>Other problems can occur if you create queries with conflicting conditions or styles. EQCSS is like CSS in that it is computed top-to-bottom and using a hierarchy of importance. Although CSS is a stylesheet language, it does contain very advanced capabilities. It's just a couple steps away from being <em>turing-complete</em> as a programming language, but this lack of turing-completeness so far has helped CSS avoid some annoying behaviours more common in programming languages, like recursion and the ability to create infinite loops.</p>
+      <p>So far, debugging CSS has been a pretty straightforward affair, but EQCSS shifts CSS from simply being a stylesheet language into being an <q>interpreted, dynamic stylesheet language</q>.</p>
+        <p>With this new territory comes a variety of potential new problems, but unlike CSS and JavaScript which both have mature debugging tools, when debugging EQCSS you have to make-do with the current tools written for CSS and JavaScript plus a bit of human interpretation to troubleshoot and fix problems. The examples below produce unexpected results and aren't examples of good element queries. Thankfully, writing bad element queries is harder to do than writing good element queries, and I struggled to come up with broken examples of queries that fail.</p>
+      <p>Here's an example of a reciprocal loop in EQCSS, something which normal CSS <code>@media</code> queries are immune from by design:</p>
+      <pre><code class=css>@element '.widget' and (min-width: 300px) {
+  $this {
+    width: 200px;
+  }
+}</code></pre>
+      <p>I call this <code>jekyll: hide;</code> CSS. But in addition to one style continually triggering itself, there's also the possibility to write multiple queries that trigger each other in what we call the <em>double inverted reciprocal loop</em>, the nastiest of all:</p>
+      <pre><code class=css>@element '.widget' and (min-width: 400px) {
+  $this {
+    width: 200px;
+  }
+}
+@element '.widget' and (max-width: 300px) {
+  .widget {
+    width: 500px;
+  }
+}</code></pre>
+      <p>In theory, that unfortunate widget would be stuck resizing between <code>200px</code> to <code>500px</code> until the end of time, unable to pick a final width. For cases like this, EQCSS simply computes the rules in the order they appear (using normal CSS precedence) and awards the winner. If you rearrange the order these styles appear, the latter style will always win if they are of equal importance.</p>
+      <p>Some people say that the ability to create loops (or even <em>double-inverted reciprocal loops</em>) is a design flaw, but in order to prevent loops from being possible you would need to limit the power of EQCSS to remove most of the value the syntax provides. It's easy to create infinite loops in JavaScript, and that's not viewed as a design flaw of the language, it's seen evidence of its power. The case is the same with element queries.</p>
+    </article>
+    <article data-slide data-theme=code>
+      <h1>How to Design With Element Queries</h1>
+    </article>
+    <article data-slide data-theme=code>
+      <h2>Liberating CSS</h2>
+      <p>This simplest way to make use of element queries is to convert existing designs using <code>@media</code> queries into <code>@element</code> queries to <q>liberate</q> elements and their responsive styles from one layout, and make it easy to re-use that module on other pages or projects. The following <code>@media</code> query and <code>@element</code> query might be functionally equivalent.</p>
+      <pre><code class=css>@media (max-width: 500px) {
+  .footer a {
+    display: block;
+  }
+}
+</code></pre>
+      <pre><code class=css>@element '.footer' and (max-width: 500px) {
+  $this a {
+    display: block;
+  }
+}
+</code></pre>
+      <p>The difference is that on the original page, the footer links stayed as <code>display: block</code> until the browser was at least 500 pixels wide. The second example using element queries would look the same as long as the footer is full-width. But after 'liberating' this footer style we can now also place this footer into a container of any width and be sure that when the footer itself is squished below 500 pixels, the same responsive style applies as in our original.</p>
+      <p>It only takes minutes to convert CSS designed using <code>@media</code> queries into <code>@element</code> queries. Here's what the process looks like:</p>
+      <ol>
+        <li>ensure <code>EQCSS.js</code> is present in the destination document's HTML
+        <li>replace <code>@media</code> with <code>@element</code> in your CSS
+        <li>add your CSS selector to the scope
+        <li>(optional: replace occurrences of the selector inside your <code>@element</code> scope with <code>$this</code> in case there are multiple instances of that element on the page)
+      </ol>
+      <p>By liberating an element from one design we can isolate it for re-use later. Once you have converted the <code>@media</code> breakpoints to element-based responsive conditions, you never have to tweak those widths again, no matter where you display it in the future!</p>
+    </article>
+    <article data-slide data-theme=code>
+      <h2>Converting <code>@media</code> queries to <code>@element</code> queries</h2>
+      <p><iframe width="720" height="450" src="https://www.youtube.com/embed/ybCrzsglqXM" frameborder="0" allowfullscreen></iframe></p>
+    </article>
+    <article data-slide data-theme=code>
+      <h2>Tomorrow's Features in Yesterday's Browsers</h2>
+      <p>During the process of supporting IE8, the decision was made to include all valid CSS units a browser understands &mdash; that means you can include units like <code>px</code>, <code>pt</code>, <code>em</code>, <code>vw</code>, <code>vh</code>, <code>vmin</code>, <code>vmax</code>, <code>cm</code>, <code>mm</code>, and <code>in</code> in any width, height, or scroll-based responsive condition EQCSS understands.</p>
+      <p>If you don't require IE8 support, you're also able to write queries using <code>rem</code>, <code>ex</code>, <code>ch</code>, and <code>pc</code> units as well. Also, the <code>vw</code>, <code>vh</code>, <code>vmin</code>, <code>vmax</code> units have been made available via polyfill to let you design with greater accuracy in more browsers.</p>
+      <p>I have fixed a website navigation problem for IE8 users simply by wrapping the existing problematic CSS in an <code>@element</code> query. If IE8 support is a big deal to you, EQCSS may be the simplest way to get there.</p>
+    </article>
+    <article data-slide data-theme=code>
+      <h2>In-browser Design</h2>
+      <p>When designing layouts from scratch with <code>@element</code> queries, you can easily eliminate much of the labour you might have done when building the same layout using <code>@media</code> queries, precompilers, and plugins before.</p>
+      <p>The biggest shift is learning how to stop viewing the DOM only from the perspective of the root HTML element, and think about individual elements on the page being their own responsive universes, sometimes that even interact with each other or change after the page loads as the user continues to interact with the page.</p>
+      <p>The old paradigms of <q>desktop-first</q> and <q>mobile-first</q> aren't relevant any longer, the new way of building interfaces approaches styling <q>element-first</q>. Using element queries enables you to work on individual parts of layouts in isolation, to style them with a greater level of responsive detail, and to finally realize the principle of 'Atomic Design' at any scale.</p>
+    </article>
+    <article data-slide data-theme=code>
+      <h2>Thinking <q>Element-first</q></h2>
+      <p>Element-first design is the spirit of the Atomic design principle, but looks very different in practice than how most people implement Atomic design using their <q>mobile-first</q> or <q>desktop-first</q> mindset. Instead of writing styles in advance for every conceivable situation a widget my find itself in, we are able to allow individual parts of the layout to adapt responsively when those elements require it.</p>
+      <p>It makes more sense to say: <em><q>These are the styles for the menu when the menu has 300px wide, and these are the styles when the menu is more than 300px wide</q></em> than it does to say <em><q>These styles are in case the menu shows up in a layout outside a wrapper where it has less than 300px space, here&rsquo;s how the menu shows up in a layout inside a wrapper with less than 300px space, here&rsquo;s how the menu shows up in a layout without a wrapper but with a sidebar with less than 300px, etc&hellip;</q></em> and then also defining all those different layout variations at every breakpoint you want to support as well.</p>
+      <p>You can see why people have turned toward conventions like BEM to try to help them manage the complexity, but we&rsquo;ve clearly reached a breaking point where our layouts are breaking under the weight of all of the classes and attributes we&rsquo;re adding to them. We feel the need to use pre-processors which are powerless to help us after the page loads, just to try to output enough CSS <q>just in case</q> we need it, and in the meantime we have to deal with tons of CSS and find ways to minify and compress that down so it&rsquo;s small again.</p>
+      <p>Why not just take an element-first approach? Let&rsquo;s say you have some HTML like this:</p>
+      <pre><code class=html>&lt;form>
+  &lt;input placeholder=Search>
+  &lt;input type=button value=Search>
+&lt;/form></code></pre>
+      <p>Now let&rsquo;s say the responsive behaviour you want could be explained like this in english:<p>
+      <p><em><q>Search box and button are side-by-side until they get too narrow, then both the input and the button should be stacked on top of each other and full-width.</q></em></p>
+    </article>
+    <article data-slide data-theme=code>
+      <h2>Desktop-first Approach</h2>
+      <p>In a desktop-first mindset you would write your CSS like this:</p>
+      <pre><code class=css>input {
+  width: 100%;
+}
+@media (max-width: 600px) {
+  input {
+    width: 50%;
+    float: left;
+  }
+}</code></pre>
+    </article>
+    <article data-slide data-theme=code>
+      <h2>Mobile-first Approach</h2>
+      <p>In a mobile-first mindset, you&rsquo;re targeting the mobile view (stacked) first and adding support for the side-by-side view only if the screen has enough room:</p>
+      <pre><code class=css>input {
+  width: 100%;
+}
+@media (min-width: 600px) {
+  input {
+    width: 50%;
+    float: left;
+  }
+}</code></pre>
+    </article>
+    <article data-slide data-theme=code>
+      <h2>Element-first Approach</h2>
+      <p>With the first two examples, your <code>@media</code> breakpoint was set to <code>600px</code> not because that&rsquo;s how wide the inputs will be when they switch. The chances are that search form is probably inside at least one other parent element with margins and padding and so when the browser is <code>600px</code> width, those inputs might be somewhere around <code>550px</code> or <code>525px</code> wide in reality. So in a <em>desktop-first</em> and <em>mobile-first</em> mindset you&rsquo;re always setting your breakpoints based on the layout and how the elements show up in it. With <em>element-first</em> you would just say: <em><q>I don&rsquo;t care how wide the browser may be, I know when my inputs get to be <code>525-550px</code> wide that&rsquo;s the sweet spot where I want them to stack.</q></em> Instead of using a <code>@media</code> query to swap that CSS by the browser&rsquo;s dimensions, with <em>element-first</em> design you could attach your responsive conditions to the <code>&lt;form></code> element and say something like:</p>
+      <pre><code class=css>input {
+  width: 100%;
+}
+@element 'form' and (min-width: 525px) {
+  input {
+    width: 50%;
+    float: left;
+  }
+}</code></pre>
+      <p>The code is very similar to the previous methods, but now you are free to display this search form in a sidebar, you can make it full-width, you can use it in any template and no matter how wide the browser is, and when the form itself doesn&rsquo;t have enough room to display the inputs side-by-side it will adapt. Even if the browser is <code>1000px</code> wide at the time that the form is squished below <code>525px</code> where you&rsquo;ve put it in your layout.</p>
+    </article>
+    <article data-slide data-theme=code>
+      <h2>Designing with 2020 vision</h2>
+      <p>The best thing we can do for the future of CSS is to experiment with these ideas as much as possible today. No amount of theorizing and thinking about these features is as useful as trying to implement them and discovering the quirks that make them usable or powerful.</p>
+      <p>In addition to providing a solution for Element Queries, I hope that <code>EQCSS.js</code> can also serve as a platform for other experiments in extending CSS. If you have an idea of a new responsive condition you'd like to try, a new idea for a selector, or some new feature you want to test out, forking <code>EQCSS.js</code> gets you most of the way there with no effort.</p>
+    </article>
+    <article data-slide data-theme=code>
+      <h1>Resources for Getting Started</h1>
+    </article>
+    <article data-slide data-theme=code>
+      <h2>Quick EQCSS embed</h2>
+      <pre><code class=html>&lt;script src="http://elementqueries.com/EQCSS.js">&lt;/script></code></pre>
+      <h2>EQCSS embed (with IE8 support)</h2>
+      <pre><code class=html>&lt;!--[if lt IE 9]>&lt;script src="http://elementqueries.com/EQCSS-polyfills.js">&lt;/script>&lt;![endif]-->
+&lt;script src="http://elementqueries.com/EQCSS.js">&lt;/script></code></pre>
+      <h2>EQCSS-enabled Basic HTML Template</h2>
+      <pre><code class=html>&lt;!DOCTYPE html>
+&lt;html>
+&lt;head>
+  &lt;meta charset=utf-8>
+  &lt;meta name=viewport content="width=device-width, initial-scale=1">
+  &lt;title>&lt;/title>
+  &lt;style>&lt;/style>
+&lt;/head>
+&lt;body>
+
+  &lt;!--[if lt IE 9]>&lt;script src="http://elementqueries.com/EQCSS-polyfills.js">&lt;/script>&lt;![endif]-->
+  &lt;script src="http://elementqueries.com/EQCSS.js">&lt;/script>
+&lt;/body>
+&lt;/html></code></pre>
+    </article>
+    <article data-slide data-theme=code>
+      <h2>Sample Element Queries</h2>
+      <blockquote>
+        <p><q>When the body is wider than 600 pixels, make the background red.</q></p>
+      </blockquote>
+      <pre><code class=html>&lt;style>
+  @element 'body' and (min-width: 600px) {
+    $this {
+      background: red;
+    }
+  }
+&lt;/style></code></pre>
+    </article>
+    <article data-slide data-theme=code>
+      <h2>Sample Element Queries</h2>
+      <blockquote>
+        <p><q>When the username input contains more than 15 characters, make the background of the wrapper pink and display the error message</q></p>
+      </blockquote>
+      <pre><code class=html>&lt;div>
+  &lt;span data-notification=success>Username looks good&lt;/span>
+  &lt;span data-notification=error>Username too long&lt;/span>
+  &lt;input>
+&lt;/div>
+&lt;style>
+  div {
+    padding: 15px;
+  }
+  [data-notification] {
+    display: none;
+  }
+  @element 'input' and (max-characters: 14) {
+    $parent {
+      background: lightgreen;
+    }
+    $parent [data-notification=success] {
+      display: block;
+    }
+  }
+  @element 'input' and (min-characters: 15) {
+    $parent {
+      background: pink;
+    }
+    $parent [data-notification=error] {
+      display: block;
+    }
+  }
+&lt;/style>
+&lt;script>
+  window.addEventListener('keyup',function(){
+    EQCSS.apply()
+  })
+&lt;/script></code></pre>
+    </article>
+    <article data-slide data-theme=code>
+      <h2>Sample Element Queries</h2>
+      <blockquote>
+        <p><q>Display an updating character count for the comment box, and when the count hits 50 disable the 'Reply' button and make the border of the comment box red.</q></p>
+      </blockquote>
+      <pre><code class=html>&lt;textarea>&lt;/textarea>
+&lt;div>&lt;/div>
+&lt;input type=submit value=Reply>
+&lt;style>
+  @element 'textarea' {
+    div:after {
+      content: 'eval("50-value.length") characters left';
+      display: block;
+    }
+  }
+  @element 'textarea' and (min-characters: 50) {
+    $this {
+      border: 1px solid red;
+      background: pink;
+    }
+    div:after {
+      color: #f00;
+      font-weight: bold;
+    }
+    input[type=submit] {
+      opacity: .5;
+      pointer-events: none;
+    }
+  }
+&lt;/style>
+&lt;script>
+  window.addEventListener('keyup',function(){
+    EQCSS.apply()
+  })
+&lt;/script></code></pre>
+    </article>
+    <article data-slide data-theme=code>
+      <h1><em>Thank You!</em></h1>
+      <h2>check out elementqueries.com</h2>
+    </article>
+    <nav>
+      <input type=button data-button=outline value=&lt; onclick=move('prev') ontouchstart=move('prev')>
+      <input type=button data-button=outline value=&gt; onclick=move('next') ontouchstart=move('next')>
+    </nav>
+  </section>
+  <script>
+    var slideshow = document.querySelector('[data-slideshow]')
+        slides = slideshow.querySelectorAll('[data-slide]')
+    for (j=0;j<slides.length;j++){
+      slides[j].setAttribute('data-slide',j)
+    }
+    var count = 0
+    function move(direction){
+      if (direction == 'prev'){
+        if (document.querySelector('[data-slideshow] [data-slide="'+(count-1)+'"]')){
+          document.querySelector('[data-slideshow] [data-slide="'+(count-1)+'"]').style.left = '-100vw'
+        }
+        document.querySelector('[data-slideshow] [data-slide="'+count+'"]').style.left = '0'
+        if (document.querySelector('[data-slideshow] [data-slide="'+(count+1)+'"]')){
+          document.querySelector('[data-slideshow] [data-slide="'+(count+1)+'"]').style.left = '100vw'
+        }
+        if (count-1 >= 0){
+          count--
+        }
+      }
+      if (direction == 'next'){
+        document.querySelector('[data-slideshow] [data-slide="'+count+'"]').style.left = '-100vw'
+        if (document.querySelector('[data-slideshow] [data-slide="'+(count+1)+'"]')){
+          document.querySelector('[data-slideshow] [data-slide="'+(count+1)+'"]').style.left = '0'
+        }
+        if (document.querySelector('[data-slideshow] [data-slide="'+(count+2)+'"]')){
+          document.querySelector('[data-slideshow] [data-slide="'+(count+2)+'"]').style.left = '100vw'
+          count++
+        }
+      }
+    }
+    // Arrow keys to navigate
+    document.onkeyup = function(e){
+      e.preventDefault()
+      var charCode = e.which;
+      charCode==37 && move('prev')
+      charCode==39 && move('next')
+    }
+    // Swipe to Navigate
+    var gesture = {
+          x: [],
+          y: [],
+          match: ''
+        },
+        tolerance = 100;
+    window.addEventListener('touchstart',function(e){
+      e.preventDefault()
+      for (var i=0; i<e.touches.length; i++){
+        var dot = document.createElement('div');
+        dot.id = i
+        dot.style.top = e.touches[i].clientY-25+'px'
+        dot.style.left = e.touches[i].clientX-25+'px'
+        document.body.appendChild(dot)
+        gesture.x.push(e.touches[i].clientX)
+        gesture.y.push(e.touches[i].clientY)
+      }
+    });
+    window.addEventListener('touchmove',function(e){
+      for (var i=0; i<e.touches.length; i++) {
+        var dot = document.getElementById(i);
+        dot.style.top = e.touches[i].clientY-25+'px'
+        dot.style.left = e.touches[i].clientX-25+'px'
+        gesture.x.push(e.touches[i].clientX)
+        gesture.y.push(e.touches[i].clientY)
+      }
+    });
+    window.addEventListener('touchend',function(e){
+      var dots = document.querySelectorAll('div'),
+          xTravel = gesture.x[gesture.x.length-1] - gesture.x[0],
+          yTravel = gesture.y[gesture.y.length-1] - gesture.y[0];
+      if (yTravel<tolerance && yTravel>-tolerance && xTravel<-tolerance){
+        move('next')
+      }
+      if (yTravel<tolerance && yTravel>-tolerance && xTravel>tolerance){
+        move('prev')
+      }
+      gesture.x = []
+      gesture.y = []
+      gesture.match = xTravel = yTravel = ''
+      for (i=0;i<dots.length;i++){
+        dots[i].id = ''
+        dots[i].style.opacity = 0
+        setTimeout(function(){
+          document.body.removeChild(dots[i])
+        },1000)
+      }
+    })
+  </script>
+  <!--[if lt IE 9]><script src=http://elementqueries.com/EQCSS-polyfills.js></script><![endif]-->
+  <script src=http://elementqueries.com/EQCSS.js></script>
+  <link href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/solarized_dark.min.css" rel=stylesheet>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad()</script>
+  <script>hljs.listLanguages()</script>
+</body>
+</html>
