@@ -42,7 +42,7 @@
   <p>So now that all devices are being accounted for - why change our approach? Because no matter how you look at it, both desktop-first and mobile-first mindsets still prioritize the layout over the individual design elements that that layout is comprised of. With element-first thinking we deal with the modules inside the layout first, and then put self-responsive modules into a very simple layout. We never have to worry what happens if the layout is displayed 600px wide, or 3000px, because we know that each module within that layout will always adapt to display itself according to the responsive styles it has been given, and also how the user and web page interact after the page loads.</p>
   <p>Element-first layouts aren&rsquo;t static, they are born when the page loads and live and adapt as the user and application interact</p>
   <h3>Element-first</h4>
-  <p>Element-first design is the spirit of the Atomic design principle, but looks very different in practice than how most people implement Atomic using their mobile-first mindset. Instead of writing styles on advance for every conceivable situation a widget my find itself in, we are able to allow individual parts of the layout to adapt responsively when those elements require it.</p>
+  <p>Element-first design is the spirit of the Atomic design principle, but looks very different in practice than how most people implement Atomic using their mobile-first mindset. Instead of writing styles in advance for every conceivable situation a widget my find itself in, we are able to allow individual parts of the layout to adapt responsively when those elements require it.</p>
   <p>It makes more sense to say: <em><q>These are the styles for the menu when the menu has 300px wide, and these are the styles when the menu is more than 300px wide</q></em> than it does to say <em><q>These styles are in case the menu shows up in a layout outside a wrapper where it has less than 300px space, here&rsquo;s how the menu shows up in a layout inside a wrapper with less than 300px space, here&rsquo;s how the menu shows up in a layout without a wrapper but with a sidebar with less than 300px, etc…</q></em> and then also defining all those different layout variations at every breakpoint you want to support as well.</p>
   <p>You can see why people have turned toward conventions like BEM to try to help them manage the complexity, but we&rsquo;ve clearly gotten to a breaking point where our layouts are breaking under the weight of all of the classes and attributes we&rsquo;re adding to them. We feel the need to use pre-processors which can&rsquo;t help us after the page loads to try to output enough CSS <q>just in case</q> we need it, then we have to deal with tons of CSS and minify and compress that down so it&rsquo;s small again.</p>
   <p>Why not just take an element-first approach?</p>
@@ -53,7 +53,7 @@
   &lt;input type=button value=Search>
 &lt;/form></code></pre>
   <p>Now let&rsquo;s say the responsive behaviour you want could be explained like this in english:<p>
-  <p><Em><q>Search box and button are side-by-side until they get too narrow, then both the input and the button should be stacked on top of each other and full-width.</q></em></p>
+  <p><em><q>Search box and button are side-by-side until they get too narrow, then both the input and the button should be stacked on top of each other and full-width.</q></em></p>
   <h4>Desktop-first CSS</h4>
   <p>In a desktop-first mindset you would write your CSS like this:</p>
 <pre><code class=css>input {
@@ -68,7 +68,7 @@
   <h4>Mobile-first CSS</h4>
   <p>In a mobile-first mindset, you&rsquo;re targeting the mobile view (stacked) first and adding support for the side-by-side view only if the screen has enough room:</p>
 <pre><code class=css>input {
-  width: 1000%;
+  width: 100%;
 }
 @media (min-width: 600px) {
   input {
