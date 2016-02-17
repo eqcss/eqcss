@@ -2,16 +2,17 @@
 <html>
 <head>
   <meta charset=utf-8>
-  <meta name=description content="EQCSS is a polyfill that introduces Element Queries, Scoped CSS, a Parent selector, and more to all browsers IE8 and up">
-  <meta name=keywords content="EQCSS, element queries, element query, container queries, reponsive, rwd, elq, polyfill, plugin, SASS, Less, Grid Style Sheets, flexbox, IE8, IE8 Support">
-  <meta property=og:title content="EQCSS - Element Queries for CSS">
+  <meta name=description content="EQCSS is a polyfill that introduces Element Queries, Scoped Styles, CSS Meta-Selectors like $parent and $prev, and more, to all browsers IE8 and up">
+  <meta name=keywords content="EQCSS, element queries, element query, container queries, CSS extension, parent selector, meta selector, scoped CSS, scoped styles, CSS variables, reponsive web design, rwd, elq, polyfill, plugin, SASS, Less, Grid Style Sheets, flexbox, IE8">
+  <meta property=og:title content="EQCSS - Element Query CSS | Element Queries | Scoped Styles | Meta-Selectors | CSS Extension">
   <meta property=og:url content=http://elementqueries.com>
-  <meta property=og:description content="EQCSS is a polyfill that introduces Element Queries, Scoped CSS, a Parent selector, and more to all browsers IE8 and up">
-  <meta name=google-site-verification content=zqvNXM9AZmB51r-f-4NNlvL_RRS-K0oWVpPo0yd3E_0>
+  <meta property=og:description content="EQCSS is a polyfill that introduces Element Queries, Scoped Styles, CSS Meta-Selectors like $parent and $prev, and more, to all browsers IE8 and up">
   <meta name=viewport content="width=device-width, initial-scale=1">
-  <title>EQCSS - Element Queries for CSS</title>
+  <meta name=google-site-verification content=zqvNXM9AZmB51r-f-4NNlvL_RRS-K0oWVpPo0yd3E_0>
+  <title>EQCSS - Element Query CSS | Element Queries | Scoped Styles | Meta-Selectors | CSS Extension</title>
   <link href=http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic rel=stylesheet>
   <link href=http://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,500,600,700,900 rel=stylesheet>
+  <link href=http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic rel=stylesheet>
   <link href=http://staticresource.com/data-buttons.css rel=stylesheet>
   <link href=http://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css rel=stylesheet>
   <style>
@@ -185,12 +186,219 @@
     .center {
       text-align: center;
     }
+    /* Min-width */
+    @element ".minwidthpixels" and (min-width: 500px) {
+      .minwidthpixels {
+        background: gold;
+      }
+    }
+    @element ".minwidthpercents" and (min-width: 50%) {
+      .minwidthpercents {
+        background: gold;
+      }
+    }
+    /* Max-width */
+    @element ".maxwidthpixels" and (max-width: 500px) {
+      .maxwidthpixels {
+        background: gold;
+      }
+    }
+    @element ".maxwidthpercents" and (max-width: 50%) {
+      .maxwidthpercents {
+        background: gold;
+      }
+    }
+    /* Min-height */
+    @element ".minheightpixels" and (min-height: 200px) {
+      .minheightpixels {
+        background: gold;
+      }
+    }
+    @element ".minheightpercents" and (min-height: 50%) {
+      .minheightpercents {
+        background: gold;
+      }
+    }
+    /* Max-height */
+    @element ".maxheightpixels" and (max-height: 200px) {
+      .maxheightpixels {
+        background: gold;
+      }
+    }
+    @element ".maxheightpercents" and (max-height: 50%) {
+      .maxheightpercents {
+        background: gold;
+      }
+    }
+    /* Min-characters */
+    @element ".mincharacters" and (min-characters: 30) {
+      .mincharacters {
+        background: gold;
+      }
+    }
+    @element ".mincharacters-input" and (min-characters: 30) {
+      .mincharacters-input {
+        background: gold;
+      }
+    }
+    @element ".mincharacters-textarea" and (min-characters: 30) {
+      .mincharacters-textarea {
+        background: gold;
+      }
+    }
+    /* Max-characters */
+    @element ".maxcharacters" and (max-characters: 30) {
+      .maxcharacters {
+        background: gold;
+      }
+    }
+    @element ".maxcharacters-input" and (max-characters: 30) {
+      .maxcharacters-input {
+        background: gold;
+      }
+    }
+    @element ".maxcharacters-textarea" and (max-characters: 30) {
+      .maxcharacters-textarea {
+        background: gold;
+      }
+    }
+    /* Min-children */
+    @element ".minchildren" and (min-children: 5) {
+      .minchildren {
+        background: gold;
+      }
+    }
+    /* Max-children */
+    @element ".maxchildren" and (max-children: 5) {
+      .maxchildren {
+        background: gold;
+      }
+    }
+    /* Min-lines */
+    @element ".minlines" and (min-lines: 5) {
+      .minlines {
+        background: gold;
+      }
+    }
+    /* Max-lines */
+    @element ".maxlines" and (max-lines: 5) {
+      .maxlines {
+        background: gold;
+      }
+    }
+    /* Min-scroll-x */
+    @element ".min-scroll-x" and (min-scroll-x: 50%) {
+      .min-scroll-x {
+        background: gold;
+      }
+    }
+    /* Max-scroll-x */
+    @element ".max-scroll-x" and (max-scroll-x: 50%) {
+        .max-scroll-x {
+          background: gold;
+      }
+    }
+    /* Min-scroll-y */
+    @element ".min-scroll-y" and (min-scroll-y: 50%) {
+      .min-scroll-y {
+        background: gold;
+      }
+    }
+    /* Max-scroll-y */
+    @element ".max-scroll-y" and (max-scroll-y: 50%) {
+      .max-scroll-y {
+        background: gold;
+      }
+    }
+    /* Scoped Styles */
+    @element ".scoped" and (min-width: 300px) {
+
+      /* Only set a gold background to the elements matching the query */
+      $this {
+        background: gold;
+      }
+    }
+    /* Scoped Queries + Multiple Conditions */
+    @element ".scoped-multiple" and (min-width: 350px) and (max-width: 450px) {
+      $this {
+        background: gold;
+      }
+      $this > b {
+        color: red
+      }
+      $this:hover {
+        background: orange;
+      }
+    }
+    /* Multiple Conditions */
+    @element ".multiple-conditions" and (min-width: 50%) and (min-height: 150px) {
+      .multiple-conditions {
+        background: gold;
+      }
+    }
+    /* Comments */
+    /* comment before */
+    @element ".comments" and (max-width: 400px) {
+      /* comment at the beginning */
+      .comments {
+        background: gold;
+      }
+      /* comment at the end */
+    }
+    /* comment after */
+    /* $this selector */
+    @element ".this-selector input" and (min-characters: 5) {
+      $this {
+        border-color: red;
+      }
+    }
+    /* $parent selector */
+    @element ".parent-selector input" and (min-characters: 5) {
+      $this {
+        border-color: red;
+      }
+      $parent {
+        background: pink;
+      }
+    }
+    /* $root selector */
+    @element ".root-selector input" and (min-characters: 5) {
+      $this {
+        border-color: red;
+      }
+      $root {
+        background: pink;
+      }
+    }
+    /* $prev selector */
+    @element ".prev-selector [type=email]" {
+      $prev {
+        border-color: red;
+      }
+    }
+    /* $next selector */
+    @element ".next-selector [type=text]" {
+      $next {
+        border-color: red;
+      }
+    }
+    /* eval('') */
+    @element "strong" {
+      $this:after {
+        content: ' eval("new Date().getFullYear()")';
+      }
+    }
+    @element "em" {
+      $this:after {
+        content: ' eval("window.innerWidth+' x '+window.innerHeight")';
+      }
+    }
   </style>
 </head>
 <body>
   <main>
     <h1>EQCSS</h1>
-    <h2>Element Queries for CSS</h2>
+    <h2>Element Query CSS</h2>
     <h3 id=faq>What are Element Queries?</h3>
     <p>Element queries are a new way of thinking about responsive web design where the responsive conditions apply to elements on the page instead of the width or height of the browser.</p>
     <p>Unlike CSS <code>@media</code> queries, <code>@element</code> Queries are aware of more than just the width and height of the browser, you can write responsive conditions for a number of different situations like how many characters of text or child elements an element contains.</p>
@@ -199,7 +407,7 @@
     <p>EQCSS is a JavaScript plugin that lets you write element queries inside CSS today. With performance in mind, this plugin is written in pure JavaScript, so it doesn't require jQuery or any other libraries on your page in order to function - add EQCSS.js to you HTML and you&rsquo;re ready to get started!</p>
     <p class=center>
       <a href=http://github.com/eqcss/eqcss data-button=blue>View EQCSS on Github</a>
-      <a href=http://www.npmjs.com/package/eqcss data-button=red>View EQCSS on NPM</a>
+      <a href=http://www.npmjs.com/package/eqcss data-button=green>View EQCSS on NPM</a>
     </p>
     <p>Once you have downloaded a copy of EQCSS you will need to add it to every HTML page where you will be using element queries. It&rsquo;s best to add a <code>&lt;script></code> after your content, before the end of your <code>&lt;body></code> tag.</p>
     <pre><code class=html>&lt;script src=EQCSS.js>&lt;/script></code></pre>
@@ -232,113 +440,103 @@
     <article id=min-width-in-pixels>
       <h4>min-width in <code>px</code></h4>
       <div class="minwidthpixels" style="resize: horizontal">class="minwidthpixels"</div>
-<script type="text/eqcss">@element ".minwidthpixels" and (min-width: 500px) {
+      <pre><code class=css>@element ".minwidthpixels" and (min-width: 500px) {
   .minwidthpixels {
     background: gold;
   }
-}
-</script>
+}</code></pre>
     </article>
     <article id=min-width-in-percent>
       <h4>min-width in <code>%</code></h4>
       <div class="minwidthpercents" style="resize: horizontal">class="minwidthpercents"</div>
-<script type="text/eqcss">@element ".minwidthpercents" and (min-width: 50%) {
+      <pre><code class=css>@element ".minwidthpercents" and (min-width: 50%) {
   .minwidthpercents {
     background: gold;
   }
-}
-</script>
+}</code></pre>
     </article>
     <article id=max-width-in-pixels>
       <h4>max-width in <code>px</code></h4>
       <div class="maxwidthpixels" style="resize: horizontal">class="maxwidthpixels"</div>
-<script type="text/eqcss">@element ".maxwidthpixels" and (max-width: 500px) {
+      <pre><code class=css>@element ".maxwidthpixels" and (max-width: 500px) {
   .maxwidthpixels {
     background: gold;
   }
-}
-</script>
+}</code></pre>
     </article>
     <article id=max-width-in-percent>
       <h4>max-width in <code>%</code></h4>
       <div class="maxwidthpercents" style="resize: horizontal">class="maxwidthpercents"</div>
-<script type="text/eqcss">@element ".maxwidthpercents" and (max-width: 50%) {
+      <pre><code class=css>@element ".maxwidthpercents" and (max-width: 50%) {
   .maxwidthpercents {
     background: gold;
   }
-}
-</script>
+}</code></pre>
     </article>
     <article id=min-height-in-pixels>
       <h4>min-height in <code>px</code></h4>
       <div class="minheightpixels" style="resize: vertical">class="minheightpixels"</div>
-<script type="text/eqcss">@element ".minheightpixels" and (min-height: 200px) {
+      <pre><code class=css>@element ".minheightpixels" and (min-height: 200px) {
   .minheightpixels {
     background: gold;
   }
-}
-</script>
+}</code></pre>
     </article>
     <article id=min-height-in-percent>
       <h4>min-height in <code>%</code></h4>
       <section style="height: 300px;">
         <div class="minheightpercents" style="resize: vertical">class="minheightpercents"</div>
       </section>
-<script type="text/eqcss">@element ".minheightpercents" and (min-height: 50%) {
-  .minheightpercents {
-    background: gold;
-  }
-}
-</script>
+      <pre><code class=css>@element ".minheightpercents" and (min-height: 50%) {
+        .minheightpercents {
+          background: gold;
+        }
+      }</code></pre>
     </article>
     <article id=max-height-in-pixels>
       <h4>max-height in <code>px</code></h4>
       <div class="maxheightpixels" style="resize: vertical">class="maxheightpixels"</div>
-<script type="text/eqcss">@element ".maxheightpixels" and (max-height: 200px) {
+      <pre><code class=css>@element ".maxheightpixels" and (max-height: 200px) {
   .maxheightpixels {
     background: gold;
   }
-}
-</script>
+}</code></pre>
     </article>
     <article id=max-height-in-percent>
       <h4>max-height in <code>%</code></h4>
       <section style="height: 300px">
         <div class="maxheightpercents" style="resize: vertical">class="maxheightpercents"</div>
       </section>
-<script type="text/eqcss">@element ".maxheightpercents" and (max-height: 50%) {
+      <pre><code class=css>@element ".maxheightpercents" and (max-height: 50%) {
   .maxheightpercents {
     background: gold;
   }
-}
-</script>
+}</code></pre>
     </article>
     <article id=min-characters-on-block-elements>
       <h4>min-characters on block elements</h4>
       <p>(Use keyboard)</p>
       <div class="mincharacters" contenteditable>class="mincharacters"</div>
-<script type="text/eqcss">@element ".mincharacters" and (min-characters: 30) {
+      <pre><code class=css>@element ".mincharacters" and (min-characters: 30) {
   .mincharacters {
     background: gold;
   }
-}
-</script>
+}</code></pre>
     </article>
     <article id=max-characters-on-block-elements>
       <h4>max-characters on block elements</h4>
       <div class="maxcharacters" contenteditable>class="maxcharacters"</div>
-<script type="text/eqcss">@element ".maxcharacters" and (max-characters: 30) {
+      <pre><code class=css>@element ".maxcharacters" and (max-characters: 30) {
   .maxcharacters {
     background: gold;
   }
-}
-</script>
+}</code></pre>
     </article>
     <article id=min-characters-on-form-inputs>
       <h4>min-characters on form inputs</h4>
       <input class="mincharacters-input" value='class="mincharacters-input"'>
       <textarea class="mincharacters-textarea">class="mincharacters-textarea"</textarea>
-<script type="text/eqcss">@element ".mincharacters-input" and (min-characters: 30) {
+      <pre><code class=css>@element ".mincharacters-input" and (min-characters: 30) {
   .mincharacters-input {
     background: gold;
   }
@@ -347,14 +545,13 @@
   .mincharacters-textarea {
     background: gold;
   }
-}
-</script>
+}</code></pre>
     </article>
     <article id=max-characters-on-form-inputs>
       <h4>max-characters on form inputs</h4>
       <input class="maxcharacters-input" value='class="maxcharacters-input"'>
       <textarea class="maxcharacters-textarea">class="maxcharacters-textarea"</textarea>
-<script type="text/eqcss">@element ".maxcharacters-input" and (max-characters: 30) {
+      <pre><code class=css>@element ".maxcharacters-input" and (max-characters: 30) {
   .maxcharacters-input {
     background: gold;
   }
@@ -363,72 +560,67 @@
   .maxcharacters-textarea {
     background: gold;
   }
-}
-</script>
+}</code></pre>
     </article>
     <article id=min-children>
       <h4>min-children</h4>
       <div class="minchildren">class="minchildren"<br></div>
       <button data-button=green onclick="document.querySelector('.minchildren').innerHTML += '<img src=//staticresource.com/prestonIcon.jpg style=width:50px>'">Add Child</button>
-<script type="text/eqcss">@element ".minchildren" and (min-children: 5) {
+      <pre><code class=css>@element ".minchildren" and (min-children: 5) {
   .minchildren {
     background: gold;
   }
-}
-</script>
+}</code></pre>
     </article>
     <article id=max-children>
       <h4>max-children</h4>
       <div class="maxchildren">class="maxchildren"<br></div>
       <button data-button=green onclick="document.querySelector('.maxchildren').innerHTML += '<img src=//staticresource.com/prestonIcon.jpg style=width:50px>'">Add Child</button>
-<script type="text/eqcss">@element ".maxchildren" and (max-children: 5) {
+      <pre><code class=css>@element ".maxchildren" and (max-children: 5) {
   .maxchildren {
     background: gold;
   }
-}
-</script>
+}</code></pre>
     </article>
     <article id=min-lines>
       <h4>min-lines</h4>
       <div class="minlines" contenteditable>class="minlines"</div>
-<script type="text/eqcss">@element ".minlines" and (min-lines: 5) {
+      <pre><code class=css>@element ".minlines" and (min-lines: 5) {
   .minlines {
     background: gold;
   }
-}
-</script>
+}</code></pre>
     </article>
     <article id=max-lines>
       <h4>max-lines</h4>
       <div class="maxlines" contenteditable>class="maxlines"</div>
-<script type="text/eqcss">@element ".maxlines" and (max-lines: 5) {
+      <pre><code class=css>@element ".maxlines" and (max-lines: 5) {
   .maxlines {
     background: gold;
   }
-}
-</script>
+}</code></pre>
     </article>
     <article id=min-scroll-x>
       <h4>min-scroll-x</h4>
       <div class="min-scroll-x">
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       </div>
-<script type="text/eqcss">@element ".min-scroll-x" and (min-scroll-x: 50%) {
+      <pre><code class=css>@element ".min-scroll-x" and (min-scroll-x: 50%) {
   .min-scroll-x {
     background: gold;
   }
-}
-</script>
+}</code></pre>
     </article>
     <article id=max-scroll-x>
       <h4>max-scroll-x</h4>
       <div class="max-scroll-x">
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       </div>
-<script type="text/eqcss">@element ".max-scroll-x" and (max-scroll-x: 50%) {
+      <pre><code class=css>@element ".max-scroll-x" and (max-scroll-x: 50%) {
   .max-scroll-x {
     background: gold;
-}</script>
+  }
+}</code></pre>
     </article>
     <article id=min-scroll-y>
       <h4>min-scroll-y</h4>
@@ -436,12 +628,11 @@
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       </div>
-<script type="text/eqcss">@element ".min-scroll-y" and (min-scroll-y: 50%) {
+      <pre><code class=css>@element ".min-scroll-y" and (min-scroll-y: 50%) {
   .min-scroll-y {
     background: gold;
   }
-}
-</script>
+}</code></pre>
     </article>
     <article id=max-scroll-y>
       <h4>max-scroll-y</h4>
@@ -449,31 +640,29 @@
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       </div>
-<script type="text/eqcss">@element ".max-scroll-y" and (max-scroll-y: 50%) {
+      <pre><code class=css>@element ".max-scroll-y" and (max-scroll-y: 50%) {
   .max-scroll-y {
     background: gold;
   }
-}
-</script>
+}</code></pre>
     </article>
     <article id=scoped-styles>
       <h4>Scoped queries ($this)</h4>
       <div class="scoped" style="resize: horizontal">class="scoped"</div>
       <div class="scoped" style="resize: horizontal">class="scoped"</div>
-<script type="text/eqcss">@element ".scoped" and (min-width: 300px) {
+      <pre><code class=css>@element ".scoped" and (min-width: 300px) {
 
   /* Only set a gold background to the elements matching the query */
   $this {
     background: gold;
   }
-}
-</script>
+}</code></pre>
     </article>
     <article id=scoped-queries-and-multiple-conditions>
       <h4>Scoped queries + multiple conditions</h4>
       <div class="scoped-multiple" style="resize: horizontal"><b>class="scoped-multiple"</b></div>
       <div class="scoped-multiple" style="resize: horizontal"><b>class="scoped-multiple"</b></div>
-<script type="text/eqcss">@element ".scoped-multiple" and (min-width: 350px) and (max-width: 450px) {
+      <pre><code class=css>@element ".scoped-multiple" and (min-width: 350px) and (max-width: 450px) {
   $this {
     background: gold;
   }
@@ -483,32 +672,29 @@
   $this:hover {
     background: orange;
   }
-}
-</script>
+}</code></pre>
 </article>
     <article id=multiple-conditions>
       <h4>Multiple conditions</h4>
       <div class="multiple-conditions" style="resize: both">class="multiple-conditions"</div>
-<script type="text/eqcss">@element ".multiple-conditions" and (min-width: 50%) and (min-height: 150px) {
+      <pre><code class=css>@element ".multiple-conditions" and (min-width: 50%) and (min-height: 150px) {
   .multiple-conditions {
     background: gold;
   }
-}
-</script>
+}</code></pre>
     </article>
     <article id=comments>
       <h4>Comments</h4>
       <div class="comments" style="resize: horizontal">class="comments"</div>
-<script type="text/eqcss">
-/* comment before */@element ".comments" and (max-width: 400px) {
+      <pre><code class=css>/* comment before */
+@element ".comments" and (max-width: 400px) {
   /* comment at the beginning */
   .comments {
     background: gold;
   }
   /* comment at the end */
 }
-/* comment after */
-</script>
+/* comment after */</code></pre>
     </article>
     <h3 id=meta-selectors>Meta Selectors</h3>
     <article id=this-selector>
@@ -518,12 +704,11 @@
         <input placeholder=input>
         <input placeholder=input>
       </div>
-<script type="text/eqcss">@element ".this-selector input" and (min-characters: 5) {
+      <pre><code class=css>@element ".this-selector input" and (min-characters: 5) {
   $this {
     border-color: red;
   }
-}
-</script>
+}</code></pre>
     </article>
     <article id=parent-selector>
       <h4><code>$parent</code> selector</h4>
@@ -532,15 +717,14 @@
         <input placeholder=input>
         <input placeholder=input>
       </div>
-<script type="text/eqcss">@element ".parent-selector input" and (min-characters: 5) {
+      <pre><code class=css>@element ".parent-selector input" and (min-characters: 5) {
   $this {
     border-color: red;
   }
   $parent {
     background: pink;
   }
-}
-</script>
+}</code></pre>
     <article id=root-selector>
       <h4><code>$root</code> selector</h4>
       <div class="root-selector">
@@ -548,15 +732,14 @@
         <input placeholder=input>
         <input placeholder=input>
       </div>
-<script type="text/eqcss">@element ".root-selector input" and (min-characters: 5) {
+      <pre><code class=css>@element ".root-selector input" and (min-characters: 5) {
   $this {
     border-color: red;
   }
   $root {
     background: pink;
   }
-}
-</script>
+}</code></pre>
     </article>
     <article id=prev-selector>
       <h4><code>$prev</code> selector</h4>
@@ -565,12 +748,11 @@
         <input type=text placeholder=input>
         <input type=email placeholder=email>
       </div>
-<script type="text/eqcss">@element ".prev-selector [type=email]" {
+      <pre><code class=css>@element ".prev-selector [type=email]" {
   $prev {
     border-color: red;
   }
-}
-</script>
+}</code></pre>
     </article>
     <article id=next-selector>
       <h4><code>$next</code> selector</h4>
@@ -579,12 +761,11 @@
         <input type=text placeholder=input>
         <input type=email placeholder=email>
       </div>
-<script type="text/eqcss">@element ".next-selector [type=text]" {
+      <pre><code class=css>@element ".next-selector [type=text]" {
   $next {
     border-color: red;
   }
-}
-</script>
+}</code></pre>
     </article>
     <h3 id=css-functions>CSS Functions</h3>
     <article id=var>
@@ -593,7 +774,7 @@
         <p><strong>Current Year:</strong></p>
         <p><em>Viewport Size:</em></p>
       </div>
-<script type="text/eqcss">@element "strong" {
+      <pre><code class=css>@element "strong" {
   $this:after {
     content: ' eval("new Date().getFullYear()")';
   }
@@ -602,8 +783,7 @@
   $this:after {
     content: ' eval("window.innerWidth+' x '+window.innerHeight")';
   }
-}
-</script>
+}</code></pre>
     <h3 id=demos>Element Query Demos</h3>
     <ul>
       <li><a href=demos/blockquote-style.html>Alternating Blockquote Style</a></li>
@@ -667,69 +847,69 @@
   <script src=EQCSS.js></script>
   <script>
     // Apply eqcss on clicks, resizes, inputs
-    var EQCSS_resizing = true;
-    var EQCSS_timeout = true;
-    window.addEventListener("mousedown", function() {
-      EQCSS_resizing = true;
-      if(EQCSS_timeout == true) {
-        EQCSS.apply();
+    var EQCSS_resizing = true
+    var EQCSS_timeout = true
+    window.addEventListener("mousedown", function(){
+      EQCSS_resizing = true
+      if(EQCSS_timeout == true){
+        EQCSS.apply()
       }
-      EQCSS_timeout = false;
-      setTimeout(function() {
-        EQCSS_timeout = true;
-      },250);
-    });
-    window.addEventListener("mouseup", function() {
-      EQCSS_resizing = false;
-      if(EQCSS_timeout == true) {
-        EQCSS.apply();
+      EQCSS_timeout = false
+      setTimeout(function(){
+        EQCSS_timeout = true
+      },250)
+    })
+    window.addEventListener("mouseup", function(){
+      EQCSS_resizing = false
+      if(EQCSS_timeout == true){
+        EQCSS.apply()
       }
-      EQCSS_timeout = false;
-      setTimeout(function() {
-        EQCSS_timeout = true;
-      },250);
-    });
-    window.addEventListener("mousemove", function() {
-      if(EQCSS_resizing === true) {
-        if(EQCSS_timeout === true) {
-          EQCSS.apply();
+      EQCSS_timeout = false
+      setTimeout(function(){
+        EQCSS_timeout = true
+      },250)
+    })
+    window.addEventListener("mousemove", function(){
+      if(EQCSS_resizing === true){
+        if(EQCSS_timeout === true){
+          EQCSS.apply()
         }
-        EQCSS_timeout = false;
-        setTimeout(function() {
-          EQCSS_timeout = true;
-        },250);
+        EQCSS_timeout = false
+        setTimeout(function(){
+          EQCSS_timeout = true
+        },250)
       }
-    });
-    window.addEventListener("keydown", function() {
-      if(EQCSS_timeout == true) {
-        EQCSS.apply();
+    })
+    window.addEventListener("keydown", function(){
+      if(EQCSS_timeout == true){
+        EQCSS.apply()
       }
-      EQCSS_timeout = false;
+      EQCSS_timeout = false
       setTimeout(function() {
-        EQCSS_timeout = true;
-      },250);
-    });
-    window.addEventListener("keyup", function() {
-      if(EQCSS_timeout == true) {
-        EQCSS.apply();
+        EQCSS_timeout = true
+      },250)
+    })
+    window.addEventListener("keyup", function(){
+      if(EQCSS_timeout == true){
+        EQCSS.apply()
       }
-      EQCSS_timeout = false;
+      EQCSS_timeout = false
       setTimeout(function() {
-        EQCSS_timeout = true;
-      },250);
-    });
-    window.addEventListener("input", function() {
-      if(EQCSS_timeout == true) {
-        EQCSS.apply();
+        EQCSS_timeout = true
+      },250)
+    })
+    window.addEventListener("input", function(){
+      if(EQCSS_timeout == true){
+        EQCSS.apply()
       }
-      EQCSS_timeout = false;
+      EQCSS_timeout = false
       setTimeout(function() {
-        EQCSS_timeout = true;
-      },250);
-    });
+        EQCSS_timeout = true
+      },250)
+    })
   </script>
-  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/solarized_dark.min.css" rel=stylesheet>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
+  <link href=http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/solarized_dark.min.css rel=stylesheet>
+  <script src=http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js></script>
   <script>hljs.initHighlightingOnLoad()</script>
 </body>
 </html>
