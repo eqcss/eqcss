@@ -1,4 +1,6 @@
-# EQCSS - Element Queries for CSS
+# EQCSS
+
+**A CSS Extension for Element Queries & More**
 
 ## What are Element Queries?
 
