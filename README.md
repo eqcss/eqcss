@@ -30,6 +30,19 @@ Alternatively, you can also grab [EQCSS from NPM](https://www.npmjs.com/package/
 
     npm install eqcss
 
+
+### CDN Hosted Links</h4>
+
+EQCSS is also hosted on CDNjs and you can use the version hosted there for your projects: [https://cdnjs.com/libraries/eqcss](https://cdnjs.com/libraries/eqcss):
+
+```
+https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.1.0/EQCSS-polyfills.min.js
+```
+
+```
+https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.1.0/EQCSS.min.js
+```
+
 ## Writing Element Queries
 
 Now that you have EQCSS added to your HTML you're ready to write element queries. There are two ways you can add EQCSS to your site: the easiest way is by writing them inside your CSS either in a `<style>` or `<link>` in your HTML, or by isolating your EQCSS styles in a custom script type.
