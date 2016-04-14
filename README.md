@@ -138,6 +138,7 @@ Element Queries have the following format:
 - [Tweet-Counter Demo](http://elementqueries.com/demos/tweet-counter.html)
 - [JS Variables Demo](http://elementqueries.com/demos/variables.html)
 - [Responsive Scaling Demo](http://elementqueries.com/demos/video-scaling.html)
+- [Geometric Design Demo](http://elementqueries.com/demos/geometric.html)
 
 ## Documentation & Tutorials
 

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8>
+  <meta name="description" content="Using Element Queries, Scoped styles, CSS Variables, and eval() to build a Geometric Design">
+  <meta name="keywords" content="EQCSS, element queries, element query, container queries, responsive, content blocks, responsive content, responsive grid">
+  <title>Rotating Geometric Design</title>
+  <style>
+    html, body {
+      overflow: hidden;
+    }
+    body {
+      margin: 1em;
+      background: #222;
+      -moz-animation-name: roll;
+      -webkit-animation-name: roll;
+      animation-name: roll;
+      -moz-animation-iteration-count: infinite;
+      -webkit-animation-iteration-count: infinite;
+      animation-iteration-count: infinite;
+      -webkit-animation-timing-function: linear;
+      -moz-animation-timing-function: linear;
+      animation-timing-function: linear;
+      -moz-animation-duration: 60s;
+      -webkit-animation-duration: 60s;
+      animation-duration: 60s;
+    }
+    @element '[data-logo]' {
+      body {
+        padding: eval("stroke");
+      }
+      $this,
+      $this:before,
+      $this:after,
+      $this * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+      $this {
+        display: block;
+        margin: 0 auto;
+        width: eval("width");
+        height: eval("scrollWidth")px;
+        position: relative;
+        max-width: calc(100vmin - 2em);
+      }
+      $this:before,
+      $this:after {
+        content: '';
+        display: block;
+        background: eval("color");
+        position: absolute;
+      }
+      $this:before {
+        width: eval("stroke");
+        height: calc(100% + eval("stroke")*2);
+        top: -eval("stroke");
+        left: calc(50% - eval("stroke")/2);
+      }
+      $this:after {
+        width: calc(100% + eval("stroke")*2);
+        height: eval("stroke");
+        top: calc(50% - eval("stroke")/2);
+        left: -eval("stroke");
+      }
+      $this i {
+        display: block;
+        width: calc(50% + eval("stroke")*1.5);
+        height: calc(50% + eval("stroke")*1.5);
+        border: eval("stroke") solid rgb(eval("color"));
+        border-radius: 100%;
+        position: absolute;
+        background: rgba(eval("color"),.1);
+      }
+      $this i:nth-child(1) {
+        width: calc(100% + eval("stroke")*2);
+        height: calc(100% + eval("stroke")*2);
+        top: -eval("stroke");
+        left: -eval("stroke");
+      }
+      $this i:nth-child(2) {
+        top: -eval("stroke");
+        left: calc(25% - eval("stroke")/1.5);
+      }
+      $this i:nth-child(3) {
+        top: calc(25% - eval("stroke")/1.5);
+        left: calc(0% - eval("stroke"));
+      }
+      $this i:nth-child(4) {
+        bottom: calc(25% - eval("stroke")/1.5);
+        right: calc(0% - eval("stroke"));
+      }
+      $this i:nth-child(5) {
+        bottom: calc(0% - eval("stroke"));
+        left: calc(25% - eval("stroke")/1.5);
+      }
+      $this i:nth-child(n+6) {
+        width: calc(41.5% + eval("stroke")*1.5);
+        height: calc(41.5% + eval("stroke")*1.5);
+      }
+      $this i:nth-child(6) {
+        left: calc(8.5% - eval("stroke")/1.5);
+        top: calc(8.5% - eval("stroke")/1.5);
+      }
+      $this i:nth-child(7) {
+        right: calc(8.5% - eval("stroke")/1.5);
+        top: calc(8.5% - eval("stroke")/1.5);
+      }
+      $this i:nth-child(8) {
+        left: calc(8.5% - eval("stroke")/1.5);
+        bottom: calc(8.5% - eval("stroke")/1.5);
+      }
+      $this i:nth-child(9) {
+        right: calc(8.5% - eval("stroke")/1.5);
+        bottom: calc(8.5% - eval("stroke")/1.5);
+      }
+    }
+    @-moz-keyframes roll {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @-webkit-keyframes roll {
+      from { -webkit-transform: rotate(0deg); }
+      to { -webkit-transform: rotate(360deg); }
+    }
+    @keyframes roll {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <span data-logo>
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
+  </span>
+  <script>
+    var width = '100%'
+    var stroke = '1px'
+    var color = ~~(Math.random()*256) + ',' + ~~(Math.random()*256) + ',' +  ~~(Math.random()*256)
+  </script>
+  <!--[if lt IE 9]><script src=http://elementqueries.com/EQCSS-polyfills.js></script><![endif]-->
+  <script src=http://elementqueries.com/EQCSS.js></script>
+</body>
+</html>
