@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset=utf-8>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name=viewport content="width=device-width, initial-scale=1">
   <title>Message Style with Element Queries</title>
   <meta name="description" content="">
   <meta name="keywords" content="EQCSS, element queries, element query, container queries, responsive, blockquotes, pullquotes, messages, chat bubbles">
@@ -28,11 +28,15 @@
     blockquote:before {
       content: '';
       display: block;
+      background: transparent;
       position: absolute;
+      top: auto;
       bottom: -.9em;
       left: 0;
+      height: 0;
       border: 1em solid transparent;
       border-left-color: #3499c5;
+      opacity: 1;
     }
     blockquote:nth-of-type(even):before {
       border-left-color: transparent;
@@ -42,6 +46,7 @@
     }
     blockquote p {
       margin: 0;
+      color: white;
       font-size: 12pt;
       line-height: 1.4;
       padding: 1em 1em 1em 1em;
@@ -52,7 +57,8 @@
     blockquote p:not(:first-of-type) {
       padding-top: 0;
     }
-    blockquote footer {
+    blockquote footer,
+    blockquote cite {
       color: white;
       margin: 0 auto;
       font-weight: normal;
@@ -62,16 +68,20 @@
       font-style: italic;
       font-family: 'Fira Sans', 'Source Sans Pro', 'Open Sans', Roboto, 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', 'Myriad Pro', 'Segoe UI', Myriad, Helvetica, 'Lucida Grande', 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, Arial, sans-serif;
     }
-    blockquote footer:before {
+    blockquote footer:before,
+    blockquote cite:before {
       content: '— ';
     }
-    blockquote:nth-of-type(even) footer:before {
+    blockquote:nth-of-type(even) footer:before,
+    blockquote:nth-of-type(even) cite:before {
       content: '';
     }
-    blockquote:nth-of-type(even) footer:after {
+    blockquote:nth-of-type(even) footer:after,
+    blockquote:nth-of-type(even) cite:after {
       content: ' —';
     }
-    blockquote:nth-of-type(even) footer {
+    blockquote:nth-of-type(even) footer,
+    blockquote:nth-of-type(even) cite {
       text-align: right;
     }
     @element 'blockquote' and (min-width: 300px){
@@ -90,46 +100,54 @@
 <h1>Alternating Messages</h1>
   <blockquote>
     <p><q>The U.S. is fast approaching $19,000,000,000,000.00 in national debt. This is mathematically impossible to ever pay back &hellip; even if every American was taxed at 100%.</q></p>
-    <footer>Charles Goyette, The Dollar Meltdown</footer>
+    <cite>Charles Goyette, The Dollar Meltdown</cite>
   </blockquote>
   <blockquote>
     <p><q>79 million Baby Boomers are about to retire, pull their money out of the economy, and demand their $35 Trillion Dollars in Social Security &amp; Medicare. Think that through&hellip;</q></p>
-    <footer>Robert Kiyosaki</footer>
+    <cite>Robert Kiyosaki</cite>
   </blockquote>
   <blockquote>
     <p><q>23.4% of Americans are Currently Unemployed &hellip; not the 9.1% they&rsquo;d like you to believe.</q></p>
-    <footer>ShadowStats.com</footer>
+    <cite>ShadowStats.com</cite>
   </blockquote>
   <blockquote>
     <p><q>There are currently 5 job seekers for every 1 job opening in America, forcing wages down by 10%.</q></p>
-    <footer>The Wall Street Journal</footer>
+    <cite>The Wall Street Journal</cite>
   </blockquote>
   <blockquote>
     <p><q>Adjusted for inflation, the average yearly earnings for an American male are lower than in 1978.</q></p>
-    <footer>The Wall Street Journal</footer>
+    <cite>The Wall Street Journal</cite>
   </blockquote>
   <blockquote>
     <p><q>1 out of every 5 Americans is on government support of some sort</q></p>
-    <footer>The Wall Street Journal</footer>
+    <cite>The Wall Street Journal</cite>
   </blockquote>
   <blockquote>
     <p><q>America will lose its position as the world&rsquo;s superpower in less than 10 years.</q></p>
-    <footer>Goldman Sachs</footer>
+    <cite>Goldman Sachs</cite>
   </blockquote>
   <blockquote>
     <p><q>We&rsquo;re actually in a depression right now.  They just don&rsquo;t want us to know that.</q></p>
-    <footer>Anonymous</footer>
+    <cite>Anonymous</cite>
   </blockquote>
   <blockquote>
     <p><q>If we don&rsquo;t do something soon &hellip; our recovery is on the verge of faltering.</q></p>
-    <footer>Ben Bernanke, The Fed</footer>
+    <cite>Ben Bernanke, The Fed</cite>
   </blockquote>
   <blockquote>
     <p>&ldquo;The stock bubble of 2001 and the housing bubble of 2007 were mere sideshows for what&rsquo;s coming.</p>
     <p>The main act is just around the corner &hellip;&rdquo;</p>
-    <footer>Chris Martenson Ph.D., The Crash Course</footer>
+    <cite>Chris Martenson Ph.D., The Crash Course</cite>
   </blockquote>
-  <!--[if lt IE 9]><script src="http://elementqueries.com/EQCSS-polyfills.js"></script><![endif]-->
-  <script src="http://elementqueries.com/EQCSS.js"></script>
+  <!--[if lt IE 9]><script src=http://elementqueries.com/EQCSS-polyfills.min.js></script><![endif]-->
+  <script src=http://elementqueries.com/EQCSS.min.js></script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create','UA-76690105-1','auto');
+    ga('send','pageview');
+  </script>
 </body>
 </html>

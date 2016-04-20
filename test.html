@@ -117,7 +117,7 @@ EQCSS.apply();
 Please note that this is called automatically on load, on resize, on input, on keydown/keyup, on mousedown/mouseup and when the DOM changes.
 </section>
 
-<!--section>
+<section>
 <h3>Write your own EQCSS code as if you wrote regular CSS code</h3>
 in the head or the body, as inline style
 <br>
@@ -519,7 +519,7 @@ You can also target any children of the root:
     $root .parent_section style { background: yellow }
 }
 </style>
-</section-->
+</section>
 
 
 
@@ -548,7 +548,7 @@ Infinite nested parenthesis
 <style>
 @element ".eval2" and (min-width: 150px){
     $this:after {
-      content: 
+      content:
       "eval('Math.min(Math.random(),Math.random())')"
     }
 }
@@ -571,7 +571,7 @@ JS error
 <br>
 Scoping
 <br>
-(you can use "$it" or nothing to access the current element) 
+(you can use "$it" or nothing to access the current element)
 <br>
 <br>
 <div class="eval4" style="resize: horizontal; padding: 5px;">
@@ -695,4 +695,12 @@ window.addEventListener("input", function(){
     EQCSS_timeout = true;
   },250);
 });
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create','UA-76690105-1','auto');
+  ga('send','pageview');
 </script>

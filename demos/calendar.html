@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset=utf-8>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name=viewport content="width=device-width, initial-scale=1">
   <title>Calendar with Element Queries</title>
   <meta name="description" content="Bootstrap-free calendar widget written using HTML and EQCSS, CSS with element queries. Because of the element queries this calendar widget will adapt responsively to fit into whatever container in your template you display it inside. This can fill an entire page, or shrink down to just the size of a thumbnail in a sidebar.">
   <meta name="keywords" content="EQCSS, element queries, element query, container queries, responsive, widget, calendar, element-first, element-first design">
@@ -852,7 +852,15 @@
     <input type="radio" name="eqCal" id="reset">
     <label class="reset" for="reset">
   </section>
-  <!--[if lt IE 9]><script src="http://elementqueries.com/EQCSS-polyfills.js"></script><![endif]-->
-  <script src="http://elementqueries.com/EQCSS.js"></script>
+  <!--[if lt IE 9]><script src=http://elementqueries.com/EQCSS-polyfills.min.js></script><![endif]-->
+  <script src=http://elementqueries.com/EQCSS.min.js></script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create','UA-76690105-1','auto');
+    ga('send','pageview');
+  </script>
 </body>
 </html>

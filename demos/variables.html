@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset=utf-8>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name=viewport content="width=device-width, initial-scale=1">
   <title>Variables with Element Queries</title>
   <meta name="description" content="Using the new eval("") feature in EQCSS you can now use a value from JavaScript in your CSS, whether it's a variable, value, or function - whatever the current value of that is at the time the element query applies will be the value that is used.">
   <meta name="keywords" content="EQCSS, element queries, element query, container queries, responsive, variables, CSS variables, JS variables">
@@ -63,8 +63,16 @@
       return parseInt(number) + 10
     }
   </script>
-  <!--[if lt IE 9]><script src="http://elementqueries.com/EQCSS-polyfills.js"></script><![endif]-->
-  <script src="http://elementqueries.com/EQCSS.js"></script>
+  <!--[if lt IE 9]><script src=http://elementqueries.com/EQCSS-polyfills.min.js></script><![endif]-->
+  <script src=http://elementqueries.com/EQCSS.min.js></script>
   <script src="http://staticresource.com/eqcss-demo.js"></script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create','UA-76690105-1','auto');
+    ga('send','pageview');
+  </script>
 </body>
 </html>

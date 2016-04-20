@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset=utf-8>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name=viewport content="width=device-width, initial-scale=1">
   <title>Media Player with Element Queries</title>
-  <meta name="description" content="">
+  <meta name="description" content="Responsive media player with element queries. This media player can be embedded anywhere on any website, and since the styles are relative to the media player and not the browser, it will adapt to fit where you place it.">
   <meta name="keywords" content="EQCSS, element queries, element query, container queries, responsive, media player, player ui, media controls, responsive audio player">
   <link href=http://staticresource.s3.amazonaws.com/template/css/basic.css rel=stylesheet>
   <link href=http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic rel=stylesheet>
@@ -453,7 +453,15 @@
           }
         }
   </script>
-  <!--[if lt IE 9]><script src="http://elementqueries.com/EQCSS-polyfills.js"></script><![endif]-->
-  <script src="http://elementqueries.com/EQCSS.js"></script>
+  <!--[if lt IE 9]><script src=http://elementqueries.com/EQCSS-polyfills.min.js></script><![endif]-->
+  <script src=http://elementqueries.com/EQCSS.min.js></script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create','UA-76690105-1','auto');
+    ga('send','pageview');
+  </script>
 </body>
 </html>
