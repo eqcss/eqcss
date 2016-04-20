@@ -281,7 +281,7 @@
 <body>
 <h1>REM Audio Player</h1>
 <aside data-media>
-  <audio src="http://staticresource.com/test.m4a" preload=auto></audio>
+  <audio src=http://staticresource.s3.amazonaws.com/test.m4a preload=auto></audio>
   <span data-current>00:00</span>
   <span data-total>00:00</span>
   <input type=range min=0 max=1000 step=1 value=0 oninput=remPlayer.updateTime(this.parentNode.getAttribute("data-media"),this.value)>
@@ -293,7 +293,7 @@
 </aside>
 
 <aside data-media>
-  <audio src="http://staticresource.com/test.m4a" preload=auto></audio>
+  <audio src=http://staticresource.s3.amazonaws.com/test.m4a preload=auto></audio>
   <span data-current>00:00</span>
   <span data-total>00:00</span>
   <input type=range min=0 max=1000 step=1 value=0 oninput=remPlayer.updateTime(this.parentNode.getAttribute("data-media"),this.value)>
