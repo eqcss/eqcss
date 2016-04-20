@@ -4,13 +4,45 @@
   <meta charset=utf-8>
   <meta name=viewport content="width=device-width, initial-scale=1">
   <title>Previous Element Meta-Selector</title>
-  <meta name="description" content="Previous element CSS selector. Use EQCSS.js to add new meta-selectors like $next, $prev, $parent, and more to CSS.">
-  <meta name="keywords" content="EQCSS, element queries, element query, container queries, meta selector, previous element, previous selector, css selector">
+  <meta name=description content="Previous element CSS selector. Use EQCSS.js to add new meta-selectors like $next, $prev, $parent, and more to CSS.">
+  <meta name=keywords content="EQCSS, element queries, element query, container queries, meta selector, previous element, previous selector, css selector">
   <link href=http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic rel=stylesheet>
   <link href=http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic rel=stylesheet>
   <link href=http://staticresource.s3.amazonaws.com/template/css/basic.css rel=stylesheet>
   <link href=http://staticresource.s3.amazonaws.com/template/plugins/buttons/data-buttons.css rel=stylesheet>
   <style>
+    body {
+      text-align: center;
+    }
+    [type=text],
+    [type=email],
+    [type=password] {
+      display: block;
+      margin: 0 0 1em 0;
+      padding: .4em .5em;
+      width: 100%;
+      height: 40px;
+      outline: none;
+      border: 1px solid rgba(255,255,255,.7);
+      border-radius: 2px;
+      background: rgba(255,255,255,.5);
+      box-shadow: rgba(0,0,0,.15) 0 1px 0;
+      color: rgba(0,0,0,.7);
+      font-weight: 400;
+      font-size: 12pt;
+      transition: all .2s ease-in-out;
+      -webkit-appearance: none;
+      appearance: none;
+      -moz-appearance: none;
+      font-family: 'Source Sans Pro', 'Open Sans', Roboto, 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', 'Myriad Pro', 'Segoe UI', Myriad, Helvetica, 'Lucida Grande', 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, Arial, sans-serif;
+    }
+    [type=text]:focus,
+    [type=email]:focus,
+    [type=password]:focus {
+      outline: none;
+      border-color: orange;
+      box-shadow: #fc0 0 0 3px;
+    }
     @element '[type=button]' {
       $prev {
         background: gold;
@@ -21,10 +53,12 @@
 <body>
   <h1>Selecting Previous Element</h1>
   <h2>Using the <code>$prev</code> meta-selector in EQCSS</h2>
-  <input type=text placeholder="Text input">
-  <input type=email placeholder="Email input">
-  <input type=password placeholder="Password input">
-  <input type=button data-button value="Button input">
+  <form>
+    <input type=text placeholder="Text input">
+    <input type=email placeholder="Email input">
+    <input type=password placeholder="Password input">
+    <input type=button data-button value="Button input">
+  </form>
   <!--[if lt IE 9]><script src=http://elementqueries.com/EQCSS-polyfills.min.js></script><![endif]-->
   <script src=http://elementqueries.com/EQCSS.min.js></script>
   <script>
