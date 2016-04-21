@@ -140,6 +140,9 @@ Element Queries have the following format:
 - [Responsive Scaling Demo](http://elementqueries.com/demos/video-scaling.html)
 - [Geometric Design Demo](http://elementqueries.com/demos/geometric.html)
 - [Responsive Order Form](http://elementqueries.com/demos/order-form.html)
+- [Element Query Grid](http://elementqueries.com/demos/element-query-grid.html)
+- [JS Functions in CSS](http://elementqueries.com/demos/js-functions-demo.html)
+- [Responsive Content Waterfall](http://elementqueries.com/demos/responsive-waterfall.html)
 
 ## Documentation & Tutorials
 

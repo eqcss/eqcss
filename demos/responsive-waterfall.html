@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8>
+  <meta name=viewport content="width=device-width, initial-scale=1">
+  <title>Running JS Functions from CSS</title>
+  <meta name=description content="Responsive repeating content blocks with alternating background color. The breakpoints in this component are relative to the width of the element containing these blocks instead of the width of the browser. This means they can be added anywhere, to any layout and will always look their best.">
+  <meta name=keywords content="EQCSS, element queries, element query, container queries, meta selector, responsive content, content waterfall, storytelling">
+  <link href="http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic|Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic" rel=stylesheet>
+  <link href=http://staticresource.s3.amazonaws.com/template/css/basic.css rel=stylesheet>
+  <style>
+    @element '[data-waterfall]' {
+      $this,
+      $this *,
+      $this *:before,
+      $this *:after {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-kerning: auto;
+      }
+      $this {
+        color: #333;
+        font-size: 10pt;
+        line-height: 1.4;
+        font-weight: 400;
+        font-family: 'Source Sans Pro', 'Open Sans', Roboto, 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', 'Myriad Pro', 'Segoe UI', Myriad, Helvetica, 'Lucida Grande', 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, Arial, sans-serif;
+        -webkit-text-size-adjust: 100%;
+      }
+      $this aside {
+        padding: 1em;
+      }
+      $this aside:nth-child(even) {
+        background: rgba(0,0,0,.1)
+      }
+      $this aside:after {
+        content: '';
+        display: block;
+        clear: both;
+      }
+      $this h2,
+      $this h3 {
+        color: #555;
+        font-family: Fira, 'Source Sans Pro', 'Open Sans', Roboto, 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', 'Myriad Pro', 'Segoe UI', Myriad, Helvetica, 'Lucida Grande', 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, Arial, sans-serif;
+        margin: 0 auto;
+        letter-spacing: -.02em;
+        line-height: 1.2;
+      }
+      $this h2 {
+        font-size: 240%;
+        font-weight: 700;
+      }
+      $this h3 {
+        font-size: 180%;
+        font-weight: 400;
+      }
+      $this img {
+        display: block;
+        width: auto;
+        max-width: 100%;
+        margin: 1em auto;
+        border-radius: 100%;
+      }
+      $this p {
+        color: #333;
+        font-size: 120%;
+        margin: .5em 0;
+      }
+    }
+    @element '[data-waterfall]' and (max-width: 200px) {
+      $this h2,
+      $this h3,
+      $this p {
+        text-align: center;
+      }
+      $this h2 {
+        font-size: 200%;
+      }
+      $this h3 {
+        font-size: 140%;
+      }
+      $this p {
+        font-size: 100%;
+      }
+    }
+    @element '[data-waterfall]' and (min-width: 600px) {
+      $this h2 {
+        font-size: 280%;
+      }
+      $this h3 {
+        font-size: 220%;
+      }
+      $this p {
+        font-size: 140%;
+      }
+      $this img {
+        float: left;
+        margin: 0 2em 0 0;
+      }
+      $this aside {
+        margin: 2em 0;
+        padding: 2em;
+      }
+      $this aside:nth-child(even) img {
+        float: right;
+        margin: 0 0 0 2em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Responsive Waterfall</h1>
+  <h2>Storytelling with CSS</h2>
+  <section data-waterfall>
+    <aside>
+      <img src=http://staticresource.s3.amazonaws.com/user.png>
+      <h2>Headline</h2>
+      <h3>Subheadline goes here</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+    </aside>
+    <aside>
+      <img src=http://staticresource.s3.amazonaws.com/user.png>
+      <h2>Headline</h2>
+      <h3>Subheadline goes here</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+    </aside>
+    <aside>
+      <img src=http://staticresource.s3.amazonaws.com/user.png>
+      <h2>Headline</h2>
+      <h3>Subheadline goes here</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+    </aside>
+    <aside>
+      <img src=http://staticresource.s3.amazonaws.com/user.png>
+      <h2>Headline</h2>
+      <h3>Subheadline goes here</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+    </aside>
+  </section>
+  <!--[if lt IE 9]><script src=http://elementqueries.com/EQCSS-polyfills.min.js></script><![endif]-->
+  <script src=http://elementqueries.com/EQCSS.min.js></script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create','UA-76690105-1','auto');
+    ga('send','pageview');
+  </script>
+</body>
+</html>

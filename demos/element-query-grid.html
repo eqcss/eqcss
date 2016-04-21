@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html data-theme=dark>
+<head>
+  <meta charset=utf-8>
+  <meta name=viewport content="width=device-width, initial-scale=1">
+  <title>Element Query-Powered Grid</title>
+  <meta name=description content="Element Query-Powered grid is a responsive grid that uses breakpoints relative to the element you apply it to, instead of breakpoints based on the width of the browser alone. This lets you use this grid for embedding content responsively inside of other elements like slideshows or widgets without worrying when the responsive styles will kick in.">
+  <meta name=keywords content="EQCSS, element queries, element query, container queries, meta selector, element query grid, css grid, eqcss grid, self-repsonsive, container query grid">
+  <link href="http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic|Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic" rel=stylesheet>
+  <link href=http://staticresource.s3.amazonaws.com/template/css/basic.css rel=stylesheet>
+  <style>
+    body {
+      max-width: 100%;
+    }
+    p {
+      margin: 1em 0;
+    }
+    div {
+      min-height: 80px;
+      text-align: center;
+      padding: 1em;
+      background: rgba(255,255,255,.1);
+      border: 1px solid lime;
+    }
+
+    /* Element Query Grid */
+    @element '[data-grid]' {
+      $this,
+      $this *,
+      $this *:before,
+      $this *:after {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-kerning: auto;
+      }
+      $this {
+        font-size: 12pt;
+        line-height: 1.4;
+        font-weight: 400;
+        font-family: 'Open Sans', 'Source Sans Pro', Roboto, 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', 'Myriad Pro', 'Segoe UI', Myriad, Helvetica, 'Lucida Grande', 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, Arial, sans-serif;
+        -webkit-text-size-adjust: 100%;
+      }
+      $this:after,
+      $this [data-row]:after {
+        content: '';
+        display: block;
+        clear: both;
+      }
+      $this [class*=-col-],
+      $this [class*=-split-] { float: left; }
+      $this [class^=col-1] { width: 10%; }
+      $this [class^=col-2] { width: 20%; }
+      $this [class^=col-3] { width: 30%; }
+      $this [class^=col-4] { width: 40%; }
+      $this [class^=col-5] { width: 50%; }
+      $this [class^=col-6] { width: 60%; }
+      $this [class^=col-7] { width: 70%; }
+      $this [class^=col-8] { width: 80%; }
+      $this [class^=col-9] { width: 90%; }
+      $this [class^=col-10] { width: 100%; }
+      $this [class^=split-1] { width: calc(100%/1); }
+      $this [class^=split-2] { width: calc(100%/2); }
+      $this [class^=split-3] { width: calc(100%/3); }
+      $this [class^=split-4] { width: calc(100%/4); }
+      $this [class^=split-5] { width: calc(100%/5); }
+      $this [class^=split-6] { width: calc(100%/6); }
+      $this [class^=split-7] { width: calc(100%/7); }
+      $this [class^=split-8] { width: calc(100%/8); }
+      $this [class^=split-9] { width: calc(100%/9); }
+      $this [class^=split-10] { width: calc(100%/10); }
+    }
+    @element '[data-grid]' and (max-width: 400px) {
+      $this [class*=small-col-1] { width: 10%; }
+      $this [class*=small-col-2] { width: 20%; }
+      $this [class*=small-col-3] { width: 30%; }
+      $this [class*=small-col-4] { width: 40%; }
+      $this [class*=small-col-5] { width: 50%; }
+      $this [class*=small-col-6] { width: 60%; }
+      $this [class*=small-col-7] { width: 70%; }
+      $this [class*=small-col-8] { width: 80%; }
+      $this [class*=small-col-9] { width: 90%; }
+      $this [class*=small-col-10] { width: 100%; }
+      $this [class*=small-split-1] { width: calc(100%/1); }
+      $this [class*=small-split-2] { width: calc(100%/2); }
+      $this [class*=small-split-3] { width: calc(100%/3); }
+      $this [class*=small-split-4] { width: calc(100%/4); }
+      $this [class*=small-split-5] { width: calc(100%/5); }
+      $this [class*=small-split-6] { width: calc(100%/6); }
+      $this [class*=small-split-7] { width: calc(100%/7); }
+      $this [class*=small-split-8] { width: calc(100%/8); }
+      $this [class*=small-split-9] { width: calc(100%/9); }
+      $this [class*=small-split-10] { width: calc(100%/10); }
+      $this [class*=hide-small] { display: none; }
+    }
+    @element '[data-grid]' and (min-width: 400px) and (max-width: 800px) {
+      $this [class*=medium-col-1] { width: 10%; }
+      $this [class*=medium-col-2] { width: 20%; }
+      $this [class*=medium-col-3] { width: 30%; }
+      $this [class*=medium-col-4] { width: 40%; }
+      $this [class*=medium-col-5] { width: 50%; }
+      $this [class*=medium-col-6] { width: 60%; }
+      $this [class*=medium-col-7] { width: 70%; }
+      $this [class*=medium-col-8] { width: 80%; }
+      $this [class*=medium-col-9] { width: 90%; }
+      $this [class*=medium-col-10] { width: 100%; }
+      $this [class*=medium-split-1] { width: calc(100%/1); }
+      $this [class*=medium-split-2] { width: calc(100%/2); }
+      $this [class*=medium-split-3] { width: calc(100%/3); }
+      $this [class*=medium-split-4] { width: calc(100%/4); }
+      $this [class*=medium-split-5] { width: calc(100%/5); }
+      $this [class*=medium-split-6] { width: calc(100%/6); }
+      $this [class*=medium-split-7] { width: calc(100%/7); }
+      $this [class*=medium-split-8] { width: calc(100%/8); }
+      $this [class*=medium-split-9] { width: calc(100%/9); }
+      $this [class*=medium-split-10] { width: calc(100%/10); }
+      $this [class*=hide-medium] { display: none; }
+    }
+    @element '[data-grid]' and (min-width: 800px) {
+      $this [class*=large-col-1] { width: 10%; }
+      $this [class*=large-col-2] { width: 20%; }
+      $this [class*=large-col-3] { width: 30%; }
+      $this [class*=large-col-4] { width: 40%; }
+      $this [class*=large-col-5] { width: 50%; }
+      $this [class*=large-col-6] { width: 60%; }
+      $this [class*=large-col-7] { width: 70%; }
+      $this [class*=large-col-8] { width: 80%; }
+      $this [class*=large-col-9] { width: 90%; }
+      $this [class*=large-col-10] { width: 100%; }
+      $this [class*=large-split-1] { width: calc(100%/1); }
+      $this [class*=large-split-2] { width: calc(100%/2); }
+      $this [class*=large-split-3] { width: calc(100%/3); }
+      $this [class*=large-split-4] { width: calc(100%/4); }
+      $this [class*=large-split-5] { width: calc(100%/5); }
+      $this [class*=large-split-6] { width: calc(100%/6); }
+      $this [class*=large-split-7] { width: calc(100%/7); }
+      $this [class*=large-split-8] { width: calc(100%/8); }
+      $this [class*=large-split-9] { width: calc(100%/9); }
+      $this [class*=large-split-10] { width: calc(100%/10); }
+      $this [class*=hide-large] { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Element Query Grid</h1>
+  <br>
+  <h2>Responsive Grid</h2>
+  <p>Small = full width, Medium = thirds, Large = sixths.</p>
+  <section data-grid>
+    <div class="col-10 medium-split-3 large-split-6"></div>
+    <div class="col-10 medium-split-3 large-split-6"></div>
+    <div class="col-10 medium-split-3 large-split-6"></div>
+    <div class="col-10 medium-split-3 large-split-6"></div>
+    <div class="col-10 medium-split-3 large-split-6"></div>
+    <div class="col-10 medium-split-3 large-split-6"></div>
+  </section>
+  <h2>Split Grid</h2>
+  <p>Small = half width, Medium = 1, 2, 3, 4 split, Large = 4, 3, 2, 1 split.</p>
+  <section data-grid>
+    <div class="col-5 medium-split-1 large-split-4"></div>
+    <div class="col-5 medium-split-2 large-split-4"></div>
+    <div class="col-5 medium-split-2 large-split-4"></div>
+    <div class="col-5 medium-split-3 large-split-4"></div>
+    <div class="col-5 medium-split-3 large-split-3"></div>
+    <div class="col-5 medium-split-3 large-split-3"></div>
+    <div class="col-5 medium-split-4 large-split-3"></div>
+    <div class="col-5 medium-split-4 large-split-2"></div>
+    <div class="col-5 medium-split-4 large-split-2"></div>
+    <div class="col-5 medium-split-4 large-split-1"></div>
+  </section>
+  <h2>Hidden Elements</h2>
+  <p>Small = Hide Small, Medium = Hide Medium, Large = Hide Large.</p>
+  <section data-grid>
+    <div class="hide-small col-10">Small</div>
+    <div class="hide-medium col-10">Medium</div>
+    <div class="hide-large col-10">Large</div>
+  </section>
+  <!--[if lt IE 9]><script src=http://elementqueries.com/EQCSS-polyfills.min.js></script><![endif]-->
+  <script src=http://elementqueries.com/EQCSS.min.js></script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create','UA-76690105-1','auto');
+    ga('send','pageview');
+  </script>
+</body>
+</html>

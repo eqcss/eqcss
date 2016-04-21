@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html data-theme=dark>
+<head>
+  <meta charset=utf-8>
+  <meta name=viewport content="width=device-width, initial-scale=1">
+  <title>Running JS Functions from CSS</title>
+  <meta name=description content="Using EQCSS you can use the hex2rgb() function anywhere to convert hexadecimal colors into RGB format.">
+  <meta name=keywords content="EQCSS, element queries, element query, container queries, meta selector, eval(""), CSS expressions, JS in CSS, running JavaScript from CSS, CSS extension, PostCSS">
+  <link href="http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic|Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic" rel=stylesheet>
+  <link href=http://staticresource.s3.amazonaws.com/template/css/basic.css rel=stylesheet>
+  <style>
+    h1 {
+      color: hexa(#fff,.8);
+      background: hexa(#903,.5);
+      text-align: center;
+      font-size: 300%;
+      letter-spacing: -.02em;
+    }
+    p {
+      color: #111c;
+      font-size: 12pt;
+    }
+    @element 'body' {
+      $this {
+        color: hexa(#000,.8);
+        background: rgba(eval("hex2rgb('#999')"),.7);
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>HEXA Color Format</h1>
+  <h2>Converting Hex colors to RGB</h2>
+  <p>This plugin lets you use colors in CSS in <code>hexa()</code> format. With vanilla CSS, this will only work in <code>style</code> tags directly embedded on the page. If you are using EQCSS you can use the <code>hex2rgb()</code> function anywhere to convert hexadecimal colors into RGB format.</p>
+  <h2>How To Use <code>hexa()</code> in Vanilla CSS</h2>
+  <p>The <code>hexa()</code> format allows you to include any hexadecimal encoded color into an rgb color value.</p>
+  <pre>h1 {
+  color: hexa(#fff,.8);
+  background: hexa(#903,.5);
+}</pre>
+  <h2>How To Use <code>#rgba</code> in Vanilla CSS</h2>
+  <p>You can also write colors in <code>#rgba</code> format, with four or eight characters like this:</p>
+  <pre>p {
+  color: #111c;
+}</pre>
+  <h2>How To Use <code>hex2rgb()</code> With EQCSS</h2>
+  <p>If you want to use this hex to RGB conversion in external stylesheets, or use <code>hex2rgb()</code> in more places than just where you want to use an <code>rgba()</code> formatted color, you can pair the <code>hex2rgb()</code> function with EQCSS&rsquo;s <code>eval("")</code> function like this:</p>
+  <pre>@element 'body' {
+  $this {
+    color: hexa(#000,.8);
+    background: rgba(eval("hex2rgb('#999')"),.7);
+  }
+}</pre>
+  <p>Of course, if you are reading EQCSS from a <code>style</code> tag on the page, you can also make use of <code>hexa()</code> as well.</p>
+  <!--[if lt IE 9]><script src=http://elementqueries.com/EQCSS-polyfills.min.js></script><![endif]-->
+  <script src=http://elementqueries.com/EQCSS.min.js></script>
+  <script>
+    // Automatically Convert hexa to rgba in regular CSS
+    var style = document.getElementsByTagName('style')
+    for (i=0;i<style.length;i++){
+      var text = style[i].innerHTML
+      style[i].innerHTML =
+        text.replace(/hexa\(#(?:[0-9a-fA-F]{3}){1,2}/g,function(result){
+          return 'rgba('+hex2rgb(result.split('#')[1])}
+        ).replace(/#(?:[0-9a-fA-F]{4}){1,2}/g,function(result){
+          return 'rgba('+hex2rgb(result.split('#')[1])+')'}
+        )
+    }
+    // Convert hex to rgb
+    function hex2rgb(hex){
+      hex = hex.replace(/ /g,'').replace(/#/g,'').replace(/;/g,'').replace(/\]/g,'')
+      if (hex.length == 3){
+        hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2]
+      } else if (hex.length == 4){
+        hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2]+hex[3]+hex[3]
+      }
+      var r = parseInt(hex.substring(0,2),16),
+          g = parseInt(hex.substring(2,4),16),
+          b = parseInt(hex.substring(4,6),16)
+      if (hex.length == 6){
+        return r+','+g+','+b
+      } else if (hex.length == 8){
+        var a = ~~(parseInt(hex.substring(7,8),16)/16*100)/100
+        return r+','+g+','+b+','+a
+      }
+    }
+  </script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create','UA-76690105-1','auto');
+    ga('send','pageview');
+  </script>
+</body>
+</html>
