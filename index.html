@@ -489,7 +489,7 @@
     <p>Use your mouse to resize the blocks</p>
     <article id=min-width-in-pixels>
       <h4>min-width in <code>px</code></h4>
-      <div class="minwidthpixels" style="resize: horizontal" data-drag=horizontal>class="minwidthpixels"</div>
+      <div class="minwidthpixels" data-drag=horizontal>class="minwidthpixels"</div>
       <pre><code class=css>@element ".minwidthpixels" and (min-width: 500px) {
   .minwidthpixels {
     background: gold;
@@ -498,7 +498,7 @@
     </article>
     <article id=min-width-in-percent>
       <h4>min-width in <code>%</code></h4>
-      <div class="minwidthpercents" style="resize: horizontal" data-drag=horizontal>class="minwidthpercents"</div>
+      <div class="minwidthpercents" data-drag=horizontal>class="minwidthpercents"</div>
       <pre><code class=css>@element ".minwidthpercents" and (min-width: 50%) {
   .minwidthpercents {
     background: gold;
@@ -507,7 +507,7 @@
     </article>
     <article id=max-width-in-pixels>
       <h4>max-width in <code>px</code></h4>
-      <div class="maxwidthpixels" style="resize: horizontal" data-drag=horizontal>class="maxwidthpixels"</div>
+      <div class="maxwidthpixels" data-drag=horizontal>class="maxwidthpixels"</div>
       <pre><code class=css>@element ".maxwidthpixels" and (max-width: 500px) {
   .maxwidthpixels {
     background: gold;
@@ -516,7 +516,7 @@
     </article>
     <article id=max-width-in-percent>
       <h4>max-width in <code>%</code></h4>
-      <div class="maxwidthpercents" style="resize: horizontal" data-drag=horizontal>class="maxwidthpercents"</div>
+      <div class="maxwidthpercents" data-drag=horizontal>class="maxwidthpercents"</div>
       <pre><code class=css>@element ".maxwidthpercents" and (max-width: 50%) {
   .maxwidthpercents {
     background: gold;
@@ -525,7 +525,7 @@
     </article>
     <article id=min-height-in-pixels>
       <h4>min-height in <code>px</code></h4>
-      <div class="minheightpixels" style="resize: vertical" data-drag=vertical>class="minheightpixels"</div>
+      <div class="minheightpixels" data-drag=vertical>class="minheightpixels"</div>
       <pre><code class=css>@element ".minheightpixels" and (min-height: 200px) {
   .minheightpixels {
     background: gold;
@@ -535,7 +535,7 @@
     <article id=min-height-in-percent>
       <h4>min-height in <code>%</code></h4>
       <section style="height: 300px;">
-        <div class="minheightpercents" style="resize: vertical" data-drag=vertical>class="minheightpercents"</div>
+        <div class="minheightpercents" data-drag=vertical>class="minheightpercents"</div>
       </section>
       <pre><code class=css>@element ".minheightpercents" and (min-height: 50%) {
         .minheightpercents {
@@ -545,7 +545,7 @@
     </article>
     <article id=max-height-in-pixels>
       <h4>max-height in <code>px</code></h4>
-      <div class="maxheightpixels" style="resize: vertical" data-drag=vertical>class="maxheightpixels"</div>
+      <div class="maxheightpixels" data-drag=vertical>class="maxheightpixels"</div>
       <pre><code class=css>@element ".maxheightpixels" and (max-height: 200px) {
   .maxheightpixels {
     background: gold;
@@ -555,7 +555,7 @@
     <article id=max-height-in-percent>
       <h4>max-height in <code>%</code></h4>
       <section style="height: 300px">
-        <div class="maxheightpercents" style="resize: vertical" data-drag=vertical>class="maxheightpercents"</div>
+        <div class="maxheightpercents" data-drag=vertical>class="maxheightpercents"</div>
       </section>
       <pre><code class=css>@element ".maxheightpercents" and (max-height: 50%) {
   .maxheightpercents {
@@ -700,8 +700,8 @@
     </article>
     <article id=scoped-styles>
       <h4>Scoped queries ($this)</h4>
-      <div class="scoped" style="resize: horizontal" data-drag=horizontal>class="scoped"</div>
-      <div class="scoped" style="resize: horizontal" data-drag=horizontal>class="scoped"</div>
+      <div class="scoped" data-drag=horizontal>class="scoped"</div>
+      <div class="scoped" data-drag=horizontal>class="scoped"</div>
       <pre><code class=css>@element ".scoped" and (min-width: 300px) {
 
   /* Only set a gold background to the elements matching the query */
@@ -712,8 +712,8 @@
     </article>
     <article id=scoped-queries-and-multiple-conditions>
       <h4>Scoped queries + multiple conditions</h4>
-      <div class="scoped-multiple" style="resize: horizontal" data-drag=horizontal><strong>class="scoped-multiple"</strong></div>
-      <div class="scoped-multiple" style="resize: horizontal" data-drag=horizontal><strong>class="scoped-multiple"</strong></div>
+      <div class="scoped-multiple" data-drag=horizontal><strong>class="scoped-multiple"</strong></div>
+      <div class="scoped-multiple" data-drag=horizontal><strong>class="scoped-multiple"</strong></div>
       <pre><code class=css>@element ".scoped-multiple" and (min-width: 350px) and (max-width: 450px) {
   $this {
     background: gold;
@@ -728,7 +728,7 @@
 </article>
     <article id=multiple-conditions>
       <h4>Multiple conditions</h4>
-      <div class="multiple-conditions" style="resize: both" data-drag=both>class="multiple-conditions"</div>
+      <div class="multiple-conditions" data-drag=both>class="multiple-conditions"</div>
       <pre><code class=css>@element ".multiple-conditions" and (min-width: 50%) and (min-height: 150px) {
   .multiple-conditions {
     background: gold;
@@ -737,7 +737,7 @@
     </article>
     <article id=comments>
       <h4>Comments</h4>
-      <div class="comments" style="resize: horizontal" data-drag=horizontal>class="comments"</div>
+      <div class="comments" data-drag=horizontal>class="comments"</div>
       <pre><code class=css>/* comment before */
 @element ".comments" and (max-width: 400px) {
   /* comment at the beginning */
@@ -1077,6 +1077,18 @@
       color: black;
       line-height: 30px;
       font-size: 20px;
+    }
+    [data-drag] {
+      overflow: auto;
+    }
+    [data-drag=horizontal] {
+      resize: horizontal;
+    }
+    [data-drag=vertical] {
+      resize: vertical;
+    }
+    [data-drag=both] {
+      resize: both;
     }
   </style>
 </body>
