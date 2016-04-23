@@ -143,6 +143,7 @@ Element Queries have the following format:
 - [Element Query Grid](http://elementqueries.com/demos/element-query-grid.html)
 - [JS Functions in CSS](http://elementqueries.com/demos/js-functions-demo.html)
 - [Responsive Content Waterfall](http://elementqueries.com/demos/responsive-waterfall.html)
+- [Sticky Scroll Header](http://elementqueries.com/demos/scroll-header.html)
 
 ## Documentation & Tutorials
 

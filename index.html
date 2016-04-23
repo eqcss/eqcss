@@ -13,6 +13,7 @@
   <link href="http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic|Source+Code+Pro:300,400,500,600,700,900|Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic" rel=stylesheet>
   <link href=http://staticresource.s3.amazonaws.com/template/plugins/buttons/data-buttons.css rel=stylesheet>
   <link href=http://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css rel=stylesheet>
+  <link href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.min.css rel=stylesheet>
   <link href=http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/solarized_dark.min.css rel=stylesheet>
   <style>
     *,
@@ -97,6 +98,7 @@
       border-radius: 3px;
       box-shadow: rgba(0,0,0,.1) 0 1px 0;
       font-family: 'Source Code Pro', Consolas, 'Andale Mono WT', 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Liberation Mono', 'Nimbus Mono L', Monaco, 'Courier New', Courier, monospace;
+      word-break: break-word;
     }
     script[type="text/eqcss"],
     script[type="text/eqcss-read"],
@@ -122,10 +124,11 @@
                   rgba(0,0,0,.3) 0 1px .5px,
                   rgba(0,0,0,.15) 0 3px 5px;
     }
-    pre code {
+    pre > code {
       border-bottom: none;
       border: none;
       box-shadow: none;
+      background: transparent;
     }
     li {
       color: #555;
@@ -145,9 +148,9 @@
       width: 100%;
     }
     article div {
-      overflow: auto;
       display: inline-block;
       border-radius: 3px;
+      margin: 1em;
       padding: 30px;
       color: #555;
       font-size: 12pt;
@@ -165,30 +168,68 @@
     img {
       margin: 5px;
     }
-    input,
-    textarea {
-      width: 100%;
-      font-size: 12pt;
-      margin-bottom: 1em;
-      padding: 10px 8px;
-    }
     footer {
       font-size: 11pt;
       color: #777;
       text-align: center;
       padding: 3em .5em;
     }
+    [class*=-scroll-x] {
+      overflow-x: scroll;
+    }
     [class*=-scroll-x] p {
       width: 200%;
     }
     [class*=-scroll-y] {
       height: 150px;
+      overflow-y: scroll;
+    }
+    [class*=-selector],
+    [class*=-selector] input,
+    [class*=-input],
+    [class*=-textarea] {
+      width: calc(100% - 2em);
     }
     [data-button=blue] {
       display: inline-block;
     }
     .center {
       text-align: center;
+    }
+    [type=text],
+    [type=email],
+    textarea {
+      display: block;
+      margin: 1em;
+      padding: .5em .6em;
+      outline: none;
+      border: 1px solid rgba(0,0,0,.2);
+      border-radius: 2px;
+      background: rgba(255,255,255,.5);
+      box-shadow: rgba(0,0,0,.15) 0 1px 0;
+      color: rgba(0,0,0,.7);
+      font-size: 13pt;
+      font-weight: 400;
+      transition: all .2s ease-in-out;
+      -webkit-appearance: none;
+      appearance: none;
+      -moz-appearance: none;
+      font-family: 'Source Sans Pro', 'Open Sans', Roboto, 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', 'Myriad Pro', 'Segoe UI', Myriad, Helvetica, 'Lucida Grande', 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, Arial, sans-serif;
+    }
+    input + [type=text],
+    input + [type=email],
+    input + textarea {
+      margin-top: 1em;
+    }
+    [type=text]:focus,
+    [type=email]:focus,
+    textarea:focus {
+      outline: none;
+      border-color: orange;
+      box-shadow: #fc0 0 0 3px;
+    }
+    textarea {
+      min-height: 5em;
     }
     /* Min-width */
     @element ".minwidthpixels" and (min-width: 500px) {
@@ -328,7 +369,7 @@
         background: gold;
       }
       $this > b {
-        color: red
+        color: red;
       }
       $this:hover {
         background: orange;
@@ -352,7 +393,8 @@
     /* comment after */
     /* $this selector */
     @element ".this-selector input" and (min-characters: 5) {
-      $this {
+      $this,
+      $this:focus {
         border-color: red;
       }
     }
@@ -419,8 +461,8 @@
     <pre><code class=html>&lt;!--[if lt IE 9]>&lt;script src="EQCSS-polyfills.js">&lt;/script>&lt;![endif]--></code></pre>
     <h4>CDN Hosted Links</h4>
     <p>EQCSS is also hosted on CDNjs and you can use the version hosted there for your projects: <a href=https://cdnjs.com/libraries/eqcss>https://cdnjs.com/libraries/eqcss</a>:</p>
-    <pre>https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.1.0/EQCSS-polyfills.min.js</pre>
-    <pre>https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.1.0/EQCSS.min.js</pre>
+    <pre><code class=html>https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.1.0/EQCSS-polyfills.min.js</code></pre>
+    <pre><code class=html>https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.1.0/EQCSS.min.js</code></pre>
     <h3 id=writing>Writing Element Queries</h3>
     <p>Now that you have EQCSS added to your HTML you&rsquo;re ready to write element queries. There are two ways you can add EQCSS to your site: the easiest way is by writing them inside your CSS either in a <code>&lt;style></code> or <code>&lt;link></code> in your HTML, or by isolating your EQCSS styles in a custom script type.</p>
     <p>You can also link to EQCSS hosted in external files with either <code>.css</code> or <code>.eqcss</code> extensions.</p>
@@ -447,7 +489,7 @@
     <p>Use your mouse to resize the blocks</p>
     <article id=min-width-in-pixels>
       <h4>min-width in <code>px</code></h4>
-      <div class="minwidthpixels" style="resize: horizontal">class="minwidthpixels"</div>
+      <div class="minwidthpixels" style="resize: horizontal" data-drag=horizontal>class="minwidthpixels"</div>
       <pre><code class=css>@element ".minwidthpixels" and (min-width: 500px) {
   .minwidthpixels {
     background: gold;
@@ -456,7 +498,7 @@
     </article>
     <article id=min-width-in-percent>
       <h4>min-width in <code>%</code></h4>
-      <div class="minwidthpercents" style="resize: horizontal">class="minwidthpercents"</div>
+      <div class="minwidthpercents" style="resize: horizontal" data-drag=horizontal>class="minwidthpercents"</div>
       <pre><code class=css>@element ".minwidthpercents" and (min-width: 50%) {
   .minwidthpercents {
     background: gold;
@@ -465,7 +507,7 @@
     </article>
     <article id=max-width-in-pixels>
       <h4>max-width in <code>px</code></h4>
-      <div class="maxwidthpixels" style="resize: horizontal">class="maxwidthpixels"</div>
+      <div class="maxwidthpixels" style="resize: horizontal" data-drag=horizontal>class="maxwidthpixels"</div>
       <pre><code class=css>@element ".maxwidthpixels" and (max-width: 500px) {
   .maxwidthpixels {
     background: gold;
@@ -474,7 +516,7 @@
     </article>
     <article id=max-width-in-percent>
       <h4>max-width in <code>%</code></h4>
-      <div class="maxwidthpercents" style="resize: horizontal">class="maxwidthpercents"</div>
+      <div class="maxwidthpercents" style="resize: horizontal" data-drag=horizontal>class="maxwidthpercents"</div>
       <pre><code class=css>@element ".maxwidthpercents" and (max-width: 50%) {
   .maxwidthpercents {
     background: gold;
@@ -483,7 +525,7 @@
     </article>
     <article id=min-height-in-pixels>
       <h4>min-height in <code>px</code></h4>
-      <div class="minheightpixels" style="resize: vertical">class="minheightpixels"</div>
+      <div class="minheightpixels" style="resize: vertical" data-drag=vertical>class="minheightpixels"</div>
       <pre><code class=css>@element ".minheightpixels" and (min-height: 200px) {
   .minheightpixels {
     background: gold;
@@ -493,7 +535,7 @@
     <article id=min-height-in-percent>
       <h4>min-height in <code>%</code></h4>
       <section style="height: 300px;">
-        <div class="minheightpercents" style="resize: vertical">class="minheightpercents"</div>
+        <div class="minheightpercents" style="resize: vertical" data-drag=vertical>class="minheightpercents"</div>
       </section>
       <pre><code class=css>@element ".minheightpercents" and (min-height: 50%) {
         .minheightpercents {
@@ -503,7 +545,7 @@
     </article>
     <article id=max-height-in-pixels>
       <h4>max-height in <code>px</code></h4>
-      <div class="maxheightpixels" style="resize: vertical">class="maxheightpixels"</div>
+      <div class="maxheightpixels" style="resize: vertical" data-drag=vertical>class="maxheightpixels"</div>
       <pre><code class=css>@element ".maxheightpixels" and (max-height: 200px) {
   .maxheightpixels {
     background: gold;
@@ -513,7 +555,7 @@
     <article id=max-height-in-percent>
       <h4>max-height in <code>%</code></h4>
       <section style="height: 300px">
-        <div class="maxheightpercents" style="resize: vertical">class="maxheightpercents"</div>
+        <div class="maxheightpercents" style="resize: vertical" data-drag=vertical>class="maxheightpercents"</div>
       </section>
       <pre><code class=css>@element ".maxheightpercents" and (max-height: 50%) {
   .maxheightpercents {
@@ -542,7 +584,7 @@
     </article>
     <article id=min-characters-on-form-inputs>
       <h4>min-characters on form inputs</h4>
-      <input class="mincharacters-input" value='class="mincharacters-input"'>
+      <input type=text class="mincharacters-input" value='class="mincharacters-input"'>
       <textarea class="mincharacters-textarea">class="mincharacters-textarea"</textarea>
       <pre><code class=css>@element ".mincharacters-input" and (min-characters: 30) {
   .mincharacters-input {
@@ -557,7 +599,7 @@
     </article>
     <article id=max-characters-on-form-inputs>
       <h4>max-characters on form inputs</h4>
-      <input class="maxcharacters-input" value='class="maxcharacters-input"'>
+      <input type=text class="maxcharacters-input" value='class="maxcharacters-input"'>
       <textarea class="maxcharacters-textarea">class="maxcharacters-textarea"</textarea>
       <pre><code class=css>@element ".maxcharacters-input" and (max-characters: 30) {
   .maxcharacters-input {
@@ -574,7 +616,7 @@
       <h4>min-children</h4>
       <div class="minchildren">class="minchildren"<br></div>
       <br>
-      <button data-button=green onclick="document.querySelector('.minchildren').innerHTML += '<img src=//staticresource.s3.amazonaws.com/prestonIcon.jpg style=width:50px>'">Add Child</button>
+      <button data-button=green onclick="document.querySelector('.minchildren').innerHTML += '<img src=data:image/jpeg;base64,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 style=width:50px>'">Add Child</button>
       <pre><code class=css>@element ".minchildren" and (min-children: 5) {
   .minchildren {
     background: gold;
@@ -585,7 +627,7 @@
       <h4>max-children</h4>
       <div class="maxchildren">class="maxchildren"<br></div>
       <br>
-      <button data-button=green onclick="document.querySelector('.maxchildren').innerHTML += '<img src=//staticresource.s3.amazonaws.com/prestonIcon.jpg style=width:50px>'">Add Child</button>
+      <button data-button=green onclick="document.querySelector('.maxchildren').innerHTML += '<img src=data:image/jpeg;base64,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 style=width:50px>'">Add Child</button>
       <pre><code class=css>@element ".maxchildren" and (max-children: 5) {
   .maxchildren {
     background: gold;
@@ -658,8 +700,8 @@
     </article>
     <article id=scoped-styles>
       <h4>Scoped queries ($this)</h4>
-      <div class="scoped" style="resize: horizontal">class="scoped"</div>
-      <div class="scoped" style="resize: horizontal">class="scoped"</div>
+      <div class="scoped" style="resize: horizontal" data-drag=horizontal>class="scoped"</div>
+      <div class="scoped" style="resize: horizontal" data-drag=horizontal>class="scoped"</div>
       <pre><code class=css>@element ".scoped" and (min-width: 300px) {
 
   /* Only set a gold background to the elements matching the query */
@@ -670,8 +712,8 @@
     </article>
     <article id=scoped-queries-and-multiple-conditions>
       <h4>Scoped queries + multiple conditions</h4>
-      <div class="scoped-multiple" style="resize: horizontal"><strong>class="scoped-multiple"</strong></div>
-      <div class="scoped-multiple" style="resize: horizontal"><strong>class="scoped-multiple"</strong></div>
+      <div class="scoped-multiple" style="resize: horizontal" data-drag=horizontal><strong>class="scoped-multiple"</strong></div>
+      <div class="scoped-multiple" style="resize: horizontal" data-drag=horizontal><strong>class="scoped-multiple"</strong></div>
       <pre><code class=css>@element ".scoped-multiple" and (min-width: 350px) and (max-width: 450px) {
   $this {
     background: gold;
@@ -686,7 +728,7 @@
 </article>
     <article id=multiple-conditions>
       <h4>Multiple conditions</h4>
-      <div class="multiple-conditions" style="resize: both">class="multiple-conditions"</div>
+      <div class="multiple-conditions" style="resize: both" data-drag=both>class="multiple-conditions"</div>
       <pre><code class=css>@element ".multiple-conditions" and (min-width: 50%) and (min-height: 150px) {
   .multiple-conditions {
     background: gold;
@@ -695,7 +737,7 @@
     </article>
     <article id=comments>
       <h4>Comments</h4>
-      <div class="comments" style="resize: horizontal">class="comments"</div>
+      <div class="comments" style="resize: horizontal" data-drag=horizontal>class="comments"</div>
       <pre><code class=css>/* comment before */
 @element ".comments" and (max-width: 400px) {
   /* comment at the beginning */
@@ -711,11 +753,12 @@
       <h4><code>$this</code> selector</h4>
       <div class="this-selector">
         class="this-selector"
-        <input placeholder=input>
-        <input placeholder=input>
+        <input type=text placeholder=input>
+        <input type=text placeholder=input>
       </div>
       <pre><code class=css>@element ".this-selector input" and (min-characters: 5) {
-  $this {
+  $this,
+  $this:focus {
     border-color: red;
   }
 }</code></pre>
@@ -724,8 +767,8 @@
       <h4><code>$parent</code> selector</h4>
       <div class="parent-selector">
         class="parent-selector"
-        <input placeholder=input>
-        <input placeholder=input>
+        <input type=text placeholder=input>
+        <input type=text placeholder=input>
       </div>
       <pre><code class=css>@element ".parent-selector input" and (min-characters: 5) {
   $this {
@@ -740,8 +783,8 @@
       <h4><code>$root</code> selector</h4>
       <div class="root-selector">
         class="root-selector"
-        <input placeholder=input>
-        <input placeholder=input>
+        <input type=text placeholder=input>
+        <input type=text placeholder=input>
       </div>
       <pre><code class=css>@element ".root-selector input" and (min-characters: 5) {
   $this {
@@ -756,7 +799,7 @@
       <h4><code>$prev</code> selector</h4>
       <div class="prev-selector">
         class="prev-selector"
-        <input type=text placeholder=input>
+        <input type=text type=text placeholder=input>
         <input type=email placeholder=email>
       </div>
       <pre><code class=css>@element ".prev-selector [type=email]" {
@@ -826,6 +869,7 @@
       <li><a href=http://elementqueries.com/demos/element-query-grid.html>Element Query Grid</a>
       <li><a href=http://elementqueries.com/demos/js-functions-demo.html>JS Functions in CSS</a>
       <li><a href=http://elementqueries.com/demos/repsonsive-waterfall.html>Responsive Content Waterfall</a>
+      <li><a href=http://elementqueries.com/demos/scroll-header.html>Sticky Scroll Header</a>
     </ul>
     <h3 id=docs>Documentation &amp; Tutorials</h3>
     <ul>
@@ -935,5 +979,105 @@
     ga('create','UA-76690105-1','auto');
     ga('send','pageview');
   </script>
+  <script>
+    if(('ontouchstart' in window)||(navigator.msMaxTouchPoints>0)){
+      var tag = document.querySelectorAll('[data-drag]')
+      for(i=0;i<tag.length;i++){
+        var direction = tag[i].getAttribute('data-drag') || 'both'
+        tag[i].setAttribute('data-container',i)
+        spawnNubbin(i,direction)
+      }
+      function spawnNubbin(element,direction){
+        var parent = document.querySelector('[data-container="'+element+'"]'),
+            pTop = parent.scrollHeight - 15,
+            pLeft = parent.scrollWidth - 15,
+            nubbin = document.createElement('div')
+        nubbin.setAttribute('data-nubbin',element)
+        parent.style.position = 'relative'
+        nubbin.style.position = 'absolute'
+        nubbin.style.top = pTop+'px'
+        nubbin.style.left = pLeft+'px'
+        nubbin.setAttribute('data-max-top',pTop)
+        nubbin.setAttribute('data-max-left',pLeft)
+        if (direction == 'horizontal'){
+          nubbin.innerHTML = '<i class="fa fa-arrows-h"></i>'
+        }
+        if (direction == 'vertical'){
+          nubbin.innerHTML = '<i class="fa fa-arrows-v"></i>'
+        }
+        if (direction == 'both'){
+          nubbin.innerHTML = '<i class="fa fa-arrows"></i>'
+        }
+        document.addEventListener('mousedown',grab)
+        document.addEventListener('touchstart',grab)
+        document.addEventListener('mousemove',drag)
+        document.addEventListener('touchmove',drag)
+        document.addEventListener('mouseup',drop)
+        document.addEventListener('touchend',drop)
+        parent.appendChild(nubbin)
+      }
+      var grabbed
+      var startX = startY = oldTop = oldLeft = 0
+      function grab(e){
+        if (e.target.getAttribute('data-nubbin')){
+          e.preventDefault()
+          grabbed = e.target.getAttribute('data-nubbin')
+          startX = e.clientX || e.touches[0].clientX
+          startY = e.clientY || e.touches[0].clientY
+          oldTop = parseInt(e.target.style.top.split('px')[0]) || 0
+          oldLeft = parseInt(e.target.style.left.split('px')[0]) || 0
+        }
+      }
+      function drag(e){
+        if (grabbed) {
+          if (e.target.getAttribute('data-nubbin')){
+            var nubbin = document.querySelector('[data-nubbin="'+grabbed+'"]'),
+                parent = e.target.parentNode,
+                direction = parent.getAttribute('data-drag'),
+                pTop = parent.scrollHeight,
+                pLeft = parent.scrollWidth,
+                newTop = oldTop+parseInt((e.clientY||e.touches[0].clientY)-startY),
+                newLeft = oldLeft+parseInt((e.clientX||e.touches[0].clientX)-startX),
+                maxTop = parseInt(nubbin.getAttribute('data-max-top')),
+                maxLeft = parseInt(nubbin.getAttribute('data-max-left')),
+                filterTop = newTop>=maxTop?newTop:maxTop,
+                filterLeft = newLeft>=maxLeft?newLeft:maxLeft
+            if (direction == 'vertical' || direction == 'both'){
+              nubbin.style.top = filterTop + 'px'
+              parent.style.height = newTop>maxTop?newTop+15+'px':maxTop+15+'px'
+            }
+            if (direction == 'horizontal' || direction == 'both'){
+              nubbin.style.left = filterLeft + 'px'
+              parent.style.width = newLeft>maxLeft?newLeft+15+'px':maxLeft+15+'px'
+            }
+            EQCSS.apply()
+          }
+        }
+      }
+      function drop(e){
+        grabbed = undefined
+        EQCSS.apply()
+      }
+    }
+  </script>
+  <style>
+    [data-nubbin] {
+      border: 1px solid rgba(0,0,0,.15);
+      width: 30px;
+      height: 30px;
+      text-align: center;
+      padding: 0;
+      margin: 0;
+      background: lightgreen;
+      cursor: pointer;
+      z-index: 500;
+    }
+    [data-nubbin] i {
+      pointer-events: none;
+      color: black;
+      line-height: 30px;
+      font-size: 20px;
+    }
+  </style>
 </body>
 </html>

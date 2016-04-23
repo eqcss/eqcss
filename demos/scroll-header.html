@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8>
+  <meta name=viewport content="width=device-width, initial-scale=1">
+  <title>Scrolling Sticky Header</title>
+  <meta name="description" content="Scrolling sticky header layout using container queries and element queries. CSS is triggered by the scroll-position as the user moves down the page.">
+  <meta name="keywords" content="EQCSS, element queries, element query, container queries, responsive, sticky header, header, scroll queries, min-scroll, min-scroll-y">
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic" rel=stylesheet>
+  <style>
+    * {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-kerning: auto;
+    }
+    html {
+      font-size: 10pt;
+      line-height: 1.4;
+      font-weight: 400;
+      font-family: 'Source Sans Pro', 'Open Sans', Roboto, 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', 'Myriad Pro', 'Segoe UI', Myriad, Helvetica, 'Lucida Grande', 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, Arial, sans-serif;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      margin: 0;
+      background: #eee;
+    }
+    section {
+      height: 100vh;
+      background: coral;
+    }
+    section h1 {
+      margin: 0;
+      font-size: 400%;
+      text-align: center;
+      line-height: 1;
+      padding-top: calc(50vh - 20pt)
+    }
+    header {
+      width: 100%;
+      padding: 1em;
+      font-size: 140%;
+      position: absolute;
+      top: 100vh;
+      left: 0;
+      transition: opacity .2s ease-in-out;
+      text-align: center;
+    }
+    header span {
+      font-weight: 600;
+    }
+    nav a {
+      display: inline-block;
+      outline: none;
+      text-decoration: none;
+      opacity: .7;
+      padding: 0 .5em;
+      color: black;
+      transition: opacity .2s ease-in-out;
+    }
+    nav a:hover,
+    nav a:focus {
+      opacity: 1;
+    }
+    article {
+      margin: 5em auto 0;
+      padding: 1em;
+      font-size: 140%;
+      max-width: 800px;
+      background: white;
+      box-shadow: rgba(0,0,0,.05) 0 3px 15px;
+    }
+    article p {
+      margin: 0;
+      color: #333;
+    }
+    article p + p {
+      margin-top: .7em;
+    }
+    @media (min-width: 500px) {
+      header {
+        text-align: left;
+      }
+      nav {
+        float: right;
+      }
+      article {
+        margin: 3.5em auto 0;
+        padding: 2em;
+      }
+    }
+    @media (min-width: 800px) {
+      article {
+        margin: 3.5em auto;
+      }
+    }
+    @element 'html, body' and (min-scroll-y: 100vh) {
+      header {
+        position: fixed;
+        top: 0;
+        background: white;
+        box-shadow: rgba(0,0,0,.05) 0 3px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section>
+    <h1>Big Headline!</h1>
+  </section>
+  <header>
+    <span>Brand</span>
+    <nav>
+      <a href=#>One</a>
+      <a href=#>Two</a>
+      <a href=#>Three</a>
+    </nav>
+  </header>
+  <article>
+    <h1>Headline</h1>
+    <p>In elementum lorem eget est euismod ornare. Phasellus sit amet pellentesque mauris. Aliquam quis malesuada ex. Nullam eu aliquam nibh. Mauris molestie, urna accumsan ornare semper, augue nibh posuere lorem, vitae feugiat sem magna eget massa. Vivamus quis tincidunt dolor. Fusce efficitur, orci non vestibulum consequat, lectus turpis bibendum odio, in efficitur leo felis sed justo. Fusce commodo iaculis orci, quis imperdiet urna. Sed mollis facilisis lacus non condimentum. Nunc efficitur massa non neque elementum semper. Vestibulum lorem arcu, tincidunt in quam et, feugiat venenatis augue. Donec sed tincidunt tellus, a facilisis magna. Proin sit amet viverra nibh, bibendum gravida felis. Vivamus ut nunc id mauris posuere pellentesque. Praesent tincidunt id odio id feugiat.</p>
+    <p>In ac nisi lacus. Fusce est dolor, tincidunt ut bibendum vitae, fermentum ac quam. Aliquam pretium tristique nibh quis iaculis. In et cursus ex, eu aliquet ex. Proin facilisis lacus sit amet sapien ultrices, ut vehicula arcu lobortis. Vivamus mollis ipsum ut hendrerit molestie. Morbi lacinia, sapien eu dictum dignissim, tellus tortor congue magna, sit amet bibendum libero nisi id massa.</p>
+    <p>Donec arcu elit, euismod vel lobortis eu, fringilla sit amet dolor. Cras congue, massa nec sagittis mollis, dui felis ultrices magna, tincidunt finibus lorem quam in sem. Morbi odio turpis, pulvinar sit amet vulputate quis, ultricies eu libero. Donec ac maximus neque, nec maximus nibh. Morbi rhoncus convallis urna, accumsan porta lorem hendrerit in. Cras eget nisl dui. Morbi faucibus nisi eget ipsum semper vulputate. Mauris nec tincidunt lectus. Aenean ac mi consequat velit dignissim consectetur. Fusce placerat ac ipsum ac eleifend. Aenean quis faucibus ex.</p>
+    <p>Cras egestas tempor nibh, a fermentum lorem sollicitudin non. Nulla facilisi. In at elit id leo tristique condimentum. Donec at est nulla. Mauris egestas magna ut laoreet pretium. Sed ultrices suscipit vestibulum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id sapien eros. Vivamus viverra ultricies gravida. Nam urna nibh, blandit a vulputate at, vehicula non nulla. Aenean ut nulla leo. Praesent in ullamcorper est.</p>
+    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Phasellus bibendum nec arcu eu lobortis. Nam convallis faucibus ante sed porta. Nullam ut convallis elit, quis venenatis nunc. Curabitur sed sem eget velit condimentum rutrum in et orci. Nunc non suscipit eros. Suspendisse porta sem vel justo commodo dictum. Aliquam erat ligula, fringilla nec suscipit sed, porta vitae turpis. Vestibulum rhoncus placerat nulla vitae suscipit. Curabitur consectetur ex ut odio tristique vehicula. Ut ligula tortor, tincidunt quis sodales vitae, ornare a turpis. Proin sit amet finibus enim. Fusce tempus a neque vitae tempor. Aenean rutrum, libero iaculis interdum vulputate, dui eros vehicula nisi, at interdum enim lacus eu diam.</p>
+  </article>
+  <!--[if lt IE 9]><script src="http://elementqueries.com/EQCSS-polyfills.js"></script><![endif]-->
+  <script src="http://elementqueries.com/EQCSS.js"></script>
+</body>
+</html>
