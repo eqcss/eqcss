@@ -1,5 +1,7 @@
 # EQCSS
 
+[![Join the chat at https://gitter.im/eqcss/eqcss](https://badges.gitter.im/eqcss/eqcss.svg)](https://gitter.im/eqcss/eqcss?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 **A CSS Extension for Element Queries & More**
 
 ## What are Element Queries?
