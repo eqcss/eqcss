@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html data-theme=dark>
+<head>
+  <meta charset=utf-8>
+  <meta name=viewport content="width=device-width, initial-scale=1">
+  <title>Responsive Aspect Ratio</title>
+  <meta name="description" content="This pen uses element queries and scoped CSS to calculate the aspect ratio of any element with the `data-ratio` attribute. You can supply a value like `16:9`, `640:400`, `4:3`, `1:1` or any two numbers separated by a `:` colon. The first number represents units of width, and the second number represents height. In this demo, the elements expand to fill the width of their containers, so in order to maintain the correct height we need to evaluate the formula for the aspect ratio with the actual pixel width the element has on the page.">
+  <meta name="keywords" content="EQCSS, element queries, element query, container queries, responsive, aspect ratio, responsive ratio">
+  <link href="http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic|Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic" rel=stylesheet>
+  <link href=http://staticresource.s3.amazonaws.com/template/css/basic.css rel=stylesheet>
+  <style>
+    div {
+      margin: 1em;
+      background: dodgerblue;
+    }
+    @element '[data-ratio]' {
+      $this {
+        height: eval('clientWidth * parseInt(getAttribute("data-ratio").split(":")[1]) / parseInt(getAttribute("data-ratio").split(":")[0])')px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Responsive Aspect Ratio</h1>
+  <h2>Using Scoped CSS &amp; Element Queries</h2>
+  <div data-ratio=16:9></div>
+  <div data-ratio=640:400></div>
+  <div data-ratio=4:3></div>
+  <div data-ratio=1:1></div>
+  <!--[if lt IE 9]><script src=http://elementqueries.com/EQCSS-polyfills.min.js></script><![endif]-->
+  <script src=http://elementqueries.com/EQCSS.min.js></script>
+  <script src=http://staticresource.s3.amazonaws.com/eqcss-demo.js></script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create','UA-76690105-1','auto');
+    ga('send','pageview');
+  </script>
+</body>
+</html>

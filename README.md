@@ -118,6 +118,8 @@ Element Queries have the following format:
 
 ## Element Query Demos
 
+- [Responsive Aspect Ratio](http://elementqueries.com/demos/aspect-ratio.html)
+- [Sticky Scroll Header](http://elementqueries.com/demos/scroll-header.html)
 - [Blockquote Style](http://elementqueries.com/demos/blockquote-style.html)
 - [Calendar](http://elementqueries.com/demos/calendar.html)
 - [Content Demo](http://elementqueries.com/demos/content-blocks.html)
@@ -144,7 +146,6 @@ Element Queries have the following format:
 - [Element Query Grid](http://elementqueries.com/demos/element-query-grid.html)
 - [JS Functions in CSS](http://elementqueries.com/demos/js-functions-demo.html)
 - [Responsive Content Waterfall](http://elementqueries.com/demos/responsive-waterfall.html)
-- [Sticky Scroll Header](http://elementqueries.com/demos/scroll-header.html)
 
 ## Documentation & Tutorials
 
