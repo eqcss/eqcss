@@ -1,8 +1,6 @@
-<img src=eqcss-logo.png style="display:block;margin:0 auto;width:250px;max-width:100%">
-
-<h1 style=text-align:center;>EQCSS</h1>
-
-<p><strong style=display:block;text-align:center>A CSS Extension for Element Queries & More</strong></p>
+![](http://i.imgur.com/OUQzoiA.png)
+# EQCSS
+**A CSS Extension for Element Queries & More**
 
 [![Join the chat at https://gitter.im/eqcss/eqcss](https://badges.gitter.im/eqcss/eqcss.svg)](https://gitter.im/eqcss/eqcss?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
