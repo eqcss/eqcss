@@ -112,6 +112,10 @@ Element Queries have the following format:
 - `$this`
 - `$parent`
 - `$root`
+- `$prev`
+- `$next`
+
+(Alternatively, for SCSS compatibility you can also use meta-selectors prefixed by `eq_` instead of a `$`. These are `eq_this`, `eq_parent`, `eq_root`, `eq_prev`, and `eq_next`)
 
 ### CSS Functions
 

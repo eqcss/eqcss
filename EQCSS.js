@@ -2,7 +2,7 @@
  * EQCSS / Tommy Hodgins, Maxime Euzière / MIT licence
  * github.com/eqcss/eqcss
  * elementqueries.com
- * version 1.1.0
+ * version 1.1.1
  */
 
 EQCSS = {
@@ -570,7 +570,6 @@ EQCSS.apply = function(){
 
           break;
 
-
           // Min-children
           case "min-children":
 
@@ -590,8 +589,6 @@ EQCSS.apply = function(){
             }
 
           break;
-
-
 
           // Min-lines
           case "min-lines":
@@ -658,22 +655,20 @@ EQCSS.apply = function(){
           }
         );
 
-        // Replace "$this" with "[element_guid]"
-        css_code = css_code.replace(/\$this/g, "[" + element_guid + "]");
+        // Replace "$this" or "eq_this" with "[element_guid]"
+        css_code = css_code.replace(/(\$|eq_)this/g, "[" + element_guid + "]");
 
-        // Replace "$parent" with "[element_guid_parent]"
-        css_code = css_code.replace(/\$parent/g, "[" + element_guid_parent + "]");
+        // Replace "$parent" or "eq_parent" with "[element_guid_parent]"
+        css_code = css_code.replace(/(\$|eq_)parent/g, "[" + element_guid_parent + "]");
 
-        // Replace "$prev" with "[element_guid_prev]"
-        css_code = css_code.replace(/\$prev/g, "[" + element_guid_prev + "]");
+        // Replace "$prev" or "eq_prev" with "[element_guid_prev]"
+        css_code = css_code.replace(/(\$|eq_)prev/g, "[" + element_guid_prev + "]");
 
-        // Replace "$next" with "[element_guid_next]"
-        css_code = css_code.replace(/\$next/g, "[" + element_guid_next + "]");
+        // Replace "$next" or "eq_next" with "[element_guid_next]"
+        css_code = css_code.replace(/(\$|eq_)next/g, "[" + element_guid_next + "]");
 
-        // Replace "$root" with html
-        css_code = css_code.replace(/\$root/g, "html");
-
-
+        // Replace "$root" or "eq_root" with html
+        css_code = css_code.replace(/(\$|eq_)root/g, "html");
 
 
         // good browsers
