@@ -160,8 +160,3 @@ Element Queries have the following format:
 - [It's Time to Think 'Element-First'](http://elementqueries.com/notes/its-time-to-think-element-first.html)
 
 ### More Demos @ the EQCSS Website: [http://elementqueries.com](http://elementqueries.com)
-
-<style>
-img{display:block;margin:0 auto;width:250px;max-width:100%;}
-h1,h1+strong{display:block;text-align:center}
-</style>
