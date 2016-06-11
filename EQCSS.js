@@ -156,7 +156,6 @@ EQCSS.parse = function(code){
  */
 
 EQCSS.apply = function(){
-
   var i, j, k;                      // Iterators
   var elements;                     // Elements targeted by each query
   var element_guid;                 // GUID for current element
@@ -396,7 +395,15 @@ EQCSS.apply = function(){
           // Min-scroll-x
           case "min-scroll-x":
 
-            var element_scroll = elements[j].scrollLeft;
+            var element = elements[j];
+            var element_scroll = element.scrollLeft;
+            
+            if(!element.hasScrollListener){
+              element.addEventListener("scroll", function(){
+                EQCSS.throttle();
+                element.hasScrollListener = true;
+              })
+            }
 
             // Min-scroll-x in px
             if(recomputed == true || EQCSS.data[i].conditions[k].unit == "px"){
@@ -428,7 +435,15 @@ EQCSS.apply = function(){
           // Min-scroll-y
           case "min-scroll-y":
 
+            var element = elements[j];
             element_scroll = elements[j].scrollTop;
+            
+            if(!element.hasScrollListener){
+              element.addEventListener("scroll", function(){
+                EQCSS.throttle();
+                element.hasScrollListener = true;
+              })
+            }
 
             // Min-scroll-y in px
             if(recomputed == true || EQCSS.data[i].conditions[k].unit == "px"){
@@ -461,7 +476,15 @@ EQCSS.apply = function(){
           // Max-scroll-x
           case "max-scroll-x":
 
+            var element = elements[j];
             element_scroll = elements[j].scrollLeft;
+            
+            if(!element.hasScrollListener){
+              element.addEventListener("scroll", function(){
+                EQCSS.throttle();
+                element.hasScrollListener = true;
+              })
+            }
 
             // Max-scroll-x in px
             if(recomputed == true || EQCSS.data[i].conditions[k].unit == "px"){
@@ -494,7 +517,15 @@ EQCSS.apply = function(){
           // Max-scroll-y
           case "max-scroll-y":
 
+            var element = elements[j];
             element_scroll = elements[j].scrollTop;
+            
+            if(!element.hasScrollListener){
+              element.addEventListener("scroll", function(){
+                EQCSS.throttle();
+                element.hasScrollListener = true;
+              })
+            }
 
             // Max-scroll-y in px
             if(recomputed == true || EQCSS.data[i].conditions[k].unit == "px"){
@@ -735,21 +766,57 @@ EQCSS.domReady = function(fn) {
   }
 }
 
-// Call load and apply on page load
+// Call load (and apply, indirectly) on page load
 EQCSS.domReady(function(){
   EQCSS.load();
-  EQCSS.apply();
 });
 
-// Call apply on resize
-window.addEventListener("resize", function(){
-  EQCSS.apply();
+
+/* EQCSS.throttle
+Ensures EQCSS.apply() is not called more than once every (EQCSS_timeout)ms
+*/
+
+var EQCSS_throttle_available = true;
+var EQCSS_throttle_queued = false;
+var EQCSS_mouse_down = false;
+var EQCSS_timeout = 200;
+
+EQCSS.throttle = function(){
+  if(EQCSS_throttle_available){
+    EQCSS.apply();
+    EQCSS_throttle_available = false;
+    setTimeout(function(){
+      EQCSS_throttle_available = true;
+      if(EQCSS_throttle_queued){
+        EQCSS_throttle_queued = false;
+        EQCSS.apply();
+      }
+    }, EQCSS_timeout);
+  }
+  else{
+    EQCSS_throttle_queued = true;
+  }
+}
+
+// On resize, scroll, input, click, mousedown + mousemove, call EQCSS.throttle.
+window.addEventListener("resize", EQCSS.throttle);
+window.addEventListener("input", EQCSS.throttle);
+window.addEventListener("click", EQCSS.throttle);
+window.addEventListener("mousedown", function(){
+  EQCSS_mouse_down = true;
+});
+window.addEventListener("mouseup", function(){
+  EQCSS_mouse_down = false;
+});
+window.addEventListener("mousemove", function(){
+  if(EQCSS_mouse_down){
+    EQCSS.throttle();
+  }
 });
 
-// Call apply on scroll
-window.addEventListener("scroll", function(){
-  EQCSS.apply();
-});
+//window.addEventListener("scroll", EQCSS.throttle);
+// => to avoid annoying slowness, scroll events are only listened on elements that have a scroll EQ.
+
 
 // Debug: here's a shortcut for console.log
 function l(a){console.log(a)}
