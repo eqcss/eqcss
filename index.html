@@ -929,69 +929,9 @@
     Created by <a href=//twitter.com/innovati>@innovati</a> and <a href=//twitter.com/MaximeEuziere>@maximeeuziere</a> &middot; Hosted on <a href=//github.com/eqcss/eqcss>Github <i class=ion-social-github></i></a>
   </footer>
   <!--[if lt IE 9]><script src=EQCSS-polyfills.min.js></script><![endif]-->
-  <script src=EQCSS.min.js></script>
+  <script src=EQCSS.js></script>
   <script>
-    // Apply eqcss on clicks, resizes, inputs
-    var EQCSS_resizing = true
-    var EQCSS_timeout = true
-    window.addEventListener("mousedown", function(){
-      EQCSS_resizing = true
-      if(EQCSS_timeout == true){
-        EQCSS.apply()
-      }
-      EQCSS_timeout = false
-      setTimeout(function(){
-        EQCSS_timeout = true
-      },250)
-    })
-    window.addEventListener("mouseup", function(){
-      EQCSS_resizing = false
-      if(EQCSS_timeout == true){
-        EQCSS.apply()
-      }
-      EQCSS_timeout = false
-      setTimeout(function(){
-        EQCSS_timeout = true
-      },250)
-    })
-    window.addEventListener("mousemove", function(){
-      if(EQCSS_resizing === true){
-        if(EQCSS_timeout === true){
-          EQCSS.apply()
-        }
-        EQCSS_timeout = false
-        setTimeout(function(){
-          EQCSS_timeout = true
-        },250)
-      }
-    })
-    window.addEventListener("keydown", function(){
-      if(EQCSS_timeout == true){
-        EQCSS.apply()
-      }
-      EQCSS_timeout = false
-      setTimeout(function() {
-        EQCSS_timeout = true
-      },250)
-    })
-    window.addEventListener("keyup", function(){
-      if(EQCSS_timeout == true){
-        EQCSS.apply()
-      }
-      EQCSS_timeout = false
-      setTimeout(function() {
-        EQCSS_timeout = true
-      },250)
-    })
-    window.addEventListener("input", function(){
-      if(EQCSS_timeout == true){
-        EQCSS.apply()
-      }
-      EQCSS_timeout = false
-      setTimeout(function() {
-        EQCSS_timeout = true
-      },250)
-    })
+
   </script>
   <script src=http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js></script>
   <script>hljs.initHighlightingOnLoad()</script>
@@ -1075,13 +1015,13 @@
               nubbin.style.left = filterLeft + 'px'
               parent.style.width = newLeft>maxLeft?newLeft+15+'px':maxLeft+15+'px'
             }
-            EQCSS.apply()
+            EQCSS.throttle()
           }
         }
       }
       function drop(e){
         grabbed = undefined
-        EQCSS.apply()
+        EQCSS.throttle()
       }
     }
   </script>
