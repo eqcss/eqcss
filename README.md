@@ -38,11 +38,11 @@ Alternatively, you can also grab [EQCSS from NPM](https://www.npmjs.com/package/
 EQCSS is also hosted on CDNjs and you can use the version hosted there for your projects: [https://cdnjs.com/libraries/eqcss](https://cdnjs.com/libraries/eqcss):
 
 ```
-https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.1.1/EQCSS-polyfills.min.js
+https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.2.0/EQCSS-polyfills.min.js
 ```
 
 ```
-https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.1.1/EQCSS.min.js
+https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.2.0/EQCSS.min.js
 ```
 
 ## Writing Element Queries
