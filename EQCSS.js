@@ -397,7 +397,7 @@ EQCSS.apply = function(){
 
             var element = elements[j];
             var element_scroll = element.scrollLeft;
-            
+
             if(!element.hasScrollListener){
               element.addEventListener("scroll", function(){
                 EQCSS.throttle();
@@ -437,7 +437,7 @@ EQCSS.apply = function(){
 
             var element = elements[j];
             element_scroll = elements[j].scrollTop;
-            
+
             if(!element.hasScrollListener){
               element.addEventListener("scroll", function(){
                 EQCSS.throttle();
@@ -478,7 +478,7 @@ EQCSS.apply = function(){
 
             var element = elements[j];
             element_scroll = elements[j].scrollLeft;
-            
+
             if(!element.hasScrollListener){
               element.addEventListener("scroll", function(){
                 EQCSS.throttle();
@@ -519,7 +519,7 @@ EQCSS.apply = function(){
 
             var element = elements[j];
             element_scroll = elements[j].scrollTop;
-            
+
             if(!element.hasScrollListener){
               element.addEventListener("scroll", function(){
                 EQCSS.throttle();
@@ -807,6 +807,7 @@ window.addEventListener("mousedown", function(){
 });
 window.addEventListener("mouseup", function(){
   EQCSS_mouse_down = false;
+  EQCSS.throttle();
 });
 window.addEventListener("mousemove", function(){
   if(EQCSS_mouse_down){
