@@ -83,29 +83,29 @@ Element Queries have the following format:
 
 ### Width Queries
 
-- min-width
-- max-width
+- `min-width`
+- `max-width`
 
 ### Height Queries
 
-- min-height 
-- max-height
+- `min-height`
+- `max-height`
 
 ### Count Queries
 
-- min-characters
-- max-characters
-- min-lines
-- max-lines
-- min-children
-- max-children
+- `min-characters`
+- `max-characters`
+- `min-lines`
+- `max-lines`
+- `min-children`
+- `max-children`
 
 ### Scroll queries
 
-- min-scroll-y
-- max-scroll-y
-- min-scroll-x
-- max-scroll-x
+- `min-scroll-y`
+- `max-scroll-y`
+- `min-scroll-x`
+- `max-scroll-x`
 
 ### Meta Selectors
 
