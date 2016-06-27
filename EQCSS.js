@@ -2,7 +2,7 @@
  * EQCSS / Tommy Hodgins, Maxime Euzière / MIT licence
  * github.com/eqcss/eqcss
  * elementqueries.com
- * version 1.2.0
+ * version 1.2.1
  */
 
 EQCSS = {
@@ -130,11 +130,11 @@ EQCSS.parse = function(code){
 
       // Separate value and unit if it's possible
       var unit = null;
-      unit = value.replace(/^\d+(\D+)$/, "$1");
+      unit = value.replace(/^(\d*\.?\d+)(\D+)$/, "$2");
       if(unit == value){
         unit = null;
       }
-      value = value.replace(/^(\d+)\D+$/, "$1");
+      value = value.replace(/^(\d*\.?\d+)\D+$/, "$1");
       dataEntry.conditions.push({measure: measure, value: value, unit: unit});
     });
 

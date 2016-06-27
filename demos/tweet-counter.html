@@ -11,7 +11,8 @@
   <style>
     @element 'textarea' {
       body:after {
-        content: 'eval("140-t.value.length")';
+        content: 'eval("140-document.getElementById('t').value.length")';
+        font-size: 14pt;
       }
     }
     @element 'textarea' and (min-characters: 140) {
@@ -28,7 +29,6 @@
   <textarea id=t></textarea>
   <!--[if lt IE 9]><script src=http://elementqueries.com/EQCSS-polyfills.min.js></script><![endif]-->
   <script src=http://elementqueries.com/EQCSS.min.js></script>
-  <script src="http://staticresource.s3.amazonaws.com/eqcss-demo.js"></script>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

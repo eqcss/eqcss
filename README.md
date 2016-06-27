@@ -33,16 +33,16 @@ Alternatively, you can also grab [EQCSS from NPM](https://www.npmjs.com/package/
     npm install eqcss
 
 
-### CDN Hosted Links</h4>
+### CDN Hosted Links
 
 EQCSS is also hosted on CDNjs and you can use the version hosted there for your projects: [https://cdnjs.com/libraries/eqcss](https://cdnjs.com/libraries/eqcss):
 
 ```
-https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.2.0/EQCSS-polyfills.min.js
+https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.2.1/EQCSS-polyfills.min.js
 ```
 
 ```
-https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.2.0/EQCSS.min.js
+https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.2.1/EQCSS.min.js
 ```
 
 ## Writing Element Queries
@@ -83,43 +83,43 @@ Element Queries have the following format:
 
 ### Width Queries
 
-- `min-width`
-- `max-width`
+- `min-width` [min-width in px](http://codepen.io/tomhodgins/pen/MeKwaY), [min-width in %](http://codepen.io/tomhodgins/pen/ezJNpp)
+- `max-width` [max-width in px](http://codepen.io/tomhodgins/pen/EyPjVg), [max-width in %](http://codepen.io/tomhodgins/pen/oLbXzG)
 
 ### Height Queries
 
-- `min-height`
-- `max-height`
+- `min-height` [min-height in px](http://codepen.io/tomhodgins/pen/PzZqPd), [min-height in %](http://codepen.io/tomhodgins/pen/KMVpdO)
+- `max-height` [max-height in px](http://codepen.io/tomhodgins/pen/EyPjPg), [max-height in %](http://codepen.io/tomhodgins/pen/xOZGZg)
 
 ### Count Queries
 
-- `min-characters`
-- `max-characters`
-- `min-lines`
-- `max-lines`
-- `min-children`
-- `max-children`
+- `min-characters` [on block elements](http://codepen.io/tomhodgins/pen/vKLOLd), [on form inputs](http://codepen.io/tomhodgins/pen/OXMVMB)
+- `max-characters` [on block elements](http://codepen.io/tomhodgins/pen/pbgJyz), [on form inputs](http://codepen.io/tomhodgins/pen/MeKwyY)
+- `min-lines` [min-lines demo](http://codepen.io/tomhodgins/pen/JKGdXN)
+- `max-lines` [max-lines demo](http://codepen.io/tomhodgins/pen/oLbXxG)
+- `min-children` [min-children demo](http://codepen.io/tomhodgins/pen/dXGoMZ)
+- `max-children` [max-children demo](http://codepen.io/tomhodgins/pen/mEVJPK)
 
 ### Scroll queries
 
-- `min-scroll-y`
-- `max-scroll-y`
-- `min-scroll-x`
-- `max-scroll-x`
+- `min-scroll-y` [min-scroll-y demo](http://codepen.io/tomhodgins/pen/OXMVNa)
+- `max-scroll-y` [max-scroll-y demo](http://codepen.io/tomhodgins/pen/beEdpZ)
+- `min-scroll-x` [min-scroll-x demo](http://codepen.io/tomhodgins/pen/ZOQGOb)
+- `max-scroll-x` [max-scroll-x demo](http://codepen.io/tomhodgins/pen/ezJNzJ)
 
 ### Meta Selectors
 
-- `$this`
-- `$parent`
-- `$root`
-- `$prev`
-- `$next`
+- `$this` [$this demo](http://codepen.io/tomhodgins/pen/xOZGOq)
+- `$parent` [$parent demo](http://codepen.io/tomhodgins/pen/VjeLjy)
+- `$root` [$root demo](http://codepen.io/tomhodgins/pen/RRrPRy)
+- `$prev` [$prev demo](http://codepen.io/tomhodgins/pen/gMPpMd)
+- `$next` [$next demo](http://codepen.io/tomhodgins/pen/PzZqzy)
 
 (Alternatively, for SCSS compatibility you can also use meta-selectors prefixed by `eq_` instead of a `$`. These are `eq_this`, `eq_parent`, `eq_root`, `eq_prev`, and `eq_next`)
 
 ### CSS Functions
 
-- `eval("")`
+- `eval('')` [eval('') demo](http://codepen.io/tomhodgins/pen/WxrvxB)
 
 ## Element Query Demos
 
