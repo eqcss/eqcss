@@ -8,7 +8,7 @@
 
 Element queries are a new way of thinking about responsive web design in CSS where the responsive conditions apply to individual elements on the page instead of the width or height of the browser.
 
-Unlike CSS `@media` queries, element Queries can be based on more than just the width or height of the browser as well, you can change styles in a number of different situations, like how many lines of text or child elements an element contains.
+Unlike CSS `@media` queries, `@element` queries can be based on more than just the width or height of the browser as well, you can change styles in a number of different situations, like how many lines of text or child elements an element contains.
 
 Another concept that element queries brings to CSS is the idea of 'scoping' your styles to one element in the same way that JavaScript functions define a new scope for the variables they contain.
 
@@ -71,27 +71,37 @@ By default the plugin execute once when the content loads, and also whenever it 
 
 ## Designing with Element Queries
 
-Element Queries have the following format:
+Element Queries have the following syntax:
 
-    @element {selector} and {condition} [ and {condition} ]* { {css} }
+**element_query** = @element `selector_list` `[ condition_list ]` { `css_code` }
 
-- `{selector}` is a CSS selector targeting one or many elements. Ex: `"#id"` or `".class"`
-- `{condition}` is composed of a measure and a value.
-- `{css}` can contain: Any valid CSS rule. (Ex: `#id div { color: red }`)
+**selector_list** = " `css_selector` `[ "," css_selector ]*` "
 
-## Responsive Conditions
+**condition_list** = and ( `query_condition` : `value` ) `[ "and (" query_condition ":" value ")" ]*`
 
-### Width Queries
+**value** = `number` `[ css_unit ]`
+
+**query_condition** = min-height | max-height | min-width | max-width | min-characters | max-characters | min-lines | max-lines | min-children | max-children | min-scroll-y | max-scroll-y | min-scroll-x | max-scroll-x
+
+*css_unit* = % | px | pt | em | cm | mm | rem | ex | ch | pc | vw | vh | vmin | vmax
+
+An EQCSS element query is a container query that begins with "@element", followed by one or more CSS selectors (comma-separated) in quotes (either single or double quotes), followed by one or more optional responsive conditions comprised of a query condition and a value separated by a colon, followed by one or more optional CSS rules wrapped in curly brackets.
+
+For more info, view more about EQCSS syntax here: [https://gist.github.com/tomhodgins/6237039fa07c2e4b7acd1c8b0f9549a9](https://gist.github.com/tomhodgins/6237039fa07c2e4b7acd1c8b0f9549a9)
+
+## Element Query Conditions
+
+### Width-based Conditions
 
 - `min-width` [min-width in px](http://codepen.io/tomhodgins/pen/MeKwaY), [min-width in %](http://codepen.io/tomhodgins/pen/ezJNpp)
 - `max-width` [max-width in px](http://codepen.io/tomhodgins/pen/EyPjVg), [max-width in %](http://codepen.io/tomhodgins/pen/oLbXzG)
 
-### Height Queries
+### Height-based Conditions
 
 - `min-height` [min-height in px](http://codepen.io/tomhodgins/pen/PzZqPd), [min-height in %](http://codepen.io/tomhodgins/pen/KMVpdO)
 - `max-height` [max-height in px](http://codepen.io/tomhodgins/pen/EyPjPg), [max-height in %](http://codepen.io/tomhodgins/pen/xOZGZg)
 
-### Count Queries
+### Count-based Conditions
 
 - `min-characters` [on block elements](http://codepen.io/tomhodgins/pen/vKLOLd), [on form inputs](http://codepen.io/tomhodgins/pen/OXMVMB)
 - `max-characters` [on block elements](http://codepen.io/tomhodgins/pen/pbgJyz), [on form inputs](http://codepen.io/tomhodgins/pen/MeKwyY)
@@ -100,14 +110,14 @@ Element Queries have the following format:
 - `min-children` [min-children demo](http://codepen.io/tomhodgins/pen/dXGoMZ)
 - `max-children` [max-children demo](http://codepen.io/tomhodgins/pen/mEVJPK)
 
-### Scroll queries
+### Scroll-based Conditions
 
 - `min-scroll-y` [min-scroll-y demo](http://codepen.io/tomhodgins/pen/OXMVNa)
 - `max-scroll-y` [max-scroll-y demo](http://codepen.io/tomhodgins/pen/beEdpZ)
 - `min-scroll-x` [min-scroll-x demo](http://codepen.io/tomhodgins/pen/ZOQGOb)
 - `max-scroll-x` [max-scroll-x demo](http://codepen.io/tomhodgins/pen/ezJNzJ)
 
-### Meta Selectors
+### Meta-Selectors
 
 - `$this` [$this demo](http://codepen.io/tomhodgins/pen/xOZGOq)
 - `$parent` [$parent demo](http://codepen.io/tomhodgins/pen/VjeLjy)

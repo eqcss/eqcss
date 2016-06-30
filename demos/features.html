@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8>
+  <meta name=viewport content="width=device-width, initial-scale=1">
+  <title>EQCSS Features</title>
+  <meta name=description content="Demo page featuring tests for all of the features included in EQCSS">
+  <meta name=keywords content="EQCSS, element queries, element query, container queries, min-width, max-width, min-height, max-height, min-children, max-children, min-characters, max-characters, min-lines, max-lines, min-scroll-y, max-scroll-y, min-scroll-x, max-scroll-x, this selector, parent selector, root selector, prev selector, next selector, eval('') css">
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic" rel=stylesheet>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel=stylesheet>
+  <link href=http://staticresource.s3.amazonaws.com/template/plugins/buttons/data-buttons.css rel=stylesheet>
+
+  <!--[if lt IE 9]><script src=http://elementqueries.com/EQCSS-polyfills.js></script><![endif]-->
+  <script src=http://elementqueries.com/EQCSS.js></script>
+
+  <style>
+    * {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-kerning: auto;
+    }
+    body {
+      margin: 1em;
+      font-family: 'Source Sans Pro', sans-serif;
+    }
+    [data-button] {
+      display: block;
+      margin: 1em 0;
+    }
+    div {
+      display: inline-block;
+      border-radius: .2em;
+      padding: 2em;
+      color: #555;
+      font-size: 12pt;
+      line-height: 1.4;
+      background: #eee;
+      border: 1px solid #ccc;
+    }
+    input,
+    textarea {
+      display: block;
+      min-width: 300px;
+      border-radius: .2em;
+      margin: 1em;
+      padding: .5em;
+      color: #555;
+      font-size: 12pt;
+      background: white;
+      border: 1px solid #ccc;
+    }
+    section {
+      height: 300px;
+      display: inline-block;
+      border: 1px dotted black;
+      padding: 1em;
+    }
+    img {
+      max-width: 50px;
+      box-shadow: rgba(0,0,0,.1) 0 .2em .5em;
+    }
+    img + img {
+      margin-left: 1em;
+    }
+    p {
+      font-size: 10pt;
+      color: #555;
+    }
+    [class*=-scroll-x] {
+      overflow-x: scroll;
+    }
+    [class*=-scroll-x] p {
+      width: 200%;
+    }
+    [class*=-scroll-y] {
+      height: 150px;
+      overflow-y: scroll;
+    }
+    /* Drag Handles */
+    [data-nubbin] {
+      border: 1px solid rgba(0,0,0,.15);
+      width: 30px;
+      height: 30px;
+      text-align: center;
+      padding: 0;
+      margin: 0;
+      background: yellow;
+      cursor: pointer;
+      z-index: 500;
+    }
+    [data-nubbin] i {
+      pointer-events: none;
+      color: black;
+      line-height: 30px;
+      font-size: 20px;
+    }
+    [data-drag] {
+      overflow: auto;
+    }
+    [data-drag=horizontal] {
+      resize: horizontal;
+    }
+    [data-drag=vertical] {
+      resize: vertical;
+    }
+    [data-drag=both] {
+      resize: both;
+    }
+  </style>
+
+</head>
+<body>
+
+  <h2>Width Queries</h2>
+
+  <h3>min-width (in px)</h3>
+  <div class=minwidthpixels data-drag=horizontal>class="minwidthpixels"</div>
+  <style>
+    /* Min-width in px */
+    @element ".minwidthpixels" and (min-width: 300px) {
+      .minwidthpixels {
+        background: greenyellow;
+        border-color: limegreen;
+      }
+    }
+  </style>
+
+  <h3>min-width (in %)</h3>
+  <div class=minwidthpercents data-drag=horizontal>class="minwidthpercents"</div>
+  <style>
+    /* Min-width in % */
+    @element ".minwidthpercents" and (min-width: 50%) {
+      .minwidthpercents {
+        background: greenyellow;
+        border-color: limegreen;
+      }
+    }
+  </style>
+
+  <h3>max-width (in px)</h3>
+  <div class="maxwidthpixels" data-drag=horizontal>class="maxwidthpixels"</div>
+  <style>
+    /* Max-width in px */
+    @element ".maxwidthpixels" and (max-width: 300px) {
+      .maxwidthpixels {
+        background: greenyellow;
+        border-color: limegreen;
+      }
+    }
+    @element ".maxwidthpercents" and (max-width: 50%) {
+      .maxwidthpercents {
+        background: greenyellow;
+        border-color: limegreen;
+      }
+    }
+  </style>
+
+  <h3>max-width (in %)</h3>
+  <div class="maxwidthpercents" data-drag=horizontal>class="maxwidthpercents"</div>
+  <style>
+    /* Max-width in % */
+    @element ".maxwidthpercents" and (max-width: 50%) {
+      .maxwidthpercents {
+        background: greenyellow;
+        border-color: limegreen;
+      }
+    }
+  </style>
+
+  <h2>Height Queries</h2>
+
+  <h3>min-height (in px)</h3>
+  <div class="minheightpixels" data-drag=vertical>class="minheightpixels"</div>
+  <style>
+    /* Min-height in px */
+    @element ".minheightpixels" and (min-height: 200px) {
+      .minheightpixels {
+        background: greenyellow;
+        border-color: limegreen;
+      }
+    }
+  </style>
+
+  <h3>min-height (in %)</h3>
+  <section>
+    <div class="minheightpercents" data-drag=vertical>class="minheightpercents"</div>
+  </section>
+  <style>
+    /* Min-height in % */
+    @element ".minheightpercents" and (min-height: 50%) {
+      .minheightpercents {
+        background: greenyellow;
+        border-color: limegreen;
+      }
+    }
+  </style>
+
+  <h3>max-height (in px)</h3>
+  <div class="maxheightpixels" data-drag=vertical>class="maxheightpixels"</div>
+  <style>
+    /* Max-height in px  */
+    @element ".maxheightpixels" and (max-height: 200px) {
+      .maxheightpixels {
+        background: greenyellow;
+        border-color: limegreen;
+      }
+    }
+  </style>
+
+  <h3>max-height (in %)</h3>
+  <section>
+    <div class="maxheightpercents" data-drag=vertical>class="maxheightpercents"</div>
+  </section>
+  <style>
+    /* Max-height in % */
+    @element ".maxheightpercents" and (max-height: 50%) {
+      .maxheightpercents {
+        background: greenyellow;
+        border-color: limegreen;
+      }
+    }
+  </style>
+
+  <h2>Count Queries</h2>
+
+  <h3>min-characters on block elements</h3>
+  <p>(Use keyboard)</p>
+  <div class="mincharacters" contenteditable>class="mincharacters"</div>
+  <style>
+    /* Min-characters on block elements */
+    @element ".mincharacters" and (min-characters: 35) {
+      .mincharacters {
+        background: greenyellow;
+        border-color: limegreen;
+      }
+    }
+  </style>
+
+  <h3>min-characters on form inputs</h3>
+  <p>(Use keyboard)</p>
+  <input type=text class="mincharacters-input" value='class="mincharacters-input"'>
+  <textarea class="mincharacters-textarea">class="mincharacters-textarea"</textarea>
+  <style>
+    /* Min-characters on input */
+    @element ".mincharacters-input" and (min-characters: 35) {
+      .mincharacters-input {
+        background: greenyellow;
+        border-color: limegreen;
+      }
+    }
+    /* Min-characters on textarea */
+    @element ".mincharacters-textarea" and (min-characters: 35) {
+      .mincharacters-textarea {
+        background: greenyellow;
+        border-color: limegreen;
+      }
+    }
+  </style>
+
+  <h3>max-characters on block elements</h3>
+  <p>(Use keyboard)</p>
+  <div class="maxcharacters" contenteditable>class="maxcharacters"</div>
+  <style>
+    /* Max-characters */
+    @element ".maxcharacters" and (max-characters: 35) {
+      .maxcharacters {
+        background: greenyellow;
+        border-color: limegreen;
+      }
+    }
+  </style>
+
+  <h3>max-characters on form inputs</h3>
+  <p>(Use keyboard)</p>
+  <input type=text class="maxcharacters-input" value='class="maxcharacters-input"'>
+  <textarea class="maxcharacters-textarea">class="maxcharacters-textarea"</textarea>
+  <style>
+    /* Max-characters on input */
+    @element ".maxcharacters-input" and (max-characters: 35) {
+      .maxcharacters-input {
+        background: greenyellow;
+        border-color: limegreen;
+      }
+    }
+    /* Max-characters on textarea */
+    @element ".maxcharacters-textarea" and (max-characters: 35) {
+      .maxcharacters-textarea {
+        background: greenyellow;
+        border-color: limegreen;
+      }
+    }
+  </style>
+
+  <h3>min-lines</h3>
+  <p>(Use keyboard)</p>
+  <div class="minlines" contenteditable>class="minlines"</div>
+  <style>
+    /* Min-lines */
+    @element ".minlines" and (min-lines: 5) {
+      .minlines {
+        background: greenyellow;
+        border-color: limegreen;
+      }
+    }
+  </style>
+
+  <h3>max-lines</h3>
+  <p>(Use keyboard)</p>
+  <div class="maxlines" contenteditable>class="maxlines"</div>
+  <style>
+    /* Max-lines */
+    @element ".maxlines" and (max-lines: 5) {
+      .maxlines {
+        background: greenyellow;
+        border-color: limegreen;
+      }
+    }
+  </style>
+
+  <h3>min-children</h3>
+  <button data-button="semiflat" onclick="var img=document.createElement('img');img.src='http://staticresource.s3.amazonaws.com/user.png';document.querySelector('.minchildren').appendChild(img);EQCSS.apply()">Add Child</button>
+  <div class="minchildren">
+    <img src=http://staticresource.s3.amazonaws.com/user.png style=width:50px>
+  </div>
+  <style>
+    /* Min-children */
+    @element ".minchildren" and (min-children: 5) {
+      .minchildren {
+        background: greenyellow;
+        border-color: limegreen;
+      }
+    }
+  </style>
+
+  <h3>max-children</h3>
+  <button data-button="semiflat" onclick="var img=document.createElement('img');img.src='http://staticresource.s3.amazonaws.com/user.png';document.querySelector('.maxchildren').appendChild(img);EQCSS.apply()">Add Child</button>
+  <div class="maxchildren">
+    <img src=http://staticresource.s3.amazonaws.com/user.png style=width:50px>
+  </div>
+  <style>
+    /* Max-children */
+    @element ".maxchildren" and (max-children: 5) {
+      .maxchildren {
+        background: greenyellow;
+        border-color: limegreen;
+      }
+    }
+  </style>
+
+  <h2>Scroll queries</h2>
+
+  <h3>min-scroll-y</h3>
+  <div class="min-scroll-y">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </div>
+  <style>
+    /* Min-scroll-y */
+    @element ".min-scroll-y" and (min-scroll-y: 50%) {
+      .min-scroll-y {
+        background: greenyellow;
+        border-color: limegreen;
+      }
+    }
+  </style>
+
+  <h3>max-scroll-y</h3>
+  <div class="max-scroll-y">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </div>
+  <style>
+    /* Max-scroll-y */
+    @element ".max-scroll-y" and (max-scroll-y: 50%) {
+      .max-scroll-y {
+        background: greenyellow;
+        border-color: limegreen;
+      }
+    }
+  </style>
+
+  <h3>min-scroll-x</h3>
+  <div class="min-scroll-x">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </div>
+  <style>
+    /* Min-scroll-x */
+    @element ".min-scroll-x" and (min-scroll-x: 50%) {
+      .min-scroll-x {
+        background: greenyellow;
+        border-color: limegreen;
+      }
+    }
+  </style>
+
+  <h3>max-scroll-x</h3>
+  <div class="max-scroll-x">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </div>
+  <style>
+    /* Max-scroll-x */
+    @element ".max-scroll-x" and (max-scroll-x: 50%) {
+        .max-scroll-x {
+        background: greenyellow;
+        border-color: limegreen;
+      }
+    }
+  </style>
+
+  <h3>Multiple Conditions</h3>
+  <div class="multiple-conditions" data-drag=both>class="multiple-conditions"</div>
+  <style>
+    /* Multiple Conditions */
+    @element ".multiple-conditions" and (min-width: 50%) and (min-height: 150px) {
+      .multiple-conditions {
+        background: greenyellow;
+        border-color: limegreen;
+      }
+    }
+  </style>
+
+  <h2>Meta Selectors</h2>
+
+  <h3>$this</h3>
+  <div class="this-selector">
+    <input type=text placeholder=input>
+  </div>
+  <style>
+    /* $this selector */
+    @element ".this-selector input" and (min-characters: 5) {
+      $this,
+      $this:focus {
+        background: greenyellow;
+        border-color: limegreen;
+      }
+    }
+  </style>
+
+  <h3>$parent</h3>
+  <div class="parent-selector">
+    <input type=text placeholder=input>
+  </div>
+  <style>
+    /* $parent selector */
+    @element ".parent-selector input" and (min-characters: 5) {
+      $parent {
+        background: greenyellow;
+        border-color: limegreen;
+      }
+    }
+  </style>
+
+  <h3>$root</h3>
+  <div class="root-selector">
+    <input type=text placeholder=input>
+  </div>
+  <style>
+    /* $root selector */
+    @element ".root-selector input" and (min-characters: 5) {
+      $root {
+        background: greenyellow;
+      }
+    }
+  </style>
+
+  <h3>$prev</h3>
+  <div>
+    <img src=http://staticresource.s3.amazonaws.com/user.png>
+    <img class="prev-selector" src=http://staticresource.s3.amazonaws.com/user.png>
+  </div>
+  <style>
+    /* $prev selector */
+    @element ".prev-selector" {
+      $prev {
+        border: 2px solid limegreen;
+      }
+    }
+  </style>
+
+  <h3>$next</h3>
+  <div>
+    <img class="next-selector"src=http://staticresource.s3.amazonaws.com/user.png>
+    <img src=http://staticresource.s3.amazonaws.com/user.png>
+  </div>
+  <style>
+    /* $next selector */
+    @element ".next-selector" {
+      $next {
+        border: 2px solid limegreen;
+      }
+    }
+  </style>
+
+  <h2>CSS Functions</h2>
+
+  <h3>eval("")</h3>
+  <div class="eval">
+    <p><strong>Current Year:</strong></p>
+    <p><em>Viewport Size:</em></p>
+  </div>
+  <style>
+    /* eval('') */
+    @element "strong" {
+      $this:after {
+        content: ' eval("new Date().getFullYear()")';
+      }
+    }
+    @element "em" {
+      $this:after {
+        content: ' eval("window.innerWidth+' x '+window.innerHeight")';
+      }
+    }
+  </style>
+
+  <script>
+    // Drag Handles for Touchscreen Users
+    if(('ontouchstart' in window)||(navigator.msMaxTouchPoints>0)){
+      var tag = document.querySelectorAll('[data-drag]')
+      for(i=0;i<tag.length;i++){
+        var direction = tag[i].getAttribute('data-drag') || 'both'
+        tag[i].setAttribute('data-container',i)
+        spawnNubbin(i,direction)
+      }
+      function spawnNubbin(element,direction){
+        var parent = document.querySelector('[data-container="'+element+'"]'),
+            pTop = parent.scrollHeight - 20,
+            pLeft = parent.scrollWidth - 20,
+            nubbin = document.createElement('div')
+        nubbin.setAttribute('data-nubbin',element)
+        parent.style.position = 'relative'
+        parent.style.overflow = 'inherit'
+        nubbin.style.position = 'absolute'
+        nubbin.style.top = pTop+'px'
+        nubbin.style.left = pLeft+'px'
+        nubbin.setAttribute('data-max-top',pTop)
+        nubbin.setAttribute('data-max-left',pLeft)
+        if (direction == 'horizontal'){
+          nubbin.innerHTML = '<i class="fa fa-arrows-h"></i>'
+        }
+        if (direction == 'vertical'){
+          nubbin.innerHTML = '<i class="fa fa-arrows-v"></i>'
+        }
+        if (direction == 'both'){
+          nubbin.innerHTML = '<i class="fa fa-arrows"></i>'
+        }
+        document.addEventListener('mousedown',grab)
+        document.addEventListener('touchstart',grab)
+        document.addEventListener('mousemove',drag)
+        document.addEventListener('touchmove',drag)
+        document.addEventListener('mouseup',drop)
+        document.addEventListener('touchend',drop)
+        parent.appendChild(nubbin)
+      }
+      var grabbed
+      var startX = startY = oldTop = oldLeft = 0
+      function grab(e){
+        if (e.target.getAttribute('data-nubbin')){
+          e.preventDefault()
+          grabbed = e.target.getAttribute('data-nubbin')
+          startX = e.clientX || e.touches[0].clientX
+          startY = e.clientY || e.touches[0].clientY
+          oldTop = parseInt(e.target.style.top.split('px')[0]) || 0
+          oldLeft = parseInt(e.target.style.left.split('px')[0]) || 0
+        }
+      }
+      function drag(e){
+        if (grabbed){
+          if (e.target.getAttribute('data-nubbin')){
+            var nubbin = document.querySelector('[data-nubbin="'+grabbed+'"]'),
+                parent = e.target.parentNode,
+                direction = parent.getAttribute('data-drag'),
+                pTop = parent.scrollHeight,
+                pLeft = parent.scrollWidth,
+                newTop = oldTop+parseInt((e.clientY||e.touches[0].clientY)-startY),
+                newLeft = oldLeft+parseInt((e.clientX||e.touches[0].clientX)-startX),
+                maxTop = parseInt(nubbin.getAttribute('data-max-top')),
+                maxLeft = parseInt(nubbin.getAttribute('data-max-left')),
+                filterTop = newTop>=maxTop?newTop:maxTop,
+                filterLeft = newLeft>=maxLeft?newLeft:maxLeft
+            if (direction == 'vertical' || direction == 'both'){
+              nubbin.style.top = filterTop + 'px'
+              parent.style.height = newTop>maxTop?newTop+15+'px':maxTop+15+'px'
+            }
+            if (direction == 'horizontal' || direction == 'both'){
+              nubbin.style.left = filterLeft + 'px'
+              parent.style.width = newLeft>maxLeft?newLeft+15+'px':maxLeft+15+'px'
+            }
+            EQCSS.apply()
+          }
+        }
+      }
+      function drop(e){
+        grabbed = undefined
+        EQCSS.apply()
+      }
+    }
+  </script>
+
+</body>
+</html>

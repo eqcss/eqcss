@@ -506,7 +506,7 @@
       <li><code>{condition}</code> is composed of a measure and a value.
       <li><code>{css}</code> can contain: Any valid CSS rule. (Ex: <code>#id div { color: red }</code>)</li>
     </ul>
-    <h3 id=responsive-conditions>Responsive Conditions</h3>
+    <h3 id=element-query-conditions>Element Query Conditions</h3>
     <p>Use your mouse (or drag on the handles) to resize the blocks.</p>
     <article id=min-width-in-pixels>
       <h4>min-width in <code>px</code></h4>
@@ -769,7 +769,7 @@
 }
 /* comment after */</code></pre>
     </article>
-    <h3 id=meta-selectors>Meta Selectors</h3>
+    <h3 id=meta-selectors>Meta-Selectors</h3>
     <p>The following selectors can be used inside element queries. The <code>$this</code> meta-selector selects the same element(s) on the page that meet the query condition. The <code>$parent</code> selector refers to the parent of the element(s) on the page that meet the repsonsive condition. There are selectors for <code>$prev</code> and <code>$next</code> as well, and <code>$root</code> which always refers to the HTML document.</p>
     <p>Alternatively, for SCSS compatibility instead of using <code>$</code> you can also format meta-selectors prefixed by <code>eq_</code>. These are <code>eq_this</code>, <code>eq_parent</code>, <code>eq_root</code>, <code>eq_prev</code>, and <code>eq_next</code></p>
     <article id=this-selector>
