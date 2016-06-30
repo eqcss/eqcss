@@ -83,7 +83,7 @@ Element Queries have the following syntax:
 
 **query_condition** = min-height | max-height | min-width | max-width | min-characters | max-characters | min-lines | max-lines | min-children | max-children | min-scroll-y | max-scroll-y | min-scroll-x | max-scroll-x
 
-*css_unit* = % | px | pt | em | cm | mm | rem | ex | ch | pc | vw | vh | vmin | vmax
+**css_unit** = % | px | pt | em | cm | mm | rem | ex | ch | pc | vw | vh | vmin | vmax
 
 An EQCSS element query is a container query that begins with "@element", followed by one or more CSS selectors (comma-separated) in quotes (either single or double quotes), followed by one or more optional responsive conditions comprised of a query condition and a value separated by a colon, followed by one or more optional CSS rules wrapped in curly brackets.
 
