@@ -169,4 +169,8 @@ For more info, view more about EQCSS syntax here: [https://gist.github.com/tomho
 - [A Parent Selector for CSS](http://elementqueries.com/notes/a-parent-selector-for-css.html)
 - [It's Time to Think 'Element-First'](http://elementqueries.com/notes/its-time-to-think-element-first.html)
 
+## Try it Live
+
+Here's a link to the EQCSS REPL where you can try writing EQCSS-enhance CSS live in your browser and share a custom link with others: [http://elementqueries.com/repl.html](http://elementqueries.com/repl.html)
+
 ### More Demos @ the EQCSS Website: [http://elementqueries.com](http://elementqueries.com)

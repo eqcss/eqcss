@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8>
+  <meta name=viewport content="width=device-width, initial-scale=1">
+  <meta name=viewport content="user-scalable=yes,initial-scale=1,width=device-width">
+  <meta name=description content="Try out EQCSS with this live REPL. EQCSS is a CSS extension that introduces Element Queries, Scoped Styles, and new CSS selectors like $parent and $prev and more to all browsers IE8 and up.">
+  <meta name=keywords content="EQCSS, element queries, element query, container queries, CSS extension, parent selector, meta selector, scoped CSS, scoped styles, CSS variables, reponsive web design, rwd, repl, live editor, editor, demo">
+  <title>EQCSS REPL</title>
+  <style>
+    * {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-kerning: auto;
+    }
+    ::-moz-selection {
+      color: #002b36;
+      background: #eee8d5;
+    }
+    ::selection {
+      color: #002b36;
+      background: #eee8d5;
+    }
+    html {
+      font-size: 10pt;
+      line-height: 1.4;
+      font-weight: 400;
+      font-family: sans-serif;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      margin: 0;
+    }
+    section,
+    iframe {
+      border: 0;
+      width: 50%;
+      height: 100vh;
+      float: left;
+      position: relative;
+    }
+    section h2 {
+      margin: 0;
+      padding: 0;
+      color: white;
+      opacity: .3;
+      position: absolute;
+      top: .25em;
+      right: .5em;
+      z-index: 500;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      -o-user-select: none;
+      user-select: none;
+      cursor: default;
+    }
+    h2:last-of-type {
+      top: calc(50% + .25em);
+    }
+    textarea {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 50%;
+      margin: 0;
+      float: left;
+      position: relative;
+      font-size: 14pt;
+      line-height: 1.4;
+      background: #002b36;
+      color: #839496;
+      padding: 1.5em;
+      border: none;
+      font-family: 'Source Code Pro', Consolas, 'Andale Mono WT', 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Liberation Mono', 'Nimbus Mono L', Monaco, 'Courier New', Courier, monospace;
+    }
+    #css {
+      border-top: 1px solid #586e75;
+    }
+    label {
+      position: fixed;
+      top: calc(50% - 30pt/2);
+      left: calc(50% - 30pt/2);
+      cursor: pointer;
+      z-index: 500;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      -o-user-select: none;
+      user-select: none;
+    }
+    label input {
+      display: none;
+    }
+    label span {
+      color: #268bd2;
+      font-size: 30pt;
+      width: 30pt;
+      line-height: .8;
+      display: block;
+      text-align: center;
+      text-shadow: black 0 0 1px;
+      transition: color .2s ease-in-out;
+    }
+    label span:hover,
+    label span:focus {
+      color: #2aa198;
+    }
+    #share {
+      background: rgba(255,255,255,.3);
+      color: black;
+      position: absolute;
+      bottom: .5em;
+      right: .5em;
+      padding: .5em;
+      line-height: 1;
+      border: 1px solid rgba(0,0,0,.5);
+      z-index: 500;
+      text-decoration: none;
+      opacity: .7;
+      border-radius: .2em;
+      transition: opacity .2s ease-in-out;
+    }
+    #share:hover,
+    #share:focus {
+      opacity: 1;
+    }
+    /* Horizontal Mode */
+    .horizontal section,
+    .horizontal iframe {
+      width: 100%;
+      height: 50vh;
+    }
+    .horizontal h2 {
+      top: .25em;
+      right: calc(50% + .5em);
+    }
+    .horizontal h2:last-of-type {
+      top: .25em;
+      right: .5em;
+    }
+    .horizontal textarea {
+      width: 50%;
+      height: 100%;
+    }
+    .horizontal #css {
+      border-top: 0;
+      border-left: 1px solid #586e75;
+    }
+  </style>
+</head>
+<body>
+  <label accesskey=v>
+    <input type=checkbox name=orientation onchange=toggleView()>
+    <span>⬌</span>
+  </label>
+  <section id=editor>
+    <h2>HTML</h2>
+    <textarea id=html autocorrect=off autocapitalize=off autocomplete=off spellcheck=off><p>This is the EQCSS REPL.</p>
+
+<p>Begin editing this code and watch the changes happen live in the preview pane…</p></textarea>
+    <h2>CSS</h2>
+    <textarea id=css autocorrect=off autocapitalize=off autocomplete=off spellcheck=off>@element 'html' {
+  $this {
+    background: powderblue;
+  }
+}
+@element 'p' and (min-characters: 30){
+  $this {
+    font-weight: bold;
+  }
+}</textarea>
+  </section>
+  <iframe id=preview></iframe>
+  <a id=share href="#" target=_blank>Share</a>
+  <script id=eqcss>
+    // EQCSS / Tommy Hodgins, Maxime Euzière / MIT licence
+    // version 1.2.1
+    EQCSS={data:[],load:function(){for(var a=document.querySelectorAll("style"),b=0;b<a.length;b++)null===a[b].getAttribute("data-eqcss-read")&&(a[b].setAttribute("data-eqcss-read","true"),EQCSS.parse(a[b].innerHTML),EQCSS.apply());a=document.querySelectorAll("script");for(b=0;b<a.length;b++)null===a[b].getAttribute("data-eqcss-read")&&"text/eqcss"===a[b].getAttribute("type")&&(a[b].src?function(){var c=new XMLHttpRequest;c.open("GET",a[b].src,!0);c.send(null);c.onload=function(){EQCSS.parse(c.responseText);EQCSS.apply()}}():(EQCSS.parse(a[b].innerHTML),EQCSS.apply()),a[b].setAttribute("data-eqcss-read","true"));a=document.querySelectorAll("link");for(b=0;b<a.length;b++)null===a[b].getAttribute("data-eqcss-read")&&"stylesheet"==a[b].getAttribute("rel")&&(a[b].href&&function(){var c=new XMLHttpRequest;c.open("GET",a[b].href,!0);c.send(null);c.onload=function(){EQCSS.parse(c.responseText);EQCSS.apply()}}(),a[b].setAttribute("data-eqcss-read","true"))},parse:function(a){a=a.replace(/\s+/g," ");a=a.replace(/\/\*[\w\W]*?\*\//g,
+    "");a=a.replace(/@element/g,"\n@element");a=a.replace(/(@element.*?\{([^}]*?\{[^}]*?\}[^}]*?)*\}).*/g,"$1");a.replace(/(@element.*(?!@element))/g,function(a,c){dataEntry={};c.replace(/@element ?["']([^"']*)["']/g,function(a,c){dataEntry.i=c});dataEntry.a=[];c.replace(/and ?\( ?([^:]*) ?: ?([^)]*) ?\)/g,function(a,c,b){a=b.replace(/^(\d*\.?\d+)(\D+)$/,"$2");a==b&&(a=null);b=b.replace(/^(\d*\.?\d+)\D+$/,"$1");dataEntry.a.push({measure:c,value:b,b:a})});c.replace(/{(.*)}/g,function(a,b){dataEntry.style=
+    b});EQCSS.data.push(dataEntry)})},apply:function(){var a,b,c,f,n,l,p,d,e,h,k;for(a=0;a<EQCSS.data.length;a++)for(f=document.querySelectorAll(EQCSS.data[a].i),b=0;b<f.length;b++){n="data-eqcss-"+a+"-"+b;f[b].setAttribute(n,"");p="data-eqcss-"+a+"-"+b+"-parent";f[b]!=document.documentElement&&f[b].parentNode.setAttribute(p,"");element_guid_prev="data-eqcss-"+a+"-"+b+"-prev";f[b].previousElementSibling&&f[b].previousElementSibling.setAttribute(element_guid_prev,"");element_guid_next="data-eqcss-"+a+
+    "-"+b+"-next";f[b].nextElementSibling&&f[b].nextElementSibling.setAttribute(element_guid_next,"");l=document.querySelector("#"+n);l||(l=document.createElement("STYLE"),l.id=n,l.setAttribute("data-eqcss-read","true"),document.querySelector("head").appendChild(l));l=document.querySelector("#"+n);h=!0;c=0;a:for(;c<EQCSS.data[a].a.length;c++){e=window.getComputedStyle(f[b],null);k=null;f[b]!=document.documentElement&&(k=window.getComputedStyle(f[b].parentNode,null));d=!1;if("vw"===EQCSS.data[a].a[c].b){d=
+    !0;var g=parseInt(EQCSS.data[a].a[c].value);EQCSS.data[a].a[c].g=g*window.innerWidth/100}else if("vh"===EQCSS.data[a].a[c].b)d=!0,g=parseInt(EQCSS.data[a].a[c].value),EQCSS.data[a].a[c].g=g*window.innerHeight/100;else if("vmin"===EQCSS.data[a].a[c].b)d=!0,g=parseInt(EQCSS.data[a].a[c].value),EQCSS.data[a].a[c].g=g*Math.min(window.innerWidth,window.innerHeight)/100;else if("vmax"===EQCSS.data[a].a[c].b)d=!0,g=parseInt(EQCSS.data[a].a[c].value),EQCSS.data[a].a[c].g=g*Math.max(window.innerWidth,window.innerHeight)/
+    100;else if(null!=EQCSS.data[a].a[c].b&&"px"!=EQCSS.data[a].a[c].b&&"%"!=EQCSS.data[a].a[c].b){g=document.createElement("DIV");g.style.visibility="hidden";g.style.border="1px solid red";g.style.width=EQCSS.data[a].a[c].value+EQCSS.data[a].a[c].b;var q=f[b];f[b]!=document.documentElement&&(q=f[b].parentNode);q.appendChild(g);EQCSS.data[a].a[c].value=parseInt(window.getComputedStyle(g,null).getPropertyValue("width"));EQCSS.data[a].a[c].b="px";q.removeChild(g)}g=d?EQCSS.data[a].a[c].g:parseInt(EQCSS.data[a].a[c].value);
+    switch(EQCSS.data[a].a[c].measure){case "min-width":if(1==d||"px"==EQCSS.data[a].a[c].b)if(d=parseInt(e.getPropertyValue("width")),!(d>=g)){h=!1;break a}if("%"==EQCSS.data[a].a[c].b&&(d=parseInt(e.getPropertyValue("width")),e=parseInt(k.getPropertyValue("width")),!(e/d<=100/g))){h=!1;break a}break;case "max-width":if(1==d||"px"==EQCSS.data[a].a[c].b)if(d=parseInt(e.getPropertyValue("width")),!(d<=g)){h=!1;break a}if("%"==EQCSS.data[a].a[c].b&&(d=parseInt(e.getPropertyValue("width")),e=parseInt(k.getPropertyValue("width")),
+    !(e/d>=100/g))){h=!1;break a}break;case "min-height":if(1==d||"px"==EQCSS.data[a].a[c].b)if(d=parseInt(e.getPropertyValue("height")),!(d>=g)){h=!1;break a}if("%"==EQCSS.data[a].a[c].b&&(d=parseInt(e.getPropertyValue("height")),e=parseInt(k.getPropertyValue("height")),!(e/d<=100/g))){h=!1;break a}break;case "max-height":if(1==d||"px"==EQCSS.data[a].a[c].b)if(d=parseInt(e.getPropertyValue("height")),!(d<=g)){h=!1;break a}if("%"==EQCSS.data[a].a[c].b&&(d=parseInt(e.getPropertyValue("height")),e=parseInt(k.getPropertyValue("height")),
+    !(e/d>=100/g))){h=!1;break a}break;case "min-scroll-x":var m=f[b];k=m.scrollLeft;m.f||m.addEventListener("scroll",function(){EQCSS.throttle();m.f=!0});if(1==d||"px"==EQCSS.data[a].a[c].b){if(!(k>=g)){h=!1;break a}}else if("%"==EQCSS.data[a].a[c].b&&(d=f[b].scrollWidth,e=f[b]==document.documentElement||f[b]==document.body?window.innerWidth:parseInt(e.getPropertyValue("width")),!(k/(d-e)*100>=g))){h=!1;break a}break;case "min-scroll-y":m=f[b];k=f[b].scrollTop;m.f||m.addEventListener("scroll",function(){EQCSS.throttle();
+    m.f=!0});if(1==d||"px"==EQCSS.data[a].a[c].b){if(!(k>=g)){h=!1;break a}}else if("%"==EQCSS.data[a].a[c].b&&(d=f[b].scrollHeight,e=f[b]==document.documentElement||f[b]==document.body?window.innerHeight:parseInt(e.getPropertyValue("height")),!(k/(d-e)*100>=g))){h=!1;break a}break;case "max-scroll-x":m=f[b];k=f[b].scrollLeft;m.f||m.addEventListener("scroll",function(){EQCSS.throttle();m.f=!0});if(1==d||"px"==EQCSS.data[a].a[c].b){if(!(k<=g)){h=!1;break a}}else if("%"==EQCSS.data[a].a[c].b&&(d=f[b].scrollWidth,
+    e=f[b]==document.documentElement||f[b]==document.body?window.innerWidth:parseInt(e.getPropertyValue("width")),!(k/(d-e)*100<=g))){h=!1;break a}break;case "max-scroll-y":m=f[b];k=f[b].scrollTop;m.f||m.addEventListener("scroll",function(){EQCSS.throttle();m.f=!0});if(1==d||"px"==EQCSS.data[a].a[c].b){if(!(k<=g)){h=!1;break a}}else if("%"==EQCSS.data[a].a[c].b&&(d=f[b].scrollHeight,e=f[b]==document.documentElement||f[b]==document.body?window.innerHeight:parseInt(e.getPropertyValue("height")),!(k/(d-e)*100<=
+    g))){h=!1;break a}break;case "min-characters":if(f[b].value){if(!(f[b].value.length>=g)){h=!1;break a}}else if(!(f[b].textContent.length>=g)){h=!1;break a}break;case "max-characters":if(f[b].value){if(!(f[b].value.length<=g)){h=!1;break a}}else if(!(f[b].textContent.length<=g)){h=!1;break a}break;case "min-children":if(!(f[b].children.length>=g)){h=!1;break a}break;case "max-children":if(!(f[b].children.length<=g)){h=!1;break a}break;case "min-lines":d=parseInt(e.getPropertyValue("height"))-parseInt(e.getPropertyValue("border-top-width"))-
+    parseInt(e.getPropertyValue("border-bottom-width"))-parseInt(e.getPropertyValue("padding-top"))-parseInt(e.getPropertyValue("padding-bottom"));e=parseInt(e.getPropertyValue("line-height"));if(!(d/e>=g)){h=!1;break a}break;case "max-lines":if(d=parseInt(e.getPropertyValue("height"))-parseInt(e.getPropertyValue("border-top-width"))-parseInt(e.getPropertyValue("border-bottom-width"))-parseInt(e.getPropertyValue("padding-top"))-parseInt(e.getPropertyValue("padding-bottom")),e=parseInt(e.getPropertyValue("line-height")),
+    !(d/e+1<=g)){h=!1;break a}}}if(!0===h){c=EQCSS.data[a].style;c=c.replace(/eval\( *((".*?")|('.*?')) *\)/g,function(a,c){var e=f[b],d="";try{with(e)d=eval(c.slice(1,-1))}catch(g){d=""}return d});c=c.replace(/(\$|eq_)this/g,"["+n+"]");c=c.replace(/(\$|eq_)parent/g,"["+p+"]");c=c.replace(/(\$|eq_)prev/g,"["+element_guid_prev+"]");c=c.replace(/(\$|eq_)next/g,"["+element_guid_next+"]");c=c.replace(/(\$|eq_)root/g,"html");try{l.innerHTML=c}catch(v){l.styleSheet.cssText=c}}else try{l.innerHTML=""}catch(v){l.styleSheet.cssText=
+    ""}}},h:function(a){function b(){try{p.doScroll("left")}catch(a){setTimeout(b,50);return}c("poll")}function c(b){if("readystatechange"!=b.type||"complete"==l.readyState)("load"==b.type?window:l)[h](k+b.type,c,!1),!f&&(f=!0)&&a.call(window,b.type||b)}var f=!1,n=!0,l=window.document,p=l.documentElement,d=!~navigator.userAgent.indexOf("MSIE 8"),e=d?"addEventListener":"attachEvent",h=d?"removeEventListener":"detachEvent",k=d?"":"on";if("complete"==l.readyState)a.call(window,"lazy");else{if(!d&&p.doScroll){try{n=
+    !window.frameElement}catch(g){}n&&b()}l[e](k+"DOMContentLoaded",c,!1);l[e](k+"readystatechange",c,!1);window[e](k+"load",c,!1)}}};EQCSS.h(function(){EQCSS.load()});var r=!0,t=!1,u=!1;EQCSS.throttle=function(){r?(EQCSS.apply(),r=!1,setTimeout(function(){r=!0;t&&(t=!1,EQCSS.apply())},200)):t=!0};window.addEventListener("resize",EQCSS.throttle);window.addEventListener("input",EQCSS.throttle);window.addEventListener("click",EQCSS.throttle);window.addEventListener("mousedown",function(){u=!0});
+    window.addEventListener("mouseup",function(){u=!1;EQCSS.throttle()});window.addEventListener("mousemove",function(){u&&EQCSS.throttle()});
+  </script>
+  <script>
+    onload = function(){
+      if (location.hash){
+        var hash = location.hash,
+            new_html = location.hash.split('html=')[1],
+            match = new RegExp('html='+new_html),
+            new_css = location.hash.split('css=')[1]
+        new_css = new_css.replace(match,'')
+        new_css = decodeURIComponent(unescape(atob(new_css)))
+        new_html = decodeURIComponent(unescape(atob(new_html)))
+        new_html = new_html.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&'),
+        html_text.value = new_html
+        css_text.value = new_css
+        repl()
+      }
+    }
+    document.addEventListener('DOMContentLoaded',repl)
+    editor.addEventListener('keyup',repl)
+    var html_text = document.getElementById('html'),
+        css_text = document.getElementById('css'),
+        eqcss_text = document.getElementById('eqcss'),
+        preview = document.getElementById('preview'),
+        share = document.getElementById('share')
+    function repl(){
+      preview.srcdoc = '<!DOCTYPE html><style>'+css_text.value+'</style><html><body>'+html_text.value+'<script>'+eqcss_text.innerHTML+'<\/script></body></html>'
+      share.href = '#css='+btoa(encodeURIComponent(escape(css_text.value)))+'html='+btoa(escape(encodeURIComponent(html_text.value)))
+    }
+    function toggleView() {
+      var span = document.querySelector('label span')
+      document.body.className = document.body.className=='horizontal'?'':'horizontal'
+      span.innerHTML = span.innerHTML=='⬌'?'⬍':'⬌'
+    }
+  </script>
+</body>
+</html>
