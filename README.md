@@ -14,7 +14,7 @@ Another concept that element queries brings to CSS is the idea of 'scoping' your
 
 ## How to use EQCSS
 
-EQCSS is a JavaScript plugin that lets you write element queries inside CSS today. With performance in mind, this plugin is written in pure JavaScript, so it doesn't require jQuery or any other libraries on your page in order to function - add EQCSS.js to you HTML and you're ready to get started!
+EQCSS is a JavaScript plugin that lets you write element queries inside CSS today. With performance in mind, this plugin is written in pure JavaScript, so it doesn't require jQuery or any other libraries on your page in order to function - add EQCSS.js to your HTML and you're ready to get started!
 
 #### [Download EQCSS Zip](https://github.com/eqcss/eqcss/archive/gh-pages.zip)
 
