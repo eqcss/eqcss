@@ -74,26 +74,31 @@ EQCSS.load = function(){
   // Retrieve all link tags
   styles = document.querySelectorAll("link");
 
-  for(i = 0; i < styles.length; i++){
+  for (i = 0; i < styles.length; i++) {
+    // check if were skipping this stylesheet, David McClain.
+    if (styles[i].getAttribute("data-eqcss-ignore") == 'true') {
+        // mark as read, David McClain.
+        styles[i].setAttribute("data-eqcss-read", "true");
+    } else { //If no ignore attribute continue as normal, default behavior. David McClain.
+        // Test if the link is not read yet, and has rel=stylesheet
+      if (styles[i].getAttribute("data-eqcss-read") === null && styles[i].getAttribute("rel") == "stylesheet") {
 
-    // Test if the link is not read yet, and has rel=stylesheet
-    if(styles[i].getAttribute("data-eqcss-read") === null && styles[i].getAttribute("rel") == "stylesheet"){
-
-      // retrieve the file content with AJAX and process it
-      if(styles[i].href){
-        (function(){
-          var xhr = new XMLHttpRequest;
-          xhr.open("GET", styles[i].href, true);
-          xhr.send(null);
-          xhr.onload = function(){
-            EQCSS.parse(xhr.responseText);
-            EQCSS.apply();
+          // retrieve the file content with AJAX and process it
+          if (styles[i].href) {
+            (function () {
+                var xhr = new XMLHttpRequest;
+                xhr.open("GET", styles[i].href, true);
+                xhr.send(null);
+                xhr.onload = function () {
+                    EQCSS.parse(xhr.responseText);
+                    EQCSS.apply();
+                }
+            })();
           }
-        })();
-      }
 
-      // Mark the link as read
-      styles[i].setAttribute("data-eqcss-read", "true");
+        // Mark the link as read
+        styles[i].setAttribute("data-eqcss-read", "true");
+      }
     }
   }
 }
