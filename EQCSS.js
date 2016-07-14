@@ -701,30 +701,12 @@ EQCSS.apply = function(){
         // Replace "$root" or "eq_root" with html
         css_code = css_code.replace(/(\$|eq_)root/g, "html");
 
-
-        // good browsers
-        try {
-          css_block.innerHTML = css_code;
-        }
-
-        // IE8
-        catch(e){
-          css_block.styleSheet.cssText = css_code;
-        }
+        EQCSS.setStyle(css_block, css_code);
       }
 
       // If condition is not met: empty the CSS block
       else {
-
-        // Good browsers
-        try{
-          css_block.innerHTML = "";
-        }
-
-        // IE8
-        catch(e){
-          css_block.styleSheet.cssText = "";
-        }
+        EQCSS.setStyle(css_block, "");
       }
     }
   }
@@ -766,8 +748,29 @@ EQCSS.domReady = function(fn) {
   }
 }
 
+// Prepare style changer for "good browsers", will be redefined for "bad ones"
+EQCSS.setStyle = function(style, value){
+  if(style.innerHTML != value){
+    style.innerHTML = value;
+  }
+}
+
 // Call load (and apply, indirectly) on page load
 EQCSS.domReady(function(){
+  EQCSS.tmpstyle = document.createElement('style');
+  // good browsers should pass
+  try {
+    EQCSS.setStyle(EQCSS.tmpstyle,'/* */');
+  }
+  // IE8 is a "bad one"
+  catch(e){
+    EQCSS.setStyle = function(style, value){
+      if(style.styleSheet.cssText != value) {
+        style.styleSheet.cssText = value;
+      }
+    }
+  }
+  delete EQCSS.tmpstyle;
   EQCSS.load();
 });
 
