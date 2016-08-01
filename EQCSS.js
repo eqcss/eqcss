@@ -77,7 +77,7 @@ EQCSS.load = function(){
   for(i = 0; i < styles.length; i++){
 
     // Test if the link is not read yet, and has rel=stylesheet
-    if(styles[i].getAttribute("data-eqcss-read") === null && styles[i].getAttribute("rel") == "stylesheet"){
+    if(styles[i].getAttribute("data-eqcss-read") === null && styles[i].getAttribute("rel") == "stylesheet" && styles[i].href.indexOf("eqcss") >= 0){
 
       // retrieve the file content with AJAX and process it
       if(styles[i].href){
