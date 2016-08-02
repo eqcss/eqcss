@@ -151,8 +151,9 @@
   <!--[if lt IE 9]><script src=http://elementqueries.com/EQCSS-polyfills.min.js></script><![endif]-->
   <script src=http://elementqueries.com/EQCSS.min.js></script>
   <script>
-    EQCSS.domReady(function(){
-      EQCSS.apply()
+    // Call load and apply on page load
+    document.addEventListener('DOMContentLoaded',function(){
+      EQCSS.apply();
     })
   </script>
   <script>
