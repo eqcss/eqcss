@@ -38,11 +38,11 @@ Alternatively, you can also grab [EQCSS from NPM](https://www.npmjs.com/package/
 EQCSS is also hosted on CDNjs and you can use the version hosted there for your projects: [https://cdnjs.com/libraries/eqcss](https://cdnjs.com/libraries/eqcss):
 
 ```
-https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.2.1/EQCSS-polyfills.min.js
+https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.2.2/EQCSS-polyfills.min.js
 ```
 
 ```
-https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.2.1/EQCSS.min.js
+https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.2.2/EQCSS.min.js
 ```
 
 ## Writing Element Queries
@@ -164,6 +164,9 @@ For more info, view more about EQCSS syntax here: [https://gist.github.com/tomho
 
 ## Documentation & Tutorials
 
+- **[The Search For The Holy Grail: How I Ended Up With Element Queries, And How You Can Use Them Today](https://www.smashingmagazine.com/2016/07/how-i-ended-up-with-element-queries-and-how-you-can-use-them-today/)**
+- [How to Build a Responsive UI Component Using Element Queries](http://webdesign.tutsplus.com/tutorials/how-to-build-a-responsive-ui-component-using-element-queries--cms-27118)
+- [Element Queries: the Future of Responsive Web Design](http://webdesign.tutsplus.com/tutorials/element-queries-the-future-of-responsive-web-design--cms-26945)
 - [Element Queries For CSS](http://elementqueries.com/notes/element-queries-for-css.html)
 - [EQCSS v1.0.0 Technical Documentation](http://elementqueries.com/notes/technical-documentation.html)
 - [A Parent Selector for CSS](http://elementqueries.com/notes/a-parent-selector-for-css.html)

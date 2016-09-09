@@ -2,7 +2,7 @@
  * EQCSS / Tommy Hodgins, Maxime Euzière / MIT licence
  * github.com/eqcss/eqcss
  * elementqueries.com
- * version 1.2.1
+ * version 1.2.2
  */
 
 EQCSS = {
@@ -399,10 +399,17 @@ EQCSS.apply = function(){
             var element_scroll = element.scrollLeft;
 
             if(!element.hasScrollListener){
-              element.addEventListener("scroll", function(){
-                EQCSS.throttle();
-                element.hasScrollListener = true;
-              })
+              if (element == document.documentElement || element == document.body){
+                window.addEventListener("scroll",  function(){
+                  EQCSS.throttle();
+                  element.hasScrollListener = true;
+                })
+              } else {
+                element.addEventListener("scroll", function(){
+                  EQCSS.throttle();
+                  element.hasScrollListener = true;
+                })
+              }
             }
 
             // Min-scroll-x in px
@@ -439,10 +446,17 @@ EQCSS.apply = function(){
             element_scroll = elements[j].scrollTop;
 
             if(!element.hasScrollListener){
-              element.addEventListener("scroll", function(){
-                EQCSS.throttle();
-                element.hasScrollListener = true;
-              })
+              if (element == document.documentElement || element == document.body){
+                window.addEventListener("scroll",  function(){
+                  EQCSS.throttle();
+                  element.hasScrollListener = true;
+                })
+              } else {
+                element.addEventListener("scroll", function(){
+                  EQCSS.throttle();
+                  element.hasScrollListener = true;
+                })
+              }
             }
 
             // Min-scroll-y in px
@@ -480,10 +494,17 @@ EQCSS.apply = function(){
             element_scroll = elements[j].scrollLeft;
 
             if(!element.hasScrollListener){
-              element.addEventListener("scroll", function(){
-                EQCSS.throttle();
-                element.hasScrollListener = true;
-              })
+              if (element == document.documentElement || element == document.body){
+                window.addEventListener("scroll", function(){
+                  EQCSS.throttle();
+                  element.hasScrollListener = true;
+                })
+              } else {
+                element.addEventListener("scroll", function(){
+                  EQCSS.throttle();
+                  element.hasScrollListener = true;
+                })
+              }
             }
 
             // Max-scroll-x in px
@@ -521,10 +542,17 @@ EQCSS.apply = function(){
             element_scroll = elements[j].scrollTop;
 
             if(!element.hasScrollListener){
-              element.addEventListener("scroll", function(){
-                EQCSS.throttle();
-                element.hasScrollListener = true;
-              })
+              if (element == document.documentElement || element == document.body){
+                window.addEventListener("scroll", function(){
+                  EQCSS.throttle();
+                  element.hasScrollListener = true;
+                })
+              } else {
+                element.addEventListener("scroll", function(){
+                  EQCSS.throttle();
+                  element.hasScrollListener = true;
+                })
+              }
             }
 
             // Max-scroll-y in px
@@ -769,6 +797,7 @@ EQCSS.domReady = function(fn) {
 // Call load (and apply, indirectly) on page load
 EQCSS.domReady(function(){
   EQCSS.load();
+  EQCSS.throttle();
 });
 
 

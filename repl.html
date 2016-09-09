@@ -225,6 +225,15 @@
       preview.srcdoc = '<!DOCTYPE html><style>'+css_text.value+'</style><html><body>'+html_text.value+'<script>'+eqcss_text.innerHTML+'<\/script></body></html>'
       share.href = '#css='+btoa(encodeURIComponent(escape(css_text.value)))+'html='+btoa(escape(encodeURIComponent(html_text.value)))
     }
+    // Tab inserts 2 spaces
+    document.onkeydown = function(e){
+      e = e||window.event
+      var charCode = (typeof e.which=='number')?e.which:e.keyCode;
+      if (charCode==9){
+        e.preventDefault()
+        document.activeElement.value+='  '
+      }
+    }
     function toggleView() {
       var span = document.querySelector('label span')
       document.body.className = document.body.className=='horizontal'?'':'horizontal'
