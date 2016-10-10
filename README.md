@@ -38,11 +38,11 @@ Alternatively, you can also grab [EQCSS from NPM](https://www.npmjs.com/package/
 EQCSS is also hosted on CDNjs and you can use the version hosted there for your projects: [https://cdnjs.com/libraries/eqcss](https://cdnjs.com/libraries/eqcss):
 
 ```
-https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.2.2/EQCSS-polyfills.min.js
+https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.3.2/EQCSS-polyfills.min.js
 ```
 
 ```
-https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.2.2/EQCSS.min.js
+https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.3.2/EQCSS.min.js
 ```
 
 ## Writing Element Queries
@@ -116,6 +116,12 @@ For more info, view more about EQCSS syntax here: [https://gist.github.com/tomho
 - `max-scroll-y` [max-scroll-y demo](http://codepen.io/tomhodgins/pen/beEdpZ)
 - `min-scroll-x` [min-scroll-x demo](http://codepen.io/tomhodgins/pen/ZOQGOb)
 - `max-scroll-x` [max-scroll-x demo](http://codepen.io/tomhodgins/pen/ezJNzJ)
+
+### Aspect-based Conditions
+
+- `orientation` [orientation demo](http://codepen.io/tomhodgins/pen/wzmyYQ)
+- `min-aspect-ratio` [min-aspect-ratio demo](http://codepen.io/tomhodgins/pen/EgEQZy)
+- `max-aspect-ratio` [max-aspect-ratio demo](http://codepen.io/tomhodgins/pen/kkEZAY)
 
 ### Meta-Selectors
 

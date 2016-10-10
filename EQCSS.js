@@ -2,7 +2,7 @@
  * EQCSS / Tommy Hodgins, Maxime Euzière / MIT licence
  * github.com/eqcss/eqcss
  * elementqueries.com
- * version 1.2.2
+ * version 1.3.2
  */
 
 EQCSS = {
@@ -687,9 +687,63 @@ EQCSS.apply = function(){
 
           break;
 
+          // Orientation
+          case "orientation":
+
+            // Square Orientation
+            if (EQCSS.data[i].conditions[k].value === 'square'){
+              if (!(elements[j].offsetWidth == elements[j].offsetHeight)){
+                test = false;
+                break test_conditions;
+              }
+            }
+
+            // Portrait Orientation
+            if (EQCSS.data[i].conditions[k].value === 'portrait'){
+              if (!(elements[j].offsetWidth < elements[j].offsetHeight)){
+                test = false;
+                break test_conditions;
+              }
+            }
+
+            // Landscape Orientation
+            if (EQCSS.data[i].conditions[k].value === 'landscape'){
+              if (!(elements[j].offsetHeight < elements[j].offsetWidth)){
+                test = false;
+                break test_conditions;
+              }
+            }
+
+          break;
+
+          // Min-aspect-ratio
+          case "min-aspect-ratio":
+          
+            var el_width = EQCSS.data[i].conditions[k].value.split('/')[0],
+                el_height = EQCSS.data[i].conditions[k].value.split('/')[1];
+
+            if (!(el_width/el_height <= elements[j].offsetWidth/elements[j].offsetHeight)){
+              test = false;
+              break test_conditions;
+            }
+
+          break;
+
+          // Max-aspect-ratio
+          case "max-aspect-ratio":
+          
+            var el_width = EQCSS.data[i].conditions[k].value.split('/')[0],
+                el_height = EQCSS.data[i].conditions[k].value.split('/')[1];
+
+            if (!(elements[j].offsetWidth/elements[j].offsetHeight <= el_width/el_height)){
+              test = false;
+              break test_conditions;
+            }
+
+          break;
+
         }
       }
-
 
       // Update CSS block:
       // If all conditions are met: copy the CSS code from the query to the corresponding CSS block
@@ -728,7 +782,6 @@ EQCSS.apply = function(){
 
         // Replace "$root" or "eq_root" with html
         css_code = css_code.replace(/(\$|eq_)root/g, "html");
-
 
         // good browsers
         try {
