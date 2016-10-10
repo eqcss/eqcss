@@ -2,7 +2,7 @@
  * EQCSS / Tommy Hodgins, Maxime Euzière / MIT licence
  * github.com/eqcss/eqcss
  * elementqueries.com
- * version 1.3.2
+ * version 1.3.0
  */
 
 /*
