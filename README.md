@@ -32,6 +32,9 @@ Alternatively, you can also grab [EQCSS from NPM](https://www.npmjs.com/package/
 
     npm install eqcss
 
+Or from Yarn via
+
+    yarn add eqcss
 
 ### CDN Hosted Links
 
