@@ -2,7 +2,7 @@
  * EQCSS / Tommy Hodgins, Maxime Euzière / MIT licence
  * github.com/eqcss/eqcss
  * elementqueries.com
- * version 1.3.0
+ * version 1.3.1
  */
 
 EQCSS = {
@@ -847,13 +847,6 @@ EQCSS.domReady = function(fn) {
   }
 }
 
-// Call load (and apply, indirectly) on page load
-EQCSS.domReady(function(){
-  EQCSS.load();
-  EQCSS.throttle();
-});
-
-
 /* EQCSS.throttle
 Ensures EQCSS.apply() is not called more than once every (EQCSS_timeout)ms
 */
@@ -879,6 +872,12 @@ EQCSS.throttle = function(){
     EQCSS_throttle_queued = true;
   }
 }
+
+// Call load (and apply, indirectly) on page load
+EQCSS.domReady(function(){
+  EQCSS.load();
+  EQCSS.throttle();
+});
 
 // On resize, scroll, input, click, mousedown + mousemove, call EQCSS.throttle.
 window.addEventListener("resize", EQCSS.throttle);

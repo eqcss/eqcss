@@ -41,11 +41,11 @@ Or from Yarn via
 EQCSS is also hosted on CDNjs and you can use the version hosted there for your projects: [https://cdnjs.com/libraries/eqcss](https://cdnjs.com/libraries/eqcss):
 
 ```
-https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.3.0/EQCSS-polyfills.min.js
+https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.3.1/EQCSS-polyfills.min.js
 ```
 
 ```
-https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.3.0/EQCSS.min.js
+https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.3.1/EQCSS.min.js
 ```
 
 ## Writing Element Queries
@@ -170,6 +170,8 @@ For more info, view more about EQCSS syntax here: [https://gist.github.com/tomho
 - [Element Query Grid](http://elementqueries.com/demos/element-query-grid.html)
 - [JS Functions in CSS](http://elementqueries.com/demos/js-functions-demo.html)
 - [Responsive Content Waterfall](http://elementqueries.com/demos/responsive-waterfall.html)
+
+And view many more EQCSS demos on Codepen: [EQCSS pens on Codepen](http://codepen.io/search/pens?q=eqcss&limit=all&order=newest&depth=everything&show_forks=true)
 
 ## Documentation & Tutorials
 
