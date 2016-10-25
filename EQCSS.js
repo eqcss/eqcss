@@ -2,7 +2,7 @@
  * EQCSS / Tommy Hodgins, Maxime Euzière / MIT licence
  * github.com/eqcss/eqcss
  * elementqueries.com
- * version 1.3.1
+ * version 1.4.0
  */
 
 EQCSS = {
@@ -769,19 +769,47 @@ EQCSS.apply = function(){
         );
 
         // Replace "$this" or "eq_this" with "[element_guid]"
-        css_code = css_code.replace(/(\$|eq_)this/g, "[" + element_guid + "]");
+        css_code = css_code.replace(/(\$|eq_)this/gi, "[" + element_guid + "]");
 
         // Replace "$parent" or "eq_parent" with "[element_guid_parent]"
-        css_code = css_code.replace(/(\$|eq_)parent/g, "[" + element_guid_parent + "]");
+        css_code = css_code.replace(/(\$|eq_)parent/gi, "[" + element_guid_parent + "]");
 
         // Replace "$prev" or "eq_prev" with "[element_guid_prev]"
-        css_code = css_code.replace(/(\$|eq_)prev/g, "[" + element_guid_prev + "]");
+        css_code = css_code.replace(/(\$|eq_)prev/gi, "[" + element_guid_prev + "]");
 
         // Replace "$next" or "eq_next" with "[element_guid_next]"
-        css_code = css_code.replace(/(\$|eq_)next/g, "[" + element_guid_next + "]");
+        css_code = css_code.replace(/(\$|eq_)next/gi, "[" + element_guid_next + "]");
 
         // Replace "$root" or "eq_root" with html
-        css_code = css_code.replace(/(\$|eq_)root/g, "html");
+        css_code = css_code.replace(/(\$|eq_)root/gi, "html");
+
+        // Replace "ew", "eh", "emin", and "emax" units
+        css_code = css_code.replace(/(\d*\.?\d+)(?:\s*)(ew|eh|emin|emax)/gi,function(match,$1,$2){
+
+          switch($2){
+
+            // Element width units
+            case "ew":
+              return elements[j].offsetWidth / 100 * $1 + 'px'
+            break;
+
+            // Element height units
+            case "eh":
+              return elements[j].offsetHeight / 100 * $1 + 'px'
+            break;
+
+            // Element min units
+            case "emin":
+              return Math.min(elements[j].offsetWidth,elements[j].offsetHeight) / 100 * $1 + 'px'
+            break;
+
+            // Element max units
+            case "emax":
+              return Math.max(elements[j].offsetWidth,elements[j].offsetHeight) / 100 * $1 + 'px'
+            break;
+
+          }
+        });
 
         // good browsers
         try {

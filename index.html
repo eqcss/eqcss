@@ -17,7 +17,6 @@
   <link href=http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/solarized_dark.min.css rel=stylesheet>
   <link href="eqcss-logo.png" rel="shortcut icon">
   <link href="eqcss-logo.png" rel="apple-touch-icon">
-
   <style>
     *,
     *:before,
@@ -170,7 +169,7 @@
     article div {
       display: inline-block;
       border-radius: 3px;
-      margin: 1em;
+      margin: 15px;
       padding: 30px;
       color: #555;
       font-size: 12pt;
@@ -250,6 +249,12 @@
     }
     textarea {
       min-height: 5em;
+    }
+    .ew, .eh, .emin, .emax {
+      min-width: 150px;
+      min-height: 150px;
+      max-width: 500px;
+      max-height: 500px;
     }
     /* Min-width */
     @element ".minwidthpixels" and (min-width: 500px) {
@@ -486,6 +491,30 @@
         content: ' eval("window.innerWidth+' x '+window.innerHeight")';
       }
     }
+    /* Element width units */
+    @element '.ew' {
+      $this {
+        font-size: 10ew;
+      }
+    }
+    /* Element height units */
+    @element '.eh' {
+      $this {
+        font-size: 10eh;
+      }
+    }
+    /* Element minimum units */
+    @element '.emin' {
+      $this {
+        font-size: 10emin;
+      }
+    }
+    /* Element maximum units */
+    @element '.emax' {
+      $this {
+        font-size: 10emax;
+      }
+    }
   </style>
 </head>
 <body>
@@ -509,8 +538,8 @@
     <pre><code class=html>&lt;!--[if lt IE 9]>&lt;script src="EQCSS-polyfills.js">&lt;/script>&lt;![endif]--></code></pre>
     <h4>CDN Hosted Links</h4>
     <p>EQCSS is also hosted on CDNjs and you can use the version hosted there for your projects: <a href=https://cdnjs.com/libraries/eqcss>https://cdnjs.com/libraries/eqcss</a>:</p>
-    <pre><code class=html>https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.3.1/EQCSS-polyfills.min.js</code></pre>
-    <pre><code class=html>https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.3.1/EQCSS.min.js</code></pre>
+    <pre><code class=html>https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.4.0/EQCSS-polyfills.min.js</code></pre>
+    <pre><code class=html>https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.4.0/EQCSS.min.js</code></pre>
     <h3 id=writing>Writing Element Queries</h3>
     <p>Now that you have EQCSS added to your HTML you&rsquo;re ready to write element queries. There are two ways you can add EQCSS to your site: the easiest way is by writing them inside your CSS either in a <code>&lt;style></code> or <code>&lt;link></code> in your HTML, or by isolating your EQCSS styles in a custom script type.</p>
     <p>You can also link to EQCSS hosted in external files with either <code>.css</code> or <code>.eqcss</code> extensions.</p>
@@ -789,11 +818,7 @@
     background: gold;
   }
 }</code></pre>
-    </article>
-    
-    
-    
-    
+    </article>    
     <article id=scoped-styles>
       <h4>Scoped queries ($this)</h4>
       <div class="scoped" data-drag=horizontal>class="scoped"</div>
@@ -937,6 +962,47 @@
   }
 }</code></pre>
     </article>
+    <h3 id=units>CSS Units</h3>
+    <article>
+      <h4 id=ew>ew (element width)</h4>
+      <div class=ew data-drag=horizontal>EW Units</div>
+      <pre><code class=css>/* Element width units */
+@element '.ew' {
+  $this {
+    font-size: 10ew;
+  }
+}</code></pre>
+    </article>
+    <article>
+      <h4 id=ew>eh (element height)</h4>
+      <div class=eh data-drag=vertical>EH Units</div>
+      <pre><code class=css>/* Element height units */
+@element '.eh' {
+  $this {
+    font-size: 10eh;
+  }
+}</code></pre>
+    </article>
+    <article>
+      <h4 id=ew>emin (element minimum)</h4>
+      <div class="emin" data-drag="both">EMIN Units</div>
+      <pre><code class=css>/* Element minimum units */
+@element '.emin' {
+  $this {
+    font-size: 10emin;
+  }
+}</code></pre>
+    </article>
+    <article>
+      <h4 id=ew>emax (element maximum)</h4>
+      <div class="emax" data-drag="both">EMAX Units</div>
+      <pre><code class=css>/* Element maximum units */
+@element '.emax' {
+  $this {
+    font-size: 10emax;
+  }
+}</code></pre>
+    </article>
     <h3 id=demos>Element Query Demos</h3>
     <ul>
       <li><a href=demos/aspect-ratio.html>Responsive Aspect Ratio</a></li>
@@ -1009,9 +1075,6 @@
   </footer>
   <!--[if lt IE 9]><script src=EQCSS-polyfills.min.js></script><![endif]-->
   <script src=EQCSS.js></script>
-  <script>
-
-  </script>
   <script src=http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js></script>
   <script>hljs.initHighlightingOnLoad()</script>
   <script>
