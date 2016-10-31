@@ -235,58 +235,53 @@ EQCSS.apply = function(){
         if(elements[j] != document.documentElement){
           parent_computed_style = window.getComputedStyle(elements[j].parentNode, null);
         }
-
-        // Do we have to reconvert the size in px at each call?
-        // This is true only for vw/vh/vmin/vmax
-        var recomputed = false;
-
-        // If the condition's unit is vw, convert current value in vw, in px
-        if(EQCSS.data[i].conditions[k].unit === "vw"){
-          recomputed = true;
+        
+        // Check if condition's unit is vw/vh/vmin/vma
+        // Assume recomputed === true, and convert to px value. Otherwise, set recomputed to false
+        switch(EQCSS.data[i].conditions[k].unit) {
           var value = parseInt(EQCSS.data[i].conditions[k].value);
-          EQCSS.data[i].conditions[k].recomputed_value = value * window.innerWidth / 100;
-        }
-
-        // If the condition's unit is vh, convert current value in vh, in px
-        else if(EQCSS.data[i].conditions[k].unit === "vh"){
-          recomputed = true
-          var value = parseInt(EQCSS.data[i].conditions[k].value);
-          EQCSS.data[i].conditions[k].recomputed_value = value * window.innerHeight / 100;
-        }
-
-        // If the condition's unit is vmin, convert current value in vmin, in px
-        else if(EQCSS.data[i].conditions[k].unit === "vmin"){
-          recomputed = true;
-          var value = parseInt(EQCSS.data[i].conditions[k].value);
-          EQCSS.data[i].conditions[k].recomputed_value = value * Math.min(window.innerWidth, window.innerHeight) / 100;
-        }
-
-        // If the condition's unit is vmax, convert current value in vmax, in px
-        else if(EQCSS.data[i].conditions[k].unit === "vmax"){
-          recomputed = true;
-          var value = parseInt(EQCSS.data[i].conditions[k].value);
-          EQCSS.data[i].conditions[k].recomputed_value = value * Math.max(window.innerWidth, window.innerHeight) / 100;
-        }
-
-        // If the condition's unit is set and is not px or %, convert it into pixels
-        else if(EQCSS.data[i].conditions[k].unit != null && EQCSS.data[i].conditions[k].unit != "px" && EQCSS.data[i].conditions[k].unit != "%"){
-
-          // Create a hidden DIV, sibling of the current element (or its child, if the element is <html>)
-          // Set the given measure and unit to the DIV's width
-          // Measure the DIV's width in px
-          // Remove the DIV
-          var div = document.createElement('DIV');
-          div.style.visibility = 'hidden';
-          div.style.border = '1px solid red';
-          div.style.width = EQCSS.data[i].conditions[k].value + EQCSS.data[i].conditions[k].unit;
-          var position = elements[j];
-          if(elements[j] != document.documentElement){
-            position = elements[j].parentNode;
-          }
-          position.appendChild(div);
-          EQCSS.data[i].conditions[k].value = parseInt(window.getComputedStyle(div, null).getPropertyValue('width'));
-          EQCSS.data[i].conditions[k].unit = "px";
-          position.removeChild(div);
+          // Do we have to reconvert the size in px at each call?
+          // This is true only for vw/vh/vmin/vmax, else false
+          var recomputed = true;
+            
+          case "vw":
+            EQCSS.data[i].conditions[k].recomputed_value = value * window.innerWidth / 100;
+          break;
+            
+          case "vh":
+            EQCSS.data[i].conditions[k].recomputed_value = value * window.innerHeight / 100;
+          break;
+            
+          case "vmin":
+            EQCSS.data[i].conditions[k].recomputed_value = value * Math.min(window.innerWidth, window.innerHeight) / 100;
+          break;
+            
+          case "vmax":
+            EQCSS.data[i].conditions[k].recomputed_value = value * Math.max(window.innerWidth, window.innerHeight) / 100;
+          break;
+            
+          default:
+            if(EQCSS.data[i].conditions[k].unit != null && EQCSS.data[i].conditions[k].unit != "px" && EQCSS.data[i].conditions[k].unit != "%"){
+              // Create a hidden DIV, sibling of the current element (or its child, if the element is <html>)
+              // Set the given measure and unit to the DIV's width
+              // Measure the DIV's width in px
+              // Remove the DIV
+              var div = document.createElement('DIV');
+              div.style.visibility = 'hidden';
+              div.style.border = '1px solid red';
+              div.style.width = EQCSS.data[i].conditions[k].value + EQCSS.data[i].conditions[k].unit;
+              var position = elements[j];
+              if(elements[j] != document.documentElement){
+                position = elements[j].parentNode;
+              }
+              position.appendChild(div);
+              EQCSS.data[i].conditions[k].value = parseInt(window.getComputedStyle(div, null).getPropertyValue('width'));
+              EQCSS.data[i].conditions[k].unit = "px";
+              position.removeChild(div);
+            }
+            recomputed = false;
+          break;
+          // End switch for vw/vh/vmin/vmax
         }
 
         // Store the good value in final_value depending if the size is recomputed or not
