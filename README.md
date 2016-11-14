@@ -147,6 +147,10 @@ For more info, view more about EQCSS syntax here: [https://gist.github.com/tomho
 - `emin` element minimum [emin demo](http://codepen.io/tomhodgins/pen/YGgLrW)
 - `emax` element maximum [emax demo](http://codepen.io/tomhodgins/pen/YGgLrW)
 
+# These Units will only work on elements that are visible i.e. NOT "display: none"
+# That also includes all parent elements.
+# Use EQCSS.Apply after showing the element.
+
 ## Element Query Demos
 
 - [Responsive Aspect Ratio](http://elementqueries.com/demos/aspect-ratio.html)
