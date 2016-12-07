@@ -4,6 +4,13 @@
 
 [![Join the chat at https://gitter.im/eqcss/eqcss](https://badges.gitter.im/eqcss/eqcss.svg)](https://gitter.im/eqcss/eqcss?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+## Specification
+
+Work has begun on a specification for container-style element queries syntax. This draft is still a work-in-progress and is not standard CSS.
+
+- [View Element Queries Spec](http://tomhodgins.github.io/element-queries-spec/element-queries.html)
+- [View Spec Repository on Github](http://tomhodgins.github.io/element-queries-spec/)
+
 ## What are Element Queries?
 
 Element queries are a new way of thinking about responsive web design in CSS where the responsive conditions apply to individual elements on the page instead of the width or height of the browser.
