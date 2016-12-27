@@ -1,5 +1,7 @@
 ![](http://i.imgur.com/OUQzoiA.png)
+
 # EQCSS
+
 **A CSS Extension for Element Queries & More**
 
 [![Join the chat at https://gitter.im/eqcss/eqcss](https://badges.gitter.im/eqcss/eqcss.svg)](https://gitter.im/eqcss/eqcss?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
@@ -9,7 +11,7 @@
 Work has begun on a specification for container-style element queries syntax. This draft is still a work-in-progress and is not standard CSS.
 
 - [View Element Queries Spec](http://tomhodgins.github.io/element-queries-spec/element-queries.html)
-- [View Spec Repository on Github](http://github.com/tomhodgins/element-queries-spec/)
+- [View Spec Repository on Github](http://tomhodgins.github.io/element-queries-spec/)
 
 ## What are Element Queries?
 
@@ -190,6 +192,8 @@ And view many more EQCSS demos on Codepen: [EQCSS pens on Codepen](http://codepe
 ## Documentation & Tutorials
 
 - **[The Search For The Holy Grail: How I Ended Up With Element Queries, And How You Can Use Them Today](https://www.smashingmagazine.com/2016/07/how-i-ended-up-with-element-queries-and-how-you-can-use-them-today/)**
+- [How Style Scoping Works with Element Queries](http://codepen.io/tomhodgins/post/how-style-scoping-works-with-element-queries)
+- [Using EQCSS with CSS Preprocessors](https://github.com/eqcss/eqcss/wiki/Using-EQCSS-with-CSS-Preprocessors)
 - [How to Build a Responsive UI Component Using Element Queries](http://webdesign.tutsplus.com/tutorials/how-to-build-a-responsive-ui-component-using-element-queries--cms-27118)
 - [Element Queries: the Future of Responsive Web Design](http://webdesign.tutsplus.com/tutorials/element-queries-the-future-of-responsive-web-design--cms-26945)
 - [Element Queries For CSS](http://elementqueries.com/notes/element-queries-for-css.html)
