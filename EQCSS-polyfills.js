@@ -1,9 +1,19 @@
 /*
- * EQCSS / Tommy Hodgins, Maxime Euzière / MIT licence
- * github.com/eqcss/eqcss
- * elementqueries.com
- * version 1.4.0
- */
+
+#  EQCSS IE8 Polyfills
+## version 1.5.0
+
+This file contains optional polyfills to provide:
+IE8 support to the EQCSS.js plugin
+
+- github.com/eqcss/eqcss
+- elementqueries.com
+
+Authors: Tommy Hodgins, Maxime Euzière
+
+License: MIT
+
+*/
 
 /*
  * addEventListener polyfill 1.0 / Eirik Backer / MIT Licence
@@ -11,35 +21,35 @@
  * Adds the native DOM2 function addEventListener on IE6 - 8.
  */
 
-(function(win, doc){
+(function (win, doc) {
 
   // If the function already exists, no need to polyfill
-  if(win.addEventListener)return;
+  if (win.addEventListener) return;
 
-  function docHijack(p){
+  function docHijack(p) {
     var old = doc[p];
-    doc[p] = function(v){
+    doc[p] = function (v) {
       return addListen(old(v))
     }
   }
-  function addEvent(on, fn, self){
-    return (self = this).attachEvent('on' + on, function(e){
+  function addEvent(on, fn, self) {
+    return (self = this).attachEvent('on' + on, function(e) {
       var e = e || win.event;
       e.preventDefault  = e.preventDefault  || function(){e.returnValue = false}
       e.stopPropagation = e.stopPropagation || function(){e.cancelBubble = true}
-      try{
+      try {
         fn.call(self, e);
       }
-      catch(e){}
+      catch (e) {}
     });
   }
-  function addListen(obj, i){
-    if(i = obj.length)while(i--)obj[i].addEventListener = addEvent;
+  function addListen(obj, i) {
+    if (i = obj.length) while (i--) obj[i].addEventListener = addEvent;
     else obj.addEventListener = addEvent;
     return obj;
   }
   addListen([doc, win]);
-  if('Element' in win)win.Element.prototype.addEventListener = addEvent;      // IE8
+  if ('Element' in win) win.Element.prototype.addEventListener = addEvent;      // IE8
   else{                                                                       // IE < 8
     doc.attachEvent('onreadystatechange', function(){addListen(doc.all)});    // Make sure we also init at domReady
     docHijack('getElementsByTagName');
@@ -56,10 +66,10 @@
  * Dimensions (width, height...) are converted and returned in pixels, like modern browsers do.
  */
 
-(function(win){
+(function(win) {
 
   // If the function already exists, no need to polyfill
-  if(win.getComputedStyle)return;
+  if (win.getComputedStyle) return;
 
   function getComputedStylePixel(element, property, fontSize) {
     // Internet Explorer sometimes struggles to read currentStyle until the element's document is accessed.
@@ -186,16 +196,16 @@
  * Adds basic DOM selection on IE6-8 (selection by tag, class or id only)
  */
 
-(function(doc){
-  if(doc.querySelectorAll) return;
+(function(doc) {
+  if (doc.querySelectorAll) return;
 
-  doc.querySelectorAll = function(a){
-    if("#" == a.charAt(0)) return [doc.getElementById(a.substr(1))];
-    if("." == a.charAt(0)) return doc.getElementsByClassName(a.substr(1));
+  doc.querySelectorAll = function(a) {
+    if ("#" == a.charAt(0)) return [doc.getElementById(a.substr(1))];
+    if ("." == a.charAt(0)) return doc.getElementsByClassName(a.substr(1));
     return doc.getElementsByTagName(a);
   }
 
-  doc.querySelector = function(a){
+  doc.querySelector = function(a) {
     return querySelectorAll(a)[0];
   }
 })(document);
@@ -206,17 +216,17 @@
  * Adds textContent property to DOM elements in IE8
  */
 
-(function(){
-  if(Object.defineProperty
+(function() {
+  if (Object.defineProperty
   && Object.getOwnPropertyDescriptor
   && Object.getOwnPropertyDescriptor(Element.prototype, "textContent")
-  && !Object.getOwnPropertyDescriptor(Element.prototype, "textContent").get){
+  && !Object.getOwnPropertyDescriptor(Element.prototype, "textContent").get) {
     var innerText = Object.getOwnPropertyDescriptor(Element.prototype, "innerText");
     Object.defineProperty(Element.prototype, "textContent", {
-      get : function() {
+      get: function() {
         return innerText.get.call(this)
       },
-      set : function(x) {
+      set: function(x) {
         return innerText.set.call(this, x)
       }
     });

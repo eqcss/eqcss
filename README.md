@@ -11,7 +11,7 @@
 Work has begun on a specification for container-style element queries syntax. This draft is still a work-in-progress and is not standard CSS.
 
 - [View Element Queries Spec](http://tomhodgins.github.io/element-queries-spec/element-queries.html)
-- [View Spec Repository on Github](http://tomhodgins.github.io/element-queries-spec/)
+- [View Spec Repository on Github](http://github.com/tomhodgins/element-queries-spec)
 
 ## What are Element Queries?
 
@@ -50,11 +50,11 @@ Or from Yarn via
 EQCSS is also hosted on CDNjs and you can use the version hosted there for your projects: [https://cdnjs.com/libraries/eqcss](https://cdnjs.com/libraries/eqcss):
 
 ```
-https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.4.0/EQCSS-polyfills.min.js
+https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.5.0/EQCSS-polyfills.min.js
 ```
 
 ```
-https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.4.0/EQCSS.min.js
+https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.5.0/EQCSS.min.js
 ```
 
 ## Writing Element Queries
