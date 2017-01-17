@@ -6,11 +6,11 @@
 
 [![Join the chat at https://gitter.im/eqcss/eqcss](https://badges.gitter.im/eqcss/eqcss.svg)](https://gitter.im/eqcss/eqcss?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-## Specification
+## CSS Element Queries Specification
 
 Work has begun on a specification for container-style element queries syntax. This draft is still a work-in-progress and is not standard CSS.
 
-- [View Element Queries Spec](http://tomhodgins.github.io/element-queries-spec/element-queries.html)
+- [View CSS Element Queries Spec](http://tomhodgins.github.io/element-queries-spec/element-queries.html)
 - [View Spec Repository on Github](http://github.com/tomhodgins/element-queries-spec)
 
 ## What are Element Queries?
@@ -37,7 +37,7 @@ If you need to support IE8 there is an optional polyfill available that adds `@m
 
     <!--[if lt IE 9]><script src="EQCSS-polyfills.js"></script><![endif]-->
 
-Alternatively, you can also grab [EQCSS from NPM](https://www.npmjs.com/package/eqcss) with the following command:
+Alternatively, you can also grab [EQCSS from npm](https://www.npmjs.com/package/eqcss) with the following command:
 
     npm install eqcss
 
