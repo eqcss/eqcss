@@ -50,11 +50,11 @@ Or from Yarn via
 EQCSS is also hosted on CDNjs and you can use the version hosted there for your projects: [https://cdnjs.com/libraries/eqcss](https://cdnjs.com/libraries/eqcss):
 
 ```
-https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.5.0/EQCSS-polyfills.min.js
+https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.5.1/EQCSS-polyfills.min.js
 ```
 
 ```
-https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.5.0/EQCSS.min.js
+https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.5.1/EQCSS.min.js
 ```
 
 ## Writing Element Queries
@@ -204,5 +204,22 @@ And view many more EQCSS demos on Codepen: [EQCSS pens on Codepen](http://codepe
 ## Try it Live
 
 Here's a link to the EQCSS REPL where you can try writing EQCSS-enhance CSS live in your browser and share a custom link with others: [http://elementqueries.com/repl.html](http://elementqueries.com/repl.html)
+
+## Browser Support
+
+Lowest Version Supported:
+
+- IE 8+
+- Edge 13+
+- Safari 5.0+
+- Firefox 3.6+
+- Android 2.2+
+- iOS 4+
+- Windows Phone 8.1+
+
+Lowest Version Tested:
+
+- Chrome 15+
+- Opera 10.6+
 
 ### More Demos @ the EQCSS Website: [http://elementqueries.com](http://elementqueries.com)

@@ -3,18 +3,18 @@
 <head>
   <meta charset=utf-8>
   <meta name=description content="EQCSS is a CSS extension that introduces Element Queries, Container Queries, Scoped Styles, and new selectors like $parent and $prev and more to all browsers IE8+">
-  <meta name=keywords content="EQCSS, element queries, element query, container queries, CSS extension, parent selector, meta selector, scoped CSS, scoped styles, CSS variables, reponsive web design, rwd, elq, polyfill, plugin, SASS, Less, Grid Style Sheets, flexbox, IE8">
+  <meta name=keywords content="EQCSS, element queries, element query, container queries, container query, CSS extension, parent selector, meta selector, scoped CSS, scoped styles, CSS variables, reponsive web design, rwd, elq, polyfill, plugin, SASS, Less, Grid Style Sheets, flexbox, IE8">
   <meta property=og:title content="EQCSS • Element Query CSS | Scoped CSS, Meta-Selectors, Element Queries">
   <meta property=og:url content=http://elementqueries.com>
   <meta property=og:description content="EQCSS is a CSS extension that introduces Element Queries, Container Queries, Scoped Styles, and new selectors like $parent and $prev and more to all browsers IE8+">
   <meta name=viewport content="width=device-width, initial-scale=1">
   <meta name=google-site-verification content=zqvNXM9AZmB51r-f-4NNlvL_RRS-K0oWVpPo0yd3E_0>
   <title>EQCSS • Element Query CSS | Scoped CSS, Meta-Selectors, Element Queries</title>
-  <link href="http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic|Source+Code+Pro:300,400,500,600,700,900|Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic" rel=stylesheet>
-  <link href=http://staticresource.s3.amazonaws.com/template/plugins/buttons/data-buttons.css rel=stylesheet>
-  <link href=http://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css rel=stylesheet>
-  <link href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.min.css rel=stylesheet>
-  <link href=http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/solarized_dark.min.css rel=stylesheet>
+  <link href="//fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic|Source+Code+Pro:300,400,500,600,700,900|Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic" rel=stylesheet>
+  <link href=//staticresource.s3.amazonaws.com/template/plugins/buttons/data-buttons.css rel=stylesheet>
+  <link href=//cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css rel=stylesheet>
+  <link href=//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.min.css rel=stylesheet>
+  <link href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/solarized_dark.min.css rel=stylesheet>
   <link href="eqcss-logo.png" rel="shortcut icon">
   <link href="eqcss-logo.png" rel="apple-touch-icon">
   <style>
@@ -481,7 +481,7 @@
       }
     }
     /* eval('') */
-    @element "strong" {
+    @element ".eval strong" {
       $this:after {
         content: ' eval("new Date().getFullYear()")';
       }
@@ -544,8 +544,8 @@
     <pre><code class=html>&lt;!--[if lt IE 9]>&lt;script src="EQCSS-polyfills.js">&lt;/script>&lt;![endif]--></code></pre>
     <h4>CDN Hosted Links</h4>
     <p>EQCSS is also hosted on CDNjs and you can use the version hosted there for your projects: <a href=https://cdnjs.com/libraries/eqcss>https://cdnjs.com/libraries/eqcss</a>:</p>
-    <pre><code class=html>https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.5.0/EQCSS-polyfills.min.js</code></pre>
-    <pre><code class=html>https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.5.0/EQCSS.min.js</code></pre>
+    <pre><code class=html>https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.5.1/EQCSS-polyfills.min.js</code></pre>
+    <pre><code class=html>https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.5.1/EQCSS.min.js</code></pre>
     <h3 id=writing>Writing Element Queries</h3>
     <p>Now that you have EQCSS added to your HTML you&rsquo;re ready to write element queries. There are two ways you can add EQCSS to your site: the easiest way is by writing them inside your CSS either in a <code>&lt;style></code> or <code>&lt;link></code> in your HTML, or by isolating your EQCSS styles in a custom script type.</p>
     <p>You can also link to EQCSS hosted in external files with either <code>.css</code> or <code>.eqcss</code> extensions.</p>
@@ -957,7 +957,7 @@
         <p><strong>Current Year:</strong></p>
         <p><em>Viewport Size:</em></p>
       </div>
-      <pre><code class=css>@element "strong" {
+      <pre><code class=css>@element ".eval strong" {
   $this:after {
     content: ' eval("new Date().getFullYear()")';
   }
