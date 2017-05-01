@@ -1,0 +1,25 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <style>
+    @element #test and (min-scroll-x: 1%) {
+      html {
+        background: lime;
+        overflow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="test" style="width: 200px; overflow-x: scroll;"><p style="width: 200%;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></div>
+  <!--[if lt IE 9]><script src="../EQCSS-polyfills.js" type="text/javascript"></script><![endif]-->
+  <script src="../EQCSS.js" type="text/javascript"></script>
+  <script>
+    var test = document.getElementById('test')
+    var p = test.getElementsByTagName('p')[0]
+    test.scrollLeft = p.scrollWidth
+    test.style.opacity = 0
+  </script>
+</body>
+</html>

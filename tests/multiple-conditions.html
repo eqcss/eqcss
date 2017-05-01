@@ -1,0 +1,21 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <style>
+    html, body {
+      overflow: hidden;
+    }
+    @element #test and (min-width: 50px) and (min-height: 50px) {
+      html {
+        background: lime;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="test" style="width: 200px; height: 200px;"></div>
+  <!--[if lt IE 9]><script src="../EQCSS-polyfills.js" type="text/javascript"></script><![endif]-->
+  <script src="../EQCSS.js" type="text/javascript"></script>
+</body>
+</html>

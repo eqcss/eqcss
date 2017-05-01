@@ -1,7 +1,7 @@
 /*
 
 #  EQCSS
-## version 1.6.0
+## version 1.7.0
 
 A JavaScript plugin to read EQCSS syntax to provide:
 scoped styles, element queries, container queries,
@@ -66,8 +66,7 @@ License: MIT
           styles[i].setAttribute('data-eqcss-read', 'true');
 
           // Process
-          EQCSS.parse(styles[i].innerHTML);
-          EQCSS.apply();
+          EQCSS.process(styles[i].innerHTML);
 
         }
 
@@ -91,10 +90,9 @@ License: MIT
 
               xhr.open('GET', script[i].src, true);
               xhr.send(null);
-              xhr.onload = function() {
+              xhr.onreadystatechange = function() {
 
-                EQCSS.parse(xhr.responseText);
-                EQCSS.apply();
+                EQCSS.process(xhr.responseText);
 
               }
 
@@ -106,8 +104,7 @@ License: MIT
           else {
 
             // Process
-            EQCSS.parse(script[i].innerHTML);
-            EQCSS.apply();
+            EQCSS.process(script[i].innerHTML);
 
           }
 
@@ -117,7 +114,6 @@ License: MIT
         }
 
       }
-
       // Retrieve all link tags
       var link = document.getElementsByTagName('link');
 
@@ -135,10 +131,9 @@ License: MIT
 
               xhr.open('GET', link[i].href, true);
               xhr.send(null);
-              xhr.onload = function() {
+              xhr.onreadystatechange = function() {
 
-                EQCSS.parse(xhr.responseText);
-                EQCSS.apply();
+                EQCSS.process(xhr.responseText);
 
               }
 
@@ -163,6 +158,8 @@ License: MIT
      */
 
     EQCSS.parse = function(code) {
+
+      var parsed_queries = new Array();
 
       // Cleanup
       code = code.replace(/\s+/g, ' '); // reduce spaces and line breaks
@@ -216,11 +213,58 @@ License: MIT
         });
 
         // Add it to data
-        EQCSS.data.push(dataEntry);
+        parsed_queries.push(dataEntry);
 
       });
 
+      return parsed_queries;
+
     }
+
+
+    /*
+     * EQCSS.register()
+     * Add a single object, or an array of objects to EQCSS.data
+     *
+     */
+
+     EQCSS.register = function(queries) {
+
+       if (Object.prototype.toString.call(queries) === '[object Object]') {
+
+         EQCSS.data.push(queries);
+
+         EQCSS.apply();
+
+       }
+
+       if (Object.prototype.toString.call(queries) === '[object Array]') {
+
+        for (var i=0; i<queries.length; i++) {
+
+          EQCSS.data.push(queries[i]);
+
+        }
+
+        EQCSS.apply();
+
+       }
+
+     }
+
+
+    /*
+     * EQCSS.process()
+     * Parse and Register queries with `EQCSS.data`
+     */
+
+     EQCSS.process = function(code) {
+
+       var queries = EQCSS.parse(code)
+
+       return EQCSS.register(queries)
+
+     }
 
 
     /*
@@ -278,9 +322,24 @@ License: MIT
           element_guid_prev = 'data-eqcss-' + i + '-' + j + '-prev';
 
           // Add this guid as an attribute to the element's prev sibling
-          if (elements[j].previousElementSibling) {
+          var prev_sibling = (function(el) {
 
-            elements[j].previousElementSibling.setAttribute(element_guid_prev, '');
+            while (el = el.previousSibling) {
+
+              if (el.nodeType === 1) {
+
+                return el;
+
+              }
+
+            }
+
+          })(elements[j])
+
+          // If there is a previous sibling, add attribute
+          if (prev_sibling) {
+
+            prev_sibling.setAttribute(element_guid_prev, '');
 
           }
 
@@ -289,9 +348,24 @@ License: MIT
           element_guid_next = 'data-eqcss-' + i + '-' + j + '-next';
 
           // Add this guid as an attribute to the element's next sibling
-          if (elements[j].nextElementSibling) {
+          var next_sibling = (function(el) {
 
-            elements[j].nextElementSibling.setAttribute(element_guid_next, '');
+            while (el = el.nextSibling) {
+
+              if (el.nodeType === 1) {
+
+                return el;
+
+              }
+
+            }
+
+          })(elements[j])
+
+          // If there is a next sibling, add attribute
+          if (next_sibling) {
+
+            next_sibling.setAttribute(element_guid_next, '');
 
           }
 
@@ -909,7 +983,19 @@ License: MIT
                   - parseInt(computed_style.getPropertyValue('padding-top'))
                   - parseInt(computed_style.getPropertyValue('padding-bottom'));
 
-                element_line_height = parseInt(computed_style.getPropertyValue('line-height'));
+                element_line_height = computed_style.getPropertyValue('line-height');
+
+                if (element_line_height === 'normal') {
+
+                  var element_font_size = parseInt(computed_style.getPropertyValue('font-size'));
+
+                  element_line_height = element_font_size * 1.125;
+
+                } else {
+
+                  element_line_height = parseInt(element_line_height);
+
+                }
 
                 if (!(element_height / element_line_height >= final_value)) {
 
@@ -930,7 +1016,19 @@ License: MIT
                   - parseInt(computed_style.getPropertyValue('padding-top'))
                   - parseInt(computed_style.getPropertyValue('padding-bottom'));
 
-                element_line_height = parseInt(computed_style.getPropertyValue('line-height'));
+                element_line_height = computed_style.getPropertyValue('line-height');
+
+                if (element_line_height === 'normal') {
+
+                  var element_font_size = parseInt(computed_style.getPropertyValue('font-size'));
+
+                  element_line_height = element_font_size * 1.125;
+
+                } else {
+
+                  element_line_height = parseInt(element_line_height);
+
+                }
 
                 if (!(element_height / element_line_height + 1 <= final_value)) {
 
@@ -1193,10 +1291,6 @@ License: MIT
         }
 
       }
-
-      // TODO: remove EQCSS-generated event listeners
-      // 1) would we need to only attach named functions?
-      // 2) would we need to generate unique names and keep track?
 
     }
 

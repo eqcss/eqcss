@@ -2,7 +2,7 @@
 
 # EQCSS
 
-**A CSS Extension for Element Queries & More**
+**A CSS Reprocessor for Element Queries & More**
 
 [![Join the chat at https://gitter.im/eqcss/eqcss](https://badges.gitter.im/eqcss/eqcss.svg)](https://gitter.im/eqcss/eqcss?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -50,11 +50,11 @@ Or from Yarn via
 EQCSS is also hosted on CDNjs and you can use the version hosted there for your projects: [https://cdnjs.com/libraries/eqcss](https://cdnjs.com/libraries/eqcss):
 
 ```
-https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.6.0/EQCSS-polyfills.min.js
+https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.7.0/EQCSS-polyfills.min.js
 ```
 
 ```
-https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.6.0/EQCSS.min.js
+https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.7.0/EQCSS.min.js
 ```
 
 ## Writing Element Queries
