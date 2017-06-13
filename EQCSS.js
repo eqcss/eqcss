@@ -1115,7 +1115,7 @@ License: MIT
 
           // Update CSS block:
           // If all conditions are met: copy the CSS code from the query to the corresponding CSS block
-          if (test === true) {
+          if (test === true && EQCSS.data[i].style) {
 
             // Get the CSS code to apply to the element
             css_code = EQCSS.data[i].style;
