@@ -162,6 +162,7 @@ License: MIT
       var parsed_queries = new Array();
 
       // Cleanup
+      code = '' + code; // make IE happy
       code = code.replace(/\s+/g, ' '); // reduce spaces and line breaks
       code = code.replace(/\/\*[\w\W]*?\*\//g, ''); // remove comments
       code = code.replace(/@element/g, '\n@element'); // one element query per line
