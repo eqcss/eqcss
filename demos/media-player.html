@@ -6,10 +6,10 @@
   <title>Media Player with Element Queries</title>
   <meta name=description content="Responsive media player with element queries. This media player can be embedded anywhere on any website, and since the styles are relative to the media player and not the browser, it will adapt to fit where you place it.">
   <meta name=keywords content="EQCSS, element queries, element query, container queries, responsive, media player, player ui, media controls, responsive audio player">
-  <link href="http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic|Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic" rel=stylesheet>
-  <link href=http://staticresource.s3.amazonaws.com/template/css/basic.css rel=stylesheet>
+  <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic|Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic" rel=stylesheet>
+  <link href=https://staticasset.s3.amazonaws.com/basic.css rel=stylesheet>
   <link href=http://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css rel=stylesheet>
-  <link href=http://staticresource.s3.amazonaws.com/template/plugins/buttons/data-buttons.css rel=stylesheet>
+  <link href=https://staticasset.s3.amazonaws.com/data-buttons.css rel=stylesheet>
   <style>
     [data-media],
     [data-media] *,
@@ -281,7 +281,7 @@
 <body>
 <h1>REM Audio Player</h1>
 <aside data-media>
-  <audio src=http://staticresource.s3.amazonaws.com/test.m4a preload=auto></audio>
+  <audio src=https://staticasset.s3.amazonaws.com/test.m4a preload=auto></audio>
   <span data-current>00:00</span>
   <span data-total>00:00</span>
   <input type=range min=0 max=1000 step=1 value=0 oninput=remPlayer.updateTime(this.parentNode.getAttribute("data-media"),this.value)>
@@ -293,7 +293,7 @@
 </aside>
 
 <aside data-media>
-  <audio src=http://staticresource.s3.amazonaws.com/test.m4a preload=auto></audio>
+  <audio src=https://staticasset.s3.amazonaws.com/test.m4a preload=auto></audio>
   <span data-current>00:00</span>
   <span data-total>00:00</span>
   <input type=range min=0 max=1000 step=1 value=0 oninput=remPlayer.updateTime(this.parentNode.getAttribute("data-media"),this.value)>

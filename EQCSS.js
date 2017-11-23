@@ -1,7 +1,7 @@
 /*
 
 #  EQCSS
-## version 1.7.0
+## version 1.7.1
 
 A JavaScript plugin to read EQCSS syntax to provide:
 scoped styles, element queries, container queries,
@@ -59,14 +59,18 @@ License: MIT
 
       for (var i = 0; i < styles.length; i++) {
 
-        // Test if the style is not read yet
-        if (styles[i].getAttribute('data-eqcss-read') === null) {
+        if (styles[i].namespaceURI !== 'http://www.w3.org/2000/svg') {
 
-          // Mark the style block as read
-          styles[i].setAttribute('data-eqcss-read', 'true');
+          // Test if the style is not read yet
+          if (styles[i].getAttribute('data-eqcss-read') === null) {
 
-          // Process
-          EQCSS.process(styles[i].innerHTML);
+            // Mark the style block as read
+            styles[i].setAttribute('data-eqcss-read', 'true');
+
+            // Process
+            EQCSS.process(styles[i].innerHTML);
+
+          }
 
         }
 
@@ -162,6 +166,7 @@ License: MIT
       var parsed_queries = new Array();
 
       // Cleanup
+      code = code || ''
       code = code.replace(/\s+/g, ' '); // reduce spaces and line breaks
       code = code.replace(/\/\*[\w\W]*?\*\//g, ''); // remove comments
       code = code.replace(/@element/g, '\n@element'); // one element query per line

@@ -6,9 +6,9 @@
   <title>EQCSS 1.0.0 ~ Technical documentation - Maxime Euzière</title>
   <meta name=description content="EQCSS is a polyfill that introduces Element Queries, Scoped CSS, a Parent selector, and responsive JavaScript to all browsers IE8 and up, check out http://elementqueries.com">
   <meta name=keywords content="EQCSS, element queries, element query, container queries, responsive, adaptive">
-  <link href="http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic|Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic|Source+Code+Pro:300,400,500,600,700,900" rel=stylesheet>
-  <link href=http://staticresource.s3.amazonaws.com/template/css/basic.css rel=stylesheet>
-  <link href=http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/tomorrow-night-blue.min.css rel=stylesheet>
+  <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic|Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic|Source+Code+Pro:300,400,500,600,700,900" rel=stylesheet>
+  <link href=https://staticasset.s3.amazonaws.com/basic.css rel=stylesheet>
+  <link href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/tomorrow-night-blue.min.css rel=stylesheet>
   <style>
     small {
       display: block;
@@ -37,8 +37,8 @@
   <h3>Introduction</h3>
   <p>You can find a lot of documentation about EQCSS’s history, usage and philosophy out there:</p>
   <ul>
-    <li><a href="http://eqcss.github.io/eqcss">eqcss.github.io/eqcss</a></li>
-    <li><a href="http://eqcss.github.io/eqcss/test.html">eqcss.github.io/eqcss/test.html</a></li>
+    <li><a href="https://eqcss.github.io/eqcss">eqcss.github.io/eqcss</a></li>
+    <li><a href="https://eqcss.github.io/eqcss/test.html">eqcss.github.io/eqcss/test.html</a></li>
     <li>So I will focus on the technical part: <em>how does it work?</em></li>
   </ul>
   <h3>Needs</h3>
@@ -64,7 +64,7 @@
   EQCSS.apply();
 });</code></pre>
   <h3>EQCSS.load()</h3>
-  <p>EQCSS code can be written alongside regular CSS code. Its syntax <code>@element (...) { ... }</code> is custom enough to stay ignored by browsers when they parse CSS. Although, it’s clean enough to be colored by syntax highlighters. Ex: <a href="http://codepen.io/tomhodgins/pen/yYVdBq">codepen.io/tomhodgins/pen/yYVdBq</a></p>
+  <p>EQCSS code can be written alongside regular CSS code. Its syntax <code>@element (...) { ... }</code> is custom enough to stay ignored by browsers when they parse CSS. Although, it’s clean enough to be colored by syntax highlighters. Ex: <a href="https://codepen.io/tomhodgins/pen/yYVdBq">codepen.io/tomhodgins/pen/yYVdBq</a></p>
   <p>That’s why we allow to write EQCSS code directly in <code>style</code> blocks (for embedded style) and <code>link rel=stylesheet href=...</code> links (for external CSS files).</p>
   <p>If you want to keep your EQCSS code separated from regular CSS, you can also include it in a <code>script type="text/eqcss"</code> block (for embedded style) or <code>script type="text/eqcss" src=...</code> includes (for external files)</p>
   <p><code>EQCSS.load()</code> fetches all these elements into the page, and gather their content into a string: <code>EQCSS.code</code></p>
@@ -192,7 +192,7 @@
   </footer>
   <!--[if lt IE 9]><script src=http://elementqueries.com/EQCSS-polyfills.js></script><![endif]-->
   <script src=http://elementqueries.com/EQCSS.js></script>
-  <script src=http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js></script>
+  <script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js></script>
   <script>hljs.initHighlightingOnLoad()</script>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
