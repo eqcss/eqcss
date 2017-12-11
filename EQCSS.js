@@ -1,7 +1,7 @@
 /*
 
 #  EQCSS
-## version 1.7.2
+## version 1.7.3
 
 A JavaScript plugin to read EQCSS syntax to provide:
 scoped styles, element queries, container queries,
@@ -22,26 +22,27 @@ License: MIT
   if (typeof define === 'function' && define.amd) {
 
     // AMD: Register as an anonymous module
-    define([], factory);
+    define([], factory)
 
   } else if (typeof module === 'object' && module.exports) {
 
     // Node: Does not work with strict CommonJS, but
     // only CommonJS-like environments that support module.exports,
     // like Node
-    module.exports = factory();
+    module.exports = factory()
 
   } else {
 
     // Browser globals (root is window)
-    root.EQCSS = factory();
+    root.EQCSS = factory()
 
   }
 
 }(this, function() {
 
     var EQCSS = {
-      data: []
+      data: [],
+      version: '1.7.3'
     }
 
 
@@ -55,7 +56,7 @@ License: MIT
     EQCSS.load = function() {
 
       // Retrieve all style blocks
-      var styles = document.getElementsByTagName('style');
+      var styles = document.getElementsByTagName('style')
 
       for (var i = 0; i < styles.length; i++) {
 
@@ -65,10 +66,10 @@ License: MIT
           if (styles[i].getAttribute('data-eqcss-read') === null) {
 
             // Mark the style block as read
-            styles[i].setAttribute('data-eqcss-read', 'true');
+            styles[i].setAttribute('data-eqcss-read', 'true')
 
             // Process
-            EQCSS.process(styles[i].innerHTML);
+            EQCSS.process(styles[i].innerHTML)
 
           }
 
@@ -77,9 +78,9 @@ License: MIT
       }
 
       // Retrieve all script blocks
-      var script = document.getElementsByTagName('script');
+      var script = document.getElementsByTagName('script')
 
-      for (var i = 0; i < script.length; i++) {
+      for (i = 0; i < script.length; i++) {
 
         // Test if the script is not read yet and has type='text/eqcss'
         if (script[i].getAttribute('data-eqcss-read') === null && script[i].type === 'text/eqcss') {
@@ -90,17 +91,17 @@ License: MIT
             // retrieve the file content with AJAX and process it
             (function() {
 
-              var xhr = new XMLHttpRequest;
+              var xhr = new XMLHttpRequest
 
-              xhr.open('GET', script[i].src, true);
-              xhr.send(null);
+              xhr.open('GET', script[i].src, true)
+              xhr.send(null)
               xhr.onreadystatechange = function() {
 
-                EQCSS.process(xhr.responseText);
+                EQCSS.process(xhr.responseText)
 
               }
 
-            })();
+            })()
 
           }
 
@@ -108,18 +109,18 @@ License: MIT
           else {
 
             // Process
-            EQCSS.process(script[i].innerHTML);
+            EQCSS.process(script[i].innerHTML)
 
           }
 
           // Mark the script block as read
-          script[i].setAttribute('data-eqcss-read', 'true');
+          script[i].setAttribute('data-eqcss-read', 'true')
 
         }
 
       }
       // Retrieve all link tags
-      var link = document.getElementsByTagName('link');
+      var link = document.getElementsByTagName('link')
 
       for (i = 0; i < link.length; i++) {
 
@@ -131,22 +132,22 @@ License: MIT
 
             (function() {
 
-              var xhr = new XMLHttpRequest;
+              var xhr = new XMLHttpRequest
 
-              xhr.open('GET', link[i].href, true);
-              xhr.send(null);
+              xhr.open('GET', link[i].href, true)
+              xhr.send(null)
               xhr.onreadystatechange = function() {
 
-                EQCSS.process(xhr.responseText);
+                EQCSS.process(xhr.responseText)
 
               }
 
-            })();
+            })()
 
           }
 
           // Mark the link as read
-          link[i].setAttribute('data-eqcss-read', 'true');
+          link[i].setAttribute('data-eqcss-read', 'true')
 
         }
 
@@ -163,14 +164,14 @@ License: MIT
 
     EQCSS.parse = function(code) {
 
-      var parsed_queries = new Array();
+      var parsed_queries = new Array()
 
       // Cleanup
       code = code || ''
       code = code.replace(/\s+/g, ' '); // reduce spaces and line breaks
-      code = code.replace(/\/\*[\w\W]*?\*\//g, ''); // remove comments
-      code = code.replace(/@element/g, '\n@element'); // one element query per line
-      code = code.replace(/(@element.*?\{([^}]*?\{[^}]*?\}[^}]*?)*\}).*/g, '$1'); // Keep the queries only (discard regular css written around them)
+      code = code.replace(/\/\*[\w\W]*?\*\//g, '') // remove comments
+      code = code.replace(/@element/g, '\n@element') // one element query per line
+      code = code.replace(/(@element.*?\{([^}]*?\{[^}]*?\}[^}]*?)*\}).*/g, '$1') // Keep the queries only (discard regular css written around them)
 
       // Parse
 
@@ -178,51 +179,51 @@ License: MIT
       code.replace(/(@element.*(?!@element))/g, function(string, query) {
 
         // Create a data entry
-        var dataEntry = {};
+        var dataEntry = {}
 
         // Extract the selector
-        query.replace(/(@element)\s*(".*?"|'.*?'|.*?)\s*(and\s*\(|{)/g, function(string, atrule, selector, extra) {
+        query.replace(/(@element)\s*(".*?"|'.*?'|.*?)\s*(and\s*\(|{)/g, function(string, atrule, selector) {
 
           // Strip outer quotes if present
-          selector = selector.replace(/^\s?['](.*)[']/, '$1');
-          selector = selector.replace(/^\s?["](.*)["]/, '$1');
+          selector = selector.replace(/^\s?['](.*)[']/, '$1')
+          selector = selector.replace(/^\s?["](.*)["]/, '$1')
 
-          dataEntry.selector = selector;
+          dataEntry.selector = selector
 
         })
 
-        // Extract the conditions (measure, value, unit)
-        dataEntry.conditions = [];
+        // Extract the conditions
+        dataEntry.conditions = []
         query.replace(/and ?\( ?([^:]*) ?: ?([^)]*) ?\)/g, function(string, measure, value) {
 
           // Separate value and unit if it's possible
-          var unit = null;
-          unit = value.replace(/^(\d*\.?\d+)(\D+)$/, '$2');
+          var unit = null
+          unit = value.replace(/^(\d*\.?\d+)(\D+)$/, '$2')
 
           if (unit === value) {
 
-            unit = null;
+            unit = null
 
           }
 
-          value = value.replace(/^(\d*\.?\d+)\D+$/, '$1');
-          dataEntry.conditions.push({measure: measure, value: value, unit: unit});
+          value = value.replace(/^(\d*\.?\d+)\D+$/, '$1')
+          dataEntry.conditions.push({measure: measure, value: value, unit: unit})
 
-        });
+        })
 
         // Extract the styles
         query.replace(/{(.*)}/g, function(string, style) {
 
-          dataEntry.style = style;
+          dataEntry.style = style
 
-        });
+        })
 
         // Add it to data
-        parsed_queries.push(dataEntry);
+        parsed_queries.push(dataEntry)
 
-      });
+      })
 
-      return parsed_queries;
+      return parsed_queries
 
     }
 
@@ -237,9 +238,9 @@ License: MIT
 
        if (Object.prototype.toString.call(queries) === '[object Object]') {
 
-         EQCSS.data.push(queries);
+         EQCSS.data.push(queries)
 
-         EQCSS.apply();
+         EQCSS.apply()
 
        }
 
@@ -247,11 +248,11 @@ License: MIT
 
         for (var i=0; i<queries.length; i++) {
 
-          EQCSS.data.push(queries[i]);
+          EQCSS.data.push(queries[i])
 
         }
 
-        EQCSS.apply();
+        EQCSS.apply()
 
        }
 
@@ -280,60 +281,60 @@ License: MIT
 
     EQCSS.apply = function() {
 
-      var i, j, k;                      // Iterators
-      var elements;                     // Elements targeted by each query
-      var element_guid;                 // GUID for current element
-      var css_block;                    // CSS block corresponding to each targeted element
-      var element_guid_parent;          // GUID for current element's parent
-      var element_guid_prev;            // GUID for current element's previous sibling element
-      var element_guid_next;            // GUID for current element's next sibling element
-      var css_code;                     // CSS code to write in each CSS block (one per targeted element)
-      var element_width, parent_width;  // Computed widths
-      var element_height, parent_height;// Computed heights
-      var element_line_height;          // Computed line-height
-      var test;                         // Query's condition test result
-      var computed_style;               // Each targeted element's computed style
-      var parent_computed_style;        // Each targeted element parent's computed style
+      var i, j, k                       // Iterators
+      var elements                      // Elements targeted by each query
+      var element_guid                  // GUID for current element
+      var css_block                     // CSS block corresponding to each targeted element
+      var element_guid_parent           // GUID for current element's parent
+      var element_guid_prev             // GUID for current element's previous sibling element
+      var element_guid_next             // GUID for current element's next sibling element
+      var css_code                      // CSS code to write in each CSS block (one per targeted element)
+      var element_width, parent_width   // Computed widths
+      var element_height, parent_height // Computed heights
+      var element_line_height           // Computed line-height
+      var test                          // Query's condition test result
+      var computed_style                // Each targeted element's computed style
+      var parent_computed_style         // Each targeted element parent's computed style
 
       // Loop on all element queries
       for (i = 0; i < EQCSS.data.length; i++) {
 
         // Find all the elements targeted by the query
-        elements = document.querySelectorAll(EQCSS.data[i].selector);
+        elements = document.querySelectorAll(EQCSS.data[i].selector)
 
         // Loop on all the elements
         for (j = 0; j < elements.length; j++) {
 
           // Create a guid for this element
           // Pattern: 'EQCSS_{element-query-index}_{matched-element-index}'
-          element_guid = 'data-eqcss-' + i + '-' + j;
+          element_guid = 'data-eqcss-' + i + '-' + j
 
           // Add this guid as an attribute to the element
-          elements[j].setAttribute(element_guid, '');
+          elements[j].setAttribute(element_guid, '')
 
           // Create a guid for the parent of this element
           // Pattern: 'EQCSS_{element-query-index}_{matched-element-index}_parent'
-          element_guid_parent = 'data-eqcss-' + i + '-' + j + '-parent';
+          element_guid_parent = 'data-eqcss-' + i + '-' + j + '-parent'
 
           // Add this guid as an attribute to the element's parent (except if element is the root element)
           if (elements[j] != document.documentElement) {
 
-            elements[j].parentNode.setAttribute(element_guid_parent, '');
+            elements[j].parentNode.setAttribute(element_guid_parent, '')
 
           }
 
           // Create a guid for the prev sibling of this element
           // Pattern: 'EQCSS_{element-query-index}_{matched-element-index}_prev'
-          element_guid_prev = 'data-eqcss-' + i + '-' + j + '-prev';
+          element_guid_prev = 'data-eqcss-' + i + '-' + j + '-prev'
 
           // Add this guid as an attribute to the element's prev sibling
           var prev_sibling = (function(el) {
 
-            while (el = el.previousSibling) {
+            while ((el = el.previousSibling)) {
 
               if (el.nodeType === 1) {
 
-                return el;
+                return el
 
               }
 
@@ -344,22 +345,22 @@ License: MIT
           // If there is a previous sibling, add attribute
           if (prev_sibling) {
 
-            prev_sibling.setAttribute(element_guid_prev, '');
+            prev_sibling.setAttribute(element_guid_prev, '')
 
           }
 
           // Create a guid for the next sibling of this element
           // Pattern: 'EQCSS_{element-query-index}_{matched-element-index}_next'
-          element_guid_next = 'data-eqcss-' + i + '-' + j + '-next';
+          element_guid_next = 'data-eqcss-' + i + '-' + j + '-next'
 
           // Add this guid as an attribute to the element's next sibling
           var next_sibling = (function(el) {
 
-            while (el = el.nextSibling) {
+            while ((el = el.nextSibling)) {
 
               if (el.nodeType === 1) {
 
-                return el;
+                return el
 
               }
 
@@ -370,82 +371,83 @@ License: MIT
           // If there is a next sibling, add attribute
           if (next_sibling) {
 
-            next_sibling.setAttribute(element_guid_next, '');
+            next_sibling.setAttribute(element_guid_next, '')
 
           }
 
           // Get the CSS block associated to this element (or create one in the <HEAD> if it doesn't exist)
-          css_block = document.querySelector('#' + element_guid);
+          css_block = document.querySelector('#' + element_guid)
 
           if (!css_block) {
 
-            css_block = document.createElement('style');
-            css_block.id = element_guid;
-            css_block.setAttribute('data-eqcss-read', 'true');
-            document.querySelector('head').appendChild(css_block);
+            css_block = document.createElement('style')
+            css_block.id = element_guid
+            css_block.setAttribute('data-eqcss-read', 'true')
+            document.querySelector('head').appendChild(css_block)
 
           }
 
-          css_block = document.querySelector('#' + element_guid);
+          css_block = document.querySelector('#' + element_guid)
 
           // Reset the query test's result (first, we assume that the selector is matched)
-          test = true;
+          test = true
 
           // Loop on the conditions
           test_conditions: for (k = 0; k < EQCSS.data[i].conditions.length; k++) {
 
             // Reuse element and parent's computed style instead of computing it everywhere
-            computed_style = window.getComputedStyle(elements[j], null);
+            computed_style = window.getComputedStyle(elements[j], null)
 
-            parent_computed_style = null;
+            parent_computed_style = null
 
             if (elements[j] != document.documentElement) {
 
-              parent_computed_style = window.getComputedStyle(elements[j].parentNode, null);
+              parent_computed_style = window.getComputedStyle(elements[j].parentNode, null)
 
             }
 
             // Do we have to reconvert the size in px at each call?
             // This is true only for vw/vh/vmin/vmax
-            var recomputed = false;
+            var recomputed = false
+            var value
 
             // If the condition's unit is vw, convert current value in vw, in px
             if (EQCSS.data[i].conditions[k].unit === 'vw') {
 
-              recomputed = true;
+              recomputed = true
 
-              var value = parseInt(EQCSS.data[i].conditions[k].value);
-              EQCSS.data[i].conditions[k].recomputed_value = value * window.innerWidth / 100;
+              value = parseInt(EQCSS.data[i].conditions[k].value)
+              EQCSS.data[i].conditions[k].recomputed_value = value * window.innerWidth / 100
 
             }
 
             // If the condition's unit is vh, convert current value in vh, in px
             else if (EQCSS.data[i].conditions[k].unit === 'vh') {
 
-              recomputed = true;
+              recomputed = true
 
-              var value = parseInt(EQCSS.data[i].conditions[k].value);
-              EQCSS.data[i].conditions[k].recomputed_value = value * window.innerHeight / 100;
+              value = parseInt(EQCSS.data[i].conditions[k].value)
+              EQCSS.data[i].conditions[k].recomputed_value = value * window.innerHeight / 100
 
             }
 
             // If the condition's unit is vmin, convert current value in vmin, in px
             else if (EQCSS.data[i].conditions[k].unit === 'vmin') {
 
-              recomputed = true;
+              recomputed = true
 
-              var value = parseInt(EQCSS.data[i].conditions[k].value);
-              EQCSS.data[i].conditions[k].recomputed_value = value * Math.min(window.innerWidth, window.innerHeight) / 100;
+              value = parseInt(EQCSS.data[i].conditions[k].value)
+              EQCSS.data[i].conditions[k].recomputed_value = value * Math.min(window.innerWidth, window.innerHeight) / 100
 
             }
 
             // If the condition's unit is vmax, convert current value in vmax, in px
             else if (EQCSS.data[i].conditions[k].unit === 'vmax') {
 
-              recomputed = true;
+              recomputed = true
 
-              var value = parseInt(EQCSS.data[i].conditions[k].value);
-              EQCSS.data[i].conditions[k].recomputed_value = value * Math.max(window.innerWidth, window.innerHeight) / 100;
+              value = parseInt(EQCSS.data[i].conditions[k].value)
+              EQCSS.data[i].conditions[k].recomputed_value = value * Math.max(window.innerWidth, window.innerHeight) / 100
 
             }
 
@@ -456,29 +458,29 @@ License: MIT
               // Set the given measure and unit to the DIV's width
               // Measure the DIV's width in px
               // Remove the DIV
-              var div = document.createElement('div');
+              var div = document.createElement('div')
 
-              div.style.visibility = 'hidden';
-              div.style.border = '1px solid red';
-              div.style.width = EQCSS.data[i].conditions[k].value + EQCSS.data[i].conditions[k].unit;
+              div.style.visibility = 'hidden'
+              div.style.border = '1px solid red'
+              div.style.width = EQCSS.data[i].conditions[k].value + EQCSS.data[i].conditions[k].unit
 
-              var position = elements[j];
+              var position = elements[j]
 
               if (elements[j] != document.documentElement) {
 
-                position = elements[j].parentNode;
+                position = elements[j].parentNode
 
               }
 
-              position.appendChild(div);
-              EQCSS.data[i].conditions[k].value = parseInt(window.getComputedStyle(div, null).getPropertyValue('width'));
-              EQCSS.data[i].conditions[k].unit = 'px';
-              position.removeChild(div);
+              position.appendChild(div)
+              EQCSS.data[i].conditions[k].value = parseInt(window.getComputedStyle(div, null).getPropertyValue('width'))
+              EQCSS.data[i].conditions[k].unit = 'px'
+              position.removeChild(div)
 
             }
 
             // Store the good value in final_value depending if the size is recomputed or not
-            var final_value = recomputed ? EQCSS.data[i].conditions[k].recomputed_value : parseInt(EQCSS.data[i].conditions[k].value);
+            var final_value = recomputed ? EQCSS.data[i].conditions[k].recomputed_value : parseInt(EQCSS.data[i].conditions[k].value)
 
             // Check each condition for this query and this element
             // If at least one condition is false, the element selector is not matched
@@ -490,12 +492,12 @@ License: MIT
                 // Min-width in px
                 if (recomputed === true || EQCSS.data[i].conditions[k].unit === 'px') {
 
-                  element_width = parseInt(computed_style.getPropertyValue('width'));
+                  element_width = parseInt(computed_style.getPropertyValue('width'))
 
                   if (!(element_width >= final_value)) {
 
-                    test = false;
-                    break test_conditions;
+                    test = false
+                    break test_conditions
 
                   }
 
@@ -504,19 +506,19 @@ License: MIT
                 // Min-width in %
                 if (EQCSS.data[i].conditions[k].unit === '%') {
 
-                  element_width = parseInt(computed_style.getPropertyValue('width'));
-                  parent_width = parseInt(parent_computed_style.getPropertyValue('width'));
+                  element_width = parseInt(computed_style.getPropertyValue('width'))
+                  parent_width = parseInt(parent_computed_style.getPropertyValue('width'))
 
                   if (!(parent_width / element_width <= 100 / final_value)) {
 
-                    test = false;
-                    break test_conditions;
+                    test = false
+                    break test_conditions
 
                   }
 
                 }
 
-              break;
+              break
 
               // Max-width
               case 'max-width':
@@ -524,12 +526,12 @@ License: MIT
                 // Max-width in px
                 if (recomputed === true || EQCSS.data[i].conditions[k].unit === 'px') {
 
-                  element_width = parseInt(computed_style.getPropertyValue('width'));
+                  element_width = parseInt(computed_style.getPropertyValue('width'))
 
                   if (!(element_width <= final_value)) {
 
-                    test = false;
-                    break test_conditions;
+                    test = false
+                    break test_conditions
 
                   }
 
@@ -538,19 +540,19 @@ License: MIT
                 // Max-width in %
                 if (EQCSS.data[i].conditions[k].unit === '%') {
 
-                  element_width = parseInt(computed_style.getPropertyValue('width'));
-                  parent_width = parseInt(parent_computed_style.getPropertyValue('width'));
+                  element_width = parseInt(computed_style.getPropertyValue('width'))
+                  parent_width = parseInt(parent_computed_style.getPropertyValue('width'))
 
                   if (!(parent_width / element_width >= 100 / final_value)) {
 
-                    test = false;
-                    break test_conditions;
+                    test = false
+                    break test_conditions
 
                   }
 
                 }
 
-              break;
+              break
 
               // Min-height
               case 'min-height':
@@ -558,12 +560,12 @@ License: MIT
                 // Min-height in px
                 if (recomputed === true || EQCSS.data[i].conditions[k].unit === 'px') {
 
-                  element_height = parseInt(computed_style.getPropertyValue('height'));
+                  element_height = parseInt(computed_style.getPropertyValue('height'))
 
                   if (!(element_height >= final_value)) {
 
-                    test = false;
-                    break test_conditions;
+                    test = false
+                    break test_conditions
 
                   }
 
@@ -572,19 +574,19 @@ License: MIT
                 // Min-height in %
                 if (EQCSS.data[i].conditions[k].unit === '%') {
 
-                  element_height = parseInt(computed_style.getPropertyValue('height'));
-                  parent_height = parseInt(parent_computed_style.getPropertyValue('height'));
+                  element_height = parseInt(computed_style.getPropertyValue('height'))
+                  parent_height = parseInt(parent_computed_style.getPropertyValue('height'))
 
                   if (!(parent_height / element_height <= 100 / final_value)) {
 
-                    test = false;
-                    break test_conditions;
+                    test = false
+                    break test_conditions
 
                   }
 
                 }
 
-              break;
+              break
 
               // Max-height
               case 'max-height':
@@ -592,12 +594,12 @@ License: MIT
                 // Max-height in px
                 if (recomputed === true || EQCSS.data[i].conditions[k].unit === 'px') {
 
-                  element_height = parseInt(computed_style.getPropertyValue('height'));
+                  element_height = parseInt(computed_style.getPropertyValue('height'))
 
                   if (!(element_height <= final_value)) {
 
-                    test = false;
-                    break test_conditions;
+                    test = false
+                    break test_conditions
 
                   }
 
@@ -606,25 +608,25 @@ License: MIT
                 // Max-height in %
                 if (EQCSS.data[i].conditions[k].unit === '%') {
 
-                  element_height = parseInt(computed_style.getPropertyValue('height'));
-                  parent_height = parseInt(parent_computed_style.getPropertyValue('height'));
+                  element_height = parseInt(computed_style.getPropertyValue('height'))
+                  parent_height = parseInt(parent_computed_style.getPropertyValue('height'))
 
                   if (!(parent_height / element_height >= 100 / final_value)) {
 
-                    test = false;
-                    break test_conditions;
+                    test = false
+                    break test_conditions
 
                   }
 
                 }
 
-              break;
+              break
 
               // Min-scroll-x
               case 'min-scroll-x':
 
-                var element = elements[j];
-                var element_scroll = element.scrollLeft;
+                var element = elements[j]
+                var element_scroll = element.scrollLeft
 
                 if (!element.hasScrollListener) {
 
@@ -632,8 +634,8 @@ License: MIT
 
                     window.addEventListener('scroll', function() {
 
-                      EQCSS.throttle();
-                      element.hasScrollListener = true;
+                      EQCSS.throttle()
+                      element.hasScrollListener = true
 
                     })
 
@@ -641,8 +643,8 @@ License: MIT
 
                     element.addEventListener('scroll', function() {
 
-                      EQCSS.throttle();
-                      element.hasScrollListener = true;
+                      EQCSS.throttle()
+                      element.hasScrollListener = true
 
                     })
 
@@ -655,8 +657,8 @@ License: MIT
 
                   if (!(element_scroll >= final_value)) {
 
-                    test = false;
-                    break test_conditions;
+                    test = false
+                    break test_conditions
 
                   }
 
@@ -665,35 +667,35 @@ License: MIT
                 // Min-scroll-x in %
                 else if (EQCSS.data[i].conditions[k].unit === '%') {
 
-                  var element_scroll_size = elements[j].scrollWidth;
-                  var element_size;
+                  var element_scroll_size = elements[j].scrollWidth
+                  var element_size
 
                   if (elements[j] === document.documentElement || elements[j] === document.body) {
 
-                    element_size = window.innerWidth;
+                    element_size = window.innerWidth
 
                   } else {
 
-                    element_size = parseInt(computed_style.getPropertyValue('width'));
+                    element_size = parseInt(computed_style.getPropertyValue('width'))
 
                   }
 
                   if (!((element_scroll / (element_scroll_size - element_size)) * 100 >= final_value)) {
 
-                    test = false;
-                    break test_conditions;
+                    test = false
+                    break test_conditions
 
                   }
 
                 }
 
-              break;
+              break
 
               // Min-scroll-y
               case 'min-scroll-y':
 
-                var element = elements[j];
-                element_scroll = elements[j].scrollTop;
+                element = elements[j]
+                element_scroll = elements[j].scrollTop
 
                 if (!element.hasScrollListener) {
 
@@ -701,8 +703,8 @@ License: MIT
 
                     window.addEventListener('scroll', function() {
 
-                      EQCSS.throttle();
-                      element.hasScrollListener = true;
+                      EQCSS.throttle()
+                      element.hasScrollListener = true
 
                     })
 
@@ -710,8 +712,8 @@ License: MIT
 
                     element.addEventListener('scroll', function() {
 
-                      EQCSS.throttle();
-                      element.hasScrollListener = true;
+                      EQCSS.throttle()
+                      element.hasScrollListener = true
 
                     })
 
@@ -724,8 +726,8 @@ License: MIT
 
                   if (!(element_scroll >= final_value)) {
 
-                    test = false;
-                    break test_conditions;
+                    test = false
+                    break test_conditions
 
                   }
 
@@ -734,35 +736,35 @@ License: MIT
                 // Min-scroll-y in %
                 else if (EQCSS.data[i].conditions[k].unit === '%') {
 
-                  var element_scroll_size = elements[j].scrollHeight;
-                  var element_size;
+                  element_scroll_size = elements[j].scrollHeight
+                  element_size
 
                   if (elements[j] === document.documentElement || elements[j] === document.body) {
 
-                    element_size = window.innerHeight;
+                    element_size = window.innerHeight
 
                   } else {
 
-                    element_size = parseInt(computed_style.getPropertyValue('height'));
+                    element_size = parseInt(computed_style.getPropertyValue('height'))
 
                   }
 
                   if (!((element_scroll / (element_scroll_size - element_size)) * 100 >= final_value)) {
 
-                    test = false;
-                    break test_conditions;
+                    test = false
+                    break test_conditions
 
                   }
 
                 }
 
-              break;
+              break
 
               // Max-scroll-x
               case 'max-scroll-x':
 
-                var element = elements[j];
-                element_scroll = elements[j].scrollLeft;
+                element = elements[j]
+                element_scroll = elements[j].scrollLeft
 
                 if (!element.hasScrollListener) {
 
@@ -770,8 +772,8 @@ License: MIT
 
                     window.addEventListener('scroll', function() {
 
-                      EQCSS.throttle();
-                      element.hasScrollListener = true;
+                      EQCSS.throttle()
+                      element.hasScrollListener = true
 
                     })
 
@@ -779,8 +781,8 @@ License: MIT
 
                     element.addEventListener('scroll', function() {
 
-                      EQCSS.throttle();
-                      element.hasScrollListener = true;
+                      EQCSS.throttle()
+                      element.hasScrollListener = true
 
                     })
 
@@ -793,8 +795,8 @@ License: MIT
 
                   if (!(element_scroll <= final_value)) {
 
-                    test = false;
-                    break test_conditions;
+                    test = false
+                    break test_conditions
 
                   }
 
@@ -803,35 +805,35 @@ License: MIT
                 // Max-scroll-x in %
                 else if (EQCSS.data[i].conditions[k].unit === '%') {
 
-                  var element_scroll_size = elements[j].scrollWidth;
-                  var element_size;
+                  element_scroll_size = elements[j].scrollWidth
+                  element_size
 
                   if (elements[j] === document.documentElement || elements[j] === document.body) {
 
-                    element_size = window.innerWidth;
+                    element_size = window.innerWidth
 
                   } else {
 
-                    element_size = parseInt(computed_style.getPropertyValue('width'));
+                    element_size = parseInt(computed_style.getPropertyValue('width'))
 
                   }
 
                   if (!((element_scroll / (element_scroll_size - element_size)) * 100 <= final_value)) {
 
-                    test = false;
-                    break test_conditions;
+                    test = false
+                    break test_conditions
 
                   }
 
                 }
 
-              break;
+              break
 
               // Max-scroll-y
               case 'max-scroll-y':
 
-                var element = elements[j];
-                element_scroll = elements[j].scrollTop;
+                element = elements[j]
+                element_scroll = elements[j].scrollTop
 
                 if (!element.hasScrollListener) {
 
@@ -839,8 +841,8 @@ License: MIT
 
                     window.addEventListener('scroll', function() {
 
-                      EQCSS.throttle();
-                      element.hasScrollListener = true;
+                      EQCSS.throttle()
+                      element.hasScrollListener = true
 
                     })
 
@@ -848,8 +850,8 @@ License: MIT
 
                     element.addEventListener('scroll', function() {
 
-                      EQCSS.throttle();
-                      element.hasScrollListener = true;
+                      EQCSS.throttle()
+                      element.hasScrollListener = true
 
                     })
 
@@ -862,8 +864,8 @@ License: MIT
 
                   if (!(element_scroll <= final_value)) {
 
-                    test = false;
-                    break test_conditions;
+                    test = false
+                    break test_conditions
 
                   }
 
@@ -872,29 +874,29 @@ License: MIT
                 // Max-scroll-y in %
                 else if (EQCSS.data[i].conditions[k].unit === '%') {
 
-                  var element_scroll_size = elements[j].scrollHeight;
-                  var element_size;
+                  element_scroll_size = elements[j].scrollHeight
+                  element_size
 
                   if (elements[j] === document.documentElement || elements[j] === document.body) {
 
-                    element_size = window.innerHeight;
+                    element_size = window.innerHeight
 
                   } else {
 
-                    element_size = parseInt(computed_style.getPropertyValue('height'));
+                    element_size = parseInt(computed_style.getPropertyValue('height'))
 
                   }
 
                   if (!((element_scroll / (element_scroll_size - element_size)) * 100 <= final_value)) {
 
-                    test = false;
-                    break test_conditions;
+                    test = false
+                    break test_conditions
 
                   }
 
                 }
 
-              break;
+              break
 
               // Min-characters
               case 'min-characters':
@@ -904,8 +906,8 @@ License: MIT
 
                   if (!(elements[j].value.length >= final_value)) {
 
-                    test = false;
-                    break test_conditions;
+                    test = false
+                    break test_conditions
 
                   }
 
@@ -916,14 +918,14 @@ License: MIT
 
                   if (!(elements[j].textContent.length >= final_value)) {
 
-                    test = false;
-                    break test_conditions;
+                    test = false
+                    break test_conditions
 
                   }
 
                 }
 
-              break;
+              break
 
               // Max-characters
               case 'max-characters':
@@ -933,8 +935,8 @@ License: MIT
 
                   if (!(elements[j].value.length <= final_value)) {
 
-                    test = false;
-                    break test_conditions;
+                    test = false
+                    break test_conditions
 
                   }
 
@@ -945,38 +947,38 @@ License: MIT
 
                   if (!(elements[j].textContent.length <= final_value)) {
 
-                    test = false;
-                    break test_conditions;
+                    test = false
+                    break test_conditions
 
                   }
 
                 }
 
-              break;
+              break
 
               // Min-children
               case 'min-children':
 
                 if (!(elements[j].children.length >= final_value)) {
 
-                  test = false;
-                  break test_conditions;
+                  test = false
+                  break test_conditions
 
                 }
 
-              break;
+              break
 
               // Max-children
               case 'max-children':
 
                 if (!(elements[j].children.length <= final_value)) {
 
-                  test = false;
-                  break test_conditions;
+                  test = false
+                  break test_conditions
 
                 }
 
-              break;
+              break
 
               // Min-lines
               case 'min-lines':
@@ -986,30 +988,30 @@ License: MIT
                   - parseInt(computed_style.getPropertyValue('border-top-width'))
                   - parseInt(computed_style.getPropertyValue('border-bottom-width'))
                   - parseInt(computed_style.getPropertyValue('padding-top'))
-                  - parseInt(computed_style.getPropertyValue('padding-bottom'));
+                  - parseInt(computed_style.getPropertyValue('padding-bottom'))
 
-                element_line_height = computed_style.getPropertyValue('line-height');
+                element_line_height = computed_style.getPropertyValue('line-height')
 
                 if (element_line_height === 'normal') {
 
-                  var element_font_size = parseInt(computed_style.getPropertyValue('font-size'));
+                  var element_font_size = parseInt(computed_style.getPropertyValue('font-size'))
 
-                  element_line_height = element_font_size * 1.125;
+                  element_line_height = element_font_size * 1.125
 
                 } else {
 
-                  element_line_height = parseInt(element_line_height);
+                  element_line_height = parseInt(element_line_height)
 
                 }
 
                 if (!(element_height / element_line_height >= final_value)) {
 
-                  test = false;
-                  break test_conditions;
+                  test = false
+                  break test_conditions
 
                 }
 
-              break;
+              break
 
               // Max-lines
               case 'max-lines':
@@ -1019,30 +1021,30 @@ License: MIT
                   - parseInt(computed_style.getPropertyValue('border-top-width'))
                   - parseInt(computed_style.getPropertyValue('border-bottom-width'))
                   - parseInt(computed_style.getPropertyValue('padding-top'))
-                  - parseInt(computed_style.getPropertyValue('padding-bottom'));
+                  - parseInt(computed_style.getPropertyValue('padding-bottom'))
 
-                element_line_height = computed_style.getPropertyValue('line-height');
+                element_line_height = computed_style.getPropertyValue('line-height')
 
                 if (element_line_height === 'normal') {
 
-                  var element_font_size = parseInt(computed_style.getPropertyValue('font-size'));
+                  element_font_size = parseInt(computed_style.getPropertyValue('font-size'))
 
-                  element_line_height = element_font_size * 1.125;
+                  element_line_height = element_font_size * 1.125
 
                 } else {
 
-                  element_line_height = parseInt(element_line_height);
+                  element_line_height = parseInt(element_line_height)
 
                 }
 
                 if (!(element_height / element_line_height + 1 <= final_value)) {
 
-                  test = false;
-                  break test_conditions;
+                  test = false
+                  break test_conditions
 
                 }
 
-              break;
+              break
 
               // Orientation
               case 'orientation':
@@ -1052,8 +1054,8 @@ License: MIT
 
                   if (!(elements[j].offsetWidth === elements[j].offsetHeight)) {
 
-                    test = false;
-                    break test_conditions;
+                    test = false
+                    break test_conditions
 
                   }
 
@@ -1064,8 +1066,8 @@ License: MIT
 
                   if (!(elements[j].offsetWidth < elements[j].offsetHeight)) {
 
-                    test = false;
-                    break test_conditions;
+                    test = false
+                    break test_conditions
 
                   }
 
@@ -1076,44 +1078,44 @@ License: MIT
 
                   if (!(elements[j].offsetHeight < elements[j].offsetWidth)) {
 
-                    test = false;
-                    break test_conditions;
+                    test = false
+                    break test_conditions
 
                   }
 
                 }
 
-              break;
+              break
 
               // Min-aspect-ratio
               case 'min-aspect-ratio':
 
-                var el_width = EQCSS.data[i].conditions[k].value.split('/')[0];
-                var el_height = EQCSS.data[i].conditions[k].value.split('/')[1];
+                var el_width = EQCSS.data[i].conditions[k].value.split('/')[0]
+                var el_height = EQCSS.data[i].conditions[k].value.split('/')[1]
 
                 if (!(el_width/el_height <= elements[j].offsetWidth/elements[j].offsetHeight)) {
 
-                  test = false;
-                  break test_conditions;
+                  test = false
+                  break test_conditions
 
                 }
 
-              break;
+              break
 
               // Max-aspect-ratio
               case 'max-aspect-ratio':
 
-                var el_width = EQCSS.data[i].conditions[k].value.split('/')[0];
-                var el_height = EQCSS.data[i].conditions[k].value.split('/')[1];
+                el_width = EQCSS.data[i].conditions[k].value.split('/')[0]
+                el_height = EQCSS.data[i].conditions[k].value.split('/')[1]
 
                 if (!(elements[j].offsetWidth/elements[j].offsetHeight <= el_width/el_height)) {
 
-                  test = false;
-                  break test_conditions;
+                  test = false
+                  break test_conditions
 
                 }
 
-              break;
+              break
 
             }
           }
@@ -1123,32 +1125,32 @@ License: MIT
           if (test === true) {
 
             // Get the CSS code to apply to the element
-            css_code = EQCSS.data[i].style;
+            css_code = EQCSS.data[i].style
 
             // Replace eval('xyz') with the result of try{with(element){eval(xyz)}} in JS
             css_code = css_code.replace(
               /eval\( *((".*?")|('.*?')) *\)/g,
               function(string, match) {
 
-                return EQCSS.tryWithEval(elements[j], match);
+                return EQCSS.tryWithEval(elements[j], match)
 
               }
-            );
+            )
 
             // Replace '$this' or 'eq_this' with '[element_guid]'
-            css_code = css_code.replace(/(\$|eq_)this/gi, '[' + element_guid + ']');
+            css_code = css_code.replace(/(\$|eq_)this/gi, '[' + element_guid + ']')
 
             // Replace '$parent' or 'eq_parent' with '[element_guid_parent]'
-            css_code = css_code.replace(/(\$|eq_)parent/gi, '[' + element_guid_parent + ']');
+            css_code = css_code.replace(/(\$|eq_)parent/gi, '[' + element_guid_parent + ']')
 
             // Replace '$prev' or 'eq_prev' with '[element_guid_prev]'
-            css_code = css_code.replace(/(\$|eq_)prev/gi, '[' + element_guid_prev + ']');
+            css_code = css_code.replace(/(\$|eq_)prev/gi, '[' + element_guid_prev + ']')
 
             // Replace '$next' or 'eq_next' with '[element_guid_next]'
-            css_code = css_code.replace(/(\$|eq_)next/gi, '[' + element_guid_next + ']');
+            css_code = css_code.replace(/(\$|eq_)next/gi, '[' + element_guid_next + ']')
 
             // Replace '$root' or 'eq_root' with html
-            css_code = css_code.replace(/(\$|eq_)root/gi, 'html');
+            css_code = css_code.replace(/(\$|eq_)root/gi, 'html')
 
             // Replace 'ew', 'eh', 'emin', and 'emax' units
             css_code = css_code.replace(/(\d*\.?\d+)(?:\s*)(ew|eh|emin|emax)/gi, function(match, $1, $2) {
@@ -1158,46 +1160,46 @@ License: MIT
                 // Element width units
                 case 'ew':
 
-                  return elements[j].offsetWidth / 100 * $1 + 'px';
+                  return elements[j].offsetWidth / 100 * $1 + 'px'
 
-                break;
+                break
 
                 // Element height units
                 case 'eh':
 
-                  return elements[j].offsetHeight / 100 * $1 + 'px';
+                  return elements[j].offsetHeight / 100 * $1 + 'px'
 
-                break;
+                break
 
                 // Element min units
                 case 'emin':
 
-                  return Math.min(elements[j].offsetWidth, elements[j].offsetHeight) / 100 * $1 + 'px';
+                  return Math.min(elements[j].offsetWidth, elements[j].offsetHeight) / 100 * $1 + 'px'
 
-                break;
+                break
 
                 // Element max units
                 case 'emax':
 
-                  return Math.max(elements[j].offsetWidth, elements[j].offsetHeight) / 100 * $1 + 'px';
+                  return Math.max(elements[j].offsetWidth, elements[j].offsetHeight) / 100 * $1 + 'px'
 
-                break;
+                break
 
               }
 
-            });
+            })
 
             // good browsers
             try {
 
-              css_block.innerHTML = css_code;
+              css_block.innerHTML = css_code
 
             }
 
             // IE8
             catch(e) {
 
-              css_block.styleSheet.cssText = css_code;
+              css_block.styleSheet.cssText = css_code
 
             }
 
@@ -1209,14 +1211,14 @@ License: MIT
             // Good browsers
             try {
 
-              css_block.innerHTML = '';
+              css_block.innerHTML = ''
 
             }
 
             // IE8
             catch(e) {
 
-              css_block.styleSheet.cssText = '';
+              css_block.styleSheet.cssText = ''
 
             }
 
@@ -1236,8 +1238,8 @@ License: MIT
 
     EQCSS.tryWithEval = function(element, string) {
 
-      var $it = element;
-      var ret = '';
+      var $it = element
+      var ret = ''
 
       try {
 
@@ -1247,11 +1249,11 @@ License: MIT
 
       catch(e) {
 
-        ret = '';
+        ret = ''
 
       }
 
-      return ret;
+      return ret
 
     }
 
@@ -1265,19 +1267,19 @@ License: MIT
     EQCSS.reset = function() {
 
       // Reset EQCSS.data, removing previously parsed queries
-      EQCSS.data = [];
+      EQCSS.data = []
 
       // Remove EQCSS-generated style tags from head
-      var style_tag = document.querySelectorAll('head style[id^="data-eqcss-"]');
+      var style_tag = document.querySelectorAll('head style[id^="data-eqcss-"]')
 
       for (var i = 0; i < style_tag.length; i++) {
 
-        style_tag[i].parentNode.removeChild(style_tag[i]);
+        style_tag[i].parentNode.removeChild(style_tag[i])
 
       }
 
       // Remove EQCSS-generated attributes from all tags
-      var tag = document.querySelectorAll('*');
+      var tag = document.querySelectorAll('*')
 
       // For each tag in the document
       for (var j = 0; j < tag.length; j++) {
@@ -1307,43 +1309,43 @@ License: MIT
 
     EQCSS.domReady = function(fn) {
 
-      var done = false;
-      var top = true;
-      var doc = window.document;
-      var root = doc.documentElement;
-      var modern = !~navigator.userAgent.indexOf('MSIE 8');
-      var add = modern ? 'addEventListener' : 'attachEvent';
-      var rem = modern ? 'removeEventListener' : 'detachEvent';
-      var pre = modern ? '' : 'on';
+      var done = false
+      var top = true
+      var doc = window.document
+      var root = doc.documentElement
+      var modern = !~navigator.userAgent.indexOf('MSIE 8')
+      var add = modern ? 'addEventListener' : 'attachEvent'
+      var rem = modern ? 'removeEventListener' : 'detachEvent'
+      var pre = modern ? '' : 'on'
       var init = function(e) {
 
-        if (e.type === 'readystatechange' && doc.readyState !== 'complete') return;
+        if (e.type === 'readystatechange' && doc.readyState !== 'complete') return
 
-        (e.type === 'load' ? window : doc)[rem](pre + e.type, init, false);
+        (e.type === 'load' ? window : doc)[rem](pre + e.type, init, false)
 
-        if (!done && (done = true)) fn.call(window, e.type || e);
+        if (!done && (done = true)) fn.call(window, e.type || e)
 
       },
       poll = function() {
 
         try {
 
-          root.doScroll('left');
+          root.doScroll('left')
 
         }
 
         catch(e) {
 
-          setTimeout(poll, 50);
-          return;
+          setTimeout(poll, 50)
+          return
 
         }
 
-        init('poll');
+        init('poll')
 
-      };
+      }
 
-      if (doc.readyState === 'complete') fn.call(window, 'lazy');
+      if (doc.readyState === 'complete') fn.call(window, 'lazy')
 
       else {
 
@@ -1351,19 +1353,19 @@ License: MIT
 
           try {
 
-            top = !window.frameElement;
+            top = !window.frameElement
 
           }
 
           catch(e) {}
 
-          if (top) poll();
+          if (top) poll()
 
         }
 
-        doc[add](pre + 'DOMContentLoaded', init, false);
-        doc[add](pre + 'readystatechange', init, false);
-        window[add](pre + 'load', init, false);
+        doc[add](pre + 'DOMContentLoaded', init, false)
+        doc[add](pre + 'readystatechange', init, false)
+        window[add](pre + 'load', init, false)
 
       }
 
@@ -1375,34 +1377,34 @@ License: MIT
      * Ensures EQCSS.apply() is not called more than once every (EQCSS_timeout)ms
      */
 
-    var EQCSS_throttle_available = true;
-    var EQCSS_throttle_queued = false;
-    var EQCSS_mouse_down = false;
-    var EQCSS_timeout = 200;
+    var EQCSS_throttle_available = true
+    var EQCSS_throttle_queued = false
+    var EQCSS_mouse_down = false
+    var EQCSS_timeout = 200
 
     EQCSS.throttle = function() {
 
       if (EQCSS_throttle_available) {
 
-        EQCSS.apply();
-        EQCSS_throttle_available = false;
+        EQCSS.apply()
+        EQCSS_throttle_available = false
 
         setTimeout(function() {
 
-          EQCSS_throttle_available = true;
+          EQCSS_throttle_available = true
 
           if (EQCSS_throttle_queued) {
 
-            EQCSS_throttle_queued = false;
-            EQCSS.apply();
+            EQCSS_throttle_queued = false
+            EQCSS.apply()
 
           }
 
-        }, EQCSS_timeout);
+        }, EQCSS_timeout)
 
       } else {
 
-        EQCSS_throttle_queued = true;
+        EQCSS_throttle_queued = true
 
       }
 
@@ -1411,51 +1413,51 @@ License: MIT
     // Call load (and apply, indirectly) on page load
     EQCSS.domReady(function() {
 
-      EQCSS.load();
-      EQCSS.throttle();
+      EQCSS.load()
+      EQCSS.throttle()
 
-    });
+    })
 
     // On resize, scroll, input, click, mousedown + mousemove, call EQCSS.throttle.
-    window.addEventListener('resize', EQCSS.throttle);
-    window.addEventListener('input', EQCSS.throttle);
-    window.addEventListener('click', EQCSS.throttle);
+    window.addEventListener('resize', EQCSS.throttle)
+    window.addEventListener('input', EQCSS.throttle)
+    window.addEventListener('click', EQCSS.throttle)
 
     window.addEventListener('mousedown', function(e) {
 
       // If left button click
       if (e.which === 1) {
 
-        EQCSS_mouse_down = true;
+        EQCSS_mouse_down = true
 
       }
 
-    });
+    })
 
     window.addEventListener('mousemove', function() {
 
       if (EQCSS_mouse_down) {
 
-        EQCSS.throttle();
+        EQCSS.throttle()
 
       }
 
-    });
+    })
 
     window.addEventListener('mouseup', function() {
 
-      EQCSS_mouse_down = false;
-      EQCSS.throttle();
+      EQCSS_mouse_down = false
+      EQCSS.throttle()
 
-    });
+    })
 
-    //window.addEventListener('scroll', EQCSS.throttle);
+    //window.addEventListener('scroll', EQCSS.throttle)
     // => to avoid annoying slowness, scroll events are only listened on elements that have a scroll EQ.
 
 
     // Debug: here's a shortcut for console.log
     function l(a) { console.log(a) }
 
-    return EQCSS;
+    return EQCSS
 
-}));
+}))

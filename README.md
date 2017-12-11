@@ -50,11 +50,11 @@ Or from Yarn via
 EQCSS is also hosted on CDNjs and you can use the version hosted there for your projects: [https://cdnjs.com/libraries/eqcss](https://cdnjs.com/libraries/eqcss):
 
 ```
-https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.7.2/EQCSS-polyfills.min.js
+https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.7.3/EQCSS-polyfills.min.js
 ```
 
 ```
-https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.7.2/EQCSS.min.js
+https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.7.3/EQCSS.min.js
 ```
 
 ## Writing Element Queries

@@ -1,7 +1,7 @@
 /*
 
 #  EQCSS IE8 Polyfills
-## version 1.7.2
+## version 1.7.3
 
 This file contains optional polyfills to provide:
 IE8 support to the EQCSS.js plugin
@@ -34,7 +34,7 @@ License: MIT
   }
   function addEvent(on, fn, self) {
     return (self = this).attachEvent('on' + on, function(e) {
-      var e = e || win.event;
+      e = e || win.event;
       e.preventDefault  = e.preventDefault  || function(){e.returnValue = false}
       e.stopPropagation = e.stopPropagation || function(){e.cancelBubble = true}
       try {
@@ -44,7 +44,7 @@ License: MIT
     });
   }
   function addListen(obj, i) {
-    if (i = obj.length) while (i--) obj[i].addEventListener = addEvent;
+    if ((i = obj.length)) while (i--) obj[i].addEventListener = addEvent;
     else obj.addEventListener = addEvent;
     return obj;
   }
@@ -73,7 +73,7 @@ License: MIT
 
   function getComputedStylePixel(element, property, fontSize) {
     // Internet Explorer sometimes struggles to read currentStyle until the element's document is accessed.
-    var value = element.document && element.currentStyle[property].match(/([\d\.]+)(%|cm|em|in|mm|pc|pt|)/) || [0, 0, ''],
+    var value = element.document && element.currentStyle[property].match(/([\d.]+)(%|cm|em|in|mm|pc|pt|)/) || [0, 0, ''],
         size = value[1],
         suffix = value[2],
         rootSize;
