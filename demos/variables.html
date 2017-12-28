@@ -15,34 +15,34 @@
       text-align: center;
     }
     @element 'div' {
-      $this:before {
+      :self:before {
         content: 'eval("coolDude")';
       }
-      $this:after {
+      :self:after {
         content: ' is a cool dude';
       }
     }
     @element 'aside' {
-      $this:before {
+      :self:before {
         content: 'The time is: ';
       }
-      $this:after {
+      :self:after {
         content: 'eval("new Date()")';
       }
     }
     @element 'span' {
-      $this:before {
+      :self:before {
         content: 'Your viewport is: eval("window.innerWidth")';
       }
-      $this:after {
+      :self:after {
         content: ' by eval("window.innerHeight")';
       }
     }
     @element 'article' {
-      $this:before {
+      :self:before {
         content: 'Five plus ten is: ';
       }
-      $this:after {
+      :self:after {
         content: 'eval("addTen(5)")';
       }
     }

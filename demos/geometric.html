@@ -30,15 +30,15 @@
       body {
         padding: eval("stroke");
       }
-      $this,
-      $this:before,
-      $this:after,
-      $this * {
+      :self,
+      :self:before,
+      :self:after,
+      :self * {
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
       }
-      $this {
+      :self {
         display: block;
         margin: 0 auto;
         width: eval("width");
@@ -46,26 +46,26 @@
         position: relative;
         max-width: calc(100vmin - 2em);
       }
-      $this:before,
-      $this:after {
+      :self:before,
+      :self:after {
         content: '';
         display: block;
         background: eval("color");
         position: absolute;
       }
-      $this:before {
+      :self:before {
         width: eval("stroke");
         height: calc(100% + eval("stroke")*2);
         top: -eval("stroke");
         left: calc(50% - eval("stroke")/2);
       }
-      $this:after {
+      :self:after {
         width: calc(100% + eval("stroke")*2);
         height: eval("stroke");
         top: calc(50% - eval("stroke")/2);
         left: -eval("stroke");
       }
-      $this i {
+      :self i {
         display: block;
         width: calc(50% + eval("stroke")*1.5);
         height: calc(50% + eval("stroke")*1.5);
@@ -74,45 +74,45 @@
         position: absolute;
         background: rgba(eval("color"),.1);
       }
-      $this i:nth-child(1) {
+      :self i:nth-child(1) {
         width: calc(100% + eval("stroke")*2);
         height: calc(100% + eval("stroke")*2);
         top: -eval("stroke");
         left: -eval("stroke");
       }
-      $this i:nth-child(2) {
+      :self i:nth-child(2) {
         top: -eval("stroke");
         left: calc(25% - eval("stroke")/1.5);
       }
-      $this i:nth-child(3) {
+      :self i:nth-child(3) {
         top: calc(25% - eval("stroke")/1.5);
         left: calc(0% - eval("stroke"));
       }
-      $this i:nth-child(4) {
+      :self i:nth-child(4) {
         bottom: calc(25% - eval("stroke")/1.5);
         right: calc(0% - eval("stroke"));
       }
-      $this i:nth-child(5) {
+      :self i:nth-child(5) {
         bottom: calc(0% - eval("stroke"));
         left: calc(25% - eval("stroke")/1.5);
       }
-      $this i:nth-child(n+6) {
+      :self i:nth-child(n+6) {
         width: calc(41.5% + eval("stroke")*1.5);
         height: calc(41.5% + eval("stroke")*1.5);
       }
-      $this i:nth-child(6) {
+      :self i:nth-child(6) {
         left: calc(8.5% - eval("stroke")/1.5);
         top: calc(8.5% - eval("stroke")/1.5);
       }
-      $this i:nth-child(7) {
+      :self i:nth-child(7) {
         right: calc(8.5% - eval("stroke")/1.5);
         top: calc(8.5% - eval("stroke")/1.5);
       }
-      $this i:nth-child(8) {
+      :self i:nth-child(8) {
         left: calc(8.5% - eval("stroke")/1.5);
         bottom: calc(8.5% - eval("stroke")/1.5);
       }
-      $this i:nth-child(9) {
+      :self i:nth-child(9) {
         right: calc(8.5% - eval("stroke")/1.5);
         bottom: calc(8.5% - eval("stroke")/1.5);
       }

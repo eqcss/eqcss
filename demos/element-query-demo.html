@@ -145,53 +145,53 @@
       display: none;
     }
     @element '[data-best-picture] p' and (min-width: 220px) {
-      $this:before {
+      :self:before {
         display: inline;
       }
     }
     @element '[data-best-picture] .winner div' and (min-width: 220px) {
-      $this:before {
+      :self:before {
         content: 'Best Picture Winner';
       }
     }
     @element '[data-best-picture]' and (min-width: 400px) {
-      $this h1 {
+      :self h1 {
         background: none;
         color: #333;
         font-size: 1.25em;
       }
-      $this li {
+      :self li {
         display: inline-block;
         width: 50%;
       }
-      $this li + li {
+      :self li + li {
         border-top: none;
         padding-top: auto;
         margin-top: auto;
         margin-left: -4px;
       }
-      $this a {
+      :self a {
         overflow: hidden;
         margin: 0.5em;
         border: 1px solid #333;
         box-shadow: 0 0.125em 0.25em rgba(0, 0, 0, 0.5);
       }
-      $this a:after {
+      :self a:after {
         display: block;
         content: '';
         padding-top: 147.5095785%;
       }
-      $this img {
+      :self img {
         float: none;
         width: 100%;
         position: absolute;
         display: block;
       }
-      $this a:hover img {
+      :self a:hover img {
         -webkit-transform: scale(1.1);
                 transform: scale(1.1);
       }
-      $this div {
+      :self div {
         float: none;
         width: 100%;
         position: absolute;
@@ -200,12 +200,12 @@
         background: -webkit-linear-gradient(270deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.9));
         background: linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.9));
       }
-      $this .winner div {
+      :self .winner div {
         background: -webkit-linear-gradient(270deg, rgba(193, 165, 32, 0.9), rgba(137, 100, 14, 0.9));
         background: linear-gradient(180deg, rgba(193, 165, 32, 0.9), rgba(137, 100, 14, 0.9));
         padding: 0.5em 1em 1.5em;
       }
-      $this .winner div:before {
+      :self .winner div:before {
         content: '2015 Winner';
         color: white;
         font-family: "Tauri", sans-serif;
@@ -217,24 +217,24 @@
         letter-spacing: 0.25em;
         margin: 0 -1em 0.5em;
       }
-      $this h2 {
+      :self h2 {
         font-size: 1.125em;
         color: white;
         text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
       }
-      $this .winner h2 {
+      :self .winner h2 {
         font-weight: 700;
         color: white;
         text-shadow: 0 -1px #89640E;
       }
-      $this p {
+      :self p {
         color: white;
         text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
       }
-      $this p:before {
+      :self p:before {
         color: #aaa;
       }
-      $this .winner p {
+      :self .winner p {
         color: #312A05;
         text-shadow: 0 1px rgba(214, 188, 46, 0.4);
       }
@@ -243,33 +243,33 @@
       }
     }
     @element '[data-best-picture]' and (min-width: 600px) {
-      $this h1 {
+      :self h1 {
         font-size: 1.75em;
       }
-      $this ol {
+      :self ol {
         margin: 1em;
       }
-      $this li {
+      :self li {
         width: 33.333%;
       }
     }
     @element '[data-best-picture]' and (min-width: 900px) {
-      $this h1 {
+      :self h1 {
         font-size: 2.5em;
       }
-      $this li {
+      :self li {
         width: 25%;
       }
     }
     @element 'article' and (min-width: 900px) {
-      $this section,
-      $this aside {
+      :self section,
+      :self aside {
         float: left;
       }
-      $this section {
+      :self section {
         width: 75%;
       }
-      $this aside {
+      :self aside {
         display: block;
         width: 25%
       }

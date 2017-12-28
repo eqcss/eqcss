@@ -21,10 +21,10 @@
 
     /* Table Styles */
     @element '[data-table]' {
-      $this,
-      $this *,
-      $this *:before,
-      $this *:after {
+      :self,
+      :self *,
+      :self *:before,
+      :self *:after {
         -webkit-box-sizing: border-box !important;
         -moz-box-sizing: border-box !important;
         box-sizing: border-box !important;
@@ -33,7 +33,7 @@
         -moz-osx-font-smoothing: grayscale;
         font-kerning: auto;
       }
-      $this {
+      :self {
         width: 100%;
         margin: 15px 0 10px 0 !important;
         color: #333;
@@ -42,29 +42,29 @@
         font-size: 12pt;
         border-collapse: collapse !important;
       }
-      $this thead {
+      :self thead {
         display: table-header-group;
       }
-      $this tfoot {
+      :self tfoot {
         display: table-footer-group;
       }
-      $this thead th,
-      $this tfoot th {
+      :self thead th,
+      :self tfoot th {
         color: #777;
         background: rgba(0,0,0,.1);
         border-bottom-color: #ccc !important;
       }
-      $this caption {
+      :self caption {
         padding:.5em;
       }
-      $this tbody tr:nth-of-type(odd) {
+      :self tbody tr:nth-of-type(odd) {
         background: rgba(0,0,0,.05);
       }
-      $this td:last-child {
+      :self td:last-child {
         width: 100%;
         text-align: center;
       }
-      $this a {
+      :self a {
         display: inline-block;
         width: 30px;
         height: 30px;
@@ -78,19 +78,19 @@
         underline: none;
         transition: all .2s ease-in-out;
       }
-      $this a:nth-of-type(2) {
+      :self a:nth-of-type(2) {
          font-size: 18px !important;
       }
-      $this a:hover {
+      :self a:hover {
         color: #773570;
       }
-      $this a[data-delete]:hover {
+      :self a[data-delete]:hover {
         color: #c00;
       }
-      $this a + a {
+      :self a + a {
         margin-left: 10px;
       }
-      $this a:before {
+      :self a:before {
         content: '';
         border: 5px solid transparent;
         border-top-color: #773570;
@@ -98,7 +98,7 @@
         top: -7px;
         left: calc(50% - 5px);
       }
-      $this a:after {
+      :self a:after {
         content: attr(data-caption);
         display: block;
         width: auto;
@@ -115,40 +115,40 @@
         background: #773570;
         box-shadow: inset rgba(0,0,0,.3) 0 0 1px, inset rgba(255,255,255,.3) 0 1px 0, rgba(0,0,0,.10) 0 1px 2px;
       }
-      $this a:before,
-      $this a:after {
+      :self a:before,
+      :self a:after {
         visibility: hidden;
         opacity: 0;
         pointer-events: none;
         transition: all .2s ease-in-out;
       }
-      $this a:hover:before,
-      $this a:hover:after {
+      :self a:hover:before,
+      :self a:hover:after {
         visibility: visible;
         opacity: 1;
       }
-      $this a[data-delete]:before {
+      :self a[data-delete]:before {
         border-top-color: #c00;
       }
-      $this a[data-delete]:after {
+      :self a[data-delete]:after {
         background: #c00;
       }
     }
     /* Stacked Table */
     @element '[data-table]' and (max-width: 525px) {
-      $this caption,
-      $this tbody,
-      $this tr,
-      $this th,
-      $this td { display: block; width: 100%; }
-      $this thead,
-      $this tfoot {
+      :self caption,
+      :self tbody,
+      :self tr,
+      :self th,
+      :self td { display: block; width: 100%; }
+      :self thead,
+      :self tfoot {
         display: none;
       }
-      $this td:before {
+      :self td:before {
         content: attr(data-header)' ';
       }
-      $this td:first-child {
+      :self td:first-child {
         font-weight: 700;
         color: #333;
         font-size: 14pt;
@@ -156,20 +156,20 @@
         letter-spacing: -.02em;
         padding: 10px 5px 0 10px;
       }
-      $this td:nth-child(2) {
+      :self td:nth-child(2) {
         padding: 0 5px 0 10px;
         font-size: 10pt;
         color: #777;
         font-weight: 500;
       }
-      $this td:first-child:before,
-      $this td:last-child:before {
+      :self td:first-child:before,
+      :self td:last-child:before {
         content: '';
       }
-      $this tr + tr {
+      :self tr + tr {
         border-top: 1px solid #ccc;
       }
-      $this td {
+      :self td {
         border: none;
         color: #333;
         font-size: 12pt;
@@ -180,49 +180,49 @@
     }
     /* Wide Table */
     @element '[data-table]' and (min-width: 525px) {
-      $this { display: table; width: auto; }
-      $this caption { display: table-caption; width: auto; }
-      $this thead { display: table-header-group; width: auto; }
-      $this tbody { display: table-row-group; width: auto; }
-      $this tfoot { display: table-footer-group; width: auto; }
-      $this tr { display: table-row; width: auto; }
-      $this th,
-      $this td { display: table-cell; width: auto; }
-      $this td:before {
+      :self { display: table; width: auto; }
+      :self caption { display: table-caption; width: auto; }
+      :self thead { display: table-header-group; width: auto; }
+      :self tbody { display: table-row-group; width: auto; }
+      :self tfoot { display: table-footer-group; width: auto; }
+      :self tr { display: table-row; width: auto; }
+      :self th,
+      :self td { display: table-cell; width: auto; }
+      :self td:before {
         display: none;
       }
-      $this th,
-      $this td {
+      :self th,
+      :self td {
         padding: 10px !important;
         text-align: left;
         border: 1px solid lightgrey;
       }
-      $this th:nth-child(2) {
+      :self th:nth-child(2) {
         border-right: none !important;
       }
-      $this th:last-child {
+      :self th:last-child {
         border-left: none !important;
         background-image: none !important;
       }
-      $this td {
+      :self td {
         color: #333;
         font-size: 12pt;
         font-weight: 400;
       }
-      $this a {
+      :self a {
         display: block;
         float: left;
       }
-      $this td:first-child {
+      :self td:first-child {
         font-weight: 600;
         width: 100%;
       }
-      $this td:last-child:after {
+      :self td:last-child:after {
         content: '';
         display: block;
         clear: both;
       }
-      $this td:last-child {
+      :self td:last-child {
         padding: 7px !important;
         min-width: calc(30px + 10px + 30px + 10px + 30px + 10px + 30px + 15px);
       }

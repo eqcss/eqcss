@@ -252,25 +252,25 @@
     }
     /* Element Queries */
     @element "[data-media]" and (max-width: 229px) {
-      $this [data-button] {
+      :self [data-button] {
         width: 100%;
         margin: 10px 0 0 0 !important;
       }
-      $this [data-button][data-play] {
+      :self [data-button][data-play] {
         margin-top: 5px !important;
         margin-left: 0 !important;
       }
     }
     @element "[data-media]" and (min-width: 230px) and (max-width: 415px) {
-      $this [data-button] {
+      :self [data-button] {
         width: calc(50% - 5px);
         margin: 10px 0 0 0 !important;
         float: left;
       }
-      $this [data-button]:nth-child(odd) {
+      :self [data-button]:nth-child(odd) {
         margin-left: 10px !important;
       }
-      $this [data-button][data-play] {
+      :self [data-button][data-play] {
         width: 100%;
         margin: 5px 0 0 0 !important;
       }

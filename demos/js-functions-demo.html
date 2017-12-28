@@ -21,7 +21,7 @@
       font-size: 12pt;
     }
     @element 'body' {
-      $this {
+      :self {
         color: hexa(#000,.8);
         background: rgba(eval("hex2rgb('#999')"),.7);
       }
@@ -46,7 +46,7 @@
   <h2>How To Use <code>hex2rgb()</code> With EQCSS</h2>
   <p>If you want to use this hex to RGB conversion in external stylesheets, or use <code>hex2rgb()</code> in more places than just where you want to use an <code>rgba()</code> formatted color, you can pair the <code>hex2rgb()</code> function with EQCSS&rsquo;s <code>eval("")</code> function like this:</p>
   <pre>@element 'body' {
-  $this {
+  :self {
     color: hexa(#000,.8);
     background: rgba(eval("hex2rgb('#999')"),.7);
   }

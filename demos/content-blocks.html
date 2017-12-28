@@ -303,119 +303,119 @@
     /* Element Queries */
     /* Cover Theme */
     @element "[data-block=cover] div" and (min-children: 4) and (max-width: 249px) {
-      $this [data-reveal] {
+      :self [data-reveal] {
         display: block;
       }
     }
     @element "[data-block=cover]" and (min-width: 250px) and (max-width: 449px) {
-      $this article {
+      :self article {
         width: calc(50% - 7.5px) !important;
         margin-right: 15px;
       }
-      $this article:nth-child(even) {
+      :self article:nth-child(even) {
         margin-right: 0;
       }
-      $this article:nth-child(-n+2) {
+      :self article:nth-child(-n+2) {
         display: block;
         margin-top: 0;
       }
     }
     @element "[data-block=cover] div" and (min-children: 5) and (max-width: 449px) {
-      $this [data-reveal] {
+      :self [data-reveal] {
         display: block;
       }
     }
     @element "[data-block=cover]" and (min-width: 450px) {
-      $this article {
+      :self article {
         width: calc(33.33% - 10px) !important;
         margin-right: 15px;
       }
-      $this article:nth-child(even) {
+      :self article:nth-child(even) {
         margin-right: 15px;
       }
-      $this article:nth-child(3n) {
+      :self article:nth-child(3n) {
         margin-right: 0;
       }
-      $this article:nth-child(-n+3) {
+      :self article:nth-child(-n+3) {
         display: block;
         margin-top: 0;
       }
     }
     @element "[data-block=cover] div" and (min-children: 6) and (min-width: 450px) and (max-width: 649px) {
-      $this [data-reveal] {
+      :self [data-reveal] {
         display: block;
       }
     }
     @element "[data-block=cover]" and (min-width: 650px) {
-      $this article {
+      :self article {
         width: calc(25% - 11.5px) !important;
         margin-right: 15px;
       }
-      $this article:nth-child(3n) {
+      :self article:nth-child(3n) {
         margin-right: 15px;
       }
-      $this article:nth-child(4n) {
+      :self article:nth-child(4n) {
         margin-right: 0;
       }
-      $this article:nth-child(-n+4) {
+      :self article:nth-child(-n+4) {
         display: block;
         margin-top: 0;
       }
     }
     @element "[data-block=cover] div" and (min-children: 7) and (min-width: 650px) and (max-width: 849px) {
-      $this [data-reveal] {
+      :self [data-reveal] {
         display: block;
       }
     }
     @element "[data-block=cover]" and (min-width: 850px) {
-      $this article {
+      :self article {
         width: calc(20% - 12px) !important;
         margin-right: 15px;
       }
-      $this article:nth-child(4n) {
+      :self article:nth-child(4n) {
         margin-right: 15px;
       }
-      $this article:nth-child(5n) {
+      :self article:nth-child(5n) {
         margin-right: 0;
       }
-      $this article:nth-child(-n+5) {
+      :self article:nth-child(-n+5) {
         display: block;
         margin-top: 0;
       }
     }
     @element "[data-block=cover] div" and (min-children: 8) and (min-width: 850px) {
-      $this [data-reveal] {
+      :self [data-reveal] {
         display: block;
       }
     }
     /* Button Theme */
     @element "[data-block=button] div" and (min-children: 6) and (max-width: 449px) {
-      $this [data-reveal] {
+      :self [data-reveal] {
         display: block;
       }
     }
     @element "[data-block=button]" and (min-width: 450px) {
-      $this article {
+      :self article {
         width: calc(50% - 7.5px) !important;
         margin-right: 15px;
       }
-      $this article:nth-child(even) {
+      :self article:nth-child(even) {
         margin-right: 0;
       }
-      $this article:nth-child(-n+2) {
+      :self article:nth-child(-n+2) {
         margin-top: 0;
       }
-      $this article:nth-child(-n+6) {
+      :self article:nth-child(-n+6) {
         display: block;
       }
     }
     @element "[data-block=button] div" and (min-children: 9) and (min-width: 450px) and (max-width: 849px) {
-      $this [data-reveal] {
+      :self [data-reveal] {
         display: block;
       }
     }
     @element "[data-block=button] div" and (min-children: 12) and (min-width: 850px) {
-      $this [data-reveal] {
+      :self [data-reveal] {
         display: block;
       }
     }
@@ -441,73 +441,73 @@
     }
     /* Icon Theme */
     @element "[data-block=icon] div" and (min-children: 6) and (max-width: 449px) {
-      $this [data-reveal] {
+      :self [data-reveal] {
         display: block;
       }
     }
     @element "[data-block=icon]" and (min-width: 450px) {
-      $this article {
+      :self article {
         width: calc(50% - 7.5px) !important;
         margin-right: 15px;
       }
-      $this article:nth-child(even) {
+      :self article:nth-child(even) {
         margin-right: 0;
       }
-      $this article:nth-child(-n+2) {
+      :self article:nth-child(-n+2) {
         margin-top: 0;
       }
-      $this article:nth-child(-n+8) {
+      :self article:nth-child(-n+8) {
         display: block;
       }
     }
     @element "[data-block=icon] div" and (min-children: 11) and (min-width: 450px) and (max-width: 649px) {
-      $this [data-reveal] {
+      :self [data-reveal] {
         display: block;
       }
     }
     @element "[data-block=icon]" and (min-width: 650px) {
-      $this article {
+      :self article {
         width: calc(33.33% - 10px) !important;
         margin-right: 15px;
       }
-      $this article:nth-child(even) {
+      :self article:nth-child(even) {
         margin-right: 15px;
       }
-      $this article:nth-child(3n) {
+      :self article:nth-child(3n) {
         margin-right: 0;
       }
-      $this article:nth-child(-n+3) {
+      :self article:nth-child(-n+3) {
         margin-top: 0;
       }
-      $this article:nth-child(-n+9) {
+      :self article:nth-child(-n+9) {
         display: block;
       }
     }
     @element "[data-block=icon] div" and (min-children: 12) and (min-width: 650px) and (max-width: 849px) {
-      $this [data-reveal] {
+      :self [data-reveal] {
         display: block;
       }
     }
     @element "[data-block=icon]" and (min-width: 850px) {
-      $this article {
+      :self article {
         width: calc(25% - 11.5px) !important;
         margin-right: 15px;
       }
-      $this article:nth-child(3n) {
+      :self article:nth-child(3n) {
         margin-right: 15px;
       }
-      $this article:nth-child(4n) {
+      :self article:nth-child(4n) {
         margin-right: 0;
       }
-      $this article:nth-child(-n+4) {
+      :self article:nth-child(-n+4) {
         margin-top: 0;
       }
-      $this article:nth-child(-n+16) {
+      :self article:nth-child(-n+16) {
         display: block;
       }
     }
     @element "[data-block=icon] div" and (min-children: 19) and (min-width: 850px) {
-      $this [data-reveal] {
+      :self [data-reveal] {
         display: block;
       }
     }

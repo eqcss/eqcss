@@ -170,8 +170,8 @@
   <p>At the contrary, if all the conditions are NOT met, the <code>style</code> block is emptied and the corresponding style disappears into the page.</p>
   <p>Special keywords are handled like this:</p>
   <ul>
-    <li>To make scoped styles, eqcss allows to use the keyword <code>$this</code> into the query. The trick here is to replace <q><code>$this</code></q> with <q><code>[data-eqcss_X_Y]</code></q> before copying the css code into the <code>style</code> block. This produced a CSS selector that matches only the element having the current GUID, i.e. the current element, that we want to call <q><code>$this</code></q>.</li>
-    <li><q><code>$parent</code></q> is quite similar: EQCSS replaces it with <q><code>[data-eqcss-X-Y-parent]</code></q> in the CSS code before applying it.</li>
+    <li>To make scoped styles, eqcss allows to use the keyword <code>:self</code> into the query. The trick here is to replace <q><code>:self</code></q> with <q><code>[data-eqcss_X_Y]</code></q> before copying the css code into the <code>style</code> block. This produced a CSS selector that matches only the element having the current GUID, i.e. the current element, that we want to call <q><code>:self</code></q>.</li>
+    <li><q><code>:parent</code></q> is quite similar: EQCSS replaces it with <q><code>[data-eqcss-X-Y-parent]</code></q> in the CSS code before applying it.</li>
     <li><q><code>$root</code></q> is replaced by <q><code>html</code></q></li>
     <li>And when EQCSS meets something like <q><code>eval("abcd")</code></q> or <q><code>eval("oneFunction()")</code></q>, it evaluates the expression inside (in JavaScript) the parenthesis and replaces it with the value returned. Ex: if <code>abcd = 40</code>, <q><code>width: eval("abcd")px</code></q> becomes <q><code>width: 40px</code></q>.</li>
   </ul>

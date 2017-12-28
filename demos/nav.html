@@ -16,7 +16,7 @@
       body {
         margin: 0;
       }
-      $this * {
+      :self * {
         box-sizing: border-box;
         -moz-box-sizing: border-box;
         text-rendering: optimizeLegibility;
@@ -26,10 +26,10 @@
         font-kerning: auto;
         outline: none;
       }
-      $this {
+      :self {
         background: #333;
       }
-      $this .brand {
+      :self .brand {
         display: block;
         color: #fff;
         font-weight: 600;
@@ -38,15 +38,15 @@
         font-size: 140%;
         position: relative;
       }
-      $this input {
+      :self input {
         display: none;
       }
-      $this label {
+      :self label {
         display: block;
         position: relative;
       }
-      $this label span,
-      $this label > div a {
+      :self label span,
+      :self label > div a {
         display: block;
         padding: 1em;
         color: #fff;
@@ -63,19 +63,19 @@
         position: relative;
         transition: color .1s ease-in-out;
       }
-      $this label span:hover,
-      $this label span:focus,
-      $this a:hover,
-      $this a:focus {
+      :self label span:hover,
+      :self label span:focus,
+      :self a:hover,
+      :self a:focus {
         color: #f0c;
       }
-      $this label > div a {
+      :self label > div a {
         padding: 1em 1em 0 1em;
       }
-      $this label > div a:last-child {
+      :self label > div a:last-child {
         padding-bottom: 1em;
       }
-      $this input + label > div {
+      :self input + label > div {
         display: none;
         background: #333;
         position: relative;
@@ -84,23 +84,23 @@
         z-index: 3000;
         transition: all .5s ease-in-out;
       }
-      $this input:checked + label {
+      :self input:checked + label {
         background: #333;
       }
-      $this input:checked + label span {
+      :self input:checked + label span {
         color: #cf0;
         z-index: 100;
       }
-      $this input:checked + label > div {
+      :self input:checked + label > div {
         display: block;
         z-index: 3000;
       }
-      $this input:checked ~ label[for="reset"] {
+      :self input:checked ~ label[for="reset"] {
         opacity: 1;
         pointer-events: all;
         background: transparent;
       }
-      $this label[for="reset"] {
+      :self label[for="reset"] {
         position: fixed;
         top: 0;
         left: 0;
@@ -113,59 +113,59 @@
         transition: all .2s ease-in-out;
         pointer-events: none;
       }
-      $this input#reset:checked + label {
+      :self input#reset:checked + label {
         opacity: 0;
         pointer-events: none;
       }
     }
     /* Mobile Menu View */
     @element '.eqNav' and (max-width: 499px) {
-      $this {
+      :self {
         text-align: center;
       }
-      $this label[for="menu"] {
+      :self label[for="menu"] {
         display: inline-block;
         width: auto;
         position: absolute;
         top: 0;
         right: 0;
       }
-      $this label[for="menu"] span {
+      :self label[for="menu"] span {
         display: inline-block;
         font-size: 200%;
         padding: .2em .5em;
         text-align: center;
         z-index: 3000;
       }
-      $this input#menu:checked + label span {
+      :self input#menu:checked + label span {
         color: #cf0;
       }
-      $this input[type="radio"] + label {
+      :self input[type="radio"] + label {
         display: none;
       }
-      $this input#menu:checked ~ input[type="radio"] + label,
-      $this input#menu:checked ~ input[type="radio"]:checked ~ label[for="reset"] {
+      :self input#menu:checked ~ input[type="radio"] + label,
+      :self input#menu:checked ~ input[type="radio"]:checked ~ label[for="reset"] {
         display: block;
       }
-      $this input#menu:checked ~ input[type="radio"] + label[for="reset"] {
+      :self input#menu:checked ~ input[type="radio"] + label[for="reset"] {
         display: none;
       }
     }
     /* Desktop Menu View */
     @element '.eqNav' and (min-width: 500px) {
-      $this {
+      :self {
         text-align: right;
         max-height: auto !important;
         overflow: visible;
       }
-      $this .brand {
+      :self .brand {
         display: inline-block;
         float: left;
       }
-      $this label[for="menu"] {
+      :self label[for="menu"] {
         display: none;
       }
-      $this input + label > div {
+      :self input + label > div {
         display: none;
         background: #333;
         position: absolute;
@@ -178,10 +178,10 @@
         z-index: 3000;
         transition: all .5s ease-in-out;
       }
-      $this:before {
+      :self:before {
         display: none;
       }
-      $this label {
+      :self label {
         display: inline-block;
       }
     }

@@ -4,11 +4,11 @@
   <meta charset=utf-8>
   <meta name=viewport content="width=device-width, initial-scale=1">
   <title>EQCSS Slideshow</title>
-  <meta name=description content="EQCSS is a polyfill that introduces Element Queries, Scoped Styles, CSS Meta-Selectors like $parent and $prev, and more, to all browsers IE8 and up">
+  <meta name=description content="EQCSS is a polyfill that introduces Element Queries, Scoped Styles, CSS Meta-Selectors like :parent and :prev, and more, to all browsers IE8 and up">
   <meta name=keywords content="EQCSS, element queries, element query, container queries, CSS extension, parent selector, meta selector, scoped CSS, scoped styles, CSS variables, reponsive web design, rwd, elq, polyfill, plugin, SASS, Less, Grid Style Sheets, flexbox, IE8">
   <meta property=og:title content="EQCSS - Element Query CSS | Element Queries | Scoped Styles | Meta-Selectors | CSS Extension">
   <meta property=og:url content=http://elementqueries.com>
-  <meta property=og:description content="EQCSS is a polyfill that introduces Element Queries, Scoped Styles, CSS Meta-Selectors like $parent and $prev, and more, to all browsers IE8 and up">
+  <meta property=og:description content="EQCSS is a polyfill that introduces Element Queries, Scoped Styles, CSS Meta-Selectors like :parent and :prev, and more, to all browsers IE8 and up">
   <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic|Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic|Source+Code+Pro:300,400,500,600,700,900" rel=stylesheet>
   <link href=https://staticasset.s3.amazonaws.com/basic.css rel=stylesheet>
   <link href=https://staticresource.s3.amazonaws.com/template/css/data-buttons.css rel=stylesheet>
@@ -189,7 +189,7 @@
       font-size: 16pt !important;
     }
     @element 'iframe' {
-      $this {
+      :self {
         margin: 2em auto 1em auto;
         width: 100%;
         height: eval("scrollWidth/(width/height)")px;
@@ -243,19 +243,19 @@
 
 }</code></pre>
       <p>The element selector between the quotes can be any valid CSS selector. With this query we have created a new scope on the <code>.widget</code> element. We haven't included a responsive condition yet, so these styles will apply to our element at all times.</p>
-      <p>Using style scoping on an element allows you to use the <code>$parent</code> meta-selector for example, because JavaScript can now easily find the <code>parentNode</code> of the elements you have scoped. CSS includes a direct descendant selector, <code>></code>, that allows you to select only elements that are the children of a specified element. But CSS offers no way to travel the other way, to select the element containing something, its parent.</p>
+      <p>Using style scoping on an element allows you to use the <code>:parent</code> meta-selector for example, because JavaScript can now easily find the <code>parentNode</code> of the elements you have scoped. CSS includes a direct descendant selector, <code>></code>, that allows you to select only elements that are the children of a specified element. But CSS offers no way to travel the other way, to select the element containing something, its parent.</p>
       <p>Now that we have opened a scope for the <code>.widget</code> element, this is how we could write a style targeting its parent element:</p>
       <pre><code class=css>@element '.widget' {
-  $parent {
+  :parent {
     /* These styles apply to the parent of .widget */
   }
 }</code></pre>
-      <p>Other special <q>meta-selectors</q> available inside any <code>@element</code> query are <code>$prev</code> and <code>$next</code> selectors, which represent to previous and next sibling elements. CSS can reach the element after a specified element with <code>+ *</code>, as in <code>.widget + *</code>, but as with <code>$parent</code> CSS has no way of moving backward through the document to find the element before a specified element.</p>
+      <p>Other special <q>meta-selectors</q> available inside any <code>@element</code> query are <code>:prev</code> and <code>:next</code> selectors, which represent to previous and next sibling elements. CSS can reach the element after a specified element with <code>+ *</code>, as in <code>.widget + *</code>, but as with <code>:parent</code> CSS has no way of moving backward through the document to find the element before a specified element.</p>
       <pre><code class=css>@element '.widget' {
-  $prev {
+  :prev {
     /* These styles apply to the element before .widget */
   }
-  $next {
+  :next {
     /* These styles apply to the element after .widget */
   }
 }</code></pre>
@@ -312,7 +312,7 @@
   font-size: 24pt;
 }
 @element 'h1' and (min-characters: 16) and (max-width: 600px) {
-  $this {
+  :self {
     font-size: 20pt;
   }
 }</code></pre>
@@ -326,18 +326,18 @@
   }
 }</code></pre>
       <p>What will happen is when <em>either</em> <code>.widget</code> on the page reaches <code>500px</code>, the new style will apply to <em>both</em> <code>.widget</code> elements, which is probably not what we want to happen in most cases. This is where style scoping comes in!</p>
-      <p>The two parts of the responsive query are the selector and the condition, so if we want to target only those elements on the page that match <em>both</em> the selector <em>and</em> the condition at any given time, we can use the meta-selector <code>$this</code> inside our element query. With this in mind, here's how we could rewrite our last example so the style would only apply to the <code>.widget</code> which meets the <code>min-width: 500px</code> condition:</p>
+      <p>The two parts of the responsive query are the selector and the condition, so if we want to target only those elements on the page that match <em>both</em> the selector <em>and</em> the condition at any given time, we can use the meta-selector <code>:self</code> inside our element query. With this in mind, here's how we could rewrite our last example so the style would only apply to the <code>.widget</code> which meets the <code>min-width: 500px</code> condition:</p>
       <pre><code class=css>@element '.widget' and (min-width: 500px) {
-  $this h2 {
+  :self h2 {
     font-size: 14pt;
   }
 }</code></pre>
       <p>There are a number of additional meta-selectors in the EQCSS syntax that aren't included in regular CSS. The full list is:</p>
       <ul>
-        <li><code>$this</code>
-        <li><code>$parent</code>
-        <li><code>$prev</code>
-        <li><code>$next</code>
+        <li><code>:self</code>
+        <li><code>:parent</code>
+        <li><code>:prev</code>
+        <li><code>:next</code>
         <li><code>$it</code> (inside <code>eval('')</code>)
         <li><code>$root</code>
       </ul>
@@ -349,14 +349,14 @@
       <p>Currently it's common to use HTML as an intermediary to allow JavaScript and CSS to communicate with each other. You end up either toggling classes on your HTML to apply different CSS styles, or else adding CSS to HTML in ways that can interfere with your responsive styles. It's difficult to build <code>@media</code> queries to style elements that also have inline styles effectively.</p>
       <p>This is where <code>eval('')</code> comes in. You can access or evaluate any JavaScript, whether just to refer to the value of a JavaScript variable, to execute a one-liner like <code>new Date().getFullYear()</code>, or to run a Javascript function on the page and use the value it returns inside your CSS.</p>
       <pre><code class=css>@element 'footer' {
-  $this:after {
+  :self:after {
     content: "© eval('new Date().getFullYear()')";
   }
 }</code></pre>
     </article>
     <article data-slide data-theme=code>
       <h2>Using <code>$it</code> inside <code>eval('')</code></h2>
-      <p>To more easily share the scope of the element query where <code>eval('')</code> appears, you can use the meta-selector <code>$it</code>. This replaces the need for something like <code>document.querySelector("$this")</code> inside <code>eval('')</code> to find the context of the scoped element. For example, let's say we have a <code>&lt;div></code> with the word <q>hello</q> inside. The following code would output <q>hello hello</q>:</p>
+      <p>To more easily share the scope of the element query where <code>eval('')</code> appears, you can use the meta-selector <code>$it</code>. This replaces the need for something like <code>document.querySelector(":self")</code> inside <code>eval('')</code> to find the context of the scoped element. For example, let's say we have a <code>&lt;div></code> with the word <q>hello</q> inside. The following code would output <q>hello hello</q>:</p>
       <pre><code class=html>&lt;div>hello&lt/div>
 &lt;style>
   @element 'div' {
@@ -379,7 +379,7 @@
       <p>The smarter approach to responsive aspect ratios might involve placing each of those <code>iframe</code> elements into a container without padding applied, and to let JavaScript measure each iframe and calculate each aspect ratio at the time the page loads. Then, JavaScript can apply the correct ratio of padding to each container element to maintain the aspect ratio of the iframe inside.</p>
       <p>&hellip;But what if CSS could access those measurements directly? Not only could we consolidate our CSS and JS from two separate locations in our codebase into one, but we can also support any aspect ratio we might encounter in the future using one piece of code, without any additional labour, or surrounding containers in our HTML. Here's how simple a wrapper-free responsive video resizing solution could be when using EQCSS syntax:</p>
       <pre><code class=css>@element 'iframe' {
-  $this {
+  :self {
     margin: 0 auto;
     width: 100%;
     height: eval("scrollWidth/(width/height)")px;
@@ -395,13 +395,13 @@
         <p>With this new territory comes a variety of potential new problems, but unlike CSS and JavaScript which both have mature debugging tools, when debugging EQCSS you have to make-do with the current tools written for CSS and JavaScript plus a bit of human interpretation to troubleshoot and fix problems. The examples below produce unexpected results and aren't examples of good element queries. Thankfully, writing bad element queries is harder to do than writing good element queries, and I struggled to come up with broken examples of queries that fail.</p>
       <p>Here's an example of a reciprocal loop in EQCSS, something which normal CSS <code>@media</code> queries are immune from by design:</p>
       <pre><code class=css>@element '.widget' and (min-width: 300px) {
-  $this {
+  :self {
     width: 200px;
   }
 }</code></pre>
       <p>I call this <code>jekyll: hide;</code> CSS. But in addition to one style continually triggering itself, there's also the possibility to write multiple queries that trigger each other in what we call the <em>double inverted reciprocal loop</em>, the nastiest of all:</p>
       <pre><code class=css>@element '.widget' and (min-width: 400px) {
-  $this {
+  :self {
     width: 200px;
   }
 }
@@ -426,7 +426,7 @@
 }
 </code></pre>
       <pre><code class=css>@element '.footer' and (max-width: 500px) {
-  $this a {
+  :self a {
     display: block;
   }
 }
@@ -437,7 +437,7 @@
         <li>ensure <code>EQCSS.js</code> is present in the destination document's HTML
         <li>replace <code>@media</code> with <code>@element</code> in your CSS
         <li>add your CSS selector to the scope
-        <li>(optional: replace occurrences of the selector inside your <code>@element</code> scope with <code>$this</code> in case there are multiple instances of that element on the page)
+        <li>(optional: replace occurrences of the selector inside your <code>@element</code> scope with <code>:self</code> in case there are multiple instances of that element on the page)
       </ol>
       <p>By liberating an element from one design we can isolate it for re-use later. Once you have converted the <code>@media</code> breakpoints to element-based responsive conditions, you never have to tweak those widths again, no matter where you display it in the future!</p>
     </article>
@@ -547,7 +547,7 @@
       </blockquote>
       <pre><code class=html>&lt;style>
   @element 'body' and (min-width: 600px) {
-    $this {
+    :self {
       background: red;
     }
   }
@@ -571,18 +571,18 @@
     display: none;
   }
   @element 'input' and (max-characters: 14) {
-    $parent {
+    :parent {
       background: lightgreen;
     }
-    $parent [data-notification=success] {
+    :parent [data-notification=success] {
       display: block;
     }
   }
   @element 'input' and (min-characters: 15) {
-    $parent {
+    :parent {
       background: pink;
     }
-    $parent [data-notification=error] {
+    :parent [data-notification=error] {
       display: block;
     }
   }
@@ -609,7 +609,7 @@
     }
   }
   @element 'textarea' and (min-characters: 50) {
-    $this {
+    :self {
       border: 1px solid red;
       background: pink;
     }

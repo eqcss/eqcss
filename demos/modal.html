@@ -15,8 +15,8 @@
       margin: 1em auto !important;
     }
     @element "#RFImodal" {
-      $this,
-      $this * {
+      :self,
+      :self * {
         box-sizing: border-box;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
@@ -32,7 +32,7 @@
         -o-user-select: none;
         user-select: none;
       }
-      $this {
+      :self {
         opacity: 0;
         display: block;
         width: 100%;
@@ -49,7 +49,7 @@
         transition: opacity .2s ease-in-out;
         z-index: 9999;
       }
-      $this article {
+      :self article {
         position: relative;
         max-width: 750px;
         margin: 0 auto;
@@ -58,7 +58,7 @@
         height: auto;
         box-shadow: rgba(0,0,0,.15) 0 5px 15px;
       }
-      $this article p {
+      :self article p {
         font-size: 12pt;
         font-weight: 500;
         line-height: 1.2;
@@ -66,10 +66,10 @@
         margin: 15px 0;
         padding: 0 20px;
       }
-      $this article p:last-of-type {
+      :self article p:last-of-type {
         margin-bottom: 0;
       }
-      $this article button:first-of-type {
+      :self article button:first-of-type {
         position: absolute;
         top: 0;
         right: 0;
@@ -91,17 +91,17 @@
         cursor: pointer;
         z-index: 1000;
       }
-      $this article button:first-of-type:hover,
-      $this article button:first-of-type:focus {
+      :self article button:first-of-type:hover,
+      :self article button:first-of-type:focus {
         color: #c00;
       }
     }
     @element "#RFImodal" and (min-width: 750px) {
-      $this article {
+      :self article {
         margin: 50px auto;
         overflow: hidden;
       }
-      $this article p {
+      :self article p {
         font-size: 14pt;
       }
     }

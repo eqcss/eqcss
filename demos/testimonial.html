@@ -27,7 +27,7 @@
       font-family: 'Source Sans Pro', 'Open Sans', Roboto, 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', 'Myriad Pro', 'Segoe UI', Myriad, Helvetica, Arial, 'Lucida Grande', sans-serif;
       font-kerning: auto;
     }
-    $this {
+    :self {
       background-color: #ff3333;
       background: url('https://staticasset.s3.amazonaws.com/red-bg.jpg') no-repeat center center;
       -webkit-background-size: cover;
@@ -46,7 +46,7 @@
       cursor: default;
       box-shadow: inset #fff 0 -1px 0;
     }
-    $this:before {
+    :self:before {
       content: '';
       display: block;
       width: 100%;
@@ -63,11 +63,11 @@
       filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00FFFFFF', endColorstr='#FFFFFFFF',GradientType=0 );
       z-index: 50;
     }
-    $this .wrapper {
+    :self .wrapper {
       max-width: 1200px;
       margin: 0 auto;
     }
-    $this blockquote img {
+    :self blockquote img {
       border-radius: 100%;
       height: auto;
       max-width: 50px;
@@ -75,7 +75,7 @@
       left: 0;
       top: 0;
     }
-    $this blockquote {
+    :self blockquote {
       padding: .5em 1em 1em 60px;
       position: relative;
       z-index: 100;
@@ -83,65 +83,65 @@
       min-height: 50px;
       margin: 2em auto;
     }
-    $this blockquote q {
+    :self blockquote q {
       color: #111;
       font-size: 100%;
       line-height: 1.1;
       display: block;
     }
-    $this blockquote footer {
+    :self blockquote footer {
       color: #333;
       font-size: 90%;
       float: left;
       font-style: normal;
     }
-    $this blockquote footer:before {
+    :self blockquote footer:before {
       content: '— ';
     }
-    $this .wrapper:after {
+    :self .wrapper:after {
       content: '';
       display: block;
       clear: both;
     }
   }
   @element '.testimonials' and (max-width: 199px) {
-    $this blockquote {
+    :self blockquote {
       padding: 0 .25em;
       text-align: center;
     }
-    $this blockquote img {
+    :self blockquote img {
       display: block;
       position: relative;
       max-width: 50px;
       margin: 0 auto 10px auto;
     }
-    $this blockquote footer {
+    :self blockquote footer {
       float: none;
       text-align: right;
     }
   }
   @element '.testimonials' and (min-width: 200px) and (max-width: 499px) {
-    $this blockquote:nth-child(even) {
+    :self blockquote:nth-child(even) {
       padding: .5em 60px 1em 1em;
       text-align: right;
     }
-    $this blockquote:nth-child(even) img {
+    :self blockquote:nth-child(even) img {
       left: auto;
       right: 0;
     }
-    $this blockquote:nth-child(even) footer {
+    :self blockquote:nth-child(even) footer {
       float: right;
     }
-    $this blockquote img {
+    :self blockquote img {
       max-width: 50px;
     }
   }
   @element '.testimonials' and (min-width: 500px) and (max-width: 799px) {
-    $this {
+    :self {
       font-size: 12pt;
       padding: 2em;
     }
-    $this blockquote {
+    :self blockquote {
       margin: 1em auto;
       padding: 1em 1em 0 2em;
       padding-left: 85px;
@@ -149,40 +149,40 @@
       float: left;
       min-height: none;
     }
-    $this blockquote:nth-child(3n+3) {
+    :self blockquote:nth-child(3n+3) {
       margin-left: 25%;
       margin-right: 25%;
     }
-    $this img {
+    :self img {
       max-width: 75px !important;
       top: auto;
     }
-    $this blockquote footer {
+    :self blockquote footer {
       padding-right: 1em;
     }
   }
   @element '.testimonials' and (min-width: 800px) {
-    $this {
+    :self {
       font-size: 14pt;
       padding: 2em 2em 0 2em;
     }
-    $this blockquote {
+    :self blockquote {
       padding-left: 115px;
       width: 33%;
       float: left;
     }
-    $this blockquote:nth-child(5n+4) {
+    :self blockquote:nth-child(5n+4) {
       margin-left: 16%;
     }
-    $this blockquote:nth-child(5n+5) {
+    :self blockquote:nth-child(5n+5) {
       margin-right: 16%;
     }
-    $this img {
+    :self img {
       max-width: 100px !important;
     }
   }
   @element '.testimonials' and (min-width: 1200px) {
-    $this {
+    :self {
       font-size: 16pt;
       padding: 2em 1em 0 1em;
     }

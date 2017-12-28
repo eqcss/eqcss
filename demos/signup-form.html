@@ -11,14 +11,14 @@
   <link href=http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css rel=stylesheet>
   <style>
     @element '.cta_form' {
-      $this {
+      :self {
         font-size: 10pt;
       }
-      $this [type=text],
-      $this [type=email],
-      $this [type=password],
-      $this [type=tel],
-      $this [type=submit] {
+      :self [type=text],
+      :self [type=email],
+      :self [type=password],
+      :self [type=tel],
+      :self [type=submit] {
         -webkit-appearance: none;
         appearance: none;
         outline: none;
@@ -38,7 +38,7 @@
         transition: all .1s ease-in-out;
         box-shadow: inset #fafafa 0 -5px 15px, inset #fff 0 1px 1px, rgba(0,0,0,.15) 0px 1px 1px;
       }
-      $this [type=submit] {
+      :self [type=submit] {
         cursor: pointer;
         padding: .5em .4em .4em .4em;
         outline: none;
@@ -63,19 +63,19 @@
         background: linear-gradient(to bottom, #ff8900 0%,#ff3d00 100%);
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff8900', endColorstr='#ff3d00',GradientType=0 );
       }
-      $this [type=text]:hover,
-      $this [type=text]:focus,
-      $this [type=email]:hover,
-      $this [type=email]:focus,
-      $this [type=password]:hover,
-      $this [type=password]:focus,
-      $this [type=tel]:hover,
-      $this [type=tel]:focus {
+      :self [type=text]:hover,
+      :self [type=text]:focus,
+      :self [type=email]:hover,
+      :self [type=email]:focus,
+      :self [type=password]:hover,
+      :self [type=password]:focus,
+      :self [type=tel]:hover,
+      :self [type=tel]:focus {
         border-color: #fa0;
         box-shadow: inset #fafafa 0 -5px 15px, inset #fff 0 1px 1px, rgba(0,0,0,.15) 0px 1px 1px, rgba(255,200,0,.5) 0 0 10px;
       }
-      $this [type=submit]:hover,
-      $this [type=submit]:focus {
+      :self [type=submit]:hover,
+      :self [type=submit]:focus {
         background: #fa3;
         background: -moz-linear-gradient(top, #fa3 0%, #f30 100%);
         background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fa3), color-stop(100%,#f30));
@@ -86,7 +86,7 @@
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fa3', endColorstr='#f30',GradientType=0 );
         box-shadow: inset #f40 0 -5px 15px, inset #ffd28a 0 1px 1px, rgba(0,0,0,.15) 0px 1px 1px, rgba(255,200,0,.5) 0 0 10px;
       }
-      $this [type=submit]:active {
+      :self [type=submit]:active {
         border: 1px solid #f00;
         border-bottom-color: #d10;
         background: #f50;
@@ -98,13 +98,13 @@
         background: linear-gradient(to bottom, #f50 0%,#f50 100%);
         box-shadow: inset #f40 0 -5px 15px, inset #ffd28a 0 1px 1px;
       }
-      $this * + input {
+      :self * + input {
         margin-top: 1em;
       }
-      $this [type=checkbox] {
+      :self [type=checkbox] {
         display: none;
       }
-      $this label {
+      :self label {
         cursor: pointer;
         position: relative;
         display: block;
@@ -122,12 +122,12 @@
         -o-user-select: none;
         user-select: none;
       }
-      $this label:hover,
-      $this label:focus {
+      :self label:hover,
+      :self label:focus {
         border-color: #fa0;
         box-shadow: inset #fafafa 0 -5px 15px, inset #fff 0 1px 1px, rgba(0,0,0,.15) 0px 1px 1px, rgba(255,200,0,.5) 0 0 10px;
       }
-      $this label:before {
+      :self label:before {
         content: '\f372';
         position: relative;
         top: .1em;
@@ -137,46 +137,46 @@
         font-family: 'ionicons';
         color: #777;
       }
-      $this input:checked + label:before {
+      :self input:checked + label:before {
         content: '\f373';
         color: #333;
       }
-      $this input:checked + label {
+      :self input:checked + label {
         background: #afa;
         border-color: #7c0;
         box-shadow: inset #fff 0 1px 1px, rgba(0,0,0,.15) 0px 1px 1px, rgba(0,255,0,.5) 0 0 10px;
       }
-      $this aside label {
+      :self aside label {
         margin-bottom: 1em;
       }
-      $this label:after {
+      :self label:after {
         content: '';
         display: block;
         clear: both;
       }
-      $this label span {
+      :self label span {
         display: inline-block;
         color: #777;
         padding: .25em 0;
       }
-      $this input:checked + label span {
+      :self input:checked + label span {
         color: #333;
       }
-      $this input:checked + label img {
+      :self input:checked + label img {
         opacity: 1;
       }
-      $this p {
+      :self p {
         margin: 1em 0;
         text-align: center;
       }
     }
     @element '.cta_form' and (min-width: 200px) {
-      $this {
+      :self {
         font-size: 12pt;
       }
     }
     @element '.cta_form label' and (max-width: 349px) {
-      $this img {
+      :self img {
         display: block;
         margin: 0 auto;
         width: 100%;
@@ -186,7 +186,7 @@
       }
     }
     @element '.cta_form label' and (min-width: 350px) {
-      $this img {
+      :self img {
         display: inline !important;
         width: 100px !important;
         margin: 0 !important;

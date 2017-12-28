@@ -25,10 +25,10 @@
 
     /* Element Query Grid */
     @element '[data-grid]' {
-      $this,
-      $this *,
-      $this *:before,
-      $this *:after {
+      :self,
+      :self *,
+      :self *:before,
+      :self *:after {
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
@@ -37,110 +37,110 @@
         -moz-osx-font-smoothing: grayscale;
         font-kerning: auto;
       }
-      $this {
+      :self {
         font-size: 12pt;
         line-height: 1.4;
         font-weight: 400;
         font-family: 'Open Sans', 'Source Sans Pro', Roboto, 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', 'Myriad Pro', 'Segoe UI', Myriad, Helvetica, 'Lucida Grande', 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, Arial, sans-serif;
         -webkit-text-size-adjust: 100%;
       }
-      $this:after,
-      $this [data-row]:after {
+      :self:after,
+      :self [data-row]:after {
         content: '';
         display: block;
         clear: both;
       }
-      $this [class*=-col-],
-      $this [class*=-split-] { float: left; }
-      $this [class^=col-1] { width: 10%; }
-      $this [class^=col-2] { width: 20%; }
-      $this [class^=col-3] { width: 30%; }
-      $this [class^=col-4] { width: 40%; }
-      $this [class^=col-5] { width: 50%; }
-      $this [class^=col-6] { width: 60%; }
-      $this [class^=col-7] { width: 70%; }
-      $this [class^=col-8] { width: 80%; }
-      $this [class^=col-9] { width: 90%; }
-      $this [class^=col-10] { width: 100%; }
-      $this [class^=split-1] { width: calc(100%/1); }
-      $this [class^=split-2] { width: calc(100%/2); }
-      $this [class^=split-3] { width: calc(100%/3); }
-      $this [class^=split-4] { width: calc(100%/4); }
-      $this [class^=split-5] { width: calc(100%/5); }
-      $this [class^=split-6] { width: calc(100%/6); }
-      $this [class^=split-7] { width: calc(100%/7); }
-      $this [class^=split-8] { width: calc(100%/8); }
-      $this [class^=split-9] { width: calc(100%/9); }
-      $this [class^=split-10] { width: calc(100%/10); }
+      :self [class*=-col-],
+      :self [class*=-split-] { float: left; }
+      :self [class^=col-1] { width: 10%; }
+      :self [class^=col-2] { width: 20%; }
+      :self [class^=col-3] { width: 30%; }
+      :self [class^=col-4] { width: 40%; }
+      :self [class^=col-5] { width: 50%; }
+      :self [class^=col-6] { width: 60%; }
+      :self [class^=col-7] { width: 70%; }
+      :self [class^=col-8] { width: 80%; }
+      :self [class^=col-9] { width: 90%; }
+      :self [class^=col-10] { width: 100%; }
+      :self [class^=split-1] { width: calc(100%/1); }
+      :self [class^=split-2] { width: calc(100%/2); }
+      :self [class^=split-3] { width: calc(100%/3); }
+      :self [class^=split-4] { width: calc(100%/4); }
+      :self [class^=split-5] { width: calc(100%/5); }
+      :self [class^=split-6] { width: calc(100%/6); }
+      :self [class^=split-7] { width: calc(100%/7); }
+      :self [class^=split-8] { width: calc(100%/8); }
+      :self [class^=split-9] { width: calc(100%/9); }
+      :self [class^=split-10] { width: calc(100%/10); }
     }
     @element '[data-grid]' and (max-width: 400px) {
-      $this [class*=small-col-1] { width: 10%; }
-      $this [class*=small-col-2] { width: 20%; }
-      $this [class*=small-col-3] { width: 30%; }
-      $this [class*=small-col-4] { width: 40%; }
-      $this [class*=small-col-5] { width: 50%; }
-      $this [class*=small-col-6] { width: 60%; }
-      $this [class*=small-col-7] { width: 70%; }
-      $this [class*=small-col-8] { width: 80%; }
-      $this [class*=small-col-9] { width: 90%; }
-      $this [class*=small-col-10] { width: 100%; }
-      $this [class*=small-split-1] { width: calc(100%/1); }
-      $this [class*=small-split-2] { width: calc(100%/2); }
-      $this [class*=small-split-3] { width: calc(100%/3); }
-      $this [class*=small-split-4] { width: calc(100%/4); }
-      $this [class*=small-split-5] { width: calc(100%/5); }
-      $this [class*=small-split-6] { width: calc(100%/6); }
-      $this [class*=small-split-7] { width: calc(100%/7); }
-      $this [class*=small-split-8] { width: calc(100%/8); }
-      $this [class*=small-split-9] { width: calc(100%/9); }
-      $this [class*=small-split-10] { width: calc(100%/10); }
-      $this [class*=hide-small] { display: none; }
+      :self [class*=small-col-1] { width: 10%; }
+      :self [class*=small-col-2] { width: 20%; }
+      :self [class*=small-col-3] { width: 30%; }
+      :self [class*=small-col-4] { width: 40%; }
+      :self [class*=small-col-5] { width: 50%; }
+      :self [class*=small-col-6] { width: 60%; }
+      :self [class*=small-col-7] { width: 70%; }
+      :self [class*=small-col-8] { width: 80%; }
+      :self [class*=small-col-9] { width: 90%; }
+      :self [class*=small-col-10] { width: 100%; }
+      :self [class*=small-split-1] { width: calc(100%/1); }
+      :self [class*=small-split-2] { width: calc(100%/2); }
+      :self [class*=small-split-3] { width: calc(100%/3); }
+      :self [class*=small-split-4] { width: calc(100%/4); }
+      :self [class*=small-split-5] { width: calc(100%/5); }
+      :self [class*=small-split-6] { width: calc(100%/6); }
+      :self [class*=small-split-7] { width: calc(100%/7); }
+      :self [class*=small-split-8] { width: calc(100%/8); }
+      :self [class*=small-split-9] { width: calc(100%/9); }
+      :self [class*=small-split-10] { width: calc(100%/10); }
+      :self [class*=hide-small] { display: none; }
     }
     @element '[data-grid]' and (min-width: 400px) and (max-width: 800px) {
-      $this [class*=medium-col-1] { width: 10%; }
-      $this [class*=medium-col-2] { width: 20%; }
-      $this [class*=medium-col-3] { width: 30%; }
-      $this [class*=medium-col-4] { width: 40%; }
-      $this [class*=medium-col-5] { width: 50%; }
-      $this [class*=medium-col-6] { width: 60%; }
-      $this [class*=medium-col-7] { width: 70%; }
-      $this [class*=medium-col-8] { width: 80%; }
-      $this [class*=medium-col-9] { width: 90%; }
-      $this [class*=medium-col-10] { width: 100%; }
-      $this [class*=medium-split-1] { width: calc(100%/1); }
-      $this [class*=medium-split-2] { width: calc(100%/2); }
-      $this [class*=medium-split-3] { width: calc(100%/3); }
-      $this [class*=medium-split-4] { width: calc(100%/4); }
-      $this [class*=medium-split-5] { width: calc(100%/5); }
-      $this [class*=medium-split-6] { width: calc(100%/6); }
-      $this [class*=medium-split-7] { width: calc(100%/7); }
-      $this [class*=medium-split-8] { width: calc(100%/8); }
-      $this [class*=medium-split-9] { width: calc(100%/9); }
-      $this [class*=medium-split-10] { width: calc(100%/10); }
-      $this [class*=hide-medium] { display: none; }
+      :self [class*=medium-col-1] { width: 10%; }
+      :self [class*=medium-col-2] { width: 20%; }
+      :self [class*=medium-col-3] { width: 30%; }
+      :self [class*=medium-col-4] { width: 40%; }
+      :self [class*=medium-col-5] { width: 50%; }
+      :self [class*=medium-col-6] { width: 60%; }
+      :self [class*=medium-col-7] { width: 70%; }
+      :self [class*=medium-col-8] { width: 80%; }
+      :self [class*=medium-col-9] { width: 90%; }
+      :self [class*=medium-col-10] { width: 100%; }
+      :self [class*=medium-split-1] { width: calc(100%/1); }
+      :self [class*=medium-split-2] { width: calc(100%/2); }
+      :self [class*=medium-split-3] { width: calc(100%/3); }
+      :self [class*=medium-split-4] { width: calc(100%/4); }
+      :self [class*=medium-split-5] { width: calc(100%/5); }
+      :self [class*=medium-split-6] { width: calc(100%/6); }
+      :self [class*=medium-split-7] { width: calc(100%/7); }
+      :self [class*=medium-split-8] { width: calc(100%/8); }
+      :self [class*=medium-split-9] { width: calc(100%/9); }
+      :self [class*=medium-split-10] { width: calc(100%/10); }
+      :self [class*=hide-medium] { display: none; }
     }
     @element '[data-grid]' and (min-width: 800px) {
-      $this [class*=large-col-1] { width: 10%; }
-      $this [class*=large-col-2] { width: 20%; }
-      $this [class*=large-col-3] { width: 30%; }
-      $this [class*=large-col-4] { width: 40%; }
-      $this [class*=large-col-5] { width: 50%; }
-      $this [class*=large-col-6] { width: 60%; }
-      $this [class*=large-col-7] { width: 70%; }
-      $this [class*=large-col-8] { width: 80%; }
-      $this [class*=large-col-9] { width: 90%; }
-      $this [class*=large-col-10] { width: 100%; }
-      $this [class*=large-split-1] { width: calc(100%/1); }
-      $this [class*=large-split-2] { width: calc(100%/2); }
-      $this [class*=large-split-3] { width: calc(100%/3); }
-      $this [class*=large-split-4] { width: calc(100%/4); }
-      $this [class*=large-split-5] { width: calc(100%/5); }
-      $this [class*=large-split-6] { width: calc(100%/6); }
-      $this [class*=large-split-7] { width: calc(100%/7); }
-      $this [class*=large-split-8] { width: calc(100%/8); }
-      $this [class*=large-split-9] { width: calc(100%/9); }
-      $this [class*=large-split-10] { width: calc(100%/10); }
-      $this [class*=hide-large] { display: none; }
+      :self [class*=large-col-1] { width: 10%; }
+      :self [class*=large-col-2] { width: 20%; }
+      :self [class*=large-col-3] { width: 30%; }
+      :self [class*=large-col-4] { width: 40%; }
+      :self [class*=large-col-5] { width: 50%; }
+      :self [class*=large-col-6] { width: 60%; }
+      :self [class*=large-col-7] { width: 70%; }
+      :self [class*=large-col-8] { width: 80%; }
+      :self [class*=large-col-9] { width: 90%; }
+      :self [class*=large-col-10] { width: 100%; }
+      :self [class*=large-split-1] { width: calc(100%/1); }
+      :self [class*=large-split-2] { width: calc(100%/2); }
+      :self [class*=large-split-3] { width: calc(100%/3); }
+      :self [class*=large-split-4] { width: calc(100%/4); }
+      :self [class*=large-split-5] { width: calc(100%/5); }
+      :self [class*=large-split-6] { width: calc(100%/6); }
+      :self [class*=large-split-7] { width: calc(100%/7); }
+      :self [class*=large-split-8] { width: calc(100%/8); }
+      :self [class*=large-split-9] { width: calc(100%/9); }
+      :self [class*=large-split-10] { width: calc(100%/10); }
+      :self [class*=hide-large] { display: none; }
     }
   </style>
 </head>

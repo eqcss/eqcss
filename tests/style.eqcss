@@ -1,5 +1,5 @@
 @element 'html' {
-  $this {
+  :self {
     background: lime;
   }
 }

@@ -2,19 +2,19 @@
 <html lang=en>
 <head>
   <meta charset=utf-8>
-  <meta name=description content="EQCSS is a CSS reprocessor that introduces Scoped Styles, Element Queries, Container Queries, and new selectors like $parent and $prev and more to all browsers IE8+">
+  <meta name=description content="EQCSS is a CSS reprocessor that introduces Scoped Styles, Element Queries, Container Queries, and new selectors like :parent and :prev and more to all browsers IE8+">
   <meta name=keywords content="EQCSS, CSS reprocessor, element queries, element query, container queries, container query, CSS extension, parent selector, meta selector, scoped CSS, scoped styles, CSS variables, reponsive web design, rwd, polyfill, plugin, IE8">
   <meta property=og:title content="EQCSS • Element Query CSS | Scoped CSS, Meta-Selectors, Element Queries">
   <meta property=og:url content=http://elementqueries.com>
-  <meta property=og:description content="EQCSS is a CSS reprocessor that introduces Element Queries, Container Queries, Scoped Styles, and new selectors like $parent and $prev and more to all browsers IE8+">
+  <meta property=og:description content="EQCSS is a CSS reprocessor that introduces Element Queries, Container Queries, Scoped Styles, and new selectors like :parent and :prev and more to all browsers IE8+">
   <meta name=viewport content="width=device-width, initial-scale=1">
   <meta name=google-site-verification content=zqvNXM9AZmB51r-f-4NNlvL_RRS-K0oWVpPo0yd3E_0>
   <title>EQCSS • Element Query CSS | Scoped CSS, Meta-Selectors, Element Queries</title>
-  <link href="//fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic|Source+Code+Pro:300,400,500,600,700,900|Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic" rel=stylesheet>
-  <link href=//staticresource.com/template/plugins/buttons/data-buttons.css rel=stylesheet>
-  <link href=//cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css rel=stylesheet>
-  <link href=//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.min.css rel=stylesheet>
-  <link href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/solarized_dark.min.css rel=stylesheet>
+  <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic|Source+Code+Pro:300,400,500,600,700,900|Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic" rel=stylesheet>
+  <link href="https://staticasset.s3.amazonaws.com/data-buttons.css" rel=stylesheet>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" rel=stylesheet>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.min.css" rel=stylesheet>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/solarized_dark.min.css" rel=stylesheet>
   <link href="eqcss-logo.png" rel="shortcut icon">
   <link href="eqcss-logo.png" rel="apple-touch-icon">
   <style>
@@ -382,17 +382,17 @@
     }
     /* Orientation */
     @element .orientation and (orientation: square) {
-      $this {
+      :self {
         background: orchid;
       }
     }
     @element .orientation and (orientation: portrait) {
-      $this {
+      :self {
         background: darkturquoise;
       }
     }
     @element .orientation and (orientation: landscape) {
-      $this {
+      :self {
         background: greenyellow;
       }
     }
@@ -411,19 +411,19 @@
     /* Scoped Styles */
     @element .scoped and (min-width: 300px) {
       /* Only set a gold background to the elements matching the query */
-      $this {
+      :self {
         background: gold;
       }
     }
     /* Scoped Queries + Multiple Conditions */
     @element .scoped-multiple and (min-width: 350px) and (max-width: 450px) {
-      $this {
+      :self {
         background: gold;
       }
-      $this > strong {
+      :self > strong {
         color: red;
       }
-      $this:hover {
+      :self:hover {
         background: orange;
       }
     }
@@ -443,75 +443,75 @@
       /* comment at the end */
     }
     /* comment after */
-    /* $this selector */
+    /* :self selector */
     @element .this-selector input and (min-characters: 5) {
-      $this,
-      $this:focus {
+      :self,
+      :self:focus {
         border-color: red;
       }
     }
-    /* $parent selector */
+    /* :parent selector */
     @element .parent-selector input and (min-characters: 5) {
-      $this {
+      :self {
         border-color: red;
       }
-      $parent {
+      :parent {
         background: pink;
       }
     }
     /* $root selector */
     @element .root-selector input and (min-characters: 5) {
-      $this {
+      :self {
         border-color: red;
       }
       $root {
         background: pink;
       }
     }
-    /* $prev selector */
+    /* :prev selector */
     @element .prev-selector [type=email] {
-      $prev {
+      :prev {
         border-color: red;
       }
     }
-    /* $next selector */
+    /* :next selector */
     @element .next-selector [type=text] {
-      $next {
+      :next {
         border-color: red;
       }
     }
     /* eval('') */
     @element .eval strong {
-      $this:after {
+      :self:after {
         content: ' eval("new Date().getFullYear()")';
       }
     }
     @element em {
-      $this:after {
+      :self:after {
         content: ' eval("window.innerWidth+' x '+window.innerHeight")';
       }
     }
     /* Element width units */
     @element .ew {
-      $this {
+      :self {
         font-size: 10ew;
       }
     }
     /* Element height units */
     @element .eh {
-      $this {
+      :self {
         font-size: 10eh;
       }
     }
     /* Element minimum units */
     @element .emin {
-      $this {
+      :self {
         font-size: 10emin;
       }
     }
     /* Element maximum units */
     @element .emax {
-      $this {
+      :self {
         font-size: 10emax;
       }
     }
@@ -544,8 +544,8 @@
     <pre><code class=html>&lt;!--[if lt IE 9]>&lt;script src="EQCSS-polyfills.js">&lt;/script>&lt;![endif]--></code></pre>
     <h4>CDN Hosted Links</h4>
     <p>EQCSS is also hosted on CDNjs and you can use the version hosted there for your projects: <a href=https://cdnjs.com/libraries/eqcss>https://cdnjs.com/libraries/eqcss</a>:</p>
-    <pre><code class=html>https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.7.3/EQCSS-polyfills.min.js</code></pre>
-    <pre><code class=html>https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.7.3/EQCSS.min.js</code></pre>
+    <pre><code class=html>https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.8.0/EQCSS-polyfills.min.js</code></pre>
+    <pre><code class=html>https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.8.0/EQCSS.min.js</code></pre>
     <h3 id=writing>Writing Element Queries</h3>
     <p>Now that you have EQCSS added to your HTML you&rsquo;re ready to write element queries. There are two ways you can add EQCSS to your site: the easiest way is by writing them inside your CSS either in a <code>&lt;style></code> or <code>&lt;link></code> in your HTML, or by isolating your EQCSS styles in a custom script type.</p>
     <p>You can also link to EQCSS hosted in external files with either <code>.css</code> or <code>.eqcss</code> extensions.</p>
@@ -788,17 +788,17 @@
         <div class="orientation" style="width: 200px; height: 100px;">200 x 100</div>
       </div>
       <pre><code class=css>@element .orientation and (orientation: square) {
-  $this {
+  :self {
     background: orchid;
   }
 }
 @element .orientation and (orientation: portrait) {
-  $this {
+  :self {
     background: darkturquoise;
   }
 }
 @element .orientation and (orientation: landscape) {
-  $this {
+  :self {
     background: greenyellow;
   }
 }</code></pre>
@@ -826,13 +826,13 @@
 }</code></pre>
     </article>
     <article id=scoped-styles>
-      <h4>Scoped queries ($this)</h4>
+      <h4>Scoped queries (:self)</h4>
       <div class="scoped" data-drag=horizontal>class="scoped"</div>
       <div class="scoped" data-drag=horizontal>class="scoped"</div>
       <pre><code class=css>@element .scoped and (min-width: 300px) {
 
   /* Only set a gold background to the elements matching the query */
-  $this {
+  :self {
     background: gold;
   }
 }</code></pre>
@@ -842,13 +842,13 @@
       <div class="scoped-multiple" data-drag=horizontal><strong>class="scoped-multiple"</strong></div>
       <div class="scoped-multiple" data-drag=horizontal><strong>class="scoped-multiple"</strong></div>
       <pre><code class=css>@element .scoped-multiple and (min-width: 350px) and (max-width: 450px) {
-  $this {
+  :self {
     background: gold;
   }
-  $this > strong {
+  :self > strong {
     color: red
   }
-  $this:hover {
+  :self:hover {
     background: orange;
   }
 }</code></pre>
@@ -876,34 +876,34 @@
 /* comment after */</code></pre>
     </article>
     <h3 id=meta-selectors>Meta-Selectors</h3>
-    <p>The following selectors can be used inside element queries. The <code>$this</code> meta-selector selects the same element(s) on the page that meet the query condition. The <code>$parent</code> selector refers to the parent of the element(s) on the page that meet the repsonsive condition. There are selectors for <code>$prev</code> and <code>$next</code> as well, and <code>$root</code> which always refers to the HTML document.</p>
+    <p>The following selectors can be used inside element queries. The <code>:self</code> meta-selector selects the same element(s) on the page that meet the query condition. The <code>:parent</code> selector refers to the parent of the element(s) on the page that meet the repsonsive condition. There are selectors for <code>:prev</code> and <code>:next</code> as well, and <code>$root</code> which always refers to the HTML document.</p>
     <p>Alternatively, for SCSS compatibility instead of using <code>$</code> you can also format meta-selectors prefixed by <code>eq_</code>. These are <code>eq_this</code>, <code>eq_parent</code>, <code>eq_root</code>, <code>eq_prev</code>, and <code>eq_next</code></p>
     <article id=this-selector>
-      <h4><code>$this</code> selector</h4>
+      <h4><code>:self</code> selector</h4>
       <div class="this-selector">
         class="this-selector"
         <input type=text placeholder=input>
         <input type=text placeholder=input>
       </div>
       <pre><code class=css>@element .this-selector input and (min-characters: 5) {
-  $this,
-  $this:focus {
+  :self,
+  :self:focus {
     border-color: red;
   }
 }</code></pre>
     </article>
     <article id=parent-selector>
-      <h4><code>$parent</code> selector</h4>
+      <h4><code>:parent</code> selector</h4>
       <div class="parent-selector">
         class="parent-selector"
         <input type=text placeholder=input>
         <input type=text placeholder=input>
       </div>
       <pre><code class=css>@element .parent-selector input and (min-characters: 5) {
-  $this {
+  :self {
     border-color: red;
   }
-  $parent {
+  :parent {
     background: pink;
   }
 }</code></pre>
@@ -916,7 +916,7 @@
         <input type=text placeholder=input>
       </div>
       <pre><code class=css>@element .root-selector input and (min-characters: 5) {
-  $this {
+  :self {
     border-color: red;
   }
   $root {
@@ -925,27 +925,27 @@
 }</code></pre>
     </article>
     <article id=prev-selector>
-      <h4><code>$prev</code> selector</h4>
+      <h4><code>:prev</code> selector</h4>
       <div class="prev-selector">
         class="prev-selector"
         <input type=text type=text placeholder=input>
         <input type=email placeholder=email>
       </div>
       <pre><code class=css>@element .prev-selector [type=email] {
-  $prev {
+  :prev {
     border-color: red;
   }
 }</code></pre>
     </article>
     <article id=next-selector>
-      <h4><code>$next</code> selector</h4>
+      <h4><code>:next</code> selector</h4>
       <div class="next-selector">
         class="next-selector"
         <input type=text placeholder=input>
         <input type=email placeholder=email>
       </div>
       <pre><code class=css>@element .next-selector [type=text] {
-  $next {
+  :next {
     border-color: red;
   }
 }</code></pre>
@@ -958,12 +958,12 @@
         <p><em>Viewport Size:</em></p>
       </div>
       <pre><code class=css>@element .eval strong {
-  $this:after {
+  :self:after {
     content: ' eval("new Date().getFullYear()")';
   }
 }
 @element em {
-  $this:after {
+  :self:after {
     content: ' eval("window.innerWidth+' x '+window.innerHeight")';
   }
 }</code></pre>
@@ -974,7 +974,7 @@
       <div class=ew data-drag=horizontal>EW Units</div>
       <pre><code class=css>/* Element width units */
 @element .ew {
-  $this {
+  :self {
     font-size: 10ew;
   }
 }</code></pre>
@@ -984,7 +984,7 @@
       <div class=eh data-drag=vertical>EH Units</div>
       <pre><code class=css>/* Element height units */
 @element .eh {
-  $this {
+  :self {
     font-size: 10eh;
   }
 }</code></pre>
@@ -994,7 +994,7 @@
       <div class="emin" data-drag="both">EMIN Units</div>
       <pre><code class=css>/* Element minimum units */
 @element .emin {
-  $this {
+  :self {
     font-size: 10emin;
   }
 }</code></pre>
@@ -1004,7 +1004,7 @@
       <div class="emax" data-drag="both">EMAX Units</div>
       <pre><code class=css>/* Element maximum units */
 @element .emax {
-  $this {
+  :self {
     font-size: 10emax;
   }
 }</code></pre>

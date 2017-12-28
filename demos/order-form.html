@@ -39,8 +39,8 @@
     }
     /* Form Styles */
     @element 'form' {
-      $this,
-      $this * {
+      :self,
+      :self * {
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
@@ -49,7 +49,7 @@
         -moz-osx-font-smoothing: grayscale;
         font-kerning: auto;
       }
-      $this {
+      :self {
         font-size: 10pt;
         line-height: 1.4;
         font-weight: 400;
@@ -59,20 +59,20 @@
         padding: 0;
         transition: opacity .3s ease-in-out;
       }
-      $this:after {
+      :self:after {
         content: '';
         display: block;
         clear: both;
       }
-      $this fieldset {
+      :self fieldset {
         border: none;
         padding: 0;
       }
-      $this select,
-      $this .split-input > input,
-      $this .split-input > select,
-      $this input,
-      $this textarea {
+      :self select,
+      :self .split-input > input,
+      :self .split-input > select,
+      :self input,
+      :self textarea {
         float: left;
         margin: 0 0 2% 0;
         margin-bottom: 2%;
@@ -93,15 +93,15 @@
         -moz-appearance: none;
         font-family: 'Source Sans Pro', 'Open Sans', Roboto, 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', 'Myriad Pro', 'Segoe UI', Myriad, Helvetica, 'Lucida Grande', 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, Arial, sans-serif;
       }
-      $this select:focus,
-      $this .split-input > *:focus,
-      $this input:focus {
+      :self select:focus,
+      :self .split-input > *:focus,
+      :self input:focus {
         outline: none;
         border-color: orange;
         box-shadow: #fc0 0 0 3px;
       }
-      $this select,
-      $this .split-input select {
+      :self select,
+      :self .split-input select {
         color: rgba(0,0,0,.5);
         background: rgba(255,255,255,.5);
         padding-right: 1.5em;
@@ -112,70 +112,70 @@
         text-indent: 0.01px;
         text-overflow: '';
       }
-      $this select:active,
-      $this .split-input select:active {
+      :self select:active,
+      :self .split-input select:active {
         background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAQAAABLCVATAAABBklEQVR4Ae3PQY7TQBCG0VfNLLgGd2SBhO207SBxuZgzcAsWIxfbHiuTFsnsyCd505Kf/gof1P8NPaHfX3z26rFe/IlfX7N6yT2kcFfFa9TYPuWYJw8Vc6yxyTCp7l9ULTIuIOo+3eVkWVSIDQg1x3+mMlZVthAlTyYSIZuvfWkLlpjt0ELIasq4AbUvaVEb9qKpRN3HkILDr8eXWLPa34NEMeegs4g4O7UMsTmWszHjBpRWJ4fiwrGiGt87Datqpw9RzIbri7RHdSFYDOKwKONscqwDRS4xvF3kbJJ96OqBukf1IVhzAOJshDuhKJb8Tvww2d0oNp1K/iS+2elDj/eEntCH9BdocplPRQvKAQAAAABJRU5ErkJggg==');
       }
-      $this select::-ms-expand {
+      :self select::-ms-expand {
         display: none;
       }
-      $this textarea {
+      :self textarea {
         min-height: 5em;
       }
-      $this select[class=three-quarters],
-      $this input[class=three-quarters],
-      $this textarea[class=three-quarters] {
+      :self select[class=three-quarters],
+      :self input[class=three-quarters],
+      :self textarea[class=three-quarters] {
         width: 74%;
       }
-      $this select[class=quarter],
-      $this input[class=quarter],
-      $this textarea[class=quarter] {
+      :self select[class=quarter],
+      :self input[class=quarter],
+      :self textarea[class=quarter] {
         margin-left: 2% !important;
         width: 24%;
       }
-      $this .split-input > select[class=three-quarters],
-      $this .split-input > input[class=three-quarters],
-      $this .split-input > textarea[class=three-quarters] {
+      :self .split-input > select[class=three-quarters],
+      :self .split-input > input[class=three-quarters],
+      :self .split-input > textarea[class=three-quarters] {
         width: 73%;
       }
-      $this .split-input > select[class=quarter],
-      $this .split-input > input[class=quarter],
-      $this .split-input > textarea[class=quarter] {
+      :self .split-input > select[class=quarter],
+      :self .split-input > input[class=quarter],
+      :self .split-input > textarea[class=quarter] {
         margin-left: 4% !important;
         width: 23%;
       }
-      $this .split-input {
+      :self .split-input {
         float: left;
         width: 49%;
         margin-bottom: 2%;
       }
-      $this .split-input > input,
-      $this .split-input > select {
+      :self .split-input > input,
+      :self .split-input > select {
         margin-bottom: 0;
         width: 48%;
       }
-      $this .split-input input:nth-child(even),
-      $this .split-input select:nth-child(even) {
+      :self .split-input input:nth-child(even),
+      :self .split-input select:nth-child(even) {
         margin-left: 2%;
       }
-      $this select:nth-child(even),
-      $this input:nth-child(even),
-      $this .split-input:nth-child(even) {
+      :self select:nth-child(even),
+      :self input:nth-child(even),
+      :self .split-input:nth-child(even) {
         margin-left: 2%;
       }
-      $this .tooltip-inner {
+      :self .tooltip-inner {
         padding: 7px;
         border-radius: 2px;
         color: #fff;
         font-weight: 300;
         font-size: 12pt;
       }
-      $this [type=number]::-webkit-inner-spin-button,
-      $this [type=number]::-webkit-outer-spin-button {
+      :self [type=number]::-webkit-inner-spin-button,
+      :self [type=number]::-webkit-outer-spin-button {
         -webkit-appearance: none;
         margin: 0;
       }
-      $this [data-button] {
+      :self [data-button] {
         width: auto;
         padding: .5em .75em;
         font-size: 18pt;
@@ -184,10 +184,10 @@
         display: block;
         margin: 1em auto .5em auto;
       }
-      $this .lockit {
+      :self .lockit {
         position: relative;
       }
-      $this .lockit:after {
+      :self .lockit:after {
         content: '';
         display: block;
         width: 20px;
@@ -201,36 +201,36 @@
       }
     }
     @element 'form' and (max-width: 450px) {
-      $this select,
-      $this .split-input,
-      $this .split-input > *,
-      $this input {
+      :self select,
+      :self .split-input,
+      :self .split-input > *,
+      :self input {
         width: 100%;
       }
-      $this .split-input {
+      :self .split-input {
         margin-bottom: 0;
       }
-      $this .split-input > input,
-      $this .split-input > select {
+      :self .split-input > input,
+      :self .split-input > select {
         margin-bottom: 2%;
         width: 100%;
       }
-      $this select:nth-child(even),
-      $this input:nth-child(even),
-      $this .split-input:nth-child(even) {
+      :self select:nth-child(even),
+      :self input:nth-child(even),
+      :self .split-input:nth-child(even) {
         margin-left: 0;
       }
-      $this .lockit:after {
+      :self .lockit:after {
         display: none;
       }
-      $this .split-input > select[class=three-quarters],
-      $this .split-input > input[class=three-quarters],
-      $this .split-input > textarea[class=three-quarters] {
+      :self .split-input > select[class=three-quarters],
+      :self .split-input > input[class=three-quarters],
+      :self .split-input > textarea[class=three-quarters] {
         width: 74%;
       }
-      $this .split-input > select[class=quarter],
-      $this .split-input > input[class=quarter],
-      $this .split-input > textarea[class=quarter] {
+      :self .split-input > select[class=quarter],
+      :self .split-input > input[class=quarter],
+      :self .split-input > textarea[class=quarter] {
         margin-left: 2% !important;
         width: 24%;
       }
@@ -292,7 +292,7 @@
       box-shadow: #6c71c4 0 0 3px;
     }
     @element 'form' {
-      $this {
+      :self {
         opacity: 1 !important;
       }
     }

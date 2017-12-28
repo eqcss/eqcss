@@ -32,7 +32,7 @@
   <p>How often have you been styling something and thought to yourself, <em><q>If only CSS could apply a style to the parent element</q>?</em></p>
   <p>CSS already has a descendant selector, <code>></code>, that allows us to select only the elements that belong to a certain element, but there is no equivalent <code>&lt;</code> selector to go the other way.</p>
   <p>Adding a parent selector to CSS has been requested for a long time, and various different syntaxes have been proposed. We never set out to add a parent selector to CSS but as a side-effect of another feature we are building we had nearly all of the pieces in place.</p>
-  <h3>Ladies and Gentlemen may I present: the <code>$parent</code> selector.</h3>
+  <h3>Ladies and Gentlemen may I present: the <code>:parent</code> selector.</h3>
   <p>It works with our element query plugin EQCSS, to learn more about how to get started with element queries check out <a href=http://elementqueries.com>elementqueries.com</a></p>
   <p>When you write an element query you create a responsive context into which those styles apply. A simple element query might look like this:</p>
 <pre><code class=css>@element '.widget' {
@@ -40,18 +40,18 @@
     background: red'
   }
 }</code></pre>
-  <p>Now the styles inside can apply to any element, including other <code>.widget</code> elements on the page, so we use style scoping to apply our styles to the element(s) which match our query with the <code>$this</code> keyword. In the example below every <code>.widget</code> that matches the condition will get the styles applied to <code>$this</code>, but the styles applied to <code>.widget</code> will apply to all <code>.widget</code> elements on the page at any time a <code>.widget</code> element meets the responsive condition.</p>
+  <p>Now the styles inside can apply to any element, including other <code>.widget</code> elements on the page, so we use style scoping to apply our styles to the element(s) which match our query with the <code>:self</code> keyword. In the example below every <code>.widget</code> that matches the condition will get the styles applied to <code>:self</code>, but the styles applied to <code>.widget</code> will apply to all <code>.widget</code> elements on the page at any time a <code>.widget</code> element meets the responsive condition.</p>
 <pre><code class=css>@element '.widget' {
-    $this {
+    :self {
     background: green;
   }
   .widget {
     background: red;
   }
 }</code></pre>
-  <p>This is style scoping. To target the parent of an element using the <code>$parent</code> selector, first create a responsive context. Now anywhere you use the <code>$parent</code> selector inside this query it will target the element containing <code>$this</code>, the element that matches the query</p>
+  <p>This is style scoping. To target the parent of an element using the <code>:parent</code> selector, first create a responsive context. Now anywhere you use the <code>:parent</code> selector inside this query it will target the element containing <code>:self</code>, the element that matches the query</p>
 <pre><code class=css>@element '.widget {
-  $parent {
+  :parent {
     background: red;
   }
 }</code></pre>

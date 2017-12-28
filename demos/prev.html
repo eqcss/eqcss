@@ -4,7 +4,7 @@
   <meta charset=utf-8>
   <meta name=viewport content="width=device-width, initial-scale=1">
   <title>Previous Element Meta-Selector</title>
-  <meta name=description content="Previous element CSS selector. Use EQCSS.js to add new meta-selectors like $next, $prev, $parent, and more to CSS.">
+  <meta name=description content="Previous element CSS selector. Use EQCSS.js to add new meta-selectors like :next, :prev, :parent, and more to CSS.">
   <meta name=keywords content="EQCSS, element queries, element query, container queries, meta selector, previous element, previous selector, css selector">
   <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic|Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic" rel=stylesheet>
   <link href=https://staticasset.s3.amazonaws.com/basic.css rel=stylesheet>
@@ -43,7 +43,7 @@
       box-shadow: #fc0 0 0 3px;
     }
     @element '[type=button]' {
-      $prev {
+      :prev {
         background: gold;
       }
     }
@@ -51,7 +51,7 @@
 </head>
 <body>
   <h1>Selecting Previous Element</h1>
-  <h2>Using the <code>$prev</code> meta-selector in EQCSS</h2>
+  <h2>Using the <code>:prev</code> meta-selector in EQCSS</h2>
   <form>
     <input type=text placeholder="Text input">
     <input type=email placeholder="Email input">

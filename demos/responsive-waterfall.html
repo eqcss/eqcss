@@ -10,10 +10,10 @@
   <link href=https://staticasset.s3.amazonaws.com/basic.css rel=stylesheet>
   <style>
     @element '[data-waterfall]' {
-      $this,
-      $this *,
-      $this *:before,
-      $this *:after {
+      :self,
+      :self *,
+      :self *:before,
+      :self *:after {
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
@@ -22,7 +22,7 @@
         -moz-osx-font-smoothing: grayscale;
         font-kerning: auto;
       }
-      $this {
+      :self {
         color: #333;
         font-size: 10pt;
         line-height: 1.4;
@@ -30,81 +30,81 @@
         font-family: 'Source Sans Pro', 'Open Sans', Roboto, 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', 'Myriad Pro', 'Segoe UI', Myriad, Helvetica, 'Lucida Grande', 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, Arial, sans-serif;
         -webkit-text-size-adjust: 100%;
       }
-      $this aside {
+      :self aside {
         padding: 1em;
       }
-      $this aside:nth-child(even) {
+      :self aside:nth-child(even) {
         background: rgba(0,0,0,.1)
       }
-      $this aside:after {
+      :self aside:after {
         content: '';
         display: block;
         clear: both;
       }
-      $this h2,
-      $this h3 {
+      :self h2,
+      :self h3 {
         color: #555;
         font-family: Fira, 'Source Sans Pro', 'Open Sans', Roboto, 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', 'Myriad Pro', 'Segoe UI', Myriad, Helvetica, 'Lucida Grande', 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, Arial, sans-serif;
         margin: 0 auto;
         letter-spacing: -.02em;
         line-height: 1.2;
       }
-      $this h2 {
+      :self h2 {
         font-size: 240%;
         font-weight: 700;
       }
-      $this h3 {
+      :self h3 {
         font-size: 180%;
         font-weight: 400;
       }
-      $this img {
+      :self img {
         display: block;
         width: auto;
         max-width: 100%;
         margin: 1em auto;
         border-radius: 100%;
       }
-      $this p {
+      :self p {
         color: #333;
         font-size: 120%;
         margin: .5em 0;
       }
     }
     @element '[data-waterfall]' and (max-width: 200px) {
-      $this h2,
-      $this h3,
-      $this p {
+      :self h2,
+      :self h3,
+      :self p {
         text-align: center;
       }
-      $this h2 {
+      :self h2 {
         font-size: 200%;
       }
-      $this h3 {
+      :self h3 {
         font-size: 140%;
       }
-      $this p {
+      :self p {
         font-size: 100%;
       }
     }
     @element '[data-waterfall]' and (min-width: 600px) {
-      $this h2 {
+      :self h2 {
         font-size: 280%;
       }
-      $this h3 {
+      :self h3 {
         font-size: 220%;
       }
-      $this p {
+      :self p {
         font-size: 140%;
       }
-      $this img {
+      :self img {
         float: left;
         margin: 0 2em 0 0;
       }
-      $this aside {
+      :self aside {
         margin: 2em 0;
         padding: 2em;
       }
-      $this aside:nth-child(even) img {
+      :self aside:nth-child(even) img {
         float: right;
         margin: 0 0 0 2em;
       }

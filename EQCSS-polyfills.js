@@ -1,7 +1,7 @@
 /*
 
 #  EQCSS IE8 Polyfills
-## version 1.7.3
+## version 1.8.0
 
 This file contains optional polyfills to provide:
 IE8 support to the EQCSS.js plugin

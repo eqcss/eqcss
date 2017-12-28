@@ -10,13 +10,13 @@
   <style>
     /* Base Calendar Styles */
     @element '.eqCal' {
-      $this {
+      :self {
         position: relative;
         padding: 0;
         font-size: 12pt;
         opacity: 1;
       }
-      $this * {
+      :self * {
         box-sizing: border-box;
         -moz-box-sizing: border-box;
         text-rendering: optimizeLegibility;
@@ -30,7 +30,7 @@
         user-select: none;
         line-height: 1.2;
       }
-      $this .title {
+      :self .title {
         text-align: center;
         color: #333;
         font-family: 'Source Sans Pro', 'Open Sans', Roboto, 'Helvetica Neue', 'Myriad Pro', Myriad, 'Segoe UI', Arial, sans-serif;
@@ -39,14 +39,14 @@
         margin: 0 0 12pt 0;
         transition: font-size: .1s ease-in-out;
       }
-      $this .title .month {
+      :self .title .month {
         font-weight: 400;
       }
-      $this .title .year {
+      :self .title .year {
         font-weight: 300;
         opacity: .5;
       }
-      $this nav {
+      :self nav {
         position: absolute;
         top: 0;
         width: 100%;
@@ -54,32 +54,32 @@
         z-index: 200;
         transition: opacity .2s ease-in-out;
       }
-      $this nav a {
+      :self nav a {
         display: inline-block;
         color: #999;
         padding: .1em .1em;
         transition: color .1s ease-in-out;
       }
-      $this nav a.eqCal-prev {
+      :self nav a.eqCal-prev {
         float: left;
       }
-      $this nav a.eqCal-next {
+      :self nav a.eqCal-next {
         float: right;
       }
-      $this nav a:hover,
-      $this nav a :focus {
+      :self nav a:hover,
+      :self nav a :focus {
         color: #555;
       }
-      $this .dates:after {
+      :self .dates:after {
          content: '';
          display: block;
          clear: both;
       }
-      $this article,
-      $this article * {
+      :self article,
+      :self article * {
         font-family: 'Source Sans Pro', 'Open Sans', Roboto, 'Helvetica Neue', 'Myriad Pro', Myriad, 'Segoe UI', Arial, sans-serif;
       }
-      $this article {
+      :self article {
         display: block;
         float: left;
         width: 14.28571428571429%;
@@ -87,11 +87,11 @@
         position: relative;
         z-index: 250;
       }
-      $this input[type="radio"] {
+      :self input[type="radio"] {
         display: none;
       }
-      $this .reset,
-      $this .reset:hover {
+      :self .reset,
+      :self .reset:hover {
         display: block;
         position: fixed;
         width: 100%;
@@ -103,13 +103,13 @@
         cursor: pointer;
         -webkit-tap-highlight-color: transparent !important;
       }
-      $this input:checked + .reset,
-      $this input:checked + .reset:hover {
+      :self input:checked + .reset,
+      :self input:checked + .reset:hover {
         cursor: default;
         display: block;
         z-index: 20;
       }
-      $this ol {
+      :self ol {
         display: block;
         padding: 0;
         margin: 0 auto;
@@ -120,7 +120,7 @@
         position: relative;
         z-index: 200;
       }
-      $this ol li {
+      :self ol li {
         display: inline-block;
         float: left;
         width: 14.28571428571429%;
@@ -133,38 +133,38 @@
         border-bottom: 1px solid #eee;
         margin-bottom: .5em;
       }
-      $this ol li .short {
+      :self ol li .short {
         display: none;
       }
-      $this ol li .full {
+      :self ol li .full {
         display: none;
       }
     }
     /* Popover Functionality */
     @element '.eqCal' and (max-width: 849px) {
-      $this label:hover {
+      :self label:hover {
         background: #fc0;
       }
-      $this input:checked + label {
+      :self input:checked + label {
         background: #fc0;
       }
-      $this input:checked + label + .date {
+      :self input:checked + label + .date {
         color: #fff;
       }
-      $this label {
+      :self label {
         cursor: pointer;
         -webkit-tap-highlight-color: #f60 !important;
       }
-      $this label:empty {
+      :self label:empty {
         cursor: default;
         background: transparent;
         pointer-events: none;
         -webkit-tap-highlight-color: transparent !important;
       }
-      $this input:checked + label:empty:before {
+      :self input:checked + label:empty:before {
         display: none;
       }
-      $this input:checked + label:before {
+      :self input:checked + label:before {
         content: '';
         display: block;
         border: 12px solid transparent;
@@ -175,7 +175,7 @@
         top: -12.5px;
         z-index: 1000;
       }
-      $this input:checked + label:after {
+      :self input:checked + label:after {
         content: '';
         display: block;
         border: 11px solid transparent;
@@ -186,10 +186,10 @@
         top: -13px;
         z-index: 1500;
       }
-      $this label > div {
+      :self label > div {
         height: 100%;
       }
-      $this input:checked + label > div {
+      :self input:checked + label > div {
         content: '';
         display: inline-block;
         width: 200px;
@@ -210,22 +210,22 @@
         cursor: default;
         z-index: 500;
       }
-      $this article:nth-child(7n+1) input:checked + label > div {
+      :self article:nth-child(7n+1) input:checked + label > div {
         margin-left: -50px;
       }
-      $this article:nth-child(7n+2) input:checked + label > div {
+      :self article:nth-child(7n+2) input:checked + label > div {
         margin-left: -75px;
       }
-      $this article:nth-child(7n+6) input:checked + label > div {
+      :self article:nth-child(7n+6) input:checked + label > div {
         margin-left: -125px;
       }
-      $this article:nth-child(7n+7) input:checked + label > div {
+      :self article:nth-child(7n+7) input:checked + label > div {
         margin-left: -150px;
       }
-      $this input:checked + label > div::-webkit-scrollbar {
+      :self input:checked + label > div::-webkit-scrollbar {
         display: none;
       }
-      $this input:checked + label .event {
+      :self input:checked + label .event {
         display: block;
         height: auto;
         width: auto;
@@ -236,23 +236,23 @@
         text-align: left;
         z-index: 750;
       }
-      $this input:checked + label .event:last-child {
+      :self input:checked + label .event:last-child {
         margin-bottom: 2%;
       }
-      $this input:checked + label .event + .event {
+      :self input:checked + label .event + .event {
         margin-top: 2%;
       }
-      $this input:checked + label .event h4 {
+      :self input:checked + label .event h4 {
         font-size: 100%;
         margin: 0;
         display: block;
         color: #333;
         padding: 0 2%;
       }
-      $this input:checked + label .event aside:empty {
+      :self input:checked + label .event aside:empty {
         display: none;
       }
-      $this input:checked + label .event aside {
+      :self input:checked + label .event aside {
         display: block;
         padding: 2% 2% 0 2%;
         font-size: 90%;
@@ -261,14 +261,14 @@
     }
     /* Dot Grid */
     @element '.eqCal' and (max-width: 199px) {
-      $this .title,
-      $this nav a {
+      :self .title,
+      :self nav a {
         font-size: 100%;
       }
-      $this nav {
+      :self nav {
         opacity: 0;
       }
-      $this label {
+      :self label {
         content: '';
         display: block;
         width: 25%;
@@ -283,38 +283,38 @@
         border-radius: 100%;
         cursor: pointer;
       }
-      $this .date,
-      $this .event {
+      :self .date,
+      :self .event {
         display: none;
       }
-      $this input:checked + label > div,
-      $this input:checked + label:before {
+      :self input:checked + label > div,
+      :self input:checked + label:before {
         display: none;
       }
     }
     /* Small Numbers */
     @element '.eqCal' and (min-width: 200px) and (max-width: 849px) {
-      $this .title {
+      :self .title {
         font-size: 125%;
       }
-      $this nav a {
+      :self nav a {
         font-size: 125%;
       }
-      $this nav {
+      :self nav {
         opacity: 1;
       }
-      $this article {
+      :self article {
         width: 13.14%;
         padding-top: 12%;
         margin-right: 1.33%;
       }
-      $this article:nth-child(7n+0) {
+      :self article:nth-child(7n+0) {
         margin-right: 0;
       }
-      $this article:nth-child(n+8) {
+      :self article:nth-child(n+8) {
         margin-top: 1.33%;
       }
-      $this label {
+      :self label {
         position: absolute;
         top: 10%;
         left: 10%;
@@ -323,11 +323,11 @@
         background: #f70;
         border-radius: 50%;
       }
-      $this .event h4,
-      $this .event aside {
+      :self .event h4,
+      :self .event aside {
         display: none;
       }
-      $this .date {
+      :self .date {
         display: block;
         width: 100%;
         text-align: center;
@@ -340,76 +340,76 @@
         z-index: 1000;
         pointer-events: none;
       }
-      $this label:empty + .date {
+      :self label:empty + .date {
         color: #999;
       }
-      $this .date.today,
-      $this label:empty + .date.today {
+      :self .date.today,
+      :self label:empty + .date.today {
         color: #000 !important;
       }
-      $this label {
+      :self label {
         text-align: right;
       }
     }
     @element '.eqCal' and (min-width: 300px) and (max-width: 399px) {
-      $this .title,
-      $this nav a {
+      :self .title,
+      :self nav a {
         font-size: 150%;
       }
-      $this nav a {
+      :self nav a {
         font-size: 150%;
         padding: .1em .15em;
       }
     }
     @element '.eqCal' and (min-width: 400px) and (max-width: 499px) {
-      $this .title,
-      $this nav a {
+      :self .title,
+      :self nav a {
         font-size: 200%;
       }
-      $this label {
+      :self label {
         top: 15%;
         left: 15%;
         width: 70%;
         height: 70%;
       }
-      $this nav a {
+      :self nav a {
         font-size: 200%;
         padding: .1em .15em;
       }
     }
     @element '.eqCal' and (min-width: 500px) and (max-width: 699px) {
-      $this .title,
-      $this nav a {
+      :self .title,
+      :self nav a {
         font-size: 300%;
       }
-      $this .date {
+      :self .date {
         font-size: 18pt;
         margin-top: -10pt;
       }
-      $this ol li .short {
+      :self ol li .short {
         display: inline;
       }
     }
     @element '.eqCal' and (min-width: 700px) and (max-width: 849px) {
-      $this .title,
-      $this nav a {
+      :self .title,
+      :self nav a {
         font-size: 350%;
       }
-      $this .date {
+      :self .date {
         font-size: 24pt;
         margin-top: -14pt;
       }
-      $this ol li {
+      :self ol li {
        font-size: 12pt;
       }
-      $this ol li .short,
-      $this ol li .full {
+      :self ol li .short,
+      :self ol li .full {
         display: inline;
       }
     }
     /* Big Calendar */
     @element '.eqCal' and (min-width: 850px) {
-      $this .title {
+      :self .title {
         font-size: 450%;
         margin: 0 0 -14pt 0;
         color: #333;
@@ -417,27 +417,27 @@
         text-align: left;
         letter-spacing: -.03em;
       }
-      $this nav {
+      :self nav {
         width: 100%;
         text-align: right;
       }
-      $this nav a {
+      :self nav a {
         font-size: 350%;
         float: none !important;
       }
-      $this .title .month {
+      :self .title .month {
         font-weight: 400;
       }
-      $this .title .year {
+      :self .title .year {
         font-weight: 300;
         opacity: .4;
       }
-      $this ol {
+      :self ol {
         margin: 0;
         border-bottom: none;
         overflow: hidden;
       }
-      $this ol li {
+      :self ol li {
         border: 1px solid #ccc;
         border-right: none;
         margin-bottom: 0;
@@ -446,32 +446,32 @@
         background: rgba(255,255,255,.8);
         border-bottom: none;
       }
-      $this ol li .short,
-      $this ol li .full {
+      :self ol li .short,
+      :self ol li .full {
         display: inline;
       }
-      $this ol li + li {
+      :self ol li + li {
         border-right-width: 1px;
       }
-      $this ol li:last-child {
+      :self ol li:last-child {
         border-right: 1px solid #ccc;
       }
-      $this article {
+      :self article {
         border: 1px solid #ccc;
         border-right-width: 0;
         background: rgba(255,255,255,.8);
       }
-      $this article:nth-child(7n+0) {
+      :self article:nth-child(7n+0) {
         border-right-width: 1px;
       }
-      $this article:nth-child(n+8) {
+      :self article:nth-child(n+8) {
         border-top: none;
       }
-      $this .date:empty {
+      :self .date:empty {
         display: none;
         pointer-events: none;
       }
-      $this .date {
+      :self .date {
         position: absolute;
         top: 0;
         left: 0;
@@ -484,10 +484,10 @@
         letter-spacing: -.03em;
         cursor: none;
       }
-      $this .date.today {
+      :self .date.today {
         color: #000 !important;
       }
-      $this label > div {
+      :self label > div {
         position: absolute;
         top: 0;
         left: 0;
@@ -498,10 +498,10 @@
         padding: 20% 0 3% 0;
         z-index: 1500;
       }
-      $this label > div::-webkit-scrollbar {
+      :self label > div::-webkit-scrollbar {
         display: none;
       }
-      $this .event {
+      :self .event {
         display: block;
         position: relative;
         border-radius: 3px;
@@ -512,44 +512,44 @@
         background: #fafafa;
         box-shadow: rgba(0,0,0,.05) 0 2px 2px;
       }
-      $this .event:last-child {
+      :self .event:last-child {
         margin-bottom: 3%;
       }
-      $this .event h4 {
+      :self .event h4 {
         margin: 0;
         display: block;
         color: #555;
         padding: 2%;
       }
-      $this .event aside:empty {
+      :self .event aside:empty {
         display: none;
       }
-      $this .event aside {
+      :self .event aside {
         padding: 0 2% 2%  2%;
         font-size: 90%;
         color: #555;
       }
-      $this .event.dark {
+      :self .event.dark {
         background: #f90;
         border-color: #e40;
       }
-      $this .event.dark h4 {
+      :self .event.dark h4 {
         color: #e20;
       }
-      $this .event.dark aside {
+      :self .event.dark aside {
         color: #e20;
       }
-      $this .event.light {
+      :self .event.light {
         background: #0cf;
         border-color: #09c;
       }
-      $this .event.light h4 {
+      :self .event.light h4 {
         color: #06a;
       }
-      $this .event.light aside {
+      :self .event.light aside {
         color: #06a;
       }
-      $this input:checked + label:before {
+      :self input:checked + label:before {
         display: none;
       }
     }

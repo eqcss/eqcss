@@ -4,7 +4,7 @@
   <meta charset=utf-8>
   <meta name=viewport content="width=device-width, initial-scale=1">
   <meta name=viewport content="user-scalable=yes,initial-scale=1,width=device-width">
-  <meta name=description content="Try out EQCSS with this live REPL. EQCSS is a CSS extension that introduces Element Queries, Scoped Styles, and new CSS selectors like $parent and $prev and more to all browsers IE8 and up.">
+  <meta name=description content="Try out EQCSS with this live REPL. EQCSS is a CSS extension that introduces Element Queries, Scoped Styles, and new CSS selectors like :parent and :prev and more to all browsers IE8 and up.">
   <meta name=keywords content="EQCSS, element queries, element query, container queries, CSS extension, parent selector, meta selector, scoped CSS, scoped styles, CSS variables, reponsive web design, rwd, repl, live editor, editor, demo">
   <title>EQCSS REPL</title>
   <style>
@@ -165,23 +165,23 @@
 <p>Begin editing this code and watch the changes happen live in the preview pane…</p></textarea>
     <h2>CSS</h2>
     <textarea id=css autocorrect=off autocapitalize=off autocomplete=off spellcheck=off>@element 'html' {
-  $this {
+  :self {
     background: powderblue;
   }
 }
 @element 'p' and (min-characters: 30){
-  $this {
+  :self {
     font-weight: bold;
   }
 }</textarea>
   </section>
   <iframe id=preview></iframe>
   <a id=share href="#" target=_blank>Share</a>
-  <script id=eqcss>
+  <script id="eqcss">
     /*
 
     #  EQCSS
-    ## version 1.7.3
+    ## version 1.8.0
 
     A JavaScript plugin to read EQCSS syntax to provide:
     scoped styles, element queries, container queries,
@@ -222,7 +222,7 @@
 
         var EQCSS = {
           data: [],
-          version: '1.7.3'
+          version: '1.8.0'
         }
 
 
@@ -1317,19 +1317,19 @@
                   }
                 )
 
-                // Replace '$this' or 'eq_this' with '[element_guid]'
-                css_code = css_code.replace(/(\$|eq_)this/gi, '[' + element_guid + ']')
+                // Replace ':self', '$this' or 'eq_this' with '[element_guid]'
+                css_code = css_code.replace(/(:|\$|eq_)(this|self)/gi, '[' + element_guid + ']')
 
-                // Replace '$parent' or 'eq_parent' with '[element_guid_parent]'
-                css_code = css_code.replace(/(\$|eq_)parent/gi, '[' + element_guid_parent + ']')
+                // Replace ':parent', '$parent' or 'eq_parent' with '[element_guid_parent]'
+                css_code = css_code.replace(/(:|\$|eq_)parent/gi, '[' + element_guid_parent + ']')
 
-                // Replace '$prev' or 'eq_prev' with '[element_guid_prev]'
-                css_code = css_code.replace(/(\$|eq_)prev/gi, '[' + element_guid_prev + ']')
+                // Replace ':prev', '$prev' or 'eq_prev' with '[element_guid_prev]'
+                css_code = css_code.replace(/(:|\$|eq_)prev/gi, '[' + element_guid_prev + ']')
 
-                // Replace '$next' or 'eq_next' with '[element_guid_next]'
-                css_code = css_code.replace(/(\$|eq_)next/gi, '[' + element_guid_next + ']')
+                // Replace ':next', '$next' or 'eq_next' with '[element_guid_next]'
+                css_code = css_code.replace(/(:|\$|eq_)next/gi, '[' + element_guid_next + ']')
 
-                // Replace '$root' or 'eq_root' with html
+                // Replace '$root' or 'eq_root' with 'html'
                 css_code = css_code.replace(/(\$|eq_)root/gi, 'html')
 
                 // Replace 'ew', 'eh', 'emin', and 'emax' units

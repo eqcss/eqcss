@@ -50,11 +50,11 @@ Or from Yarn via
 EQCSS is also hosted on CDNjs and you can use the version hosted there for your projects: [https://cdnjs.com/libraries/eqcss](https://cdnjs.com/libraries/eqcss):
 
 ```
-https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.7.3/EQCSS-polyfills.min.js
+https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.8.0/EQCSS-polyfills.min.js
 ```
 
 ```
-https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.7.3/EQCSS.min.js
+https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.8.0/EQCSS.min.js
 ```
 
 ## Writing Element Queries
@@ -137,13 +137,13 @@ For more info, view more about EQCSS syntax here: [https://gist.github.com/tomho
 
 ### Meta-Selectors
 
-- `$this` [$this demo](http://codepen.io/tomhodgins/pen/xOZGOq)
-- `$parent` [$parent demo](http://codepen.io/tomhodgins/pen/VjeLjy)
+- `:self` [:self demo](http://codepen.io/tomhodgins/pen/xOZGOq)
+- `:parent` [:parent demo](http://codepen.io/tomhodgins/pen/VjeLjy)
 - `$root` [$root demo](http://codepen.io/tomhodgins/pen/RRrPRy)
-- `$prev` [$prev demo](http://codepen.io/tomhodgins/pen/gMPpMd)
-- `$next` [$next demo](http://codepen.io/tomhodgins/pen/PzZqzy)
+- `:prev` [:prev demo](http://codepen.io/tomhodgins/pen/gMPpMd)
+- `:next` [:next demo](http://codepen.io/tomhodgins/pen/PzZqzy)
 
-(Alternatively, for SCSS compatibility you can also use meta-selectors prefixed by `eq_` instead of a `$`. These are `eq_this`, `eq_parent`, `eq_root`, `eq_prev`, and `eq_next`)
+(Alternatively, for SCSS compatibility you can also use meta-selectors prefixed by `eq_` instead of a `:` or `$`. These are `eq_this` or `eq_self`, `eq_parent`, `eq_root`, `eq_prev`, and `eq_next`)
 
 ### CSS Functions
 

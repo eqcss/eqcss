@@ -1,7 +1,7 @@
 /*
 
 #  EQCSS
-## version 1.7.3
+## version 1.8.0
 
 A JavaScript plugin to read EQCSS syntax to provide:
 scoped styles, element queries, container queries,
@@ -42,7 +42,7 @@ License: MIT
 
     var EQCSS = {
       data: [],
-      version: '1.7.3'
+      version: '1.8.0'
     }
 
 
@@ -1137,19 +1137,19 @@ License: MIT
               }
             )
 
-            // Replace '$this' or 'eq_this' with '[element_guid]'
-            css_code = css_code.replace(/(\$|eq_)this/gi, '[' + element_guid + ']')
+            // Replace ':self', '$this' or 'eq_this' with '[element_guid]'
+            css_code = css_code.replace(/(:|\$|eq_)(this|self)/gi, '[' + element_guid + ']')
 
-            // Replace '$parent' or 'eq_parent' with '[element_guid_parent]'
-            css_code = css_code.replace(/(\$|eq_)parent/gi, '[' + element_guid_parent + ']')
+            // Replace ':parent', '$parent' or 'eq_parent' with '[element_guid_parent]'
+            css_code = css_code.replace(/(:|\$|eq_)parent/gi, '[' + element_guid_parent + ']')
 
-            // Replace '$prev' or 'eq_prev' with '[element_guid_prev]'
-            css_code = css_code.replace(/(\$|eq_)prev/gi, '[' + element_guid_prev + ']')
+            // Replace ':prev', '$prev' or 'eq_prev' with '[element_guid_prev]'
+            css_code = css_code.replace(/(:|\$|eq_)prev/gi, '[' + element_guid_prev + ']')
 
-            // Replace '$next' or 'eq_next' with '[element_guid_next]'
-            css_code = css_code.replace(/(\$|eq_)next/gi, '[' + element_guid_next + ']')
+            // Replace ':next', '$next' or 'eq_next' with '[element_guid_next]'
+            css_code = css_code.replace(/(:|\$|eq_)next/gi, '[' + element_guid_next + ']')
 
-            // Replace '$root' or 'eq_root' with html
+            // Replace '$root' or 'eq_root' with 'html'
             css_code = css_code.replace(/(\$|eq_)root/gi, 'html')
 
             // Replace 'ew', 'eh', 'emin', and 'emax' units

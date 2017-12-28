@@ -14,7 +14,7 @@
       background: dodgerblue;
     }
     @element '[data-ratio]' {
-      $this {
+      :self {
         height: eval('clientWidth * parseInt(getAttribute("data-ratio").split(":")[1]) / parseInt(getAttribute("data-ratio").split(":")[0])')px;
       }
     }

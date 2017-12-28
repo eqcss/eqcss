@@ -421,29 +421,29 @@
 
   <h2>Meta Selectors</h2>
 
-  <h3>$this</h3>
+  <h3>:self</h3>
   <div class="this-selector">
     <input type=text placeholder=input>
   </div>
   <style>
-    /* $this selector */
+    /* :self selector */
     @element ".this-selector input" and (min-characters: 5) {
-      $this,
-      $this:focus {
+      :self,
+      :self:focus {
         background: greenyellow;
         border-color: limegreen;
       }
     }
   </style>
 
-  <h3>$parent</h3>
+  <h3>:parent</h3>
   <div class="parent-selector">
     <input type=text placeholder=input>
   </div>
   <style>
-    /* $parent selector */
+    /* :parent selector */
     @element ".parent-selector input" and (min-characters: 5) {
-      $parent {
+      :parent {
         background: greenyellow;
         border-color: limegreen;
       }
@@ -463,29 +463,29 @@
     }
   </style>
 
-  <h3>$prev</h3>
+  <h3>:prev</h3>
   <div>
     <img src=https://staticasset.s3.amazonaws.com/user.png alt="demo image">
     <img class="prev-selector" src=https://staticasset.s3.amazonaws.com/user.png alt="demo image">
   </div>
   <style>
-    /* $prev selector */
+    /* :prev selector */
     @element ".prev-selector" {
-      $prev {
+      :prev {
         border: 2px solid limegreen;
       }
     }
   </style>
 
-  <h3>$next</h3>
+  <h3>:next</h3>
   <div>
     <img class="next-selector" src=https://staticasset.s3.amazonaws.com/user.png  alt="demo image">
     <img src=https://staticasset.s3.amazonaws.com/user.png alt="demo image">
   </div>
   <style>
-    /* $next selector */
+    /* :next selector */
     @element ".next-selector" {
-      $next {
+      :next {
         border: 2px solid limegreen;
       }
     }
@@ -501,12 +501,12 @@
   <style>
     /* eval('') */
     @element "strong" {
-      $this:after {
+      :self:after {
         content: ' eval("new Date().getFullYear()")';
       }
     }
     @element "em" {
-      $this:after {
+      :self:after {
         content: ' eval("window.innerWidth+' x '+window.innerHeight")';
       }
     }
