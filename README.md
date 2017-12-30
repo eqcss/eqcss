@@ -165,7 +165,7 @@ For more info, view more about EQCSS syntax here: [https://gist.github.com/tomho
 - [Content Demo](http://elementqueries.com/demos/content-blocks.html)
 - [Counting Children Demo](http://elementqueries.com/demos/counting-children.html)
 - [Date Demo](http://elementqueries.com/demos/date.html)
-- [Zastrow-style Element Query Demo Demo](http://elementqueries.com/demos/element-query-demo.html)
+- [Zastrow-style Element Query Demo](http://elementqueries.com/demos/element-query-demo.html)
 - [Flyout Demo](http://elementqueries.com/demos/flyout.html)
 - [Headline Demo](http://elementqueries.com/demos/headline.html)
 - [Media Player Demo](http://elementqueries.com/demos/media-player.html)
