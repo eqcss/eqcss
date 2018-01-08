@@ -515,6 +515,75 @@
         font-size: 10emax;
       }
     }
+    /* Newsletter Signup */
+    .newsletter {
+      overflow: hidden;
+      padding: 1em 1em 1em calc(1em + 3px);
+      color: rgba(0,0,0,.7);
+      margin: 2em auto;
+      line-height: 1.4;
+      background: #def;
+      color: #07f;
+      border-left: 3px solid currentColor;
+      box-shadow: rgba(0,0,0, .15) 1px 1px 1px;
+    }
+    .newsletter input {
+      display: block;
+      width: 100%;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      background: white;
+      border: 2px solid transparent;
+      border-radius: 3px;
+      padding: .5em;
+      margin: 0;
+      font-size: 12pt;
+    }
+    .newsletter .mc-field-group,
+    .newsletter .submit {
+      width: 100%;
+    }
+    .newsletter .mc-field-group,
+    .newsletter .submit {
+      float: left;
+    }
+    .newsletter input:focus,
+    .newsletter input:active {
+      outline: none;
+      border: 2px dashed #07f;
+      box-shadow: none;
+    }
+    .newsletter input[type=email],
+    .newsletter input[type=submit] {
+      margin-top: 1em;
+    }
+    .newsletter input[type=submit] {
+      background: #07f;
+      color: white;
+      cursor: pointer;
+      padding: .5em .75em;
+    }
+    .newsletter input[type=submit]:focus {
+      border-color: white;
+    }
+    .newsletter input[type=submit]:hover {
+      background: blue;
+    }
+    .newsletter input[type=submit]:active {
+      background: white;
+      border-color: #07f;
+      color: #07f;
+    }
+    @media (min-width: 500px) {
+      .newsletter .mc-field-group {
+        width: calc(100% - 1em - 140px);
+        margin-right: 1em;
+      }
+      .newsletter .submit {
+        width: 140px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -528,6 +597,29 @@
       <a data-button=blue href=//tomhodgins.github.io/element-queries-spec/element-queries.html>View CSS Element Queries Spec</a>
       <a data-button=green href=//github.com/tomhodgins/element-queries-spec>View on Github</a>
     </p>
+    <blockquote class=newsletter>
+      <p><strong>Get the Latest</strong></p>
+      <p>To stay up to date with the latest experiments, techniques, and plugins I'm working on, subscribe to <em>The Responsive Report</em> newsletter:</p>
+      <div id="mc_embed_signup">
+        <form action="https://tomhodgins.us10.list-manage.com/subscribe/post?u=df899bcfda656bdcc8fb07c20&amp;id=b403c8835c" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+          <div id="mc_embed_signup_scroll">
+            <div class="mc-field-group">
+              <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Your email address…">
+            </div>
+            <div id="mce-responses" class="clear">
+              <div class="response" id="mce-error-response" style="display:none"></div>
+              <div class="response" id="mce-success-response" style="display:none"></div>
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              <input type="text" name="b_df899bcfda656bdcc8fb07c20_b403c8835c" tabindex="-1" value="">
+            </div>
+            <div class="clear submit">
+              <input type="submit" value="Subscribe Now" name="subscribe" id="mc-embedded-subscribe" class="button">
+            </div>
+          </div>
+        </form>
+      </div>
+    </blockquote>
     <h3 id=faq>What are Element Queries?</h3>
     <p>Element queries are a new way of thinking about responsive web design where the responsive conditions apply to elements on the page instead of the width or height of the browser.</p>
     <p>Unlike CSS <code>@media</code> queries, <code>@element</code> Queries are aware of more than just the width and height of the browser, you can write responsive conditions for a number of different situations like how many characters of text or child elements an element contains.</p>
@@ -962,7 +1054,7 @@
     content: ' eval("new Date().getFullYear()")';
   }
 }
-@element em {
+@element .eval em {
   :self:after {
     content: ' eval("window.innerWidth+' x '+window.innerHeight")';
   }
