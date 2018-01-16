@@ -467,7 +467,7 @@
     }
     /* comment after */
     /* :self selector */
-    @element .this-selector input and (min-characters: 5) {
+    @element .self-selector input and (min-characters: 5) {
       :self,
       :self:focus {
         border-color: red;
@@ -611,7 +611,7 @@
 </head>
 <body>
   <main>
-    <img src=eqcss-logo.png>
+    <img src=eqcss-logo.png alt="EQCSS logo">
     <h1>EQCSS</h1>
     <h2>A CSS Extension for Element Queries &amp; More</h2>
     <h3 id=specification>Specification</h3>
@@ -627,7 +627,7 @@
         <form action="https://tomhodgins.us10.list-manage.com/subscribe/post?u=df899bcfda656bdcc8fb07c20&amp;id=b403c8835c" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
           <div id="mc_embed_signup_scroll">
             <div class="mc-field-group">
-              <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Your email address…">
+              <input aria-label="email" type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Your email address…">
             </div>
             <div id="mce-responses" class="clear">
               <div class="response" id="mce-error-response" style="display:none"></div>
@@ -782,7 +782,7 @@
     </article>
     <article id=min-characters-on-form-inputs>
       <h4>min-characters on form inputs</h4>
-      <input type=text class="mincharacters-input" value='class="mincharacters-input"'>
+      <input aria-label="min characters input" type=text class="mincharacters-input" value='class="mincharacters-input"'>
       <textarea class="mincharacters-textarea">class="mincharacters-textarea"</textarea>
       <pre><code class=css>@element .mincharacters-input and (min-characters: 30) {
   .mincharacters-input {
@@ -797,8 +797,8 @@
     </article>
     <article id=max-characters-on-form-inputs>
       <h4>max-characters on form inputs</h4>
-      <input type=text class="maxcharacters-input" value='class="maxcharacters-input"'>
-      <textarea class="maxcharacters-textarea">class="maxcharacters-textarea"</textarea>
+      <input aria-label="max characters input" type=text class="maxcharacters-input" value='class="maxcharacters-input"'>
+      <textarea aria-label="max characters textarea" class="maxcharacters-textarea">class="maxcharacters-textarea"</textarea>
       <pre><code class=css>@element .maxcharacters-input and (max-characters: 30) {
   .maxcharacters-input {
     background: gold;
@@ -993,14 +993,14 @@
     <h3 id=meta-selectors>Meta-Selectors</h3>
     <p>The following selectors can be used inside element queries. The <code>:self</code> meta-selector selects the same element(s) on the page that meet the query condition. The <code>:parent</code> selector refers to the parent of the element(s) on the page that meet the repsonsive condition. There are selectors for <code>:prev</code> and <code>:next</code> as well, and <code>$root</code> which always refers to the HTML document.</p>
     <p>Alternatively, for SCSS compatibility instead of using <code>$</code> you can also format meta-selectors prefixed by <code>eq_</code>. These are <code>eq_this</code>, <code>eq_parent</code>, <code>eq_root</code>, <code>eq_prev</code>, and <code>eq_next</code></p>
-    <article id=this-selector>
+    <article id=self-selector>
       <h4><code>:self</code> selector</h4>
-      <div class="this-selector">
-        class="this-selector"
-        <input type=text placeholder=input>
-        <input type=text placeholder=input>
+      <div class="self-selector">
+        class="self-selector"
+        <input aria-label="self selector demo input A" type=text placeholder=input>
+        <input aria-label="self selector demo input B" type=text placeholder=input>
       </div>
-      <pre><code class=css>@element .this-selector input and (min-characters: 5) {
+      <pre><code class=css>@element .self-selector input and (min-characters: 5) {
   :self,
   :self:focus {
     border-color: red;
@@ -1011,8 +1011,8 @@
       <h4><code>:parent</code> selector</h4>
       <div class="parent-selector">
         class="parent-selector"
-        <input type=text placeholder=input>
-        <input type=text placeholder=input>
+        <input aria-label="parent selector demo input A" type=text placeholder=input>
+        <input aria-label="parent selector demo input B" type=text placeholder=input>
       </div>
       <pre><code class=css>@element .parent-selector input and (min-characters: 5) {
   :self {
@@ -1027,8 +1027,8 @@
       <h4><code>$root</code> selector</h4>
       <div class="root-selector">
         class="root-selector"
-        <input type=text placeholder=input>
-        <input type=text placeholder=input>
+        <input aria-label="root selector demo input A" type=text placeholder=input>
+        <input aria-label="root selector demo input B" type=text placeholder=input>
       </div>
       <pre><code class=css>@element .root-selector input and (min-characters: 5) {
   :self {
@@ -1043,8 +1043,8 @@
       <h4><code>:prev</code> selector</h4>
       <div class="prev-selector">
         class="prev-selector"
-        <input type=text type=text placeholder=input>
-        <input type=email placeholder=email>
+        <input aria-label="previous selector demo input A" type=text type=text placeholder=input>
+        <input aria-label="previous selector demo input B" type=email placeholder=email>
       </div>
       <pre><code class=css>@element .prev-selector [type=email] {
   :prev {
@@ -1056,8 +1056,8 @@
       <h4><code>:next</code> selector</h4>
       <div class="next-selector">
         class="next-selector"
-        <input type=text placeholder=input>
-        <input type=email placeholder=email>
+        <input aria-label="next selector demo input A" type=text placeholder=input>
+        <input aria-label="next selector demo input B" type=email placeholder=email>
       </div>
       <pre><code class=css>@element .next-selector [type=text] {
   :next {
@@ -1095,7 +1095,7 @@
 }</code></pre>
     </article>
     <article>
-      <h4 id=ew>eh (element height)</h4>
+      <h4 id=eh>eh (element height)</h4>
       <div class=eh data-drag=vertical>EH Units</div>
       <pre><code class=css>/* Element height units */
 @element .eh {
@@ -1105,7 +1105,7 @@
 }</code></pre>
     </article>
     <article>
-      <h4 id=ew>emin (element minimum)</h4>
+      <h4 id=emin>emin (element minimum)</h4>
       <div class="emin" data-drag="both">EMIN Units</div>
       <pre><code class=css>/* Element minimum units */
 @element .emin {
@@ -1115,7 +1115,7 @@
 }</code></pre>
     </article>
     <article>
-      <h4 id=ew>emax (element maximum)</h4>
+      <h4 id=emax>emax (element maximum)</h4>
       <div class="emax" data-drag="both">EMAX Units</div>
       <pre><code class=css>/* Element maximum units */
 @element .emax {
