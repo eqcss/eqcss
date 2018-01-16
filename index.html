@@ -2,14 +2,14 @@
 <html lang=en>
 <head>
   <meta charset=utf-8>
-  <meta name=description content="EQCSS is a CSS reprocessor that introduces Scoped Styles, Element Queries, Container Queries, and new selectors like :parent and :prev and more to all browsers IE8+">
-  <meta name=keywords content="EQCSS, CSS reprocessor, element queries, element query, container queries, container query, CSS extension, parent selector, meta selector, scoped CSS, scoped styles, CSS variables, reponsive web design, rwd, polyfill, plugin, IE8">
-  <meta property=og:title content="EQCSS • Element Query CSS | Scoped CSS, Meta-Selectors, Element Queries">
+  <meta name=description content="EQCSS is a CSS reprocessor that extends CSS to include Scoped Styles, Element Queries, Container Queries, and new selectors like :parent and :prev and more">
+  <meta name=keywords content="EQCSS, element queries, container queries, CSS reprocessor, element query, container query, CSS extension, parent selector, meta selector, scoped CSS, scoped styles, CSS variables, reponsive web design, rwd, polyfill, plugin, runtime, event driven, virtual stylesheet">
+  <meta property=og:title content="EQCSS • Element Query CSS">
   <meta property=og:url content=http://elementqueries.com>
-  <meta property=og:description content="EQCSS is a CSS reprocessor that introduces Element Queries, Container Queries, Scoped Styles, and new selectors like :parent and :prev and more to all browsers IE8+">
+  <meta property=og:description content="EQCSS is a CSS reprocessor that extends CSS to include Scoped Styles, Element Queries, Container Queries, and new selectors like :parent and :prev and more">
   <meta name=viewport content="width=device-width, initial-scale=1">
   <meta name=google-site-verification content=zqvNXM9AZmB51r-f-4NNlvL_RRS-K0oWVpPo0yd3E_0>
-  <title>EQCSS • Element Query CSS | Scoped CSS, Meta-Selectors, Element Queries</title>
+  <title>EQCSS • Element Query CSS</title>
   <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic|Source+Code+Pro:300,400,500,600,700,900|Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic" rel=stylesheet>
   <link href="https://staticasset.s3.amazonaws.com/data-buttons.css" rel=stylesheet>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" rel=stylesheet>
@@ -34,14 +34,9 @@
       font-size: 10pt;
       line-height: 1.4;
       font-weight: 400;
-      font-family: 'Fira Sans', 'Source Sans Pro', 'Open Sans', Roboto, 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', 'Myriad Pro', 'Segoe UI', Myriad, Helvetica, 'Lucida Grande', 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, Arial, sans-serif;
+      font-family: 'Fira Sans', sans-serif;
       -webkit-text-size-adjust: 100%;
       background: rgba(0,0,0,.05);
-      background: -moz-linear-gradient(top, rgba(0,0,0,0.3) 0%, rgba(0,0,0,.05) 100vh);
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.3)), color-stop(100vh,rgba(0,0,0,.05)));
-      background: -webkit-linear-gradient(top, rgba(0,0,0,0.3) 0%,rgba(0,0,0,.05) 100vh);
-      background: -o-linear-gradient(top, rgba(0,0,0,0.3) 0%,rgba(0,0,0,.05) 100vh);
-      background: -ms-linear-gradient(top, rgba(0,0,0,0.3) 0%,rgba(0,0,0,.05) 100vh);
       background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,.05) 100vh);
     }
     body {
@@ -51,7 +46,6 @@
     }
     h1, h2, h3, h4, h5, h6 {
       font-weight: 300;
-      letter-spacing: .-03em;
       margin: 0 0 .5em 0;
       line-height: 1.2;
     }
@@ -85,7 +79,7 @@
     a {
       color: slateblue;
       text-decoration: none;
-      outline: none !important;
+      outline: none;
     }
     a:hover,
     a:focus {
@@ -116,7 +110,7 @@
       margin: 0 .15em;
       border-radius: 3px;
       box-shadow: rgba(0,0,0,.1) 0 1px 0;
-      font-family: 'Source Code Pro', Consolas, 'Andale Mono WT', 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Liberation Mono', 'Nimbus Mono L', Monaco, 'Courier New', Courier, monospace;
+      font-family: 'Source Code Pro', monospace;
       word-break: break-word;
     }
     script[type="text/eqcss"],
@@ -131,7 +125,7 @@
       margin: 1em 0 2em 0;
       width: 100%;
       font-size: 12pt;
-      font-family: 'Source Code Pro', Consolas, 'Andale Mono WT', 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Liberation Mono', 'Nimbus Mono L', Monaco, 'Courier New', Courier, monospace;
+      font-family: 'Source Code Pro', monospace;
       word-break: break-all;
       word-wrap:break-word;
       font-kerning: auto;
@@ -233,7 +227,7 @@
       -webkit-appearance: none;
       appearance: none;
       -moz-appearance: none;
-      font-family: 'Source Sans Pro', 'Open Sans', Roboto, 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', 'Myriad Pro', 'Segoe UI', Myriad, Helvetica, 'Lucida Grande', 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, Arial, sans-serif;
+      font-family: 'Source Sans Pro', sans-serif;
     }
     input + [type=text],
     input + [type=email],
@@ -255,6 +249,35 @@
       min-height: 150px;
       max-width: 500px;
       max-height: 500px;
+    }
+    [data-nubbin] {
+      border: 1px solid rgba(0,0,0,.15);
+      width: 30px;
+      height: 30px;
+      text-align: center;
+      padding: 0;
+      margin: 0;
+      background: lightgreen;
+      cursor: pointer;
+      z-index: 500;
+    }
+    [data-nubbin] i {
+      pointer-events: none;
+      color: black;
+      line-height: 30px;
+      font-size: 20px;
+    }
+    [data-drag] {
+      overflow: auto;
+    }
+    [data-drag=horizontal] {
+      resize: horizontal;
+    }
+    [data-drag=vertical] {
+      resize: vertical;
+    }
+    [data-drag=both] {
+      resize: both;
     }
     /* Min-width */
     @element .minwidthpixels and (min-width: 500px) {
@@ -1270,36 +1293,5 @@
       }
     }
   </script>
-  <style>
-    [data-nubbin] {
-      border: 1px solid rgba(0,0,0,.15);
-      width: 30px;
-      height: 30px;
-      text-align: center;
-      padding: 0;
-      margin: 0;
-      background: lightgreen;
-      cursor: pointer;
-      z-index: 500;
-    }
-    [data-nubbin] i {
-      pointer-events: none;
-      color: black;
-      line-height: 30px;
-      font-size: 20px;
-    }
-    [data-drag] {
-      overflow: auto;
-    }
-    [data-drag=horizontal] {
-      resize: horizontal;
-    }
-    [data-drag=vertical] {
-      resize: vertical;
-    }
-    [data-drag=both] {
-      resize: both;
-    }
-  </style>
 </body>
 </html>
