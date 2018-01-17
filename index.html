@@ -12,7 +12,6 @@
   <title>EQCSS • Element Query CSS</title>
   <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic|Source+Code+Pro:300,400,500,600,700,900|Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic" rel=stylesheet>
   <link href="https://staticasset.s3.amazonaws.com/data-buttons.css" rel=stylesheet>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" rel=stylesheet>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.min.css" rel=stylesheet>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/solarized_dark.min.css" rel=stylesheet>
   <link href="eqcss-logo.png" rel="shortcut icon">
@@ -783,7 +782,7 @@
     <article id=min-characters-on-form-inputs>
       <h4>min-characters on form inputs</h4>
       <input aria-label="min characters input" type=text class="mincharacters-input" value='class="mincharacters-input"'>
-      <textarea class="mincharacters-textarea">class="mincharacters-textarea"</textarea>
+      <textarea aria-label="min characters textarea" class="mincharacters-textarea">class="mincharacters-textarea"</textarea>
       <pre><code class=css>@element .mincharacters-input and (min-characters: 30) {
   .mincharacters-input {
     background: gold;
@@ -1157,7 +1156,7 @@
       <li><a href=demos/js-functions-demo.html>JS Functions in CSS</a>
       <li><a href=demos/responsive-waterfall.html>Responsive Content Waterfall</a>
     </ul>
-    <p>And view many more EQCSS demos on Codepen: <a href=https://codepen.io/search/pens?q=eqcss&limit=all&order=newest&depth=everything&show_forks=true><i class="ion-android-search"></i> Search EQCSS Codepen</a></p>
+    <p>And view many more EQCSS demos on Codepen: <a href=https://codepen.io/search/pens?q=eqcss&limit=all&order=newest&depth=everything&show_forks=true>Search EQCSS Codepen</a></p>
     <h3 id=docs>Documentation &amp; Tutorials</h3>
     <ul>
       <li><a href=https://www.smashingmagazine.com/2016/07/how-i-ended-up-with-element-queries-and-how-you-can-use-them-today/>The Search For The Holy Grail: How I Ended Up With Element Queries, And How You Can Use Them Today</a>
@@ -1194,7 +1193,7 @@
       <li>EQCSS featured in Front-end Five&rsquo;s <a href=https://frontendfive.codeschool.com/episodes/59-episode-23-october-13th-2015>podcast episode #23</a></li>
     </ul>
     <h3 id=license>License</h3>
-    <p>EQCSS.js is copyright &copy; 2014&ndash;<script>document.write(new Date().getFullYear())</script> Tommy Hodgins &amp; Maxime Euzière, and provided under the MIT license. The full license text can be found on <a href=//github.com/eqcss/eqcss/blob/gh-pages/LICENSE.md>Github</a></p>
+    <p>EQCSS.js is copyright &copy; 2014&ndash;<span id=timestamp></span> Tommy Hodgins &amp; Maxime Euzière, and provided under the MIT license. The full license text can be found on <a href=//github.com/eqcss/eqcss/blob/gh-pages/LICENSE.md>Github</a></p>
   </main>
   <footer>
     Created by <a href=//twitter.com/innovati>@innovati</a> and <a href=//twitter.com/MaximeEuziere>@maximeeuziere</a> &middot; Hosted on <a href=//github.com/eqcss/eqcss>Github <i class=ion-social-github></i></a>
@@ -1292,6 +1291,12 @@
         EQCSS.throttle()
       }
     }
+
+    // Timestamp for footer
+    var timestamp = document.querySelector('#timestamp')
+
+    timestamp.innerHTML = new Date().getFullYear()
+
   </script>
 </body>
 </html>
