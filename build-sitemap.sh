@@ -4,6 +4,11 @@
 
 true > sitemap.txt
 
+echo "Building sitemap…"
+
 for file in *.html */*.html
-  echo (echo "https://elementqueries.com/$file" | sed '$s/\.\.\///') >> sitemap.txt
+  echo " adding $file"
+  echo "https://elementqueries.com/$file" >> sitemap.txt
 end
+
+echo "Sitemap built!"
