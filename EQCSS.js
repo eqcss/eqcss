@@ -1,7 +1,7 @@
 /*
 
 #  EQCSS
-## version 1.8.0
+## version 1.9.0
 
 A JavaScript plugin to read EQCSS syntax to provide:
 scoped styles, element queries, container queries,
@@ -42,7 +42,7 @@ License: MIT
 
     var EQCSS = {
       data: [],
-      version: '1.8.0'
+      version: '1.9.0'
     }
 
 
@@ -119,6 +119,7 @@ License: MIT
         }
 
       }
+
       // Retrieve all link tags
       var link = document.getElementsByTagName('link')
 
@@ -234,17 +235,17 @@ License: MIT
      *
      */
 
-     EQCSS.register = function(queries) {
+    EQCSS.register = function(queries) {
 
-       if (Object.prototype.toString.call(queries) === '[object Object]') {
+      if (Object.prototype.toString.call(queries) === '[object Object]') {
 
-         EQCSS.data.push(queries)
+        EQCSS.data.push(queries)
 
-         EQCSS.apply()
+        EQCSS.apply()
 
-       }
+      }
 
-       if (Object.prototype.toString.call(queries) === '[object Array]') {
+      if (Object.prototype.toString.call(queries) === '[object Array]') {
 
         for (var i=0; i<queries.length; i++) {
 
@@ -254,9 +255,9 @@ License: MIT
 
         EQCSS.apply()
 
-       }
+      }
 
-     }
+    }
 
 
     /*
@@ -264,13 +265,13 @@ License: MIT
      * Parse and Register queries with `EQCSS.data`
      */
 
-     EQCSS.process = function(code) {
+    EQCSS.process = function(code) {
 
-       var queries = EQCSS.parse(code)
+      var queries = EQCSS.parse(code)
 
-       return EQCSS.register(queries)
+      return EQCSS.register(queries)
 
-     }
+    }
 
 
     /*
@@ -927,6 +928,66 @@ License: MIT
 
               break
 
+              // Characters
+              case 'characters':
+
+                // form inputs
+                if (elements[j].value) {
+
+                  if (elements[j].value.length !== final_value) {
+
+                    test = false
+                    break test_conditions
+
+                  }
+
+                }
+
+                // blocks
+                else {
+
+                  if (elements[j].textContent.length !== final_value) {
+
+                    test = false
+                    break test_conditions
+
+                  }
+
+                }
+
+              break
+
+              // Characters
+              case 'characters':
+
+                // form inputs
+                if (elements[j].value) {
+
+                l(elements[j].value.length)
+
+                  if (!(elements[j].value.length === final_value)) {
+
+                    test = false
+                    break test_conditions
+
+                  }
+
+                }
+
+                // blocks
+                else {
+
+                  if (!(elements[j].textContent.length === final_value)) {
+
+                    test = false
+                    break test_conditions
+
+                  }
+
+                }
+
+              break
+
               // Max-characters
               case 'max-characters':
 
@@ -960,6 +1021,18 @@ License: MIT
               case 'min-children':
 
                 if (!(elements[j].children.length >= final_value)) {
+
+                  test = false
+                  break test_conditions
+
+                }
+
+              break
+
+              // Children
+              case 'children':
+
+                if (elements[j].children.length !== final_value) {
 
                   test = false
                   break test_conditions
@@ -1453,7 +1526,6 @@ License: MIT
 
     //window.addEventListener('scroll', EQCSS.throttle)
     // => to avoid annoying slowness, scroll events are only listened on elements that have a scroll EQ.
-
 
     // Debug: here's a shortcut for console.log
     function l(a) { console.log(a) }

@@ -339,6 +339,37 @@
         background: gold;
       }
     }
+    /* Characters */
+    @element .characters and (characters: 1) {
+      :self {
+        background: orchid;
+      }
+    }
+    @element .characters and (characters: 2) {
+      :self {
+        background: darkturquoise;
+      }
+    }
+    @element .characters and (characters: 3) {
+      :self {
+        background: greenyellow;
+      }
+    }
+    @element .characters-input, .characters-textarea and (characters: 1) {
+      :self {
+        background: orchid;
+      }
+    }
+    @element .characters-input, .characters-textarea and (characters: 2) {
+      :self {
+        background: darkturquoise;
+      }
+    }
+    @element .characters-input, .characters-textarea and (characters: 3) {
+      :self {
+        background: greenyellow;
+      }
+    }
     /* Max-characters */
     @element .maxcharacters and (max-characters: 30) {
       :self {
@@ -359,6 +390,22 @@
     @element .minchildren and (min-children: 5) {
       :self {
         background: gold;
+      }
+    }
+    /* Children */
+    @element .children and (children: 1) {
+      :self {
+        background: orchid;
+      }
+    }
+    @element .children and (children: 2) {
+      :self {
+        background: darkturquoise;
+      }
+    }
+    @element .children and (children: 3) {
+      :self {
+        background: greenyellow;
       }
     }
     /* Max-children */
@@ -650,8 +697,8 @@
     <pre><code class=html>&lt;!--[if lt IE 9]>&lt;script src="EQCSS-polyfills.js">&lt;/script>&lt;![endif]--></code></pre>
     <h4>CDN Hosted Links</h4>
     <p>EQCSS is also hosted on CDNjs and you can use the version hosted there for your projects: <a href=https://cdnjs.com/libraries/eqcss>https://cdnjs.com/libraries/eqcss</a>:</p>
-    <pre><code class=html>https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.8.0/EQCSS-polyfills.min.js</code></pre>
-    <pre><code class=html>https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.8.0/EQCSS.min.js</code></pre>
+    <pre><code class=html>https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.9.0/EQCSS-polyfills.min.js</code></pre>
+    <pre><code class=html>https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.9.0/EQCSS.min.js</code></pre>
     <h3 id=writing>Writing Element Queries</h3>
     <p>Now that you have EQCSS added to your HTML you&rsquo;re ready to write element queries. There are two ways you can add EQCSS to your site: the easiest way is by writing them inside your CSS either in a <code>&lt;style></code> or <code>&lt;link></code> in your HTML, or by isolating your EQCSS styles in a custom script type.</p>
     <p>You can also link to EQCSS hosted in external files with either <code>.css</code> or <code>.eqcss</code> extensions.</p>
@@ -762,15 +809,6 @@
   }
 }</code></pre>
     </article>
-    <article id=max-characters-on-block-elements>
-      <h4>max-characters on block elements</h4>
-      <div class="maxcharacters" contenteditable>class="maxcharacters"</div>
-      <pre><code class=css>@element .maxcharacters and (max-characters: 30) {
-  :self {
-    background: gold;
-  }
-}</code></pre>
-    </article>
     <article id=min-characters-on-form-inputs>
       <h4>min-characters on form inputs</h4>
       <input aria-label="min characters input" type=text class="mincharacters-input" value='class="mincharacters-input"'>
@@ -781,6 +819,54 @@
   }
 }
 @element .mincharacters-textarea and (min-characters: 30) {
+  :self {
+    background: gold;
+  }
+}</code></pre>
+    </article>
+    <article id=characters-on-block-elements>
+      <h4>characters on block elements</h4>
+      <div class=characters contenteditable>Enter 1-3 Characters</div>
+      <pre><code class=css>@element .characters and (characters: 1) {
+  :self {
+    background: orchid;
+  }
+}
+@element .characters and (characters: 2) {
+  :self {
+    background: darkturquoise;
+  }
+}
+@element .characters and (characters: 3) {
+  :self {
+    background: greenyellow;
+  }
+}</code></pre>
+    </article>
+    <article id=characters-on-form-inputs>
+      <h4 id=characters>characters on form inputs</h4>
+      <input aria-label="max characters input" type=text class="characters-input" value='class="characters-input"'>
+      <textarea aria-label="max characters textarea" class="characters-textarea">class="characters-textarea"</textarea>
+      <pre><code class=css>@element .characters-input, .characters-textarea and (characters: 1) {
+  :self {
+    background: orchid;
+  }
+}
+@element .characters-input, .characters-textarea and (characters: 2) {
+  :self {
+    background: darkturquoise;
+  }
+}
+@element .characters-input, .characters-textarea and (characters: 3) {
+  :self {
+    background: greenyellow;
+  }
+}</code></pre>
+    </article>
+    <article id=max-characters-on-block-elements>
+      <h4>max-characters on block elements</h4>
+      <div class="maxcharacters" contenteditable>class="maxcharacters"</div>
+      <pre><code class=css>@element .maxcharacters and (max-characters: 30) {
   :self {
     background: gold;
   }
@@ -809,6 +895,27 @@
       <pre><code class=css>@element .minchildren and (min-children: 5) {
   :self {
     background: gold;
+  }
+}</code></pre>
+    </article>
+    <article id=children>
+      <h4>children</h4>
+      <div class="children">class="children"</div>
+      <br>
+      <button data-button=green onclick="document.querySelector('.children').innerHTML += '<img src=data:image/jpeg;base64,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 style=width:50px>'">Add Child</button>
+      <pre><code class=css>@element .children and (children: 1) {
+  :self {
+    background: orchid;
+  }
+}
+@element .children and (children: 2) {
+  :self {
+    background: darkturquoise;
+  }
+}
+@element .children and (children: 3) {
+  :self {
+    background: greenyellow;
   }
 }</code></pre>
     </article>
