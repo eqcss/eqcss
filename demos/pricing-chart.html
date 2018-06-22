@@ -10,7 +10,7 @@
   <link href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css rel=stylesheet>
   <link href=//cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css rel=stylesheet>
   <style>
-    @element ".pricingChart" {
+    @element .pricingChart {
       html {
         -webkit-text-size-adjust:100%;
       }
@@ -328,7 +328,7 @@
     }
 
     /* Multi-column layout */
-    @element ".pricingChart" and (min-width: 600px) {
+    @element .pricingChart and (min-width: 600px) {
       :self {
         font-size: 12pt;
       }
@@ -424,7 +424,7 @@
         border: none;
       }
     }
-    @element ".pricingChart" and (min-width: 800px) {
+    @element .pricingChart and (min-width: 800px) {
       :self { font-size: 14pt; }
       :self label.footer { font-size: 115%; }
       :self article:after {
@@ -432,13 +432,13 @@
         height: 75px;
       }
     }
-    @element ".pricingChart" and (min-width: 1000px) {
+    @element .pricingChart and (min-width: 1000px) {
       :self article:after {
         width: 90px;
         height: 90px;
       }
     }
-    @element ".pricingChart" and (min-width: 1200px) {
+    @element .pricingChart and (min-width: 1200px) {
       :self { font-size: 16pt; }
       :self label.footer { font-size: 125%; }
       :self article:after {
@@ -448,40 +448,40 @@
     }
 
     /* Additional Queries */
-    @element ".pricingChart" and (min-width: 600px) and (min-children: 1) {
+    @element .pricingChart and (min-width: 600px) and (min-children: 1) {
       :self article { width: 100%; }
     }
-    @element ".pricingChart" and (min-width: 600px) and (min-children: 2) {
+    @element .pricingChart and (min-width: 600px) and (min-children: 2) {
       :self article { width: calc(50% - 7.5px); }
     }
-    @element ".pricingChart" and (min-width: 600px) and (min-children: 3) {
+    @element .pricingChart and (min-width: 600px) and (min-children: 3) {
       :self article { width: calc(33.3333% - 10px); }
     }
-    @element ".pricingChart" and (min-width: 600px) and (min-children: 4) {
+    @element .pricingChart and (min-width: 600px) and (min-children: 4) {
       :self article { width: calc(25% - 11.25px); }
     }
-    @element ".pricingChart article a" and (min-lines: 2) {
+    @element .pricingChart article a and (min-lines: 2) {
       @media (min-width: 600px) { :self { font-size: 73% !important; padding: 1.15em 0 !important; } }
     }
-    @element ".pricingChart article a" and (min-lines: 2) {
+    @element .pricingChart article a and (min-lines: 2) {
       @media (min-width: 600px) { :self { font-size: 70% !important; padding: 1.25em 0 !important; } }
     }
-    @element ".pricingChart article a" and (min-lines: 2) {
+    @element .pricingChart article a and (min-lines: 2) {
       @media (min-width: 600px) { :self { font-size: 65% !important; padding: 1.4em 0 !important; } }
     }
-    @element ".pricingChart article a" and (min-lines: 2) {
+    @element .pricingChart article a and (min-lines: 2) {
       @media (min-width: 600px) {:self { font-size: 60% !important; padding: 1.5em 0 !important; } }
     }
-    @element ".pricingChart article a" and (min-lines: 2) {
+    @element .pricingChart article a and (min-lines: 2) {
       @media (min-width: 600px) { :self { font-size: 55% !important; padding: 1.65em 0 !important; } }
     }
-    @element ".pricingChart h2" and (min-lines: 2) {
+    @element .pricingChart h2 and (min-lines: 2) {
       @media (min-width: 600px) { :self { font-size: 100% !important; padding: .2em 0 !important; } }
     }
-    @element ".pricingChart h2" and (min-lines: 2) {
+    @element .pricingChart h2 and (min-lines: 2) {
       @media (min-width: 600px) { :self { font-size: 95% !important; padding: .45em 0 !important; } }
     }
-    @element ".pricingChart h2" and (min-lines: 2) {
+    @element .pricingChart h2 and (min-lines: 2) {
       @media (min-width: 600px) {
         :self { padding: 0 !important; }
         :self + h3 { margin-top: 0 !important; }

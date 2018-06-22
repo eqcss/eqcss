@@ -24,7 +24,7 @@
     }
 
     /* Element Query Grid */
-    @element '[data-grid]' {
+    @element [data-grid] {
       :self,
       :self *,
       :self *:before,
@@ -73,7 +73,7 @@
       :self [class^=split-9] { width: calc(100%/9); }
       :self [class^=split-10] { width: calc(100%/10); }
     }
-    @element '[data-grid]' and (max-width: 400px) {
+    @element [data-grid] and (max-width: 400px) {
       :self [class*=small-col-1] { width: 10%; }
       :self [class*=small-col-2] { width: 20%; }
       :self [class*=small-col-3] { width: 30%; }
@@ -96,7 +96,7 @@
       :self [class*=small-split-10] { width: calc(100%/10); }
       :self [class*=hide-small] { display: none; }
     }
-    @element '[data-grid]' and (min-width: 400px) and (max-width: 800px) {
+    @element [data-grid] and (min-width: 400px) and (max-width: 800px) {
       :self [class*=medium-col-1] { width: 10%; }
       :self [class*=medium-col-2] { width: 20%; }
       :self [class*=medium-col-3] { width: 30%; }
@@ -119,7 +119,7 @@
       :self [class*=medium-split-10] { width: calc(100%/10); }
       :self [class*=hide-medium] { display: none; }
     }
-    @element '[data-grid]' and (min-width: 800px) {
+    @element [data-grid] and (min-width: 800px) {
       :self [class*=large-col-1] { width: 10%; }
       :self [class*=large-col-2] { width: 20%; }
       :self [class*=large-col-3] { width: 30%; }

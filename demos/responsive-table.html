@@ -20,7 +20,7 @@
     }
 
     /* Table Styles */
-    @element '[data-table]' {
+    @element [data-table] {
       :self,
       :self *,
       :self *:before,
@@ -135,7 +135,7 @@
       }
     }
     /* Stacked Table */
-    @element '[data-table]' and (max-width: 525px) {
+    @element [data-table] and (max-width: 525px) {
       :self caption,
       :self tbody,
       :self tr,
@@ -179,7 +179,7 @@
       }
     }
     /* Wide Table */
-    @element '[data-table]' and (min-width: 525px) {
+    @element [data-table] and (min-width: 525px) {
       :self { display: table; width: auto; }
       :self caption { display: table-caption; width: auto; }
       :self thead { display: table-header-group; width: auto; }

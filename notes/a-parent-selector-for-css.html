@@ -35,13 +35,13 @@
   <h3>Ladies and Gentlemen may I present: the <code>:parent</code> selector.</h3>
   <p>It works with our element query plugin EQCSS, to learn more about how to get started with element queries check out <a href=http://elementqueries.com>elementqueries.com</a></p>
   <p>When you write an element query you create a responsive context into which those styles apply. A simple element query might look like this:</p>
-<pre><code class=css>@element '.widget' {
+<pre><code class=css>@element .widget {
   .widget {
     background: red'
   }
 }</code></pre>
   <p>Now the styles inside can apply to any element, including other <code>.widget</code> elements on the page, so we use style scoping to apply our styles to the element(s) which match our query with the <code>:self</code> keyword. In the example below every <code>.widget</code> that matches the condition will get the styles applied to <code>:self</code>, but the styles applied to <code>.widget</code> will apply to all <code>.widget</code> elements on the page at any time a <code>.widget</code> element meets the responsive condition.</p>
-<pre><code class=css>@element '.widget' {
+<pre><code class=css>@element .widget {
     :self {
     background: green;
   }
@@ -50,7 +50,7 @@
   }
 }</code></pre>
   <p>This is style scoping. To target the parent of an element using the <code>:parent</code> selector, first create a responsive context. Now anywhere you use the <code>:parent</code> selector inside this query it will target the element containing <code>:self</code>, the element that matches the query</p>
-<pre><code class=css>@element '.widget {
+<pre><code class=css>@element .widget {
   :parent {
     background: red;
   }

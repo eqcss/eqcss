@@ -144,17 +144,17 @@
     aside {
       display: none;
     }
-    @element '[data-best-picture] p' and (min-width: 220px) {
+    @element [data-best-picture] p and (min-width: 220px) {
       :self:before {
         display: inline;
       }
     }
-    @element '[data-best-picture] .winner div' and (min-width: 220px) {
+    @element [data-best-picture] .winner div and (min-width: 220px) {
       :self:before {
         content: 'Best Picture Winner';
       }
     }
-    @element '[data-best-picture]' and (min-width: 400px) {
+    @element [data-best-picture] and (min-width: 400px) {
       :self h1 {
         background: none;
         color: #333;
@@ -242,7 +242,7 @@
         color: #413806;
       }
     }
-    @element '[data-best-picture]' and (min-width: 600px) {
+    @element [data-best-picture] and (min-width: 600px) {
       :self h1 {
         font-size: 1.75em;
       }
@@ -253,7 +253,7 @@
         width: 33.333%;
       }
     }
-    @element '[data-best-picture]' and (min-width: 900px) {
+    @element [data-best-picture] and (min-width: 900px) {
       :self h1 {
         font-size: 2.5em;
       }
@@ -261,7 +261,7 @@
         width: 25%;
       }
     }
-    @element 'article' and (min-width: 900px) {
+    @element article and (min-width: 900px) {
       :self section,
       :self aside {
         float: left;

@@ -13,7 +13,7 @@
       margin: 1em;
       background: dodgerblue;
     }
-    @element '[data-ratio]' {
+    @element [data-ratio] {
       :self {
         height: eval('clientWidth * parseInt(getAttribute("data-ratio").split(":")[1]) / parseInt(getAttribute("data-ratio").split(":")[0])')px;
       }

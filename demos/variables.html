@@ -14,7 +14,7 @@
       font-size: 18pt;
       text-align: center;
     }
-    @element 'div' {
+    @element div {
       :self:before {
         content: 'eval("coolDude")';
       }
@@ -22,7 +22,7 @@
         content: ' is a cool dude';
       }
     }
-    @element 'aside' {
+    @element aside {
       :self:before {
         content: 'The time is: ';
       }
@@ -30,7 +30,7 @@
         content: 'eval("new Date()")';
       }
     }
-    @element 'span' {
+    @element span {
       :self:before {
         content: 'Your viewport is: eval("window.innerWidth")';
       }
@@ -38,7 +38,7 @@
         content: ' by eval("window.innerHeight")';
       }
     }
-    @element 'article' {
+    @element article {
       :self:before {
         content: 'Five plus ten is: ';
       }

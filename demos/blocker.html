@@ -58,13 +58,13 @@
       margin: .5em auto !important;
       width: auto !important;
     }
-    @element '[data-blocker]' and (min-width: 500px) {
+    @element [data-blocker] and (min-width: 500px) {
       :self article {
         margin: 30px auto !important;
         border-radius: 3px;
       }
     }
-    @element 'html,body' and (min-scroll-y: 50%) {
+    @element html, body and (min-scroll-y: 50%) {
       eval("
         var modal = document.querySelector('[data-blocker]');
         modal.style.opacity = 1;

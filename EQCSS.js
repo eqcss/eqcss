@@ -1,7 +1,7 @@
 /*
 
 #  EQCSS
-## version 1.9.0
+## version 1.9.1
 
 A JavaScript plugin to read EQCSS syntax to provide:
 scoped styles, element queries, container queries,
@@ -42,7 +42,7 @@ License: MIT
 
     var EQCSS = {
       data: [],
-      version: '1.9.0'
+      version: '1.9.1'
     }
 
 
@@ -97,7 +97,11 @@ License: MIT
               xhr.send(null)
               xhr.onreadystatechange = function() {
 
-                EQCSS.process(xhr.responseText)
+                if (xhr.readyState === 4 && xhr.status === 200) {
+
+                  EQCSS.process(xhr.responseText)
+
+                }
 
               }
 
@@ -139,7 +143,11 @@ License: MIT
               xhr.send(null)
               xhr.onreadystatechange = function() {
 
-                EQCSS.process(xhr.responseText)
+                if (xhr.readyState === 4 && xhr.status === 200) {
+
+                  EQCSS.process(xhr.responseText)
+
+                }
 
               }
 
@@ -1265,14 +1273,18 @@ License: MIT
             // good browsers
             try {
 
-              css_block.innerHTML = css_code
+              css_block.innerText = css_code
 
             }
 
             // IE8
             catch(e) {
 
-              css_block.styleSheet.cssText = css_code
+              if (css_block.styleSheet) {
+
+                css_block.styleSheet.cssText = css_code
+
+              }
 
             }
 
@@ -1284,14 +1296,18 @@ License: MIT
             // Good browsers
             try {
 
-              css_block.innerHTML = ''
+              css_block.innerText = ''
 
             }
 
             // IE8
             catch(e) {
 
-              css_block.styleSheet.cssText = ''
+              if (css_block.styleSheet) {
+
+                css_block.styleSheet.cssText = ''
+
+              }
 
             }
 
@@ -1306,7 +1322,6 @@ License: MIT
 
     /*
      * Eval('') and $it
-     * (…yes with() was necessary, and eval() too!)
      */
 
     EQCSS.tryWithEval = function(element, string) {
@@ -1316,6 +1331,7 @@ License: MIT
 
       try {
 
+        // with() is necessary for implicit 'this'!
         with ($it) { ret = eval(string.slice(1, -1)) }
 
       }

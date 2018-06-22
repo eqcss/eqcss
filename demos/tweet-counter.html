@@ -9,13 +9,13 @@
   <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic,700italic|Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic" rel=stylesheet>
   <link href=https://staticasset.s3.amazonaws.com/basic.css rel=stylesheet>
   <style>
-    @element 'textarea' {
+    @element textarea {
       body:after {
         content: 'eval("140-document.getElementById('t').value.length")';
         font-size: 14pt;
       }
     }
-    @element 'textarea' and (min-characters: 140) {
+    @element textarea and (min-characters: 140) {
       body:after {
         color: #f00;
         font-weight: bold;

@@ -38,7 +38,7 @@
       text-align: center !important;
     }
     /* Form Styles */
-    @element 'form' {
+    @element form {
       :self,
       :self * {
         -webkit-box-sizing: border-box;
@@ -200,7 +200,7 @@
         right: 0;
       }
     }
-    @element 'form' and (max-width: 450px) {
+    @element form and (max-width: 450px) {
       :self select,
       :self .split-input,
       :self .split-input > *,
@@ -291,7 +291,7 @@
       border-color: #6c71c4;
       box-shadow: #6c71c4 0 0 3px;
     }
-    @element 'form' {
+    @element form {
       :self {
         opacity: 1 !important;
       }

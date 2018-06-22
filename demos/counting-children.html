@@ -10,7 +10,7 @@
   <link href=https://staticasset.s3.amazonaws.com/basic.css rel=stylesheet>
   <link href=https://staticasset.s3.amazonaws.com/data-buttons.css rel=stylesheet>
   <style>
-    @element '[type=submit]' {
+    @element [type=submit] {
       eval("className=document.querySelector('ul').children.length>=5?'':'disabled'")
       eval("value='Checkout with '+document.querySelector('ul').children.length+' Items'")
     }
