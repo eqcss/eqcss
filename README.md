@@ -81,6 +81,8 @@ And you can include EQCSS scripts inline in your page like this as well:
 
 By default the plugin execute once when the content loads, and also whenever it detects browser resize (similar to `@media` queries). The `EQCSS.apply()` function can be called manually on other events too, like keyup or clicks, or even when specific elements are interacted with.
 
+> Note: Because EQCSS has the ability to execute JavaScript instructions stored inside EQCSS syntax, site owners using EQCSS _should not allow_ unstruted user-supplied EQCSS syntax to be parsed and run with the EQCSS plugin. The risk is that users could execute malicious JavaScript instructions that could exfiltrate sensitive data from their session on your site to another server where it could be recorded. This is the same vulnerability as any 3rd party JavaScript plugin that can be used to execute JavaScript instructions.
+
 ## Designing with Element Queries
 
 Element Queries have the following syntax:
