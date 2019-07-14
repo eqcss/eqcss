@@ -1,7 +1,7 @@
 /*
 
 #  EQCSS
-## version 1.9.1
+## version 1.9.2
 
 A JavaScript plugin to read EQCSS syntax to provide:
 scoped styles, element queries, container queries,
@@ -42,7 +42,7 @@ License: MIT
 
     var EQCSS = {
       data: [],
-      version: '1.9.1'
+      version: '1.9.2'
     }
 
 
@@ -955,37 +955,6 @@ License: MIT
                 else {
 
                   if (elements[j].textContent.length !== final_value) {
-
-                    test = false
-                    break test_conditions
-
-                  }
-
-                }
-
-              break
-
-              // Characters
-              case 'characters':
-
-                // form inputs
-                if (elements[j].value) {
-
-                l(elements[j].value.length)
-
-                  if (!(elements[j].value.length === final_value)) {
-
-                    test = false
-                    break test_conditions
-
-                  }
-
-                }
-
-                // blocks
-                else {
-
-                  if (!(elements[j].textContent.length === final_value)) {
 
                     test = false
                     break test_conditions
